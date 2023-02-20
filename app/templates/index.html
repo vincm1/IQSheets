@@ -1,0 +1,134 @@
+{% extends "base.html" %} {% block content %}
+
+<nav class="navbar navbar-expand-md sticky-top p-3">
+    <div class="container">
+        <a class="navbar-brand" href="#">ExcelGuru</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <a class="btn btn-primary me-2" href="{{url_for('auth.user_signup')}}">Registrieren</a>
+                <a class="btn btn-outline-primary" href="{{url_for('auth.user_login')}}">Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <!-- Hero Area-->
+    <section>
+        <div class="hero pt-5">
+            <div class="slider-active">
+                <div class="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
+                    <div class="container">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-lg-6 col-md-9 ">
+                                <div class="hero__caption">
+                                    <span data-animation="fadeInUp" data-delay=".4s">ExcelGuru</span>
+                                    <h1 data-animation="fadeInUp" data-delay=".6s">Verwandeln Sie Ihre Textanweisungen in Sekundenschnelle<br>mithilfe von KI kostenlos in Excel-Formeln.</h1>
+                                    <p data-animation="fadeInUp" data-delay=".8s">Machen Sie sich in Sekundenschnelle mit Excel vertraut. Arbeiten Sie schneller und intelligenter.</p>
+                                    <!-- Slider btn -->
+                                <div class="slider-btns">
+                                        <!-- Hero-btn -->
+                                        <a href="{{url_for('auth.user_signup')}}" class="btn btn-primary">Registrieren</a>
+                                        <!-- Video Btn -->
+                                        <a data-animation="fadeInRight" data-delay="1.0s" class="btn btn-secondary" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><i class="fas fa-play">Wie funktioniert ExcelGuru?</i></a>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="hero__img d-none d-lg-block f-right" data-animation="fadeInRight" data-delay="1s">
+                                    <img src="{{url_for('static', filename='img/hero_right.png')}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slider Area End -->
+    </section>
+    
+    <!-- Best Features Start -->
+    <section class="features pt-5">
+        <div class="container-fluid pt-5">
+            <div class="row justify-content-end">
+                <div class="col-xl-8 col-lg-10">
+                    <!-- Section Tittle -->
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10">
+                            <div class="section-tittle">
+                                <h2>Some of the best features Of Our App!</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Section caption -->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6">
+                            <div class="single-features mb-70">
+                                <div class="features-icon">
+                                    <span class="flaticon-support"></span>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Easy to Costomize</h3>
+                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6">
+                            <div class="single-features mb-70">
+                                <div class="features-icon">
+                                    <span class="flaticon-support"></span>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Extreme Security</h3>
+                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-xl-6 col-lg-6 col-md-6">
+                            <div class="single-features mb-70">
+                                <div class="features-icon">
+                                    <span class="flaticon-support"></span>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Customer Support</h3>
+                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6">
+                            <div class="single-features mb-70">
+                                <div class="features-icon">
+                                    <span class="flaticon-support"></span>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Creative Design</h3>
+                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Shpe -->
+                        <div class="features-shpae d-none d-lg-block">
+                            <img src="{{url_for('static', filename='img/best-features.png')}}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!-- Best Features End -->
+</main>
+
+
+{% endblock %}

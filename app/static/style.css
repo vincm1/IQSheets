@@ -1,0 +1,42 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+main {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Abril Fatface', cursive;
+    color: black
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #5B8391;
+    border-color: #5B8391;
+    color: #EBECEE;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.btn-outline-primary {
+    border-color: #98DAD8;
+    color: #98DAD8;
+    font-family: 'Abril Fatface';
+}
+
+.btn-outline-primary:hover {
+    border-color: #98DAD8;
+    color: #fff;
+    font-family: 'Abril Fatface';
+}
+
+/* Navbar */
+
+.navbar a {
+    color: #30444f;
+    font-family: 'Abril Fatface', cursive;
+}
+
