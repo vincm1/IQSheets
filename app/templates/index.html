@@ -1,32 +1,8 @@
 {% extends "base.html" %} {% block content %}
-
-<nav class="navbar navbar-expand-md sticky-top p-3">
-    <div class="container">
-        <a class="navbar-brand" href="#">ExcelGuru</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-            </ul>
-            <div class="d-flex">
-                <a class="btn btn-primary me-2" href="{{url_for('auth.user_signup')}}">Registrieren</a>
-                <a class="btn btn-outline-primary" href="{{url_for('auth.user_login')}}">Login</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
 <main>
     <!-- Hero Area-->
-    <section>
-        <div class="hero pt-5">
+    <section class="hero">
+        <div class="hero py-5">
             <div class="slider-active">
                 <div class="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
                     <div class="container">
@@ -59,7 +35,7 @@
     </section>
     
     <!-- Best Features Start -->
-    <section class="features pt-5">
+    <section class="features py-5">
         <div class="container-fluid pt-5">
             <div class="row justify-content-end">
                 <div class="col-xl-8 col-lg-10">
@@ -125,10 +101,231 @@
                 </div>
             </div>
         </div>
-        
     </section>
     <!-- Best Features End -->
+
+    <!-- Services Area Start -->
+    <section class="service-area">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-tittle text-center">
+                        <h2>Wie kann Dir<br>ExcelGuru helfen?</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- Section caption -->
+            <div class="row pt-5">
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="services-caption text-center mb-30 px-5 py-5">
+                        <div class="service-icon">
+                            <i class="fa-regular fa-clock fa-3x"></i>
+                        </div> 
+                        <div class="service-cap pt-4">
+                            <h4>Fokus aufs Wichtige</h4>
+                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="services-caption-active text-center mb-30 px-5 py-5">
+                        <div class="service-icon">
+                            <i class="fa-regular fa-clock fa-3x"></i>
+                        </div> 
+                        <div class="service-cap pt-4">
+                            <h4>Zeitersparnis</h4>
+                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="services-caption text-center mb-30 px-5 py-5">
+                        <div class="service-icon">
+                            <i class="fa-regular fa-clock fa-3x"></i>
+                        </div> 
+                        <div class="service-cap pt-4">
+                            <h4>Neue Ideen</h4>
+                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Area End -->
+    <!-- Applic App Start -->
+    <section class="app-pictures py-5">
+        <div class="applic-apps p-5">
+            <div class="container-fluid">
+                <div class="row justify-content-start">
+                    <!-- slider Heading -->
+                    <div class="col-xl-3 col-lg-3 col-md-8">
+                        <div class="single-cases-info mb-30">
+                            <h3>Applic Apps<br> Screenshot</h3>
+                            <p>Lorem ipsum dolor sit amet, consecadipiscing elit, sed do eiusmod tempor incididunt ut ore et dolore magna aliqua. Quis ipsum suspendisse gravida. Risus commodo viverra maecenasan lacus vel facilisis. </p>
+                        </div>
+                    </div>
+                    <!-- OwL -->
+                    <div class="col-xl-7 col-lg-8 col-md-7">
+                        <div class="app-active owl-carousel"> 
+                            <div class="single-cases-img">
+                                <img src="static/img/App1.png" alt="">
+                            </div>
+                            <div class="single-cases-img">
+                                <img src="static/img/App2.png" alt="">
+                            </div>
+                            <div class="single-cases-img">
+                                <img src="static/img/App3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Applic App End -->
+    <!-- Best Pricing Start -->
+    <section class="pricing py-5" data-background="assets/img/gallery/best_pricingbg.jpg">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="section-tittle section-tittle2 text-center">
+                        <h2>Wähle einen unserer Pläne.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Best Pricing End -->
+    <!-- Pricing Card Start -->
+        <div class="pricing-card-area py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-card text-center mb-30">
+                            <div class="card-top py-3">
+                                <h4>Starter</h4>
+                            </div>
+                            <div class="card-bottom">
+                                <ul>
+                                    <li>Increase traffic 50%</li>
+                                    <li>E-mail support</li>
+                                    <li>10 Free Optimization</li>
+                                    <li>24/7  support</li>
+                                </ul>
+                                <a href="{{url_for('auth.user_signup')}}" class="btn btn-primary">Loslegen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-card  text-center mb-30">
+                            <div class="card-top py-3">
+                                <h4>Profi</h4>
+                            </div>
+                            <div class="card-bottom">
+                                <ul>
+                                    <li>Increase traffic 50%</li>
+                                    <li>E-mail support</li>
+                                    <li>10 Free Optimization</li>
+                                    <li>24/7  support</li>
+                                </ul>
+                                <a href="{{url_for('auth.user_signup')}}" class="btn btn-primary">Loslegen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Card End -->
+    <!-- Testimonials -->
+    <section class="testimonials py-5">
+        <div class="customers">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-xl-8">
+                        <div class="section-tittle text-center">
+                            <h2>What Our Customers<br> Have to Say</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container text-center py-5">
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="textimonial-img">
+                            <img src="static/img/testi1.png" alt="">
+                        </div>
+                        <div class="textimonial-cap">
+                            <h4>Welcome To The Best Model  Winner Contest</h4>
+                            <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="textimonial-img">
+                            <img src="static/img/testi2.png" alt="">
+                        </div>
+                        <div class="textimonial-cap">
+                            <h4>Welcome To The Best Model  Winner Contest</h4>
+                            <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="single-customer mb-100">
+                            <div class="textimonial-img">
+                                <img src="static/img/testi3.png" alt="">
+                            </div>
+                            <div class="textimonial-cap">
+                                <h4>Welcome To The Best Model  Winner</h4>
+                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="carousel-controls py-5">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>   
+    <!-- Our Customer End -->
+    <!-- Say Something Start -->
+    <section class="newsletter py-5">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="offset-xl-1 offset-lg-1 col-xl-5 col-lg-5">
+                    <div class="say-something-cap">
+                        <h2>Melde Dich <span style="font-style:italic">jetzt</span> an als Beta-Tester</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-xl-2 col-lg-3">
+                    <div class="a-btn">
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <button type="submit" href="" class="btn btn-primary">Anmelden</button>
+                        <img src="static/img/say-shape-right.png" alt="" class="say-shape2 d-none d-lg-block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Say Something End -->
 </main>
-
-
 {% endblock %}

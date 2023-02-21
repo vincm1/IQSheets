@@ -1,28 +1,28 @@
 body {
     font-family: 'Roboto', sans-serif;
-    color: black;
+    color: #19184D;
 }
 
 main {
     font-family: 'Roboto', sans-serif;
-    color: black;
+    color: #19184D;
 }
 
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Abril Fatface', cursive;
-    color: black
+    color: #19184D;
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #5B8391;
-    border-color: #5B8391;
-    color: #EBECEE;
+    background-color: #87B1AC;
+    border-color: #87B1AC;
+    color: #19184D;
     font-family: 'Abril Fatface', cursive;
 }
 
 .btn-outline-primary {
-    border-color: #98DAD8;
+    border-color: #87B1AC;
     color: #98DAD8;
     font-family: 'Abril Fatface';
 }
@@ -40,3 +40,78 @@ h1,h2,h3,h4,h5,h6 {
     font-family: 'Abril Fatface', cursive;
 }
 
+/* Features */
+
+.features {
+    background-color: #87B1AC;
+}
+
+/* services */
+
+.service-area {
+    padding: 8rem 0;
+}
+
+.service-area .services-caption-active {
+    border: 1px solid;
+    border-color:#30444f;
+    border-radius: 10px;
+}
+
+.service-area .services-caption:hover {
+    border: 1px solid;
+    border-color:#30444f;
+    border-radius: 10px;
+}
+
+.service-area i {
+    background-color: #87B1AC;
+    color: #fff;
+    padding: 25px 25px;
+    border-radius: 5px 20px 5px;
+}
+
+/* App */
+
+.app-pictures {
+    background-color: #87B1AC;
+}
+
+/* services */
+ 
+.pricing .single-card {
+    border: 1px solid;
+    border-color:#30444f;
+    border-radius: 10px;
+}
+
+.pricing .single-card ul {
+    list-style-type: none; 
+}
+
+.pricing .single-card li {
+    margin: 5px 0;
+}
+
+.pricing .card-bottom .btn-primary {
+    margin: 2rem 0;
+    padding: 15px 90px;
+}
+
+/* Testimonials */
+
+.testimonials {
+    background-color: #87B1AC;
+}
+
+/* Newsletter */
+
+.newsletter {
+    border-bottom: 1px solid#87B1AC
+}
+
+/* Footer */
+
+.footer ul {
+    list-style-type: none;
+}

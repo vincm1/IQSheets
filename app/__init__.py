@@ -10,4 +10,10 @@ app.register_blueprint(auth)
 def index():
     return render_template('index.html')
 
+@app.route("/preise")
+def pricing():
+    return render_template('pricing.html')
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
