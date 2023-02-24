@@ -28,12 +28,13 @@ migrate = Migrate(app,db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-login_manager.login_view = "users.login_user"
+login_manager.login_view = "users.login"
 
 ### Blueprints ###
 from excelguru_app.users.routes import users
 from excelguru_app.oauth.routes import oauth
 
+### Registering all Blueprints ###
 app.register_blueprint(oauth)
 app.register_blueprint(users)
 

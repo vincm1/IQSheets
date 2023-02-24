@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 
 # images
-app/static/img/
+excelguru_app/static/img/

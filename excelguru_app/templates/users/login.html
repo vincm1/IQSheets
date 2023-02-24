@@ -46,8 +46,8 @@
             </div> 
             <div class="col-xl-4 col-lg-4">
                 <h2 class="form-title pb-4">Login</h2>
-                <form method="POST" action="{{url_for('users.login_user')}}">
-                    {{form.hidden_tag()}}
+                <form method="POST" action="{{url_for('users.login')}}">
+                      {{form.hidden_tag()}}
                     <div class="form-group py-1">
                       {{form.username(placeholder="Username", class="form-control")}}
                     </div>
