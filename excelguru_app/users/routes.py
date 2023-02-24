@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from excelguru_app import db
 from excelguru_app.models import User
-from excelguru_app.users.forms import RegistrationForm, LoginForm
+from excelguru_app.users.forms import RegistrationForm, LoginForm, EditUserForm
 
 users = Blueprint('users', __name__)
 
@@ -42,6 +42,14 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@login_required
+@users.route('/edit_profil')
+def edit_user():
+    user = User.query.filter_by(username=current_user.username).first()
+    form = EditUserForm()
+    
+    return render_template('users/profil.html', form=form)
 
 @login_required
 @users.route('/dashboard', methods=['GET', 'POST'])

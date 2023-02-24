@@ -28,3 +28,13 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Passwort', validators=[DataRequired()])
     submit = SubmitField('Login')
+    
+class EditUserForm(FlaskForm):
+    
+    username = StringField('Username', validators=[DataRequired(), check_username])
+    email = EmailField('Email', validators=[Email(), DataRequired(), check_email])
+    password = PasswordField('Passwort', validators=[DataRequired(), Length(min=8, message="Mindestens 8 Zeichen!"), 
+                            EqualTo('confirm_pw', message="Passwörter stimmen nicht überein!"),
+                            Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])", message="Passwort muss Sonderzeichen, Groß-Kleinschreibung.")])
+    confirm_pw = PasswordField('Passwort bestätigen', validators=[DataRequired()])
+    submit = SubmitField('Speichern')

@@ -1,5 +1,4 @@
 /* Google Font Import - Poppins */
-/* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 *{
     margin: 0;
@@ -56,13 +55,11 @@ body.dark{
     transition: var(--tran-05);
     z-index: 100;  
 }
-
 .sidebar.close{
     width: 88px;
 }
 
 /* ===== Reusable code - Here ===== */
-
 .sidebar li{
     height: 50px;
     list-style: none;
@@ -259,7 +256,6 @@ body.dark .mode .sun-moon i.moon{
     border-radius: 6px;
     cursor: pointer;
 }
-
 .toggle-switch .switch{
     position: relative;
     height: 22px;
