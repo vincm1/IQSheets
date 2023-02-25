@@ -307,4 +307,8 @@ body.dark .switch::before{
 body.dark .home .text{
     color: var(--text-color);
 }
- 
+
+.sidebar .bottom-content #premium {
+    background-color: #87B1AC;
+    border-radius: 6px;
+}

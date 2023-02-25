@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, redirect, request, flash, url_for
+"""Routes for Users"""
+from flask import Blueprint, render_template, redirect, request, flash, url_for, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 from excelguru_app import db
 from excelguru_app.models import User
-from excelguru_app.users.forms import RegistrationForm, LoginForm, EditUserForm
+from excelguru_app.users.forms import RegistrationForm, LoginForm, EditUserForm, DashboardForm
+from excelguru_app.openai import engines, openai_chat
 
 users = Blueprint('users', __name__)
 
@@ -40,12 +42,14 @@ def login():
 @login_required
 @users.route('/logout')
 def logout():
+    """Logout"""
     logout_user()
     return redirect(url_for('index'))
 
 @login_required
 @users.route('/edit_profil')
 def edit_user():
+    """Edit user profile"""
     user = User.query.filter_by(username=current_user.username).first()
     form = EditUserForm()
     
@@ -55,4 +59,17 @@ def edit_user():
 @users.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     """User Dashboard page"""
-    return render_template('users/dashboard.html')
+    form = DashboardForm()
+    
+    if form.validate_on_submit():
+        prompt = form.prompt.data
+        result = openai_chat(prompt)
+        
+        answer = result["choices"][0]["text"]
+        
+        start = answer.find("=")
+        end = answer.find(")")
+        
+        formula = answer[start:end + 1]
+       
+    return render_template('users/dashboard.html', form=form, answer=answer, formula=formula)

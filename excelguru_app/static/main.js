@@ -5,7 +5,6 @@ const body = document.querySelector('body'),
       modeSwitch = body.querySelector(".toggle-switch"),
       modeText = body.querySelector(".mode-text");
 
-
 toggle.addEventListener("click" , () =>{
     sidebar.classList.toggle("close");
 })
@@ -23,4 +22,15 @@ modeSwitch.addEventListener("click" , () =>{
         modeText.innerText = "Dark mode";
         
     }
+});
+
+const premium = document.getElementById('premium')
+const premiumBtn = document.getElementById('premium-btn');
+
+premium.addEventListener("mouseover", () => {
+	premiumBtn.innerText = "Upgrade";
+});
+
+premium.addEventListener("mouseout", () => {
+	premiumBtn.innerText = "Premium";
 });

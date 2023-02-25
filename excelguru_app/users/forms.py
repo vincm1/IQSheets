@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, SubmitField, ValidationError
-from flask_wtf.file import FileField, FileAllowed
-from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp, Optional
+from wtforms import StringField, PasswordField, EmailField, TextAreaField, SubmitField, ValidationError
+from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp
 from excelguru_app.models import User
 
 #### Checks: Nutzername & Email bereits vorhanden. ####
@@ -38,3 +37,8 @@ class EditUserForm(FlaskForm):
                             Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])", message="Passwort muss Sonderzeichen, Groß-Kleinschreibung.")])
     confirm_pw = PasswordField('Passwort bestätigen', validators=[DataRequired()])
     submit = SubmitField('Speichern')
+
+class DashboardForm(FlaskForm):
+    
+    prompt = TextAreaField('Funktion die Zelle A1 mit Zelle B1 summiert z.B.', validators=[DataRequired(), Length(max=400)])
+    submit = SubmitField('Formel')  
