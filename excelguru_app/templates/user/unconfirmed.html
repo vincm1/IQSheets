@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h1>Welcome!</h1>
+<h1>Willkommen bei ExcelWizzard!</h1>
 <br>
-<p>You have not confirmed your account. Please check your inbox (and your spam folder) - you should have received an email with a confirmation link.</p>
-<p>Didn't get the email? <a href="/">Resend</a>.</p>
+<p>Leider hast Du deine Emailadresse noch nicht bestätig. Bitte checke dein Postfach und Spam-Ordner nach deinem Bestätigungslink</p>
+<p>Email nicht bekommen?<a href="{{url_for('user.resend_confirmation')}}">Erneut</a>.</p>
 
 {% endblock %}

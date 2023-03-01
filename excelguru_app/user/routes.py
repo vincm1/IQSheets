@@ -38,32 +38,30 @@ def register():
         subject = "Bitte bestätige Deine Email für ExcelWizzard!"
         send_email(user.email, subject, html)
         
-        flash(f'Eine Bestätigungsemail wurde an {user.email} geschickt.', 'success')
+        flash(f'Eine Bestätigungs-Email wurde an {user.email} geschickt.', 'success')
         return redirect(url_for('user.login'))
     
     return render_template('user/signup.html', form=form)
 
 @user_blueprint.route('/confirm/<token>')
-@login_required
 def confirm_email(token):
-    try:
-        email = confirm_token(token)
-        
-    except:
-        flash('The confirmation link is invalid or has expired.', 'danger')
-        
-    user = User.query.filter_by(email=email).first_or_404()
+    if current_user.is_confirmed:
+        flash('Account bereits bestätigt.', 'success')
+        return redirect(url_for('user.login'))
     
-    if user.is_confirmed:
-        flash('Account already confirmed. Please login.', 'success')
+    email = confirm_token(token)
     
-    else:
+    user = User.query.filter_by(email=current_user.email).first_or_404()
+    
+    if user.email == email:
         user.is_confirmed = True
-        user.confirmed_on = datetime.datetime.now()
+        user.confirmed_on = datetime.now()
         db.session.add(user)
         db.session.commit()
-        flash('You have confirmed your account. Thanks!', 'success')
-        
+        flash('Account bestätigt', 'success')
+        return redirect(url_for('user.login'))
+    else:
+        flash('Der Bestätigungslink ist abgelaufen oder invalide.', 'danger')
     return redirect(url_for('index'))
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
@@ -92,9 +90,20 @@ def logout():
 @login_required
 def unconfirmed():
     if current_user.is_confirmed:
-        return redirect('main.home')
-    flash('Please confirm your account!', 'warning')
+        return redirect('user.login')
+    flash('Bitte Account bestätigen', 'warning')
     return render_template('user/unconfirmed.html')
+
+@user_blueprint.route('/resend')
+@login_required
+def resend_confirmation():
+    token = generate_confirmation_token(current_user.email)
+    confirm_url = url_for('user.confirm_email', token=token, _external=True)
+    html = render_template('user/activate.html', confirm_url=confirm_url)
+    subject = "Bitte bestätige Deine Email für ExcelWizzard!"
+    send_email(current_user.email, subject, html)
+    flash(f'Eine Bestätigungs-Email wurde an {current_user.email} geschickt.', 'success')
+    return redirect(url_for('user.unconfirmed'))
 
 @user_blueprint.route('/edit_profil', methods=['GET', 'POST'])
 @login_required
