@@ -1,0 +1,27 @@
+{% extends "layout.html" %}{% block content %}
+	<section class="home">
+
+		<div class="container-fluid pt-5 ps-5">
+			<div class="row d-flex">
+
+				<div class="col-xl-4 col-lg-4 col-md-3">
+					<form method="POST">
+						{{form.hidden_tag()}}
+						{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formle die zwei Zellen summiert z.B.")}}
+						{{form.submit(class="btn btn-primary")}}
+					</form>
+				</div>
+
+				<div class="col-xl-4 col-lg-4 col-md-3 response">
+					<h6>{{answer}}</h6>
+				</div>
+
+				<div class="col-xl-2 col-lg-3 col-md-3 formula">
+					<p>{{formula}}</p>
+				</div>
+
+			</div>
+		</div>
+		
+	</section>
+{% endblock %}

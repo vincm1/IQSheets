@@ -16,14 +16,18 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
     registration_date = db.Column(db.DateTime, default=datetime.now)
+    is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
 
-    def __init__(self, username, email, password):
-        self.username = username
-        self.email = email
-        self.password_hash = generate_password_hash(password)
-        
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def __init__(self, username, email, password, is_confirmed=False, confirmed_on=None):
+        self.username = username
+        self.email = email
+        self.password_hash = generate_password_hash(password)
+        self.is_confirmed = is_confirmed
+        self.confirmed_on = confirmed_on
+        
     def __repr__(self):
         f"User with {self.id} and {self.username} {self.email}."
