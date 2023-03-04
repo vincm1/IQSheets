@@ -15,16 +15,16 @@ migrate = Migrate(app,db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-login_manager.login_view = "user.login"
+login_manager.login_view = "google.login"
 
 mail = Mail(app)
 
 ### Blueprints ###
 from excelguru_app.user.routes import user_blueprint
-from excelguru_app.oauth.routes import oauth
+from excelguru_app.oauth.routes import oauth_blueprint
 
 ### Registering all Blueprints ###
-app.register_blueprint(oauth)
+app.register_blueprint(oauth_blueprint, url_prefix='/login')
 app.register_blueprint(user_blueprint)
 
 ### Core Routes ###
