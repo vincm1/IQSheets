@@ -34,7 +34,7 @@
 			<header>
 					<div class="image-text">
 							<span class="image">
-								<img src="static/img/Vincent_Michler.jpg" alt="Profilbild">
+								<img src={{url_for('static', filename="img/Vincent_Michler.jpg")}} alt="Profilbild">
 							</span>
 
 							<div class="text logo-text">
@@ -51,7 +51,7 @@
 
 							<li class="search-box">
 									<i class='bx bx-search icon'></i>
-									<input type="text" placeholder="Search...">
+									<input type="text" placeholder="Suche...">
 							</li>
 							
 							<li class="">
@@ -62,16 +62,23 @@
 							</li>
 
 							<li class="">
-								<a href="#">
+								<a href="{{url_for('user.favorites', username=current_user.username)}}">
 									<i class='bx bx-heart icon' ></i>
 									<span class="text nav-text">Favoriten</span>
 								</a>
 							</li>
 
 							<li class="">
+								<a href="{{url_for('dashboard.templates')}}">
+									<i class='bx bx-spreadsheet icon' ></i>
+									<span class="text nav-text">Templates</span>
+								</a>
+							</li>
+
+							<li class="">
 								<a href="#">
 									<i class='bx bx-wallet icon' ></i>
-									<span class="text nav-text">Wallets</span>
+									<span class="text nav-text">Zahlungen</span>
 								</a>
 							</li>
 					</div>

@@ -161,7 +161,7 @@ def dashboard():
     if form.validate_on_submit():
         prompt = form.prompt.data
         result = openai_chat(prompt)
-        
+        print(result)
         answer = result["choices"][0]["text"]
         
         start = answer.find("=")
@@ -172,3 +172,13 @@ def dashboard():
         return render_template('user/dashboard.html', form=form, answer=answer, formula=formula)
        
     return render_template('user/dashboard.html', form=form)
+
+@user_blueprint.route('/<username>/favorites', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
+def favorites(username):
+    """User favorite Excel Formulas"""
+       
+    return render_template('user/favorites.html')
+
+

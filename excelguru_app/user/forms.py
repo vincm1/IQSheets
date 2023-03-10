@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, TextAreaField, SubmitField, ValidationError
+from wtforms import StringField, PasswordField, EmailField, TextAreaField, SelectField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp
 from excelguru_app.models import User
 
@@ -46,5 +46,6 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField('Passwort bestätigen')
 
 class DashboardForm(FlaskForm):
+    info_prompt = SelectField('Was möchtest du generieren?', choices=["Formel", "VBA"], render_kw={'class': 'btn-group-toggle', 'data-toggle': 'buttons'})
     prompt = TextAreaField('Funktion die Zelle A1 mit Zelle B1 summiert z.B.', validators=[DataRequired(), Length(max=400)])
     submit = SubmitField('Formel')  

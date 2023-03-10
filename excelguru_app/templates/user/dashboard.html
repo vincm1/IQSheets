@@ -1,27 +1,64 @@
 {% extends "layout.html" %}{% block content %}
 	<section class="home">
-
-		<div class="container-fluid pt-5 ps-5">
-			<div class="row d-flex">
-
-				<div class="col-xl-4 col-lg-4 col-md-3">
-					<form method="POST">
-						{{form.hidden_tag()}}
-						{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formle die zwei Zellen summiert z.B.")}}
-						{{form.submit(class="btn btn-primary")}}
-					</form>
+		<section class="dashboard">
+			<div class="container-fluid pt-5 ps-5">
+				<div class="banner mb-5">
+					<h1>Nur noch 1 von 5 gratis Prompts verfügbar</h1>
+					<button class="btn btn-primary premium-btn"><i class='bx bx-diamond icon'></i>Premium</button>
 				</div>
 
-				<div class="col-xl-4 col-lg-4 col-md-3 response">
-					<h6>{{answer}}</h6>
+				<div class="prompt mt-3">
+					<div class="row align-items start">
+						<form method="POST">
+							{{form.hidden_tag()}}
+							{{form.info_prompt.label()}}
+							<div class="btn-group" role="group">
+								{% for choice in form.info_prompt.choices %}
+								  <input name="info_prompt" value="{{ choice }}" class="btn btn-secondary {% if form.info_prompt.data == choice[0] %}active{% endif %}">{{ choice }}</>
+								{% endfor %}
+							</div>
+					</div>
+	
+					<div class="row d-flex mt-5">
+	
+						<div class="col-xl-5 col-lg-4 col-md-3 prompt">
+							<div class="row">
+								{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formel die zwei Zellen summiert z.B.")}}
+							</div>
+							<div class="row justify-content-end">
+								{{form.submit(class="btn btn-primary mt-2 col-lg-5")}}
+							</div>
+							
+						</form>
+					</div>
+	
+					<div class="col-xl-2 col-lg-3 col-md-3 pl-5 formula">
+						<div class="card">
+							<div class="card-header">
+							  Formel
+							</div>
+							<div class="card-body">
+								{{formula}}
+								<button alt="Favoriten hinzufügen"><i class="fa-regular fa-heart"></i></button>
+							</div>
+						</div>
+					</div>
+	
+					<div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
+						<div class="card">
+							<div class="card-header">
+							  Erklärung
+							</div>
+							<div class="card-body">
+								{{answer}}
+							</div>
+						</div>
+					</div>
+	
 				</div>
-
-				<div class="col-xl-2 col-lg-3 col-md-3 formula">
-					<p>{{formula}}</p>
 				</div>
 
 			</div>
-		</div>
-		
+		</section>
 	</section>
 {% endblock %}
