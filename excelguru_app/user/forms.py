@@ -44,8 +44,3 @@ class ResetPasswordForm(FlaskForm):
                             message="Passwort muss Sonderzeichen, Groß-Kleinschreibung.")])
     confirm_pw = PasswordField('Wiederholen', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Passwort bestätigen')
-
-class DashboardForm(FlaskForm):
-    info_prompt = SelectField('Was möchtest du generieren?', choices=["Formel", "VBA"], render_kw={'class': 'btn-group-toggle', 'data-toggle': 'buttons'})
-    prompt = TextAreaField('Funktion die Zelle A1 mit Zelle B1 summiert z.B.', validators=[DataRequired(), Length(max=400)])
-    submit = SubmitField('Formel')  

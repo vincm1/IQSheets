@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     registration_date = db.Column(db.DateTime, default=datetime.now)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
+    premium = db.Column(db.Boolean, nullable=False, default=False)
     
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)

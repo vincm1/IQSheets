@@ -67,6 +67,7 @@ body.dark{
     left: 0;
     height: 100%;
     width: 250px;
+    max-height: 100%;
     padding: 10px 14px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
@@ -375,7 +376,19 @@ body.dark .home .text{
     background-color: var(--primary-color);
     padding: 10px 10px;
     border-radius: 8px;
-    max-width: 95%;
+}
+
+.dashboard #prompt-header {
+    font-size: 28px;
+}
+
+.dashboard select {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    color: var(--sidebar-color);
+    font-size: 24px;
+    padding: 5px 3px;
 }
 
 .dashboard .card-header {
@@ -383,4 +396,10 @@ body.dark .home .text{
     color: var(--sidebar-color);
     font-size: 24px;
     font-style: italic;
+}
+
+#favorite-btn:hover i {
+    color: #fff; /* Change the color of the icon on hover */
+    transition: color 0.3s ease-in-out; /* Add a smooth transition effect */
+    font-weight: 900;
 }

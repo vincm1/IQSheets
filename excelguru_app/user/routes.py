@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from excelguru_app import app, db, mail
 from excelguru_app.models import User
-from .forms import RegistrationForm, LoginForm, EditUserForm, ResetPasswordRequestForm, ResetPasswordForm, DashboardForm
+from .forms import RegistrationForm, LoginForm, EditUserForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
 from werkzeug.security import generate_password_hash
@@ -151,34 +151,5 @@ def reset_password(token):
         return redirect(url_for('user.login'))
     return render_template('user/reset_password.html', form=form)
 
-@user_blueprint.route('/dashboard', methods=['GET', 'POST'])
-@login_required
-@check_confirmed_mail
-def dashboard():
-    """User Dashboard page"""
-    form = DashboardForm()
-    
-    if form.validate_on_submit():
-        prompt = form.prompt.data
-        result = openai_chat(prompt)
-        print(result)
-        answer = result["choices"][0]["text"]
-        
-        start = answer.find("=")
-        end = answer.find(")")
-        
-        formula = answer[start:end + 1]
-        
-        return render_template('user/dashboard.html', form=form, answer=answer, formula=formula)
-       
-    return render_template('user/dashboard.html', form=form)
-
-@user_blueprint.route('/<username>/favorites', methods=['GET', 'POST'])
-@login_required
-@check_confirmed_mail
-def favorites(username):
-    """User favorite Excel Formulas"""
-       
-    return render_template('user/favorites.html')
 
 

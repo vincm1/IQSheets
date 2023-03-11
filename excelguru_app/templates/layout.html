@@ -34,7 +34,7 @@
 			<header>
 					<div class="image-text">
 							<span class="image">
-								<img src={{url_for('static', filename="img/Vincent_Michler.jpg")}} alt="Profilbild">
+								<a href="{{url_for('user.edit_user')}}"><img src={{url_for('static', filename='img/Vincent_Michler.jpg')}} alt="Profilbild"></a>
 							</span>
 
 							<div class="text logo-text">
@@ -46,7 +46,7 @@
 					<i class='bx bx-chevron-right toggle'></i>
 			</header>
 
-			<div class="menu-bar">
+			<div class="menu-bar mb-2">
 					<div class="menu">
 
 							<li class="search-box">
@@ -55,14 +55,14 @@
 							</li>
 							
 							<li class="">
-								<a href="{{url_for('user.dashboard')}}">
+								<a href="{{url_for('dashboard.dashboard')}}">
 									<i class='bx bx-home-alt icon' ></i>
 										<span class="text nav-text">Dashboard</span>
 										</a>
 							</li>
 
 							<li class="">
-								<a href="{{url_for('user.favorites', username=current_user.username)}}">
+								<a href="{{url_for('dashboard.favorites', username=current_user.username)}}">
 									<i class='bx bx-heart icon' ></i>
 									<span class="text nav-text">Favoriten</span>
 								</a>
@@ -83,13 +83,15 @@
 							</li>
 					</div>
 
-					<div class="bottom-content">
+					<div class="bottom-content mb-2">
+						
 						<li id="premium">
 							<a href="#">
 									<i class='bx bx-diamond icon'></i>
 									<span class="text nav-text" id="premium-btn">Premium</span>
 							</a>
 						</li>
+						
 
 						<li class="">
 							<a href="{{url_for('user.edit_user')}}">
