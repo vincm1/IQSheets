@@ -19,7 +19,6 @@
 									{{form.info_prompt(class=("col-xl-2 col-md-4"))}}
 								</div>
 							</div>
-					</div>
 	
 					<div class="row d-flex mt-5">
 						<div class="col-xl-4 col-lg-4 col-md-3 prompt">
@@ -27,11 +26,11 @@
 								{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formel die zwei Zellen summiert z.B.")}}
 							</div>
 							<div class="row justify-content-end">
-								{{form.submit(class="btn btn-primary mt-2 col-lg-5")}}
+								{{form.submit(class="btn btn-primary mt-2 col-lg-5", id="formel-btn")}}
 							</div>
 							
 						</form>
-					</div>
+				</div>
 					
 					{% if formula %}
 					<div class="col-xl-3 col-lg-3 col-md-3 pl-5 formula">
@@ -39,26 +38,37 @@
 							<div class="card-header">
 							  Formel
 							</div>
-							<div class="row">
-								<p>{{formula}}</p>
-							</div>
-							<div class="row d-flex justify-content-end">
-								<button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+							<div class="card-body p-3">
+								<div class="row">
+									<p>{{formula}}</p>
+								</div>
+								<div class="row d-flex justify-content-end">
+									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
+										<button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
 	
 					<div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
 						<div class="card">
-							<div class="card-header">
+							<div class="card-header p-3">
 							  Erklärung
 							</div>
-							<div class="row">
-								<p>{{answer}}</p>
+							<div class="card-body p-3">
+								<div class="row">
+									<p>{{answer}}</p>
+								</div>
+								<div class="row d-flex justify-content-end">
+									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
+										{{form_2.hidden_tag()}}
+										{{form_2.submit(class="p-2 btn btn-primary col-lg-1 me-2", id="favorite-btn")}}
+										<!-- <button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button> -->
+									</form>
+								</div>
 							</div>
-							<div class="row d-flex justify-content-end">
-								<button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button>
-							</div>
+							
 						</div>
 					</div>
 
@@ -69,12 +79,16 @@
 							<div class="card-header">
 							  Vorschlag
 							</div>
-							<div class="card-body">
+							<div class="card-body p-3">
 								<div class="row">
 									<p>{{answer}}</p>
 								</div>
 								<div class="row d-flex justify-content-end">
-									<button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
+										{{form_2.hidden_tag()}}
+										{{form_2.submit(class="p-2 btn btn-primary col-lg-1 me-2", id="favorite-btn")}}
+										<!-- <button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button> -->
+									</form>
 								</div>
 							</div>
 						</div>
@@ -82,7 +96,7 @@
 					
 					{% endif %}
 	
-				</div>
+					</div>
 				</div>
 
 			</div>

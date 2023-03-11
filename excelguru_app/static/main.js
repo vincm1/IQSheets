@@ -34,3 +34,9 @@ premium.addEventListener("mouseover", () => {
 premium.addEventListener("mouseout", () => {
 	premiumBtn.innerText = "Premium";
 });
+
+
+const submitButton2 = document.getElementById('favorite-btn');
+        submitButton2.addEventListener('click', () => {
+            submitButton2.disabled = true;
+        });
