@@ -1,6 +1,7 @@
 """Routes for user"""
+import os
 from datetime import datetime
-from flask import Blueprint, render_template, redirect, request, flash, url_for
+from flask import Blueprint, current_app, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from excelguru_app import app, db, mail
 from excelguru_app.models import User
@@ -8,6 +9,8 @@ from .forms import RegistrationForm, LoginForm, EditUserForm, ResetPasswordReque
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
 from werkzeug.security import generate_password_hash
+from werkzeug.utils import secure_filename
+import uuid as uuid
 from flask_mail import Message
 from excelguru_app.utils.decorators import check_confirmed_mail
 from excelguru_app.openai import openai_chat
@@ -28,7 +31,7 @@ def register():
     
     if form.validate_on_submit() and request.method == "POST":
         user = User(username=form.username.data, email=form.email.data, 
-                    password=form.password.data, is_confirmed=False)
+                    password=form.password.data, job_description=None, is_confirmed=False)
 
         db.session.add(user)
         db.session.commit()
@@ -56,7 +59,7 @@ def login():
             flash('Falscher Username oder Passwort')
             return redirect(url_for('user.login'))
         login_user(user, remember=True)
-        return redirect(url_for('user.dashboard'))
+        return redirect(url_for('dashboard.dashboard'))
     
     return render_template('user/login.html', form=form)
 
@@ -110,6 +113,24 @@ def edit_user():
     """Edit user profile"""
     user = User.query.filter_by(username=current_user.username).first()
     form = EditUserForm()
+    
+    if form.validate_on_submit():
+        
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.job_description = form.job_description.data
+        current_user.profile_picture = form.profile_picture.data
+        # Image name
+        pic_filename = secure_filename(current_user.profile_picture.filename)
+        # UUID
+        pic_name = str(uuid.uuid1()) + "_" + pic_filename
+        current_user.profile_picture.save(os.path.join(current_app.root_path, 'static/profile_pictures', pic_name))
+        current_user.profile_picture = pic_name
+       
+        db.session.add(user)
+        db.session.commit()
+        flash("Profil erfolgreich bearbeitet!", "success")
+        return render_template('user/profil.html', form=form)
     
     return render_template('user/profil.html', form=form)
 

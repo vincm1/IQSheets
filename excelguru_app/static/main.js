@@ -36,7 +36,12 @@ premium.addEventListener("mouseout", () => {
 });
 
 
-const submitButton2 = document.getElementById('favorite-btn');
-        submitButton2.addEventListener('click', () => {
-            submitButton2.disabled = true;
-        });
+const premiumProfileBtn = document.getElementById('profile-premium-btn');
+
+premiumProfileBtn.addEventListener("mouseover", () => {
+	premiumProfileBtn.innerText = "Upgrade";
+});
+
+premiumProfileBtn.addEventListener("mouseout", () => {
+	premiumProfileBtn.innerHTML = "<i class='bx bx-diamond icon pe-2'></i>Premium";
+});

@@ -13,8 +13,10 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
+    username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String, nullable=False)
+    job_description = db.Column(db.String(100), nullable=True)
+    profile_picture = db.Column(db.String, nullable=True, default='default_profile_picture.png')
     password_hash = db.Column(db.String, nullable=False)
     registration_date = db.Column(db.DateTime, default=datetime.now)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
@@ -25,9 +27,10 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __init__(self, username, email, password, is_confirmed=False, confirmed_on=None):
+    def __init__(self, username, email, job_description, password, is_confirmed=False, confirmed_on=None):
         self.username = username
         self.email = email
+        self.job_description = job_description
         self.password_hash = generate_password_hash(password)
         self.is_confirmed = is_confirmed
         self.confirmed_on = confirmed_on

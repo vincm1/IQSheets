@@ -403,3 +403,16 @@ body.dark .home .text{
     transition: color 0.3s ease-in-out; /* Add a smooth transition effect */
     font-weight: 900;
 }
+
+/* ====== Profile Page ====== */
+
+.profile #profile-premium-btn {
+    color: var(--text-color);
+    border-color: var(--text-color);
+}
+
+.profile #profile-premium-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-color: var(--primary-color);
+}

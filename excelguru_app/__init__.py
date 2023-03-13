@@ -36,7 +36,7 @@ app.register_blueprint(dashboard_blueprint)
 def index():
     return render_template('index.html')
 
-@app.route("/preise")
+@app.route("/abos")
 def pricing():
     return render_template('pricing.html')
 

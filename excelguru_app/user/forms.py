@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, TextAreaField, SelectField, SubmitField, ValidationError
-from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp
+from wtforms import StringField, PasswordField, EmailField, SubmitField, FileField, ValidationError
+from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp, Optional
 from excelguru_app.models import User
 
 #### Checks: Nutzername & Email bereits vorhanden. ####
@@ -27,12 +27,14 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
     
 class EditUserForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), check_username])
-    email = EmailField('Email', validators=[Email(), DataRequired(), check_email])
-    password = PasswordField('Passwort', validators=[DataRequired(), Length(min=8, message="Mindestens 8 Zeichen!"), 
+    username = StringField('Username', validators=[ Optional(), check_username])
+    email = EmailField('Email', validators=[Email(), Optional(), check_email])
+    job_description = StringField('Berufsbezeichnung', validators=[Optional()])
+    profile_picture = FileField('Profilbild')
+    password = PasswordField('Passwort', validators=[Optional(), Length(min=8, message="Mindestens 8 Zeichen!"), 
                             EqualTo('confirm_pw', message="Passwörter stimmen nicht überein!"),
                             Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])", message="Passwort muss Sonderzeichen, Groß-Kleinschreibung.")])
-    confirm_pw = PasswordField('Passwort bestätigen', validators=[DataRequired()])
+    confirm_pw = PasswordField('Passwort bestätigen', validators=[Optional()])
     submit = SubmitField('Speichern')
 
 class ResetPasswordRequestForm(FlaskForm):

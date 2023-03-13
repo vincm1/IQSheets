@@ -34,12 +34,12 @@
 			<header>
 					<div class="image-text">
 							<span class="image">
-								<a href="{{url_for('user.edit_user')}}"><img src={{url_for('static', filename='img/Vincent_Michler.jpg')}} alt="Profilbild"></a>
+								<a href="{{url_for('user.edit_user')}}"><img src="{{url_for('static', filename='profile_pictures/' + current_user.profile_picture)}}" alt="Profilbild"></a>
 							</span>
 
 							<div class="text logo-text">
 									<span class="name">{{current_user.username}}</span>
-									<span class="profession">Web developer</span>
+									<span class="profession">{{current_user.job_description}}</span>
 							</div>
 					</div>
 
@@ -86,7 +86,7 @@
 					<div class="bottom-content mb-2">
 						
 						<li id="premium">
-							<a href="#">
+							<a href="{{url_for('pricing')}}">
 									<i class='bx bx-diamond icon'></i>
 									<span class="text nav-text" id="premium-btn">Premium</span>
 							</a>

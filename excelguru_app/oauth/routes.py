@@ -41,11 +41,12 @@ def google_logged_in(blueprint, token):
 
     if oauth.user:
         login_user(oauth.user)
-        return redirect(url_for('user.dashboard'))
+        return redirect(url_for('dashboard.dashboard'))
 
     else:
         # Create a new local user account for this user
-        user = User(username=info["name"], email=info["email"], password="", is_confirmed=True, confirmed_on=datetime.now())
+        user = User(username=info["name"], email=info["email"], password="", is_confirmed=True, 
+                    job_description="", confirmed_on=datetime.now())
         # Associate the new local user account with the OAuth token
         oauth.user = user
         # Save and commit our database models
@@ -53,7 +54,7 @@ def google_logged_in(blueprint, token):
         db.session.commit()
         # Log in the new local user account
         login_user(user)
-        return redirect(url_for('user.dashboard'))
+        return redirect(url_for('dashboard.dashboard'))
 
     # Disable Flask-Dance's default behavior for saving the OAuth token
     return False
