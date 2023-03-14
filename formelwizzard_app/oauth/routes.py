@@ -1,13 +1,13 @@
 """ Oauth routes """
 from datetime import datetime
-from excelguru_app import app
+from formelwizzard_app import app
 from flask import flash, url_for, redirect
 from flask_login import current_user, login_user
 from flask_dance.contrib.google import make_google_blueprint
 from flask_dance.consumer import oauth_authorized, oauth_error
 from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from sqlalchemy.orm.exc import NoResultFound
-from excelguru_app.models import db, User, OAuth
+from formelwizzard_app.models import db, User, OAuth
 
 oauth_blueprint = make_google_blueprint(
     client_id=app.config['GOOGLE_OAUTH_CLIENT_ID'],

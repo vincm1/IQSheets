@@ -20,9 +20,9 @@ login_manager.login_view = "google.login"
 mail = Mail(app)
 
 ### Blueprints ###
-from excelguru_app.user.routes import user_blueprint
-from excelguru_app.oauth.routes import oauth_blueprint
-from excelguru_app.dashboard.routes import dashboard_blueprint
+from formelwizzard_app.user.routes import user_blueprint
+from formelwizzard_app.oauth.routes import oauth_blueprint
+from formelwizzard_app.dashboard.routes import dashboard_blueprint
 
 ### Registering all Blueprints ###
 app.register_blueprint(oauth_blueprint, url_prefix='/login')

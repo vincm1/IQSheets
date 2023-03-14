@@ -3,8 +3,8 @@ import os
 from datetime import datetime
 from flask import Blueprint, current_app, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
-from excelguru_app import app, db, mail
-from excelguru_app.models import User
+from formelwizzard_app import app, db, mail
+from formelwizzard_app.models import User
 from .forms import RegistrationForm, LoginForm, EditUserForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
@@ -12,8 +12,8 @@ from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 import uuid as uuid
 from flask_mail import Message
-from excelguru_app.utils.decorators import check_confirmed_mail
-from excelguru_app.openai import openai_chat
+from formelwizzard_app.utils.decorators import check_confirmed_mail
+from formelwizzard_app.openai import openai_chat
 
 ################
 #### config ####
@@ -115,7 +115,6 @@ def edit_user():
     form = EditUserForm()
     
     if form.validate_on_submit():
-        
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.job_description = form.job_description.data

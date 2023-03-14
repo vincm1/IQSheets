@@ -1,0 +1,37 @@
+{% extends "layout.html" %}{% block content %}
+<section class="home">
+  <section class="templates">
+    <div class="container-fluid m-5">
+      <div class="heading">
+        <h1>FormulaWizzard templates</h1>
+      </div>
+
+      <div class="templates-cards">
+        <div class="container-fluid text-start">
+          <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
+              <div class="card" style="width: 18rem">
+                <img
+                  src="{{url_for('static', filename='img/spreadsheet-g1c355ce39_640.png' )}}"
+                  class="card-img-top"
+                  alt="Spreadsheet picture"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+									<div class="row">
+										<a href="{{url_for('dashboard.download')}}" class="btn btn-primary px-5">Download</a>
+									</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+{% endblock %}

@@ -1,11 +1,10 @@
 """Routes for dashboard"""
-from datetime import datetime
-from flask import Blueprint, render_template, request, flash, url_for, redirect
+from formelwizzard_app import db
+from flask import Blueprint, render_template, request, url_for, redirect, send_file
 from flask_login import login_required, current_user
-from excelguru_app import app, db, mail
-from excelguru_app.models import Favorite
-from excelguru_app.utils.decorators import check_confirmed_mail
-from excelguru_app.openai import openai_chat
+from formelwizzard_app.models import Favorite
+from formelwizzard_app.utils.decorators import check_confirmed_mail
+from formelwizzard_app.openai import openai_chat
 from .forms import DashboardForm, FavoritesForm
 
 ################
@@ -55,13 +54,8 @@ def dashboard():
 @check_confirmed_mail
 def favorites(username):
     """User favorite Excel Formulas"""
-       
-    return render_template('user/favorites.html')
-
-@dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
-def templates():
-    return render_template('dashboard/templates.html')
-
+    favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).all()
+    return render_template('user/favorites.html', favorite_formulas=favorite_formulas)
 
 @dashboard_blueprint.route('/add_favorite', methods=['POST'])
 @login_required
@@ -69,5 +63,23 @@ def templates():
 def add_favorite():
     """Add Formula/VBA to User favorites"""
     
-
     return render_template("dashboard/dashboard.html")
+
+@dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
+def templates():
+    """ Route for templates """
+    return render_template('dashboard/templates.html')
+
+@dashboard_blueprint.route('/download', methods=['GET'])
+def download():
+    """ Route for templates download """
+    filename = 'static/xlxs_templates/Calendar-Template.xlsx'
+    try:
+        return send_file(filename)
+    except Exception as e:
+        return str(e)
+        
+
+@dashboard_blueprint.route('/premium', methods=['GET', 'POST'])
+def premium():
+    return render_template('dashboard/premium.html')
