@@ -42,7 +42,7 @@ class OAuth(OAuthConsumerMixin, db.Model):
     provider_user_id = db.Column(db.String(256), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     user = db.relationship(User)
-
+    
 class Favorite(db.Model):
     
     __tablename__ = "favorites"

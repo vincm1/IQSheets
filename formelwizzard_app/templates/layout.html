@@ -53,6 +53,15 @@
 									<i class='bx bx-search icon'></i>
 									<input type="text" placeholder="Suche...">
 							</li>
+
+							{% if not current_user.is_premium %}
+							<li id="premium">
+								<a href="{{url_for('dashboard.premium')}}">
+									<i class='bx bx-diamond icon'></i>
+									<span class="text nav-text" id="premium-btn">Premium</span>
+								</a>
+							</li>
+							{% endif %}
 							
 							<li class="">
 								<a href="{{url_for('dashboard.dashboard')}}">
@@ -74,21 +83,13 @@
 									<span class="text nav-text">Templates</span>
 								</a>
 							</li>
-
-							<li class="">
-								<a href="#">
-									<i class='bx bx-wallet icon' ></i>
-									<span class="text nav-text">Zahlungen</span>
-								</a>
-							</li>
 					</div>
 
 					<div class="bottom-content mb-2">
-						
-						<li id="premium">
-							<a href="{{url_for('dashboard.premium')}}">
-									<i class='bx bx-diamond icon'></i>
-									<span class="text nav-text" id="premium-btn">Premium</span>
+						<li class="">
+							<a href="#">
+								<i class='bx bx-wallet icon' ></i>
+								<span class="text nav-text">Zahlungen</span>
 							</a>
 						</li>
 						

@@ -12,11 +12,14 @@
 						<form method="POST">
 							{{form.hidden_tag()}}
 							<div class="row mb-4">
-								{{form.info_prompt.label(id=("prompt-header"))}}
+								{{form.excel_google.label(id=("prompt-header"))}}
 							</div>
-							<div class="row">
-								<div class="select" role="group">
-									{{form.info_prompt(class=("col-xl-2 col-md-4"))}}
+							<div class="d-flex flex-row align-items-start">
+								<div class="p-2 select" role="group">
+									{{form.excel_google()}}
+								</div>
+								<div class="p-2 select" role="group">
+									{{form.info_prompt()}}
 								</div>
 							</div>
 	
@@ -44,7 +47,9 @@
 								</div>
 								<div class="row d-flex justify-content-end">
 									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
-										<button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+										{{form.hidden_tag()}}
+										{{form.submit(class="p-2 btn btn-primary col-lg-1 me-2", id="favorite-btn")}}
+										<!-- <button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button> -->
 									</form>
 								</div>
 							</div>
@@ -63,6 +68,10 @@
 								<div class="row d-flex justify-content-end">
 									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
 										{{form_2.hidden_tag()}}
+										{{form_2.favorite_type(value=form.excel_google.data)}}
+										{{form_2.favorite_method(value=form.info_prompt.data)}}
+										{{form_2.command(value=form.prompt.data)}}
+										{{form_2.prompt(value=answer)}}
 										{{form_2.submit(class="p-2 btn btn-primary col-lg-1 me-2", id="favorite-btn")}}
 										<!-- <button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button> -->
 									</form>
@@ -86,6 +95,10 @@
 								<div class="row d-flex justify-content-end">
 									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
 										{{form_2.hidden_tag()}}
+										{{form_2.favorite_type(value=form.excel_google.data)}}
+										{{form_2.favorite_method(value=form.info_prompt.data)}}
+										{{form_2.command(value=form.prompt.data)}}
+										{{form_2.prompt(value=answer)}}
 										{{form_2.submit(class="p-2 btn btn-primary col-lg-1 me-2", id="favorite-btn")}}
 										<!-- <button class="p-2 btn btn-primary col-lg-1 me-2" id="favorite-btn"><i class="fa-regular fa-heart"></i></button> -->
 									</form>

@@ -1,6 +1,6 @@
 """Routes for dashboard"""
 from formelwizzard_app import db
-from flask import Blueprint, render_template, request, url_for, redirect, send_file
+from flask import Blueprint, render_template, request, send_file
 from flask_login import login_required, current_user
 from formelwizzard_app.models import Favorite
 from formelwizzard_app.utils.decorators import check_confirmed_mail
@@ -38,13 +38,7 @@ def dashboard():
         formula = answer[start:end + 1]
         
         form_2 = FavoritesForm()
-              
-        if form_2.validate_on_submit and request.method=="POST":
-            favorite = Favorite(favorite_method="Excel", favorite_type=form.info_prompt.data,
-                                command=prompt, prompt=answer, user_id=current_user.id)
-            db.session.add(favorite)
-            db.session.commit()
-        
+                    
         return render_template('dashboard/dashboard.html', form=form, form_2=form_2, result=result, answer=answer, formula=formula)
        
     return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
@@ -62,7 +56,11 @@ def favorites(username):
 @check_confirmed_mail
 def add_favorite():
     """Add Formula/VBA to User favorites"""
-    
+    form = FavoritesForm()
+    # if form.validate_on_submit and request.method=="POST":
+    #     favorite = Favorite(favorite_method=form.favorite_type.data, favorite_type=form.favorite_method.data,
+    #                         command=form.command.data, prompt=form.prompt.data, user_id=current_user.id)
+    #     print(favorite)
     return render_template("dashboard/dashboard.html")
 
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
