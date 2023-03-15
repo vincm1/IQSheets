@@ -54,8 +54,9 @@ class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
-    favorite_method = db.Column(db.String, nullable=False)
+    provider = db.Column(db.String, nullable=False)
     favorite_type = db.Column(db.String, nullable=False)
+    method = db.Column(db.String, nullable=False)
     command = db.Column(db.String, nullable=False)
     prompt = db.Column(db.String, nullable=False)
     favorite_date = db.Column(db.DateTime, nullable=False, default=datetime.now)

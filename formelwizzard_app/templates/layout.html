@@ -54,7 +54,7 @@
 									<input type="text" placeholder="Suche...">
 							</li>
 
-							{% if not current_user.is_premium %}
+							{% if not current_user.premium %}
 							<li id="premium">
 								<a href="{{url_for('dashboard.premium')}}">
 									<i class='bx bx-diamond icon'></i>
