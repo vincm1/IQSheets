@@ -26,20 +26,32 @@ def dashboard():
     form_2 = FavoritesForm()
     
     if form.validate_on_submit():
-        prompt = "Excel " + form.info_prompt.data + ": " + form.prompt.data
-        print(prompt)
+        prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
+        
         result = openai_chat(prompt)
-        print(result)
-        answer = result["choices"][0]["text"]
+        # Increasing the amount of prompts and total tokens when prompt is generated
+        current_user.num_prompts += 1
+        current_user.num_tokens += result["usage"]["total_tokens"]
+        # Commiting numbers to db
+        db.session.commit()
         
-        start = answer.find("=")
-        end = answer.find(")")
+        if form.formula_explain.data == "Erklären":
+            explanation = result["choices"][0]["text"]
         
-        formula = answer[start:end + 1]
+            form_2 = FavoritesForm()
         
-        form_2 = FavoritesForm()
+            return render_template('dashboard/dashboard.html', form=form, form_2=form_2, explanation=explanation)
+        
+        else:
+        
+            formula = result["choices"][0]["text"]
+            start = formula.find("=")
+            end = formula.find(")")
+            formula = formula[start - 1:end + 1]
+        
+            form_2 = FavoritesForm()
                     
-        return render_template('dashboard/dashboard.html', form=form, form_2=form_2, result=result, answer=answer, formula=formula)
+            return render_template('dashboard/dashboard.html', form=form, form_2=form_2, formula=formula)
        
     return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
 
