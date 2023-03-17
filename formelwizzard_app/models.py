@@ -61,12 +61,13 @@ class Favorite(db.Model):
     prompt = db.Column(db.String, nullable=False)
     favorite_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
     
-    def __init__(self, favorite_method, favorite_type, command, prompt, user_id):
-        self.favorite_method = favorite_method
+    def __init__(self, provider, favorite_type, method, command, prompt, user_id):
+        self.provider = provider
         self.favorite_type = favorite_type
+        self.method = method
         self.command = command
         self.prompt = prompt
         self.user_id = user_id
         
     def __repr__(self):
-        f"Formel mit {self.favorite_method}, {self.favorite_type}, {self.command}, {self.prompt} wurde am {self.favorite_date} hinzugefügt."
+        f"Formel mit {self.provider}, {self.favorite_type}, {self.command}, {self.prompt} wurde am {self.favorite_date} hinzugefügt."

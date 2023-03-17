@@ -1,0 +1,44 @@
+{% extends "layout.html" %}{% block content %}
+	<section class="home">
+		<section class="favorites">
+			<div class="container-fluid m-5">
+				
+				<div class="favorite-btns">
+					<div class="row align-items-start">
+						<button class="btn btn-primary col-xl-1 me-2">
+							Alle
+						</button>
+						<button class="btn btn-primary col-xl-1 me-2">
+							Excel
+						</button>
+						<button class="btn btn-primary col-xl-1 me-2">
+							Google
+						</button>
+					</div>
+				</div>
+
+				<div class="favorite-cards mt-3">
+					<div class="row">
+						{% for formula in favorite_formulas %}
+						<div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
+							<div class="card">
+								<div class="card-header">
+									{{formula.provider}} ({{formula.favorite_date.strftime('%d.%m.%Y')}}):
+								</div>
+								<div class="card-body">
+									<div class="row m-2">
+										{{formula.command}}
+									</div>
+									<div class="row m-2">
+										{{formula.prompt}}
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
+{% endblock %}

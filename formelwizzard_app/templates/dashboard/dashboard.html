@@ -39,11 +39,11 @@
 							</div>
 							
 						</form>
-				</div>
+					</div>
 					
-					{% if explanation %}
 					<div class="col-xl-5 col-lg-3 col-md-3 pl-5 formula">
 						<div class="card">
+					{% if form.formula_explain.data == "Erklären" %}
 							<div class="card-header">
 							  Erklärung
 							</div>
@@ -52,25 +52,7 @@
 									<p>{{explanation}}</p>
 								</div>
 								<div class="row d-flex justify-content-end">
-									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
-											{{form_2.hidden_tag()}}
-											{{form_2.provider(value=form.excel_google.data)}}
-											{{form_2.favorite_type(value=form.info_prompt.data)}}
-											{{form_2.method(value=form.formula_explain.data)}}
-											{{form_2.command(value=form.prompt.data)}}
-											{{form_2.prompt(value=explanation)}}
-											<button class="p-2 btn btn-primary col-lg-1 me-2" type="submit" value="Form1" name="favorite-btn" id="favorite-btn">
-												<i class="fa-regular fa-heart"></i>
-											</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-					
 					{% else %}
-					<div class="col-xl-5 col-lg-4 col-md-3 pl-4 response">
-						<div class="card">
 							<div class="card-header p-3">
 							  Formel
 							</div>
@@ -78,14 +60,19 @@
 								<div class="row">
 									<p>{{formula}}</p>
 								</div>
+					{% endif %}
 								<div class="row d-flex justify-content-end">
 									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
-										{{form_3.hidden_tag()}}
-										{{form_3.provider(value=form.excel_google.data)}}
-										{{form_3.favorite_type(value=form.info_prompt.data)}}
-										{{form_3.method(value=form.formula_explain.data)}}
-										{{form_3.command(value=form.prompt.data)}}
-										{{form_3.prompt(value=formula)}}
+										{{form_2.csrf_token}}
+										{{form_2.provider(value=form.excel_google.data)}}
+										{{form_2.favorite_type(value=form.info_prompt.data)}}
+										{{form_2.method(value=form.formula_explain.data)}}
+										{{form_2.command(value=form.prompt.data)}}
+										{% if form.formula_explain.data == "Erklären" %}
+											{{form_2.prompt(value=explanation)}}
+										{% else %}
+											{{form_2.prompt(value=formula)}}
+										{% endif %}
 										<button class="p-2 btn btn-primary col-lg-1 me-2" type="submit" value="Form2" name="favorite-btn" id="favorite-btn">
 											<i class="fa-regular fa-heart"></i>
 										</button>
@@ -94,9 +81,6 @@
 							</div>
 						</div>
 					</div>
-
-					{% endif %}
-
 				</div>
 				{% else %}
 				<div class="banner col-xl-10 mb-5">

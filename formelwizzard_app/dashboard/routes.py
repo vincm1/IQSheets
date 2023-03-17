@@ -24,7 +24,6 @@ def dashboard():
     """User Dashboard page"""
     form = DashboardForm()  
     form_2 = FavoritesForm()
-    form_3 = FavoritesForm()
     
     if form.validate_on_submit():
         prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
@@ -36,43 +35,38 @@ def dashboard():
         # Commiting numbers to db
         db.session.commit()
         
-        if form.formula_explain.data == "Erklären":
-            explanation = result["choices"][0]["text"]
+        # Converting OpenAi prompt to a usable text
+        explanation = result["choices"][0]["text"]
+            
+        # Converting OpenAi prompt to a usable text and formula if "formula selected" 
+        text = result["choices"][0]["text"]
+        start = text.find("=")
+        end = text.find(")")
+        formula = text[start:end+1]
 
-            return render_template('dashboard/dashboard.html', form=form, form_2=form_2, explanation=explanation)
-        
-        else:
-        
-            text = result["choices"][0]["text"]
-            print(text)
-            start = text.find("=")
-            end = text.find(")")
-            formula = text[start:end+1]
-            print(formula)
-                    
-            return render_template('dashboard/dashboard.html', form=form, form_3=form_3, formula=formula)
-       
-    return render_template('dashboard/dashboard.html', form=form, form_2=form_2, form_3=form_3)
+        return render_template('dashboard/dashboard.html', form=form, form_2=form_2, explanation=explanation, formula=formula)
+ 
+    return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
 
-@dashboard_blueprint.route('/<username>/favorites', methods=['GET', 'POST'])
+@dashboard_blueprint.route('/<username>)/favorites', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def favorites(username):
     """User favorite Excel Formulas"""
     favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).all()
-    return render_template('user/favorites.html', favorite_formulas=favorite_formulas)
+    return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas)
 
 @dashboard_blueprint.route('/add_favorite', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def add_favorite():
     """Add Formula/VBA to User favorites"""
-    form_2 = FavoritesForm()
-   
-    # if form.validate_on_submit and request.method=="POST":
-    #     favorite = Favorite(favorite_method=form.favorite_type.data, favorite_type=form.favorite_method.data,
-    #                         command=form.command.data, prompt=form.prompt.data, user_id=current_user.id)
-    #     print(favorite)
+    form = FavoritesForm()
+    if form.validate_on_submit():
+        favorite = Favorite(user_id=current_user.id, provider=form.provider.data, favorite_type=form.favorite_type.data,
+                           method=form.method.data, command=form.command.data, prompt=form.prompt.data)
+        db.session.add(favorite)
+        db.session.commit()
     return redirect(url_for('dashboard.favorites', username=current_user.username))
 
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
