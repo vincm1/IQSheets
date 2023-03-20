@@ -1,6 +1,7 @@
 {% extends "layout.html" %}{% block content %}
 	<section class="home">
 		<section class="favorites">
+
 			<div class="container-fluid m-5">
 				
 				<div class="favorite-btns">
@@ -17,40 +18,119 @@
 					</div>
 				</div>
 
-				<div class="flashmessages m-5">
-					{% with messages = get_flashed_messages(with_categories=true) %}
-						{% if messages %}
-							{% for category, message in messages %}
-							<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-								{{ message }}
-								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-							</div>
-							{% endfor %}
-						{% endif %}
-					{% endwith %}
-				</div>
-
 				<div class="favorite-cards mt-3">
 					<div class="row">
 						{% for formula in favorite_formulas %}
-						<div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
+						<div class="col-xl-4 col-lg-4 col-md-3 pl-4 mt-2 response">
 							<div class="card">
 								<div class="card-header">
-									{{formula.provider}} ({{formula.favorite_date.strftime('%d.%m.%Y')}}) {{formula.id}}: <a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}"><i class="fa-solid fa-trash"></i></a>
+									{% if formula.provider == "Excel" %}
+									<div class="container">
+										<div class="row">
+											<div class="col-xl-6">
+												<p>
+													<i class="fa-solid fa-file-excel fa-2xl pe-3"></i>
+													{{formula.provider}} {{formula.favorite_type}}
+												</p>
+											</div>
+											<div class="col-xl-4 offset-2 justify-content-end">
+												<p>{{formula.favorite_date.strftime('%d.%m.%Y')}}</p>
+											</div>
+										</div>
+									</div>
+									{% else %}
+									<div class="container">
+										<div class="row">
+											<div class="col-xl-4">
+												<p>
+													<i class="fa-solid fa-table fa-2xl pe-3"></i>
+													{{formula.provider}} {{formula.favorite_type}}
+												</p>
+											</div>
+											<div class="col-xl-4 offset-xl-4 justify-content-end">
+												<p>{{formula.favorite_date.strftime('%d.%m.%Y')}}</p>
+											</div>
+										</div>
+									</div>
+									{% endif %}
 								</div>
 								<div class="card-body">
-									<div class="row m-2">
-										{{formula.command}}
+									<div class="row m-2 command">
+										<p>{{formula.command}}</p>
 									</div>
-									<div class="row m-2">
-										{{formula.prompt}}
+									<div class="row m-2 prompt">
+										<p>{{formula.prompt}}</p>
+									</div>
+									<div class="row d-flex m-2 btns">
+										<a href="" class="p-2">
+											<button class="btn btn-primary" onclick="copyToClipboard()" id="copy-btn">
+												<i class="fa-solid fa-copy"></i>
+											</button>
+										</a>
+										<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="p-2">
+											<button class="btn btn-danger" id="incorrect-btn">
+												<i class="fa-solid fa-trash"></i>
+											</button>
+										</a>
 									</div>
 								</div>
 							</div>
 						</div>
-						{% endfor %}
+					{% endfor %}
 					</div>
 				</div>
+
+				<div class="flashmessages mt-5">
+					<div class="col-xl-4 col-lg-4 col-md-3 pl-4 flashmessages">
+						{% with messages = get_flashed_messages(with_categories=true) %}
+							{% if messages %}
+								{% for category, message in messages %}
+								<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+									{{ message }}
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+					</div>
+				</div>
+
+				<!-- Pagination Links-->
+				<div class="row align-items-end">
+					<div class="text-right">
+						<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
+						class="btn btn-outline-primary 
+						{% if favorite_formulas.page == 1 %}disabled{% endif %}">
+							&laquo;
+						</a>
+					<!-- Loop through the number of pages to display a link for each-->
+						{% for page_num in favorite_formulas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+							{% if page_num %}
+							<!-- Check for the active page and set the link to "Active"-->
+								{% if favorite_formulas.page == page_num %}
+								<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+								class="btn btn-primary">
+									{{ page_num }}
+								</a>
+								{% else %}
+								<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+								class="btn btn-outline-primary">
+									{{ page_num }}
+								</a>
+								{% endif %}
+							{% else %}
+								...
+							{% endif %}
+						{% endfor %}
+						<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
+						class="btn btn-outline-primary
+						{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
+							&raquo;
+						</a>
+					</div>
+				</div>
+				
+				
 			</div>
 		</section>
 	</section>

@@ -105,6 +105,7 @@
 									<div class="row">
 										<p id="copy-target">{{formula}}</p>
 									</div>
+									<hr>
 									<div class="row d-flex justify-content-end">
 										<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
 											{{form_2.csrf_token}}
@@ -112,21 +113,19 @@
 											{{form_2.favorite_type(value=form.info_prompt.data)}}
 											{{form_2.method(value=form.formula_explain.data)}}
 											{{form_2.command(value=form.prompt.data)}}
-											{% if form.formula_explain.data == "Erklären" %}
-												{{form_2.prompt(value=explanation)}}
-												<button class="p-2 btn btn-primary" type="submit" name="favorite-btn" id="favorite-btn">
-													<i class="fa-regular fa-heart"></i> Favorit
+											{% if form.formula_explain.data == "Erstellen" %}
+												{{form_2.prompt(value=formula)}}
+												<button class="p-2 btn btn-primary me-2 pe-4 align-items-center" type="submit" name="favorite-btn" id="favorite-btn">
+													<i class="fa-regular fa-heart ps-2 pe-1"></i> Favorit
+												</button>
+												<button class="p-2 btn btn-primary me-2 pe-4 align-items-center" onclick="copyToClipboard()" id="copy-btn">
+													<i class="fa-solid fa-copy ps-2 pe-1"></i> Kopieren
+												</button>
+												<button class="p-2 btn btn-danger me-2 pe-4 align-item-center" id="incorrect-btn">
+													<i class="fa-solid fa-circle-xmark ps-2 pe-1"></i> Falsch
 												</button>
 											{% endif %}
 										</form>
-											<div class="row d-flex">
-												<button class="p-2 btn btn-primary" onclick="copyToClipboard()" id="copy-btn">
-													<i class="fa-solid fa-copy"></i> Kopieren
-												</button>
-												<button class="p-2 btn btn-danger" id="incorrect-btn">
-													<i class="fa-solid fa-circle-xmark"></i> Falsch
-												</button>
-											</div>
 									</div>
 								</div>
 							</div>

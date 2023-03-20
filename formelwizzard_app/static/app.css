@@ -407,6 +407,19 @@ body.dark .home .text{
     font-weight: 900;
 }
 
+/* ====== Favorites Page ====== */
+
+.card .card-header {
+    background-color: var(--primary-color);
+    color: var(--body-color);
+    padding: 10px 10px 0 0;
+}
+
+.card .card-header i {
+    color: #10793F;
+}
+
+
 /* ====== Profile Page ====== */
 
 .profile #profile-premium-btn {

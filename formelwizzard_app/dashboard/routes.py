@@ -1,5 +1,5 @@
 """Routes for dashboard"""
-from flask import Blueprint, render_template, flash, send_file, redirect ,url_for
+from flask import Blueprint, render_template, flash, send_file, redirect, url_for, request
 from flask_login import login_required, current_user
 from formelwizzard_app import db
 from formelwizzard_app.models import Favorite
@@ -50,12 +50,14 @@ def dashboard():
  
     return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
 
-@dashboard_blueprint.route('/<username>)/favorites', methods=['GET', 'POST'])
+@dashboard_blueprint.route('/<username>/favorites', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def favorites(username):
     """User favorite Excel Formulas"""
-    favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).all()
+    print(request.args.get)
+    page = request.args.get('page', 1, type=int)
+    favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
     return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas)
 
 @dashboard_blueprint.route('/add_favorite', methods=['GET', 'POST'])
