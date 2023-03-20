@@ -419,6 +419,31 @@ body.dark .home .text{
     color: #10793F;
 }
 
+#filter-btn {
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+
+#filter-btn:active {
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+
+#filter-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--sidebar-color);
+}
+
+.pagination .btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.pagination .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--body-color);
+}
 
 /* ====== Profile Page ====== */
 

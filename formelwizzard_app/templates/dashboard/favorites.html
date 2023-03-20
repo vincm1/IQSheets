@@ -6,19 +6,15 @@
 				
 				<div class="favorite-btns">
 					<div class="row align-items-start">
-						<button class="btn btn-primary col-xl-1 me-2">
-							Alle
-						</button>
-						<button class="btn btn-primary col-xl-1 me-2">
-							Excel
-						</button>
-						<button class="btn btn-primary col-xl-1 me-2">
-							Google
-						</button>
+						<form method="POST">
+							<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
+							<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Excel">Excel</button>
+							<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Google Sheets">Google Sheets</button>
+						</form>
 					</div>
 				</div>
 
-				<div class="favorite-cards mt-3">
+				<div class="favorite-cards mt-4">
 					<div class="row">
 						{% for formula in favorite_formulas %}
 						<div class="col-xl-4 col-lg-4 col-md-3 pl-4 mt-2 response">
@@ -96,8 +92,8 @@
 				</div>
 
 				<!-- Pagination Links-->
-				<div class="row align-items-end">
-					<div class="text-right">
+				<div class="row pagination">
+					<div class="text-right justify-content-end">
 						<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
 						class="btn btn-outline-primary 
 						{% if favorite_formulas.page == 1 %}disabled{% endif %}">

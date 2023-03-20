@@ -55,9 +55,19 @@ def dashboard():
 @check_confirmed_mail
 def favorites(username):
     """User favorite Excel Formulas"""
-    print(request.args.get)
     page = request.args.get('page', 1, type=int)
     favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+    
+    if request.method == 'POST' and request.form['filter_value'] == "Alle":
+    
+        page = request.args.get('page', 1, type=int)
+        favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+    
+    elif request.method == 'POST':
+        filter_value = request.form['filter_value']
+        page = request.args.get('page', 1, type=int)
+        favorite_formulas = Favorite.query.filter_by(user_id=current_user.id, provider=filter_value).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+        
     return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas)
 
 @dashboard_blueprint.route('/add_favorite', methods=['GET', 'POST'])

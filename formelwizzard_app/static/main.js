@@ -68,3 +68,9 @@ function copyToClipboard() {
     /* Remove the input element from the document */
     document.body.removeChild(tempInput);
   }
+
+
+const filterBtn = document.getElementById("filter-btn");
+filterBtn.addEventListener("click", () => {
+    filterBtn.classList.add("active");
+  });
