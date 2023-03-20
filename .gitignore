@@ -165,4 +165,4 @@ cython_debug/
 # images
 formelwizzard_app/static/img/
 formelwizzard_app/static/profile_pictures/
-formelwizzard_app/static/xlsx_templates/
+formelwizzard_app/static/xlxs_templates/
