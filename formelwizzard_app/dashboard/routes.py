@@ -1,5 +1,5 @@
 """Routes for dashboard"""
-from flask import Blueprint, render_template, request, send_file, redirect ,url_for
+from flask import Blueprint, render_template, flash, send_file, redirect ,url_for
 from flask_login import login_required, current_user
 from formelwizzard_app import db
 from formelwizzard_app.models import Favorite
@@ -24,11 +24,13 @@ def dashboard():
     """User Dashboard page"""
     form = DashboardForm()  
     form_2 = FavoritesForm()
-    
+    print(form.data)
     if form.validate_on_submit():
+        print(form)
         prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
-        
+        print(prompt)
         result = openai_chat(prompt)
+        print(result)
         # Increasing the amount of prompts and total tokens when prompt is generated
         current_user.num_prompts += 1
         current_user.num_tokens += result["usage"]["total_tokens"]
@@ -37,7 +39,7 @@ def dashboard():
         
         # Converting OpenAi prompt to a usable text
         explanation = result["choices"][0]["text"]
-            
+        print(explanation)
         # Converting OpenAi prompt to a usable text and formula if "formula selected" 
         text = result["choices"][0]["text"]
         start = text.find("=")
@@ -65,8 +67,23 @@ def add_favorite():
     if form.validate_on_submit():
         favorite = Favorite(user_id=current_user.id, provider=form.provider.data, favorite_type=form.favorite_type.data,
                            method=form.method.data, command=form.command.data, prompt=form.prompt.data)
-        db.session.add(favorite)
-        db.session.commit()
+        if favorite.provider:
+            db.session.add(favorite)
+            db.session.commit()
+        else:
+            redirect(url_for('dashboar.dashboard'))
+        return redirect(url_for('dashboard.favorites', username=current_user.username))
+    return redirect(url_for('dashboard.favorites', username=current_user.username))
+
+@dashboard_blueprint.route('/formel_<int:favorite_id>/delete', methods=['GET'])
+@login_required
+@check_confirmed_mail
+def delete_favorite(favorite_id):
+    """Delete Formula/VBA to User favorites"""
+    favorite = Favorite.query.filter_by(id=favorite_id).first()
+    db.session.delete(favorite)
+    db.session.commit()
+    flash('Formel erfolgreich gelöscht!', 'success')
     return redirect(url_for('dashboard.favorites', username=current_user.username))
 
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])

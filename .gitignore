@@ -163,4 +163,6 @@ cython_debug/
 #.idea/
 
 # images
-excelguru_app/static/img/
+formelwizzard_app/static/img/
+formelwizzard_app/static/profile_pictures/
+formelwizzard_app/static/xlsx_templates/

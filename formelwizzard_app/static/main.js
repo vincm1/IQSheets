@@ -45,3 +45,26 @@ premiumProfileBtn.addEventListener("mouseover", () => {
 premiumProfileBtn.addEventListener("mouseout", () => {
 	premiumProfileBtn.innerHTML = "<i class='bx bx-diamond icon pe-2'></i>Premium";
 });
+
+function copyToClipboard() {
+    /* Get the text from the element with the ID "copy-target" */
+    var copyText = document.getElementById("copy-target").innerText;
+  
+    /* Create a temporary input element */
+    var tempInput = document.createElement("input");
+  
+    /* Set the value of the input element to the text to be copied */
+    tempInput.value = copyText;
+  
+    /* Add the input element to the document */
+    document.body.appendChild(tempInput);
+  
+    /* Select the text in the input element */
+    tempInput.select();
+  
+    /* Copy the selected text to the clipboard */
+    document.execCommand("copy");
+  
+    /* Remove the input element from the document */
+    document.body.removeChild(tempInput);
+  }

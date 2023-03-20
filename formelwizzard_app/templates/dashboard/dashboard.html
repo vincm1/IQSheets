@@ -1,7 +1,8 @@
 {% extends "layout.html" %}{% block content %}
 	<section class="home">
 		<section class="dashboard">
-			<div class="container-fluid pt-5 ps-5">
+			<div class="container-fluid mt-3 mx-5">
+
 				{% if not current_user.premium %}
 				<div class="banner col-xl-10 mb-5">
 					<h3>{{current_user.num_prompts}} von 5 Anfragen verbraucht</h3>
@@ -9,14 +10,26 @@
 				</div>
 				{% endif %}
 
+				<div class="explanation col-xl-8">
+					<h6>
+						Konvertieren Sie jeden Text in Excel- oder Google Sheets-Formeln 
+						mit AI. Geben Sie eine detaillierte Beschreibung der Formel ein, 
+						die Sie benötigen, und unsere KI wird sie innerhalb von Sekunden erstellen.
+					</h6>
+					
+					<p>
+						*Wenn Sie falsche Ergebnisse erhalten, melden Sie diese bitte, 
+						damit wir unser KI-Modell verbessern können.
+					</p>
+					<hr>
+				</div>
+				
 				{% if current_user.premium or current_user.num_prompts < 5%}
-				<div class="prompt mt-3">
+				<div class="prompt mt-5">
+					<!-- Prompt Field -->
 					<div class="row align-items start">
 						<form method="POST">
 							{{form.hidden_tag()}}
-							<div class="row mb-4">
-								{{form.excel_google.label(id=("prompt-header"))}}
-							</div>
 							<div class="d-flex flex-row align-items-start">
 								<div class="p-2 select" role="group">
 									{{form.excel_google()}}
@@ -29,7 +42,8 @@
 								</div>
 							</div>
 	
-					<div class="row d-flex mt-5">
+			<div class="row d-flex mt-5">
+
 						<div class="col-xl-5 col-lg-4 col-md-3 prompt">
 							<div class="row">
 								{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formel die zwei Zellen summiert z.B.")}}
@@ -37,30 +51,21 @@
 							<div class="row justify-content-end">
 								{{form.submit(class="btn btn-primary mt-2 col-lg-5", id="formel-btn")}}
 							</div>
-							
 						</form>
 					</div>
-					
-					<div class="col-xl-5 col-lg-3 col-md-3 pl-5 formula">
-						<div class="card">
+					<!-- Prompt Field End-->
+
 					{% if form.formula_explain.data == "Erklären" %}
+					<!-- Erklärung -->
+					<div class="col-xl-6 col-lg-3 col-md-3 pl-5 formula">
+						<div class="card">
 							<div class="card-header">
 							  Erklärung
 							</div>
 							<div class="card-body p-3">
 								<div class="row">
-									<p>{{explanation}}</p>
+									<p id="copy-target">{{explanation}}</p>
 								</div>
-								<div class="row d-flex justify-content-end">
-					{% else %}
-							<div class="card-header p-3">
-							  Formel
-							</div>
-							<div class="card-body p-3">
-								<div class="row">
-									<p>{{formula}}</p>
-								</div>
-					{% endif %}
 								<div class="row d-flex justify-content-end">
 									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
 										{{form_2.csrf_token}}
@@ -70,26 +75,97 @@
 										{{form_2.command(value=form.prompt.data)}}
 										{% if form.formula_explain.data == "Erklären" %}
 											{{form_2.prompt(value=explanation)}}
-										{% else %}
-											{{form_2.prompt(value=formula)}}
+											<button class="p-2 btn btn-primary" type="submit" name="favorite-btn" id="favorite-btn">
+												<i class="fa-regular fa-heart"></i> Favorit
+											</button>
 										{% endif %}
-										<button class="p-2 btn btn-primary col-lg-1 me-2" type="submit" value="Form2" name="favorite-btn" id="favorite-btn">
-											<i class="fa-regular fa-heart"></i>
-										</button>
-								</form>
+									</form>
+										<div class="row d-flex">
+											<button class="p-2 btn btn-primary" onclick="copyToClipboard()" id="copy-btn">
+												<i class="fa-solid fa-copy"></i> Kopieren
+											</button>
+											<button class="p-2 btn btn-danger" id="incorrect-btn">
+												<i class="fa-solid fa-circle-xmark"></i> Falsch
+											</button>
+										</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+					<!-- Erklärung End -->
+
+					{% elif form.formula_explain.data == "Erstellen" %}
+					<!-- Formel -->
+						<div class="col-xl-6 col-lg-3 col-md-3 pl-5 formula">
+							<div class="card">
+								<div class="card-header">
+								Formel
+								</div>
+								<div class="card-body p-3">
+									<div class="row">
+										<p id="copy-target">{{formula}}</p>
+									</div>
+									<div class="row d-flex justify-content-end">
+										<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
+											{{form_2.csrf_token}}
+											{{form_2.provider(value=form.excel_google.data)}}
+											{{form_2.favorite_type(value=form.info_prompt.data)}}
+											{{form_2.method(value=form.formula_explain.data)}}
+											{{form_2.command(value=form.prompt.data)}}
+											{% if form.formula_explain.data == "Erklären" %}
+												{{form_2.prompt(value=explanation)}}
+												<button class="p-2 btn btn-primary" type="submit" name="favorite-btn" id="favorite-btn">
+													<i class="fa-regular fa-heart"></i> Favorit
+												</button>
+											{% endif %}
+										</form>
+											<div class="row d-flex">
+												<button class="p-2 btn btn-primary" onclick="copyToClipboard()" id="copy-btn">
+													<i class="fa-solid fa-copy"></i> Kopieren
+												</button>
+												<button class="p-2 btn btn-danger" id="incorrect-btn">
+													<i class="fa-solid fa-circle-xmark"></i> Falsch
+												</button>
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					<!-- Formel End-->	
+					
+					{% else %}
+						<!-- Unsubmitted -->
+						<div class="col-xl-6 col-lg-3 col-md-3 pl-5 formula">
+							<div class="card">
+								<div class="card-header">
+								Formel / Erklärung
+								</div>
+								<div class="card-body p-3">
+									<div class="row">
+										<p>Lass dir eine Formel erstellen oder Erklären.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Unsubmitted End-->
+
+					{% endif %}
+								
+							</div>
+						<div>
+					</div>
+
 				{% else %}
+
 				<div class="banner col-xl-10 mb-5">
 					<h3>Keine Anfragen mehr übrig</h3>
 					<button class="btn btn-primary premium-btn"><i class='bx bx-diamond icon'></i>Premium</button>
 				</div>
+
 				{% endif %}
-			</div>
-			</div>
+						
+					</div>
+				</div>
 		</section>
 	</section>
 {% endblock %}

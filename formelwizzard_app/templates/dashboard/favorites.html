@@ -17,13 +17,26 @@
 					</div>
 				</div>
 
+				<div class="flashmessages m-5">
+					{% with messages = get_flashed_messages(with_categories=true) %}
+						{% if messages %}
+							{% for category, message in messages %}
+							<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+								{{ message }}
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							{% endfor %}
+						{% endif %}
+					{% endwith %}
+				</div>
+
 				<div class="favorite-cards mt-3">
 					<div class="row">
 						{% for formula in favorite_formulas %}
 						<div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
 							<div class="card">
 								<div class="card-header">
-									{{formula.provider}} ({{formula.favorite_date.strftime('%d.%m.%Y')}}):
+									{{formula.provider}} ({{formula.favorite_date.strftime('%d.%m.%Y')}}) {{formula.id}}: <a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}"><i class="fa-solid fa-trash"></i></a>
 								</div>
 								<div class="card-body">
 									<div class="row m-2">
