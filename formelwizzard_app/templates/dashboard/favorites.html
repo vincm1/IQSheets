@@ -1,10 +1,8 @@
 {% extends "layout.html" %}{% block content %}
 	<section class="home">
-		<section class="favorites">
-
-			<div class="container-fluid m-5">
+		<div class="container my-5 mx-3 align-items-left">
 				
-				<div class="favorite-btns">
+				<div class="favorite-btns mb-2">
 					<div class="row align-items-start">
 						<form method="POST">
 							<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
@@ -14,26 +12,20 @@
 					</div>
 				</div>
 
-				<div class="favorite-cards mt-4">
+				<div class="favorite-cards">
 					<div class="row">
 						{% for formula in favorite_formulas %}
-						<div class="col-xl-4 col-lg-4 col-md-3 pl-4 mt-2 response">
-							<div class="card">
+						<div class="col-xl-4 col-lg-2 col-md-1 col-sm-1 my-1 response">
+							<div class="card h-100 w-100">
 								<div class="card-header">
 									{% if formula.provider == "Excel" %}
-									<div class="container">
-										<div class="row">
-											<div class="col-xl-6">
-												<p>
-													<i class="fa-solid fa-file-excel fa-2xl pe-3"></i>
-													{{formula.provider}} {{formula.favorite_type}}
-												</p>
-											</div>
-											<div class="col-xl-4 offset-2 justify-content-end">
-												<p>{{formula.favorite_date.strftime('%d.%m.%Y')}}</p>
-											</div>
+										<div class="col-xl-6">
+											<i class="fa-solid fa-file-excel fa-2xl p-3"></i>
+											{{formula.provider}} {{formula.favorite_type}}
 										</div>
-									</div>
+										<div class="col-xl-4 offset-2 align-items-end">
+											{{formula.favorite_date.strftime('%d.%m.%Y')}}
+										</div>
 									{% else %}
 									<div class="container">
 										<div class="row">
@@ -57,6 +49,7 @@
 									<div class="row m-2 prompt">
 										<p>{{formula.prompt}}</p>
 									</div>
+									<hr>
 									<div class="row d-flex m-2 btns">
 										<a href="" class="p-2">
 											<button class="btn btn-primary" onclick="copyToClipboard()" id="copy-btn">
@@ -93,7 +86,7 @@
 
 				<!-- Pagination Links-->
 				<div class="row pagination">
-					<div class="text-right justify-content-end">
+					<div class="text-right">
 						<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
 						class="btn btn-outline-primary 
 						{% if favorite_formulas.page == 1 %}disabled{% endif %}">
@@ -125,9 +118,7 @@
 						</a>
 					</div>
 				</div>
-				
-				
+						
 			</div>
-		</section>
 	</section>
 {% endblock %}
