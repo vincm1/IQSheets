@@ -31,12 +31,14 @@ def create_app(config=DevelopmentConfig):
     with app.app_context():
         ### Blueprints ###
         from formelwizzard_app.core.routes import core_blueprint
+        from formelwizzard_app.errors.routes import error_handlers_blueprint
         from formelwizzard_app.user.routes import user_blueprint
         from formelwizzard_app.oauth.routes import oauth_blueprint
         from formelwizzard_app.dashboard.routes import dashboard_blueprint
 
         ### Registering all Blueprints ###
         app.register_blueprint(core_blueprint)
+        app.register_blueprint(error_handlers_blueprint)
         app.register_blueprint(oauth_blueprint, url_prefix='/login')
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
