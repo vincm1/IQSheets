@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from flask import Blueprint, current_app, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
-from formelwizzard_app import app, db, mail
+from formelwizzard_app import db, mail
 from formelwizzard_app.models import User
 from .forms import RegistrationForm, LoginForm, EditUserForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token

@@ -1,45 +1,44 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from config import DevelopmentConfig
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 
-app = Flask(__name__)
-
-app.config.from_pyfile('config.py')
-
-db = SQLAlchemy(app)
-migrate = Migrate(app,db)
-
-### Flask Login Manager  ###
+db = SQLAlchemy()
+migrate = Migrate()
 login_manager = LoginManager()
-login_manager.init_app(app)
+mail = Mail()
 
-login_manager.login_view = "google.login"
 
-mail = Mail(app)
+def create_app(config=DevelopmentConfig):
+    '''Factory to create Flask application'''
+    app = Flask(__name__)
 
-### Blueprints ###
-from formelwizzard_app.user.routes import user_blueprint
-from formelwizzard_app.oauth.routes import oauth_blueprint
-from formelwizzard_app.dashboard.routes import dashboard_blueprint
+    app.config.from_object(config)
 
-### Registering all Blueprints ###
-app.register_blueprint(oauth_blueprint, url_prefix='/login')
-app.register_blueprint(user_blueprint)
-app.register_blueprint(dashboard_blueprint)
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-### Core Routes ###
+    ### Flask Login Manager  ###
+    login_manager.init_app(app)
+    login_manager.session_protection = 'strong'
+    login_manager.login_view = "google.login"
+    
+    # Flask Mail Instance
+    mail.init_app(app)
 
-@app.route("/")
-@app.route("/home")
-def index():
-    return render_template('index.html')
+    with app.app_context():
+        ### Blueprints ###
+        from formelwizzard_app.core.routes import core_blueprint
+        from formelwizzard_app.user.routes import user_blueprint
+        from formelwizzard_app.oauth.routes import oauth_blueprint
+        from formelwizzard_app.dashboard.routes import dashboard_blueprint
 
-@app.route("/abos")
-def pricing():
-    return render_template('pricing.html')
+        ### Registering all Blueprints ###
+        app.register_blueprint(core_blueprint)
+        app.register_blueprint(oauth_blueprint, url_prefix='/login')
+        app.register_blueprint(user_blueprint)
+        app.register_blueprint(dashboard_blueprint)
 
-@app.route("/about")
-def about():
-    return render_template('about.html')
+        return app

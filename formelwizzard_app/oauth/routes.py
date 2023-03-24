@@ -1,7 +1,6 @@
 """ Oauth routes """
 from datetime import datetime
-from formelwizzard_app import app
-from flask import flash, url_for, redirect
+from flask import current_app, flash, url_for, redirect
 from flask_login import current_user, login_user
 from flask_dance.contrib.google import make_google_blueprint
 from flask_dance.consumer import oauth_authorized, oauth_error
@@ -10,8 +9,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from formelwizzard_app.models import db, User, OAuth
 
 oauth_blueprint = make_google_blueprint(
-    client_id=app.config['GOOGLE_OAUTH_CLIENT_ID'],
-    client_secret=app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
+    client_id=current_app.config['GOOGLE_OAUTH_CLIENT_ID'],
+    client_secret=current_app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
     scope=["profile", "email"],
     storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
 )

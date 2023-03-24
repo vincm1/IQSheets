@@ -1,5 +1,4 @@
 from itsdangerous import URLSafeTimedSerializer
-from formelwizzard_app import app
 
 def generate_confirmation_token(email):
     serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
