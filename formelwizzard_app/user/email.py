@@ -1,4 +1,5 @@
 """Email functions with Flask-Mail"""
+from flask import current_app as app
 from flask_mail import Message
 from formelwizzard_app import mail
 

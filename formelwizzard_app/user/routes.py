@@ -68,7 +68,7 @@ def login():
 def logout():
     """Logout"""
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('core.index'))
 
 @user_blueprint.route('/confirm/<token>')
 def confirm_email(token):
@@ -85,7 +85,7 @@ def confirm_email(token):
         return redirect(url_for('user.login'))
     else:
         flash('Der Bestätigungslink ist abgelaufen oder invalide.', 'danger')
-    return redirect(url_for('index'))
+    return redirect(url_for('core.index'))
 
 @user_blueprint.route('/unconfirmed')
 @login_required
@@ -159,7 +159,7 @@ def reset_password(token):
     user = User.query.filter_by(email=email).first_or_404()
     
     if not user:
-        return redirect(url_for('index'))
+        return redirect(url_for('core.index'))
     
     form = ResetPasswordForm()
     

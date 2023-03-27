@@ -1,21 +1,29 @@
+''' Init file for app '''
+import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-from config import DevelopmentConfig
+from config import config
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 
+# Instantiate extensions
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 mail = Mail()
 
-
-def create_app(config=DevelopmentConfig):
+def create_app(config_name=None):
     '''Factory to create Flask application'''
+    
+    # check if config name is given
+    if config_name is None:
+        config_name = os.environ.get("FLASK_CONFIG", "development")
+    
+    # instantiate the app
     app = Flask(__name__)
 
-    app.config.from_object(config)
+    app.config.from_object(config[config_name])
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -43,4 +51,6 @@ def create_app(config=DevelopmentConfig):
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
 
+        db.create_all()
+        
         return app
