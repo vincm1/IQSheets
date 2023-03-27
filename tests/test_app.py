@@ -6,34 +6,12 @@ def test_home(client):
     response = client.get('/')
     assert b'<meta charset="UTF-8" />' in response.data
     
-# def test_registration(client, app, _db):
-#     response = client.post('/register', data=dict(
-#         username="vince",
-#         email="vince@web.de",
-#         password="Test123",
-#         confirm="Test123"
-#     ))
-
-#     assert response.status_code == 200
-    
-#     # Extract user data from the response
-#     with client.session_transaction() as session:
-#         print(session)
-#         user_id = session['user_id']
-#         print(user_id)    
-#     response_user = User.query.filter_by(id = user_id)
-
-#     # Create a new user instance in the test database
-#     test_user = User(
-#         username=response_user.username,
-#         email=response_user.email,
-#         password=response_user.password
-#     )
-#     _db.session.add(test_user)
-#     _db.session.commit()
-
-#     assert User.query.count() == 1
-#     assert User.query.filter_by(email="vince@web.de").first().email == response_user.email
+def test_registration(client):
+    response = client.post('/register', data=dict(
+                            username="vince_test", email="vince@test.de",
+                            password="Test_PW123!", confirm_pw="Test_PW123!"),
+                            follow_redirects=True)
+    assert response.status_code == 200
     
 def test_request_with_logged_in_user(client, app):
     app.test_client_class = FlaskLoginClient

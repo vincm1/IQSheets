@@ -20,5 +20,5 @@ def _db(app):
     with app.app_context():
         db.create_all()
         yield db
-        #db.session.remove()
-        #db.drop_all()
+        db.session.remove()
+        db.drop_all()
