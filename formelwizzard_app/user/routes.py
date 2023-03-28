@@ -5,7 +5,7 @@ from flask import Blueprint, current_app, render_template, redirect, request, fl
 from flask_login import login_user, login_required, logout_user, current_user
 from formelwizzard_app import db, mail
 from formelwizzard_app.models import User
-from .forms import RegistrationForm, LoginForm, EditUserForm, ResetPasswordRequestForm, ResetPasswordForm
+from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
 from werkzeug.security import generate_password_hash
@@ -27,6 +27,7 @@ user_blueprint = Blueprint('user', __name__)
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
+    """ Registering a local user """
     form = RegistrationForm()
     
     if form.validate_on_submit() and request.method == "POST":
@@ -72,7 +73,7 @@ def logout():
 
 @user_blueprint.route('/confirm/<token>')
 def confirm_email(token):
-    
+    """ Sending confirmation Email to user after signup """
     email = confirm_token(token)
     user = User.query.filter_by(email=current_user.email).first_or_404()
     
@@ -90,6 +91,7 @@ def confirm_email(token):
 @user_blueprint.route('/unconfirmed')
 @login_required
 def unconfirmed():
+    """ Checking if user confirmed email link """
     if current_user.is_confirmed:
         return redirect('user.login')
     flash('Bitte Account bestätigen', 'warning')
@@ -98,6 +100,7 @@ def unconfirmed():
 @user_blueprint.route('/resend')
 @login_required
 def resend_confirmation():
+    """ Resending a confirmation link after signup """
     token = generate_confirmation_token(current_user.email)
     confirm_url = url_for('user.confirm_email', token=token, _external=True)
     html = render_template('user/email/activate.html', confirm_url=confirm_url)
@@ -115,17 +118,21 @@ def edit_user():
     form = EditUserForm()
     
     if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        current_user.job_description = form.job_description.data
-        current_user.profile_picture = form.profile_picture.data
-        # Image name
-        pic_filename = secure_filename(current_user.profile_picture.filename)
-        # UUID
-        pic_name = str(uuid.uuid1()) + "_" + pic_filename
-        current_user.profile_picture.save(os.path.join(current_app.root_path, 'static/profile_pictures', pic_name))
-        current_user.profile_picture = pic_name
-       
+        for field in ['username', 'email', 'job_description']:
+            if getattr(form, field).data and getattr(current_user, field) != getattr(form, field).data:
+                setattr(current_user, field, getattr(form, field).data)
+                
+        if form.data['profile_picture'] and current_user.profile_picture !=  form.data['profile_picture']:
+            current_user.profile_picture = form.profile_picture.data
+            # Image name
+            pic_filename = secure_filename(current_user.profile_picture.filename)
+            # UUID
+            pic_name = str(uuid.uuid1()) + "_" + pic_filename
+            current_user.profile_picture.save(os.path.join(current_app.root_path, 'static/profile_pictures', pic_name))
+            current_user.profile_picture = pic_name
+        else:
+            current_user.profile_picture = current_user.profile_picture       
+             
         db.session.add(user)
         db.session.commit()
         flash("Profil erfolgreich bearbeitet!", "success")
@@ -133,8 +140,37 @@ def edit_user():
     
     return render_template('user/profil.html', form=form)
 
+@user_blueprint.route('/change_password', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
+def change_password():
+    """Edit user password"""
+    user = User.query.filter_by(username=current_user.username).first()
+    
+    form = ChangePasswordForm()
+    
+    if form.validate_on_submit() and form.old_password.data == current_user.check_password(form.old_password.data):
+        current_user.password_hash = generate_password_hash(form.password.data)
+        
+        db.session.add(user)
+        db.session.commit()
+        flash("Passwort erfolgreich bearbeitet!", "success")
+        return redirect(url_for('dashboard.dashboard'))
+    else:
+        flash("Altes Passwort stimmt nicht!", "warning")
+    
+    return render_template('user/password.html', form=form)
+
+@user_blueprint.route('/<username>/payments', methods=['GET'])
+@login_required
+@check_confirmed_mail
+def user_payments(username):
+    """ User payments routes """
+    return render_template('user/payments.html', username=current_user.username)
+
 @user_blueprint.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
+    """ Sending a password request """
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -154,8 +190,8 @@ def reset_password_request():
     
 @user_blueprint.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    email = confirm_token(token)
-    
+    """ Resetting password after clicking on tokenized mail link """
+    email = confirm_token(token)   
     user = User.query.filter_by(email=email).first_or_404()
     
     if not user:
@@ -170,6 +206,3 @@ def reset_password(token):
         flash('Passwort zurückgesetzt', 'success')
         return redirect(url_for('user.login'))
     return render_template('user/reset_password.html', form=form)
-
-
-
