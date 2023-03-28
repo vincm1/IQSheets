@@ -24,23 +24,19 @@ class User(db.Model, UserMixin):
     premium = db.Column(db.Boolean, nullable=False, default=False)
     num_prompts = db.Column(db.Integer, nullable=False, default=0)
     num_tokens = db.Column(db.Integer, nullable=False, default=0)
+    is_oauth = db.Column(db.Boolean, nullable=False, default=False)
     favorites = db.relationship('Favorite', backref="user")
-    
+
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __init__(self, username, email, job_description, password, is_confirmed=False, confirmed_on=None, num_prompts=0, num_tokens=0):
+    def __init__(self, username, email, password):
         self.username = username
         self.email = email
-        self.job_description = job_description
         self.password_hash = generate_password_hash(password)
-        self.is_confirmed = is_confirmed
-        self.confirmed_on = confirmed_on
-        self.num_prompts = num_prompts
-        self.num_tokens = num_tokens
         
     def __repr__(self):
-        f"User with {self.id} and {self.username} {self.email}."
+        f"User with {self.id} and {self.username}, {self.email} was created."
 class OAuth(OAuthConsumerMixin, db.Model):
     
     provider_user_id = db.Column(db.String(256), unique=True, nullable=False)

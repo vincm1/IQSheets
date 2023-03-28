@@ -51,7 +51,9 @@
 
           <div class="text logo-text">
             <span class="name">{{current_user.username}}</span>
+            {% if current_user.job_description %}
             <span class="profession">{{current_user.job_description}}</span>
+            {% endif %}
           </div>
         </div>
 

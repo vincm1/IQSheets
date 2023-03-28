@@ -2,20 +2,6 @@
 	<section class="home">
   		<div class="container mt-5 profile">
 
-			<div class="flashmessages">
-				{% with messages = get_flashed_messages(with_categories=true) %}
-  					{% if messages %}
-    					{% for category, message in messages %}
-							<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-								<strong>{{ message }}</strong>
-								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-						  	</div>
-    					{% endfor %}
- 					{% endif %}
-				{% endwith %}
-			</div>
-
-
 			<div class="card p-3 text-center">
 				<form method="POST" enctype="multipart/form-data">
 					{{form.hidden_tag()}}
@@ -24,13 +10,16 @@
 							<span> <label for="file-input" {{ form.profile_picture.label.kwargs }}>{{ form.profile_picture.label }}</label>
 								{{ form.profile_picture()}}</span>
 						</div>
-						<div class="d-flex flex-column ms-3 user-details">
-								<h4 class="mb-0 mt-2">{{current_user.username}}</h4>
-								<h6 class="mt-2">{{current_user.job_description}}</h6>
+						<div class="d-flex flex-column justify-content-start text-start ms-3 user-details">
+								<h5>{{current_user.username}} (<span>{{current_user.email}}</span>)</h5>
+								{% if current_user.job_description %}
+									<h6>{{current_user.job_description}}</h6>
+								{% endif %}
+								
 								{% if current_user.is_premium %}
 									<div class="ratings"><i class='bx bx-star ms-1'></i> </div> <span>Premium Member</span>
 								{% else %}
-									<div class="ratings mt-1"></div> <span>Gratis Mitglied</span>
+									<div class="ratings mt-1"></div><span>Gratis Mitglied</span>
 								{% endif %}	
 						</div>
 					</div>
@@ -54,6 +43,7 @@
     							{% endfor %}
 							</div>
 						</div>
+						{% if not current_user.is_oauth %}
 						<div class="row justify-content-center">
 							<div class="col-xl-6 col-lg-6 col-md-6 my-2">
 								<div class="inputs">{{form.email(class="form-control", placeholder="Email")}} </div>
@@ -65,6 +55,7 @@
     							{% endfor %}
 							</div>
 						</div>
+						{% endif %}
 						<div class="row justify-content-center">
 							<div class="col-xl-6 col-lg-6 col-md-6 justify-content-start my-2">
 								<div class="inputs">{{form.job_description(class="form-control",placeholder="Berufsbezeichnung")}} </div>
@@ -79,7 +70,23 @@
 						</div>
 					</div>
 				</form>
-			</div>
+
+				<div class="container text-center mt-4">
+					<div class="row justify-content-end flashmessages">
+						<div class="col-xl-4 col-lg-4 col-md-6">
+							{% with messages = get_flashed_messages(with_categories=true) %}
+								{% if messages %}
+							  		{% for category, message in messages %}
+								  		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+									  		<strong>{{ message }}</strong>
+									  		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								  		</div>
+							  		{% endfor %}
+						   		{% endif %}
+					  	{% endwith %}
+						</div>
+					</div>
+				</div>
 		</div>
 	</section>
 {% endblock %}

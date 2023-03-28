@@ -44,10 +44,12 @@ def google_logged_in(blueprint, token):
 
     else:
         # Create a new local user account for this user
-        user = User(username=info["name"], email=info["email"], password="", is_confirmed=True, 
-                    job_description="", confirmed_on=datetime.now())
+        user = User(username=info["name"], email=info["email"], password="")
         # Associate the new local user account with the OAuth token
         oauth.user = user
+        user.is_confirmed = True
+        user.confirmed_on = datetime.utcnow()
+        user.is_oauth = True
         # Save and commit our database models
         db.session.add_all([user, oauth])
         db.session.commit()

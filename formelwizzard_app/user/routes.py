@@ -31,8 +31,7 @@ def register():
     form = RegistrationForm()
     
     if form.validate_on_submit() and request.method == "POST":
-        user = User(username=form.username.data, email=form.email.data, 
-                    password=form.password.data, job_description=None, is_confirmed=False)
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
 
         db.session.add(user)
         db.session.commit()
