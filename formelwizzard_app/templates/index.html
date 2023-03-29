@@ -1,27 +1,26 @@
 {% extends "base.html" %} {% block content %}
 <main>
     <!-- Hero Area-->
-    <section class="hero">
-        <div class="hero py-5">
+    <section class="hero py-5">
             <div class="slider-active">
                 <div class="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
                     <div class="container">
                         <div class="row d-flex align-items-center">
-                            <div class="col-lg-6 col-md-9 ">
+                            <div class="col-lg-5 col-md-9 ">
                                 <div class="hero__caption">
-                                    <span data-animation="fadeInUp" data-delay=".4s">ExcelGuru</span>
-                                    <h1 data-animation="fadeInUp" data-delay=".6s">Verwandeln Sie Ihre Textanweisungen in Sekundenschnelle<br>mithilfe von KI kostenlos in Excel-Formeln.</h1>
-                                    <p data-animation="fadeInUp" data-delay=".8s">Machen Sie sich in Sekundenschnelle mit Excel vertraut. Arbeiten Sie schneller und intelligenter.</p>
+                                    <span data-animation="fadeInUp" data-delay=".4s">FormelWizzard</span>
+                                    <h1 data-animation="fadeInUp" data-delay=".6s">Textanweisungen sekundenschnell kostenlos <br>in <span style="font-size: 45px; font-style:italic;">Excel-Formeln</span> <br> verwandeln.</h1>
+                                    <p data-animation="fadeInUp" data-delay=".8s">Dank <span style="font-size:20px; font-style:italic;">KI </span> kein Kopfzerbrechen mehr in Ihrer Arbeit in <span style="font-size: 20px; font-style:italic;">Spreadsheets.</span></p>
                                     <!-- Slider btn -->
                                 <div class="slider-btns">
                                         <!-- Hero-btn -->
-                                        <a href="{{url_for('user.register')}}" class="btn btn-primary">Registrieren</a>
+                                        <a class="btn btn-primary me-2" href="{{url_for('user.register')}}">Jetzt Formeln erstellen</a>
                                         <!-- Video Btn -->
-                                        <a data-animation="fadeInRight" data-delay="1.0s" class="btn btn-secondary" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><i class="fas fa-play">Wie funktioniert ExcelGuru?</i></a>
+                                        <a data-animation="fadeInRight" target="_blank" data-delay="1.0s" class="btn btn-secondary" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><i class="fas fa-play pe-2"></i>Wie funktioniert FormelWizzard?</a>
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5 ms-5 justify-content-end">
                                 <div class="hero__img d-none d-lg-block f-right" data-animation="fadeInRight" data-delay="1s">
                                     <img src="{{url_for('static', filename='img/hero_right.png')}}" alt="">
                                 </div>
@@ -30,20 +29,19 @@
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Slider Area End -->
     </section>
     
     <!-- Best Features Start -->
-    <section class="features py-5">
-        <div class="container-fluid pt-5">
-            <div class="row justify-content-end">
+    <section class="features pt-2">
+        <div class="container">
+            <div class="row justify-content-center pt-4">
                 <div class="col-xl-8 col-lg-10">
                     <!-- Section Tittle -->
-                    <div class="row">
+                    <div class="row text-center pb-4">
                         <div class="col-lg-10 col-md-10">
-                            <div class="section-tittle">
-                                <h2>Some of the best features Of Our App!</h2>
+                            <div class="section-title">
+                                <h2>Die besten Features unserer App</h2>
                             </div>
                         </div>
                     </div>
@@ -55,8 +53,8 @@
                                     <span class="flaticon-support"></span>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>Easy to Costomize</h3>
-                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                    <h3>Excel & GSheets <i class="fa-solid fa-file-excel fa-1xl"></i> <i class="fa-solid fa-table"></i></h3>
+                                    <p>Wir unterstützen die beiden gängigsten Spreadsheet Tools.</p>
                                 </div>
                             </div>
                         </div>
@@ -66,30 +64,30 @@
                                     <span class="flaticon-support"></span>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>Extreme Security</h3>
-                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                    <h3>Formeln <i class="fa-solid fa-paper-plane"></i></h3>
+                                    <p>Lass dir aus einfachen Textanweisungen direkt die passende Formel erstellen.</p>
                                 </div>
                             </div>
                         </div> 
-                        <div class="col-xl-6 col-lg-6 col-md-6">
+                        <div class="col-xl-6 col-lg-6 col-md-6 mt-2">
                             <div class="single-features mb-70">
                                 <div class="features-icon">
                                     <span class="flaticon-support"></span>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>Customer Support</h3>
-                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                    <h3>Erklärungen <i class="fa-solid fa-lightbulb"></i></h3>
+                                    <p>Lass dir komplizierte Formeln erklären und setze sie dann ein.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6">
+                        <div class="col-xl-6 col-lg-6 col-md-6 mt-2">
                             <div class="single-features mb-70">
                                 <div class="features-icon">
                                     <span class="flaticon-support"></span>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>Creative Design</h3>
-                                    <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                                    <h3>VBA <i class="fa-solid fa-magnifying-glass"></i></h3>
+                                    <p>Lass dir sogar passende Makros erstellen.</p>
                                 </div>
                             </div>
                         </div>
@@ -105,78 +103,98 @@
     <!-- Best Features End -->
 
     <!-- Services Area Start -->
-    <section class="service-area">
-        <div class="container">
+    <section class="service-area py-5">
+        <div class="container-fluid py-5">
             <!-- Section Tittle -->
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-6">
                     <div class="section-tittle text-center">
-                        <h2>Wie kann Dir<br>ExcelGuru helfen?</h2>
+                        <h2>Wie hilft dir <span style="font-size:40px; font-style:italic">FormelWizzard</span> im Spreadsheet Alltag?</h2>
                     </div>
                 </div>
             </div>
             <!-- Section caption -->
-            <div class="row pt-5">
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="services-caption text-center mb-30 px-5 py-5">
-                        <div class="service-icon">
-                            <i class="fa-regular fa-clock fa-3x"></i>
-                        </div> 
-                        <div class="service-cap pt-4">
-                            <h4>Fokus aufs Wichtige</h4>
-                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+            <div class="container-fluid">
+                <div class="row py-5">
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="services-caption text-center mb-30 px-5 py-5">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-bolt fa-3x"></i>
+                            </div> 
+                            <div class="service-cap pt-4">
+                                <h4>Formeln 10x schneller</h4>
+                                <p class="pt-2">Generieren Sie die benötigten Formeln in sekundenschnelle. 
+                                Keine Zeit und Nerven mehr mit der Erstellung von Formeln 
+                                durch lange Internetrecherche verschwenden.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="services-caption-active text-center mb-30 px-5 py-5">
-                        <div class="service-icon">
-                            <i class="fa-regular fa-clock fa-3x"></i>
-                        </div> 
-                        <div class="service-cap pt-4">
-                            <h4>Zeitersparnis</h4>
-                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="services-caption text-center mb-30 px-5 py-5">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-chalkboard-user fa-3x"></i>
+                            </div> 
+                            <div class="service-cap pt-4">
+                                <h4>Spreadsheet Profi werden</h4>
+                                <p class="pt-2">
+                                    Ob Anfänger oder Fortgeschritten in Excel/Google Sheets, der FormelWizzard kann 
+                                    Ihnen helfen, ein Tabellenkalkulationsexperte zu werden.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div> 
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="services-caption text-center mb-30 px-5 py-5">
-                        <div class="service-icon">
-                            <i class="fa-regular fa-clock fa-3x"></i>
-                        </div> 
-                        <div class="service-cap pt-4">
-                            <h4>Neue Ideen</h4>
-                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="services-caption text-center mb-30 px-5 py-5">
+                            <div class="service-icon">
+                                <i class="fa-regular fa-clock fa-3x"></i>
+                            </div> 
+                            <div class="service-cap pt-4">
+                                <h4>Zeitersparnis</h4>
+                                <p class="pt-2">Keine komplexe Formeln merken oder stundenlang 
+                                    diese von Grund auf neu zu erstellen. Mit unserem KI-Tool einfach und effizient erledigen.</p>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="services-caption text-center mb-30 px-5 py-5">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-lightbulb fa-3x"></i>
+                            </div> 
+                            <div class="service-cap pt-4">
+                                <h4>Neue Ideen</h4>
+                                <p class="pt-2">Entdecke mit FormelWizzard neue <br>
+                                    Lösungen für deine Arbeitsalltag und über 
+                                    <span style="font-size:20px; font-style:italic">100 Vorlagen</span><br>
+                                    für Google Sheets und Excel.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     </section>
     <!-- Services Area End -->
+    
     <!-- Applic App Start -->
     <section class="app-pictures py-5">
         <div class="applic-apps p-5">
             <div class="container-fluid">
                 <div class="row justify-content-start">
                     <!-- slider Heading -->
-                    <div class="col-xl-3 col-lg-3 col-md-8">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
                         <div class="single-cases-info mb-30">
-                            <h3>Applic Apps<br> Screenshot</h3>
-                            <p>Lorem ipsum dolor sit amet, consecadipiscing elit, sed do eiusmod tempor incididunt ut ore et dolore magna aliqua. Quis ipsum suspendisse gravida. Risus commodo viverra maecenasan lacus vel facilisis. </p>
+                            <h3>FormelWizzard<br> Screenshot</h3>
+                            <p>In nur wenigen Klicks zur Lösungen wie hier in dem Video erklärt:</p>
                         </div>
                     </div>
                     <!-- OwL -->
-                    <div class="col-xl-7 col-lg-8 col-md-7">
-                        <div class="app-active owl-carousel"> 
-                            <div class="single-cases-img">
+                    <div class="d-flex flex-row align-items-end">
+                        <div class="col-xl-12 col-lg-8 col-md-7">
+                            <div class="app-active owl-carousel align-items-end"> 
                                 <img src="static/img/App1.png" alt="">
-                            </div>
-                            <div class="single-cases-img">
                                 <img src="static/img/App2.png" alt="">
-                            </div>
-                            <div class="single-cases-img">
-                                <img src="static/img/App3.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -185,6 +203,7 @@
         </div>
     </section>
     <!-- Applic App End -->
+
     <!-- Best Pricing Start -->
     <section class="pricing py-5" data-background="assets/img/gallery/best_pricingbg.jpg">
         <div class="container">
@@ -192,29 +211,35 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-6 col-md-8">
                     <div class="section-tittle section-tittle2 text-center">
-                        <h2>Wähle einen unserer Pläne.</h2>
+                        <h2>Starte <span style="font-size: 38px;">kostenlos</span>. Upgrade zu <span style="font-size: 38px;">Premium</span> unkompliziert.</h2>
                     </div>
                 </div>
             </div>
         </div>
     <!-- Best Pricing End -->
+
     <!-- Pricing Card Start -->
         <div class="pricing-card-area py-5">
-            <div class="container">
+            <div class="container text-center">
                 <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="col-xl-4 col-lg-4 col-md-6 me-5">
                         <div class="single-card text-center mb-30">
                             <div class="card-top py-3">
                                 <h4>Starter</h4>
                             </div>
-                            <div class="card-bottom">
+                            <div class="card-bottom justify-content-center">
                                 <ul>
-                                    <li>Increase traffic 50%</li>
-                                    <li>E-mail support</li>
-                                    <li>10 Free Optimization</li>
-                                    <li>24/7  support</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Alle Features</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Best Practices</li>
+                                    <li><i class="fa-solid fa-check me-3"></i><span style="font-size: 18px;">5</span> KI-Abfragen <br> 
+                                        pro Monat</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Beschränkt Templates</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Kein Support</li>
                                 </ul>
-                                <a href="{{url_for('user.register')}}" class="btn btn-primary">Loslegen</a>
+                                <div class="container my-4">
+                                    <a href="{{url_for('user.register')}}"><button class="btn btn-outline-primary py-2 px-4">Kostenlos testen</button></a>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -225,12 +250,14 @@
                             </div>
                             <div class="card-bottom">
                                 <ul>
-                                    <li>Increase traffic 50%</li>
-                                    <li>E-mail support</li>
-                                    <li>10 Free Optimization</li>
-                                    <li>24/7  support</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Alle Features</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Best Practices</li>
+                                    <li><i class="fa-solid fa-check me-3"></i><span style="font-size: 18px;">Unbegrenzt</span> KI-Abfragen <br> 
+                                        pro Monat</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Alle Templates</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Support</li>
                                 </ul>
-                                <a href="{{url_for('user.register')}}" class="btn btn-primary">Loslegen</a>
+                                <a href="{{url_for('user.register')}}"><button class="btn btn-primary">Loslegen</button></a>
                             </div>
                         </div>
                     </div>
@@ -239,6 +266,7 @@
         </div>
     </section>
     <!-- Pricing Card End -->
+
     <!-- Testimonials -->
     <section class="testimonials py-5">
         <div class="customers">
@@ -246,7 +274,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-8">
                         <div class="section-tittle text-center">
-                            <h2>What Our Customers<br> Have to Say</h2>
+                            <h2>Was unsere <span style="font-size: 35px; font-style:italic">Nutzer</span><br> über <span style="font-size: 35px; font-style:italic">Uns</span> sagen.</h2>
                         </div>
                     </div>
                 </div>
@@ -260,31 +288,40 @@
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <div class="textimonial-img">
+                        <div class="textimonial-img mb-2">
                             <img src="static/img/testi1.png" alt="">
                         </div>
                         <div class="textimonial-cap">
-                            <h4>Welcome To The Best Model  Winner Contest</h4>
-                            <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                            <h6>Maria, Account Managerin</h6>
+                            <h4>"Auswertungen dauern nur noch 1/2 so lange."</h4>
+                            <p>Für die Kundenauswertungen nutzen wir Excel-Sheets mit vielen Verknüpfungen. <br>
+                                Dank FormelWizzard spare ich immens Zeit indem ich praktische Formeln erstelle.
+                            </p>
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <div class="textimonial-img">
+                        <div class="textimonial-img mb-2">
                             <img src="static/img/testi2.png" alt="">
                         </div>
                         <div class="textimonial-cap">
-                            <h4>Welcome To The Best Model  Winner Contest</h4>
-                            <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                            <h6>Tim, Team Lead Außendienst</h6>
+                            <h4>"Fokus auf wichtige Dinge"</h4>
+                            <p>Dank der App verschwende ich meine Zeit nicht mehr in Auswertungen <br>in Google Sheets,
+                                sondern kann mich darauf konzentrieren, <br> das Verkaufstalent meiner MAs zu entwickeln.</p>
                         </div>
                       </div>
                       <div class="carousel-item">
                         <div class="single-customer mb-100">
-                            <div class="textimonial-img">
+                            <div class="textimonial-img mb-2">
                                 <img src="static/img/testi3.png" alt="">
                             </div>
                             <div class="textimonial-cap">
-                                <h4>Welcome To The Best Model  Winner</h4>
-                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                                <h6>Marco, Buchhalter</h6>
+                                <h4>"Täglich im Einsatz"</h4>
+                                <p>Als Buchhalter ist die Arbeit in Excel Alltag. <br> 
+                                    FormelWizzard erleichtert mir diesen, wenn ich mal wieder eine Formel suche, oder
+                                    <br> eine neue Spreadsheet Vorlage brauche.
+                                </p>
                             </div>
                         </div>
                       </div>
@@ -305,23 +342,21 @@
         </div>
     </section>   
     <!-- Our Customer End -->
+
     <!-- Say Something Start -->
-    <section class="newsletter py-5">
+    <section class="newsletter m-5">
         <div class="container">
             <div class="row justify-content-between align-items-center">
-                <div class="offset-xl-1 offset-lg-1 col-xl-5 col-lg-5">
-                    <div class="say-something-cap">
-                        <h2>Melde Dich <span style="font-style:italic">jetzt</span> an als Beta-Tester</h2>
-                    </div>
+                <div class="col-xl-4">
+                        <div class="say-something-cap">
+                            <h2>Melde Dich <span style="font-style:italic">jetzt</span> an als <br> Beta-Tester</h2>
+                        </div>
                 </div>
-            </div>
-            <div class="row justify-content-between align-items-center">
-                <div class="col-xl-2 col-lg-3">
-                    <div class="a-btn">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                <div class="col-xl-4 col-lg-3">
+                    <form method="POST" action="">
                         <button type="submit" href="" class="btn btn-primary">Anmelden</button>
                         <img src="static/img/say-shape-right.png" alt="" class="say-shape2 d-none d-lg-block">
-                    </div>
+                    </form>  
                 </div>
             </div>
         </div>

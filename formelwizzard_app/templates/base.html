@@ -29,113 +29,107 @@
   
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md sticky-top py-4">
+    <nav class="navbar navbar-expand-md py-4">
       <div class="container">
           <a class="navbar-brand" href="{{url_for('core.index')}}">FormelWizzard</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0 justify-content-end">
                   <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="{{url_for('core.pricing')}}">Preise</a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="{{url_for('core.about')}}">Über uns</a>
-                  </li>
               </ul>
               <div class="d-flex">
-                  <a class="btn btn-primary me-2" href="{{url_for('user.register')}}">Registrieren</a>
+                  <a class="btn btn-primary me-1" href="{{url_for('user.register')}}">Registrieren</a>
                   <a class="btn btn-outline-primary" href="{{url_for('user.login')}}">Login</a>
               </div>
           </div>
       </div>
     </nav>
+    
     {% block content %} 
     
     {% endblock %}
     <footer class="footer py-5">
-      <!-- Footer Start-->
-       <div class="footer-area footer-padding">
-           <div class="container">
-               <div class="row  justify-content-between">
-                   <div class="col-lg-3 col-md-4 col-sm-8">
-                        <div class="single-footer-caption mb-30">
-                             <!-- logo -->
-                            <div class="footer-logo">
-                                <a href="core.index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                            </div>
-                            <div class="footer-title">
-                                <div class="footer-pera">
-                                    <p class="info1">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
-                               </div>
-                            </div>
-                        </div>
-                   </div>
-                   <div class="col-lg-2 col-md-4 col-sm-5">
-                       <div class="single-footer-caption mb-50">
-                           <div class="footer-title">
-                               <h4>Quick Links</h4>
-                               <ul>
-                                   <li><a href="#">About</a></li>
-                                   <li><a href="#">Features</a></li>
-                                   <li><a href="#">Pricing</a></li>
-                                   <li><a href="#">Download</a></li>
-                                   <li><a href="#">Reviews</a></li>
-                               </ul>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-lg-2 col-md-4 col-sm-7">
-                       <div class="single-footer-caption mb-50">
-                           <div class="footer-title">
-                               <h4>Support</h4>
-                               <ul>
-                                   <li><a href="#">Report a bug</a></li>
-                                   <li><a href="#">Privacy Policy</a></li>
-                                   <li><a href="#">Terms & Conditions</a></li>
-                                   <li><a href="#">Sitemap</a></li>
-                                   <li><a href="#">FAQs</a></li>
-                               </ul>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-md-6 col-sm-8">
-                       <div class="single-footer-caption mb-50">
-                           <div class="footer-title">
-                               <h4>Newsletter</h4>
-                               <div class="footer-pera footer-pera2">
-                                <p>Heaven fruitful doesn't over lesser in days. Appear </p>
-                            </div>
-                            <!-- Form -->
-                            <div class="footer-form">
-                                <div id="mc_embed_signup">
-                                    <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
-                                        <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '">
-                                        <div class="form-icon">
-                                            <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm"><img src="assets/img/shape/form_icon.png" alt=""></button>
-                                        </div>
-                                        <div class="mt-10 info"></div>
-                                    </form>
+        <div class="container-fluid">
+            <!-- Footer Start-->
+            <div class="footer-area footer-padding">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-3 col-md-4 col-sm-8">
+                            <div class="single-footer-caption">
+                                <div class="footer-title">
+                                    <div class="footer-pera">
+                                        <h4>Über FormelWizzard</h4>
+                                        <h6>Zeitsparen in Excel, dank KI</h6>
+                                        <p class="info1">Mit dem smarten Formel-Generator und -Erklärer sparst du <br>
+                                            Zeit und Geld bei der Erstellung von Excel-Formeln.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-               <!-- Copy-Right -->
-               <div class="row align-items-center">
-                   <div class="col-xl-12 ">
-                       <div class="footer-copy-right">
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-     </div>
-      <!-- Footer End-->
-
-  </footer>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-5">
+                            <div class="single-footer-caption">
+                                <div class="footer-title">
+                                    <h4>Quick Links</h4>
+                                    <ul>
+                                        <li><a href="#">Preise</a></li>
+                                        <li><a href="#">FAQs</a></li>
+                                        <li><a href="#">Kontakt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-7">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-title">
+                                    <h4>Support</h4>
+                                    <ul>
+                                        <li><a href="#">Feedback / Bug </a></li>
+                                        <li><a href="#">Impressum</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-8">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-title">
+                                    <h4>Newsletter</h4>
+                                    <div class="footer-pera footer-pera2">
+                                    <p>Verpasse keine Updates, jetzt zum Newsletter anmelden.</p>
+                                </div>
+                                <!-- Form -->
+                                <div class="footer-form">
+                                    <div class="d-flex flex-row">
+                                        <form method="POST">
+                                            <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="p-2 placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '">
+                                            <div class="form-icon">
+                                                <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary"><i class="fa-solid fa-arrow-right"></i></button>
+                                            </div>
+                                            <div class="mt-10 info"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Copy-Right -->
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 ">
+                            <div class="footer-copy-right">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+        </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

@@ -1,43 +1,70 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    color: #19184D;
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #87B1AC;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #19184D;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
 }
 
 main {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins';
     color: #19184D;
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Poppins', cursive;
     color: #19184D;
 }
 
-/* Buttons */
+/* ===== Btns ===== */
 .btn-primary {
-    background-color: #87B1AC;
-    border-color: #87B1AC;
-    color: #19184D;
-    font-family: 'Abril Fatface', cursive;
+	background-color: var(--primary-color);
+	border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+	background-color: var(--primary-color);
+	box-shadow: none;
 }
 
 .btn-outline-primary {
-    border-color: #87B1AC;
-    color: #98DAD8;
-    font-family: 'Abril Fatface';
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Poppins';
 }
 
 .btn-outline-primary:hover {
-    border-color: #98DAD8;
-    color: #fff;
-    font-family: 'Abril Fatface';
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+	box-shadow: none;
 }
+
 
 /* Navbar */
 
 .navbar a {
     color: #30444f;
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Poppins' sans-serif;
 }
 
 /* Features */
@@ -47,10 +74,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 /* services */
-
-.service-area {
-    padding: 8rem 0;
-}
 
 .service-area .services-caption-active {
     border: 1px solid;
@@ -90,12 +113,17 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .pricing .single-card li {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .pricing .card-bottom .btn-primary {
     margin: 2rem 0;
     padding: 15px 90px;
+}
+
+.pricing .card-bottom i {
+    color: var(--primary-color);
+    font-size: 19px;
 }
 
 /* Testimonials */
@@ -106,12 +134,20 @@ h1,h2,h3,h4,h5,h6 {
 
 /* Newsletter */
 
-.newsletter {
-    border-bottom: 1px solid#87B1AC
-}
-
 /* Footer */
+.footer {
+    border-top: 1px solid var(--primary-color);
+}
 
 .footer ul {
     list-style-type: none;
+}
+
+.footer ul a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.footer ul a:hover {
+    text-decoration: underline;
 }

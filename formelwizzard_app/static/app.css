@@ -1,5 +1,6 @@
 /* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -415,6 +416,26 @@ body.dark .home .text{
 
 .card .card-header i {
     color: #10793F;
+}
+
+#favorite-provider {
+    font-style: italic;
+    padding: 0 3px 0 5px;
+}
+
+#favorite-date {
+    font-size: 12px;
+    font-style: italic;
+    display: inline; 
+    justify-content: end;
+    display: inline-block; 
+    position: absolute right;
+}
+
+.card-body .collapse .card {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color-light);
+    color: var(--body-color);
 }
 
 #filter-btn {

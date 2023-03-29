@@ -16,27 +16,25 @@
 				<div class="favorite-cards">
 					<div class="row">
 						{% for formula in favorite_formulas %}
-						<div class="col-xl-4 col-lg-2 col-md-2 col-sm-1 my-1 response">
+						<div class="col-xl-4 col-lg-3 col-md-3 col-sm-1 my-1 response">
 							<div class="card h-100 w-100">
 								<div class="card-header">
 									{% if formula.provider == "Excel" %}
-										<i class="fa-solid fa-file-excel fa-2xl"></i>
-										<span id="favorite-provider">{{formula.provider}}:</span> {{formula.favorite_type}} {{formula.method}}
-										<span id="favorite-date">{{formula.favorite_date.strftime('%d.%m.%Y')}}</span>
+										<i class="fa-solid fa-file-excel fa-2xl pe-2"></i>
+										{{formula.provider}}:<span id="favorite-provider">{{formula.favorite_type}} {{formula.method}}</span>
 									{% else %}
-										<i class="fa-solid fa-table fa-2xl"></i>
-										<span id="favorite-provider">{{formula.provider}}:</span> {{formula.favorite_type}} {{formula.method}}
-										<span id="favorite-date">{{formula.favorite_date.strftime('%d.%m.%Y')}}</span>
+										<i class="fa-solid fa-table fa-2xl pe-2"></i>
+										{{formula.provider}}:<span id="favorite-provider">{{formula.favorite_type}} {{formula.method}}</span>
 									{% endif %}
 								</div>
 		
 								<div class="card-body">
 									{% if formula.method == "Erstellen" %}
-										<div class="row m-2 command">
+										<div class="row m-2 text-start command">
 											<p>{{formula.command}}</p>
 										</div>
-										<div class="row m-2 prompt">
-											<p class="align-items-end">
+										<div class="row m-2 text-start prompt">
+											<p class="align-self-end">
 												<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formel_{{formula.id}}" aria-expanded="false" aria-controls="formel_{{formula.id}}">
 												  Formel
 												</button>
@@ -55,7 +53,6 @@
 										<hr>
 									{% endif %}
 									<div class="d-flex flex-row-reverse">
-										
 										<div class="p-2">
 											<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="p-2">
 												<button class="btn btn-danger" id="incorrect-btn">
@@ -68,7 +65,9 @@
 												<i class="fa-solid fa-copy"></i>
 											</button>
 										</div>
-
+										<div class="p-2">
+											<span id="favorite-date">{{formula.favorite_date.strftime('%d.%m.%Y')}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
