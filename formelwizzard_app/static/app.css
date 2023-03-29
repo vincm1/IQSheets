@@ -377,12 +377,21 @@ body.dark .home .text{
 
 .dashboard .banner {
     background-color: var(--primary-color);
+    color: var(--text-color);
     padding: 10px 10px;
     border-radius: 8px;
 }
 
 .dashboard #prompt-header {
     font-size: 28px;
+}
+
+.dashboard i {
+    font-size: 24px;
+}
+
+.dashboard #premium-btn {
+    font-size: 24px;
 }
 
 .dashboard select {

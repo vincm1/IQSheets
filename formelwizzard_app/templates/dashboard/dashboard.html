@@ -1,23 +1,32 @@
 {% extends "layout.html" %}{% block content %}
 	<section class="home">
-		<section class="dashboard">
-			<div class="container-fluid mt-3 mx-2">
+		<section class="dashboard ms-3">
+			<div class="container-fluid mt-3">
 
 				{% if not current_user.premium %}
-				<div class="banner col-xl-10 mb-5">
-					<h3>{{current_user.num_prompts}} von 5 Anfragen verbraucht</h3>
-					<button class="btn btn-primary premium-btn"><i class='bx bx-diamond icon'></i>Premium</button>
-				</div>
+					<div class="d-flex flex-row mb-5">
+						<div class="banner col-xl-8 text-center me-4">
+							<h3>{{current_user.num_prompts}} von 5 KI-Anfragen verbraucht</h3>
+						</div>
+						<div class="banner col-xl-3 text-center mx-3" id="premium-div">
+							<a href="{{url_for('dashboard.premium')}}">
+								<button class="btn btn-primary" id="premium-btn">
+									<i class='bx bx-diamond icon pe-3'></i>
+									Premium
+								</button>
+							</a>
+						</div>				
+					</div>
 				{% endif %}
 
-				<div class="explanation col-xl-8">
-					<h6>
-						Konvertieren Sie jeden Text in Excel- oder Google Sheets-Formeln 
-						mit AI. Geben Sie eine detaillierte Beschreibung der Formel ein, 
-						die Sie benötigen, und unsere KI wird sie innerhalb von Sekunden erstellen.
-					</h6>
+				<div class="explanation col-xl-10 mb-5">
+					<h5>
+						Konvertieren Sie jede Textanforderung in Excel- oder Google Sheets-Formeln 
+						mit unserer AI. Geben Sie eine detaillierte <br> Beschreibung des Befehls ein, 
+						den Sie benötigen, und unsere KI wird sie innerhalb von Sekunden erstellen.
+					</h5>
 					
-					<p>
+					<p class="pt-3">
 						*Wenn Sie falsche Ergebnisse erhalten, melden Sie diese bitte, 
 						damit wir unser KI-Modell verbessern können.
 					</p>
@@ -25,47 +34,41 @@
 				</div>
 				
 				{% if current_user.premium or current_user.num_prompts < 5%}
-				<div class="prompt mt-5">
 					<!-- Prompt Field -->
-					<div class="row align-items start">
+					<div class="row justify-content-start">
 						<form method="POST">
 							{{form.hidden_tag()}}
-							<div class="d-flex flex-row align-items-start">
-								<div class="p-2 select" role="group">
-									{{form.excel_google()}}
-								</div>
-								<div class="p-2 select" role="group">
-									{{form.info_prompt()}}
-								</div>
-								<div class="p-2 select" role="group">
-									{{form.formula_explain()}}
-								</div>
-							</div>
-	
-			<div class="row d-flex mt-5">
+						<div class="select" role="group">
+							{{form.excel_google(class_="col-3 my-2 px-4")}}
+						</div>
+						<div class="select" role="group">
+							{{form.info_prompt(class_="col-3 my-2 px-4")}}
+						</div>
+						<div class="select" role="group">
+							{{form.formula_explain(class_="col-3 my-2 px-4")}}
+						</div>
+					</div>
 
-						<div class="col-xl-5 col-lg-4 col-md-3 prompt">
-							<div class="row">
-								{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formel die zwei Zellen summiert z.B.")}}
-							</div>
+					<div class="row prompt mt-5">
+						<div class="col-xl-5 col-lg-5 col-md-3 me-5 prompt">
+							{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formel die zwei Zellen summiert z.B.")}}	
 							<div class="row justify-content-end">
-								{{form.submit(class="btn btn-primary mt-2 col-lg-5", id="formel-btn")}}
+								{{form.submit(class="btn btn-primary col-4 mt-3", id="formel-btn")}}
 							</div>
 						</form>
-					</div>
-					<!-- Prompt Field End-->
+						</div>
 
-					{% if form.formula_explain.data == "Erklären" %}
-					<!-- Erklärung -->
-					<div class="col-xl-6 col-lg-3 col-md-3 pl-5 formula">
-						<div class="card">
-							<div class="card-header">
-							  Erklärung
-							</div>
-							<div class="card-body p-3">
-								<div class="row">
-									<p id="copy-target">{{explanation}}</p>
+						{% if form.formula_explain.data == "Erklären" %}
+						<!-- Erklärung -->
+						<div class="col-xl-6 col-lg-6 col-md-3 pl-5 formula">
+							<div class="card">
+								<div class="card-header">
+							  		Erklärung
 								</div>
+								<div class="card-body p-3">
+									<div class="row">
+										<p id="copy-target">{{explanation}}</p>
+									</div>
 								<div class="row d-flex justify-content-end">
 									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
 										{{form_2.csrf_token}}
@@ -89,14 +92,14 @@
 											</button>
 										</div>
 								</div>
+								</div>
 							</div>
 						</div>
-					</div>
 					<!-- Erklärung End -->
 
 					{% elif form.formula_explain.data == "Erstellen" %}
 					<!-- Formel -->
-						<div class="col-xl-6 col-lg-3 col-md-3 pl-5 formula">
+						<div class="col-xl-6 col-lg-6 col-md-3 ms-5 formula">
 							<div class="card">
 								<div class="card-header">
 								Formel
@@ -149,6 +152,12 @@
 						<!-- Unsubmitted End-->
 
 					{% endif %}
+
+					</div>
+						
+					<!-- Prompt Field End-->
+
+					
 								
 							</div>
 						<div>

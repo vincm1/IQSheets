@@ -1,13 +1,18 @@
 {% extends "layout.html" %}{% block content %}
 <section class="home">
-  <section class="templates">
-    <div class="container-fluid m-5">
-      <div class="heading">
-        <h1>FormulaWizzard templates</h1>
+  <section class="templates ms-3">
+    <div class="container-fluid mt-3">
+      <div class="favorite-btns mb-2">
+        <div class="row align-items-start">
+          <form method="POST">
+            <button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
+            <button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Excel">Excel</button>
+            <button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Google Sheets">Google Sheets</button>
+          </form>
+        </div>
       </div>
 
-      <div class="templates-cards">
-        <div class="container-fluid text-start">
+      <div class="templates-cards mt-5">
           <div class="row">
             <div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
               <div class="card" style="width: 18rem">
