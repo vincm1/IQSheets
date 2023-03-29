@@ -1,54 +1,59 @@
 {% extends "base.html" %} {% block content %}
 <main>
     <!-- Best Pricing Start -->
-    <section class="pricing py-5">
+    <section class="pricing py-5 mt-2 mb-5">
         <div class="container">
             <!-- Section Tittle -->
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-6 col-md-8">
-                    <div class="section-tittle text-center">
-                        <h2>Wähle den für Dich passenden Plan.</h2>
+                    <div class="section-tittle section-tittle2 text-center">
+                        <h2>Starte <span style="font-size: 38px;">kostenlos</span>. Upgrade zu <span style="font-size: 38px;">Premium</span> unkompliziert.</h2>
                     </div>
                 </div>
             </div>
         </div>
     <!-- Best Pricing End -->
+
     <!-- Pricing Card Start -->
-        <div class="pricing-card-area">
-            <div class="container">
+        <div class="pricing-card-area pt-3">
+            <div class="container text-center">
                 <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-card text-center mb-30">
-                            <div class="card-top">
-                                <h4>Free</h4>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                        <div class="single-card text-center mb-3">
+                            <div class="card-top py-3">
+                                <h4>Starter</h4>
                             </div>
-                            <div class="card-bottom">
+                            <div class="card-bottom justify-content-center">
                                 <ul>
-                                    <li>Increase traffic 50%</li>
-                                    <li>E-mail support</li>
-                                    <li>10 Free Optimization</li>
-                                    <li>24/7  support</li>
-                                    <li>monatlich kündbar</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Alle Features</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Best Practices</li>
+                                    <li><i class="fa-solid fa-check me-3"></i><span style="font-size: 18px;">5</span> KI-Abfragen <br> 
+                                        pro Monat</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Beschränkt Templates</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Kein Support</li>
                                 </ul>
-                                <button href="#" class="btn btn-primary">Get Started</button>
+                                <div class="container my-4">
+                                    <a href="{{url_for('user.register')}}"><button class="btn btn-outline-primary py-2 px-4">Kostenlos testen</button></a>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-card  text-center mb-30">
-                            <div class="card-top">
-                                <h4>Premium</h4>
-                                <h4> 5€ <span>/ Monat</span></h4>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                        <div class="single-card text-center mb-30">
+                            <div class="card-top py-3">
+                                <h4>Profi</h4>
                             </div>
                             <div class="card-bottom">
                                 <ul>
-                                    <li>Increase traffic 50%</li>
-                                    <li>E-mail support</li>
-                                    <li>10 Free Optimization</li>
-                                    <li>24/7  support</li>
-                                    <li>monatlich kündbar</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Alle Features</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Best Practices</li>
+                                    <li><i class="fa-solid fa-check me-3"></i><span style="font-size: 18px;">Unbegrenzt</span> KI-Abfragen <br> 
+                                        pro Monat</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Alle Templates</li>
+                                    <li><i class="fa-solid fa-check me-3"></i>Support</li>
                                 </ul>
-                                <button href="#" class="btn btn-primary">Get Started</button>
+                                <a href="{{url_for('user.register')}}"><button class="btn btn-primary">Loslegen</button></a>
                             </div>
                         </div>
                     </div>
@@ -58,31 +63,57 @@
     </section>
     <!-- Pricing Card End -->
 
-    <!-- Say Something Start -->
-    <section class="newsletter">
-        <div class="say-something-aera pt-90 pb-90 fix">
-            <div class="container">
-                <div class="row justify-content-between align-items-center">
-                    <div class="offset-xl-1 offset-lg-1 col-xl-5 col-lg-5">
-                        <div class="say-something-cap">
-                            <h2>Say Hello To The Collaboration Hub.</h2>
+    <!-- FAQs Start -->
+    <section class="FAQs py-5" id="FAQs">
+        <div class="container">
+
+            <div class="row justify-content-Center my-3">
+                <div class="text-center">
+                    <h1 style="text-decoration:underline;">FAQ's</h1>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                          Frage 1
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Lorem Ipsum dolor Lorem Ipsum dolor Lorem Ipsum dolor Lorem Ipsum dolor
+                            Lorem Ipsum dolor Lorem Ipsum dolor. Lorem Ipsum dolor. Lorem Ipsum dolor.
                         </div>
+                      </div>
                     </div>
-                    <div class="col-xl-2 col-lg-3">
-                        <div class="say-btn">
-                            <a href="#" class="btn radius-btn">Contact Us</a>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                          Frage 2
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Lorem Ipsum dolor Lorem Ipsum dolor Lorem Ipsum dolor 
+                            Lorem Ipsum dolor Lorem Ipsum dolor Lorem Ipsum dolor. Lorem Ipsum dolor. 
+                            Lorem Ipsum dolor.
                         </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                          Frage 3
+                        </button>
+                      </h2>
+                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                      </div>
                     </div>
                 </div>
             </div>
-            <!-- shape -->
-            <div class="say-shape">
-                <img src="assets/img/shape/say-shape-left.png" alt="" class="say-shape1 rotateme d-none d-xl-block">
-                <img src="assets/img/shape/say-shape-right.png" alt="" class="say-shape2 d-none d-lg-block">
-            </div>
         </div>
     </section>
-    <!-- Say Something End -->
- 
+    <!-- FAQs End --> 
 </main>
 {% endblock %}

@@ -61,10 +61,19 @@ h1,h2,h3,h4,h5,h6 {
 
 
 /* Navbar */
+nav {
+    border-bottom: solid 1px var(--primary-color);
+}
 
 .navbar a {
     color: #30444f;
     font-family: 'Poppins' sans-serif;
+    text-decoration: none;
+}
+
+.navbar li a:hover{
+    text-decoration: underline;
+    color: #30444f;
 }
 
 /* Features */
@@ -132,6 +141,21 @@ h1,h2,h3,h4,h5,h6 {
     background-color: #87B1AC;
 }
 
+/* FAQs */
+.FAQs {
+    background-color: var(--primary-color);
+    
+}
+
+.accordion {
+    border: solid 2px #30444f;;
+    border-radius: 5px;
+}
+
+#flush-heading:after {
+    background-color: red;
+}
+
 /* Newsletter */
 
 /* Footer */
@@ -150,4 +174,27 @@ h1,h2,h3,h4,h5,h6 {
 
 .footer ul a:hover {
     text-decoration: underline;
+}
+
+/* Register */
+
+.signup-form .social-signup i {
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+#google:hover {
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+#linkedin:hover {
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+#facebook:hover {
+    color: #fff;
+    background-color: var(--primary-color);
 }

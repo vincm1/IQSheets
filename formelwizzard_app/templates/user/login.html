@@ -1,23 +1,23 @@
 {% extends "base.html" %} {% block content %}
 
 <main>
-    <!-- Error messages -->
-  <div class="flashmessages">
-    <div class="container">
+  
+  <div class="flashmessages mt-5">
+    <div class="col-xl-4 col-lg-4 col-md-3 pl-4 flashmessages">
       {% with messages = get_flashed_messages(with_categories=true) %}
-        <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
-        {% if messages %} {% for category, message in messages %}
+        {% if messages %}
+          {% for category, message in messages %}
           <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-            <strong>{{message}}</strong> 
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
-      {% endfor %} {% endif %} {% endwith %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </div>
   </div>
   
-  <div class="errormessages">
+  <div class="errormessages mt-3">
     {% if form.errors %}
       <div class="container errors">
         {% for field_name, field_errors in form.errors|dictsort if field_errors %}
@@ -34,32 +34,34 @@
     {% endif %} 
   </div>
   
-  <section class="signup py-5">
+  <section class="signup mt-2 mb-5 pb-5">
     <div class="container">
-      <div class="card">
-        <div class="signup-form p-5">>
-          <div class="row">
-            <div class="col-xl-6 col-lg-6 ps-5">
+      <div class="card py-5">
+        <div class="signup-form p-4">
+          <div class="row justify-content-start">
+            <div class="col-xl-6 col-lg-6">
                 <div class="signup-image">
-                    <img src="static/img/login.png" alt="login image" />
+                    <img src="static/img/login.png" class="rounded mx-auto d-block" alt="login image" />
                 </div>
             </div> 
             <div class="col-xl-4 col-lg-4">
                 <h2 class="form-title pb-4">Login</h2>
                 <form method="POST" action="{{url_for('user.login')}}">
                       {{form.hidden_tag()}}
-                    <div class="form-group py-1">
+                    <div class="form-group my-3">
                       {{form.username(placeholder="Username", class="form-control")}}
                     </div>
-                    <div class="form-group py-1">
+                    <div class="form-group my-3">
                       {{form.password(placeholder="Passwort", class="form-control")}}
                     </div>
-                    <div class="form-group form-button py-1">
-                      {{form.submit(class="btn btn-primary")}}
+                    <div class="d-flex flex-row my-4">
+                      {{form.submit(class="btn btn-primary px-5")}}
+                      <a class="social-signup ms-5 me-2" href="{{url_for('google.login')}}"><i class="fa-brands fa-google p-2" id="google"></i></a>
+                      <a class="social-signup mx-2" href="{{url_for('google.login')}}"><i class="fa-brands fa-linkedin p-2" id="linkedin"></i></a>
+                      <a class="social-signup mx-2" href="{{url_for('google.login')}}"><i class="fa-brands fa-facebook p-2" id="facebook"></i></a>
                     </div>
                 </form>
                 <a href="{{url_for('user.reset_password_request')}}">Passwort vergessen?</a>
-                <a href="{{url_for('google.login')}}"><i class="fa-brands fa-google"></i></a>
             </div>
           </div>
         </div>
