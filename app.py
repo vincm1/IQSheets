@@ -1,5 +1,5 @@
 # import the create app application factory
-from formelwizzard_app import create_app
+from iqsheets_app import create_app
 
 app = create_app()
 

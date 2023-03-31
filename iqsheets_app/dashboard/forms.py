@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import HiddenField, TextAreaField, StringField, SelectField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, Length
+
 class DashboardForm(FlaskForm):
     excel_google = info_prompt = SelectField('Was möchtest du generieren?', validators=[DataRequired()], choices=["Excel", "Google Sheets"], render_kw={'class': 'btn-group-toggle', 'data-toggle': 'buttons'})
     info_prompt = SelectField('Was möchtest du generieren?', validators=[DataRequired()], choices=["Formel", "VBA"], render_kw={'class': 'btn-group-toggle', 'data-toggle': 'buttons'})

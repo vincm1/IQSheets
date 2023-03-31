@@ -1,4 +1,4 @@
-from formelwizzard_app.models import User
+from iqsheets_app.models import User
 from flask_login import FlaskLoginClient
 
 def test_home(client):

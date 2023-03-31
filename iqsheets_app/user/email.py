@@ -1,7 +1,7 @@
 """Email functions with Flask-Mail"""
 from flask import current_app as app
 from flask_mail import Message
-from formelwizzard_app import mail
+from iqsheets_app import mail
 
 def send_email(to, subject, template):
     """Function to send email

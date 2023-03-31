@@ -3,7 +3,7 @@ from flask import Markup
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField, FileField, ValidationError
 from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp, Optional
-from formelwizzard_app.models import User
+from iqsheets_app.models import User
 
 #### Checks: Nutzername & Email bereits vorhanden. ####
 def check_username(self, field):

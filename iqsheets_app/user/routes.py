@@ -3,8 +3,8 @@ import os
 from datetime import datetime
 from flask import Blueprint, current_app, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
-from formelwizzard_app import db, mail
-from formelwizzard_app.models import User
+from iqsheets_app import db, mail
+from iqsheets_app.models import User
 from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
@@ -12,8 +12,8 @@ from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 import uuid as uuid
 from flask_mail import Message
-from formelwizzard_app.utils.decorators import check_confirmed_mail
-from formelwizzard_app.openai import openai_chat
+from iqsheets_app.utils.decorators import check_confirmed_mail
+from iqsheets_app.openai import openai_chat
 
 ################
 #### config ####

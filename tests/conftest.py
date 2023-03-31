@@ -1,7 +1,7 @@
 ''' Testing configurations '''
 import pytest
 from config import config
-from formelwizzard_app import create_app, db
+from iqsheets_app import create_app, db
 
 # Fixture in Testing is availabel to every single test
 @pytest.fixture(scope="module")

@@ -1,10 +1,10 @@
 """Routes for dashboard"""
 from flask import Blueprint, render_template, flash, send_file, redirect, url_for, request
 from flask_login import login_required, current_user
-from formelwizzard_app import db
-from formelwizzard_app.models import Favorite
-from formelwizzard_app.utils.decorators import check_confirmed_mail
-from formelwizzard_app.openai import openai_chat
+from iqsheets_app import db
+from iqsheets_app.models import Favorite
+from iqsheets_app.utils.decorators import check_confirmed_mail
+from iqsheets_app.openai import openai_chat
 from .forms import DashboardForm, FavoritesForm
 
 ################
