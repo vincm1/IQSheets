@@ -34,7 +34,45 @@
               </div>
             </div>
           </div>
-        </div>
+      </div>
+
+      <!-- Pagination Links-->
+				<div class="pagination justify-content-end me-4">
+					<div class="row pagination mt-3">
+						<div class="text-right">
+							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
+							class="btn btn-outline-primary 
+							{% if favorite_formulas.page == 1 %}disabled{% endif %}">
+								&laquo;
+							</a>
+						<!-- Loop through the number of pages to display a link for each-->
+							{% for page_num in favorite_formulas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+								{% if page_num %}
+								<!-- Check for the active page and set the link to "Active"-->
+									{% if favorite_formulas.page == page_num %}
+									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+									class="btn btn-primary">
+										{{ page_num }}
+									</a>
+									{% else %}
+									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+									class="btn btn-outline-primary">
+										{{ page_num }}
+									</a>
+									{% endif %}
+								{% else %}
+									...
+								{% endif %}
+							{% endfor %}
+							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
+							class="btn btn-outline-primary
+							{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
+								&raquo;
+							</a>
+						</div>
+					</div>
+				</div>
+        
       </div>
     </div>
   </section>

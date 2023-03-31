@@ -101,6 +101,19 @@ def delete_favorite(favorite_id):
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
 def templates():
     """ Route for templates """
+    page = request.args.get('page', 1, type=int)
+    templates = Template.query.all().order_by(Template.favorite_date).paginate(page=page, per_page=9)
+    
+    if request.method == 'POST' and request.form['filter_value'] == "Alle":
+    
+        page = request.args.get('page', 1, type=int)
+        templates = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+    
+    elif request.method == 'POST':
+        filter_value = request.form['filter_value']
+        page = request.args.get('page', 1, type=int)
+        favorite_formulas = Favorite.query.filter_by(user_id=current_user.id, provider=filter_value).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+        
     return render_template('dashboard/templates.html')
 
 @dashboard_blueprint.route('/download', methods=['GET'])
@@ -112,7 +125,6 @@ def download():
     except Exception as e:
         return str(e)
         
-
 @dashboard_blueprint.route('/premium', methods=['GET', 'POST'])
 def premium():
     return render_template('dashboard/premium.html')

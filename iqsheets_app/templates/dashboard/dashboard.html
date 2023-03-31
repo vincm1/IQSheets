@@ -19,10 +19,10 @@
 					</div>
 				{% endif %}
 
-				<div class="explanation col-xl-10 mb-5">
+				<div class="explanation col-xl-11 mb-5">
 					<h5>
 						Konvertieren Sie jede Textanforderung in Excel- oder Google Sheets-Formeln 
-						mit unserer AI. Geben Sie eine detaillierte <br> Beschreibung des Befehls ein, 
+						mit unserer AI. Geben Sie eine detaillierte Beschreibung des Befehls ein, 
 						den Sie benötigen, und unsere KI wird sie innerhalb von Sekunden erstellen.
 					</h5>
 					
@@ -35,32 +35,26 @@
 				
 				{% if current_user.premium or current_user.num_prompts < 5%}
 					<!-- Prompt Field -->
-					<div class="row justify-content-start">
-						<form method="POST">
-							{{form.hidden_tag()}}
-						<div class="select" role="group">
-							{{form.excel_google(class_="col-3 my-2 px-4")}}
-						</div>
-						<div class="select" role="group">
-							{{form.info_prompt(class_="col-3 my-2 px-4")}}
-						</div>
-						<div class="select" role="group">
-							{{form.formula_explain(class_="col-3 my-2 px-4")}}
+					<div class="d-flex flex-row justify-content-start">
+						<div class="col">
+							<form method="POST" id="formula-form">
+								{{form.hidden_tag()}}
+								{{form.excel_google(class_="select py-1 ps-2", role_="group")}}
+								{{form.info_prompt(class_="select py-1 ps-2 pe-5 ms-3", role_="group")}}
+								{{form.formula_explain(class_="select py-1 ps-2 pe-5 ms-3", role_="group")}}
 						</div>
 					</div>
 
 					<div class="row prompt mt-5">
-						<div class="col-xl-5 col-lg-5 col-md-3 me-5 prompt">
+						<div class="col-xl-5 col-sm-12 me-xl-5 my-xl-0 my-sm-5 prompt">
 							{{form.prompt(class="form-control", placeholder="Schreibe mir eine Formel die zwei Zellen summiert z.B.")}}	
-							<div class="row justify-content-end">
-								{{form.submit(class="btn btn-primary col-4 mt-3", id="formel-btn")}}
-							</div>
+							{{form.submit(class="btn btn-primary float-end col-4 mt-3", id="formel-btn")}}
 						</form>
 						</div>
 
 						{% if form.formula_explain.data == "Erklären" %}
 						<!-- Erklärung -->
-						<div class="col-xl-6 col-lg-6 col-md-3 pl-5 formula">
+						<div class="col-xl-6 col-sm-12 my-xl-0 my-sm-3 formula">
 							<div class="card">
 								<div class="card-header">
 							  		Erklärung
@@ -99,7 +93,7 @@
 
 					{% elif form.formula_explain.data == "Erstellen" %}
 					<!-- Formel -->
-						<div class="col-xl-6 col-lg-6 col-md-3 ms-5 formula">
+						<div class="col-xl-6 col-sm-12 my-xl-0 my-sm-3 formula">
 							<div class="card">
 								<div class="card-header">
 								Formel
@@ -137,7 +131,7 @@
 					
 					{% else %}
 						<!-- Unsubmitted -->
-						<div class="col-xl-6 col-lg-3 col-md-3 pl-5 formula">
+						<div class="col-xl-6 col-sm-12 my-xl-0 my-sm-2 formula">
 							<div class="card">
 								<div class="card-header">
 								Formel / Erklärung

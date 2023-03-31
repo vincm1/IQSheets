@@ -76,12 +76,12 @@
 					</div>
 				</div>
 
-				<div class="flashmessages mt-5">
-					<div class="col-xl-4 col-lg-4 col-md-3 pl-4 flashmessages">
+				<div class="flashmessages my-5">
+					<div class="row col-xl-4 col-lg-4 col-md-3 flashmessages">
 						{% with messages = get_flashed_messages(with_categories=true) %}
 							{% if messages %}
 								{% for category, message in messages %}
-								<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+								<div class="alert alert-{{ category }} alert-dismissible fade show justify-content-end" role="alert">
 									{{ message }}
 									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 								</div>
@@ -92,39 +92,42 @@
 				</div>
 
 				<!-- Pagination Links-->
-				<div class="row pagination">
-					<div class="text-right">
-						<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
-						class="btn btn-outline-primary 
-						{% if favorite_formulas.page == 1 %}disabled{% endif %}">
-							&laquo;
-						</a>
-					<!-- Loop through the number of pages to display a link for each-->
-						{% for page_num in favorite_formulas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-							{% if page_num %}
-							<!-- Check for the active page and set the link to "Active"-->
-								{% if favorite_formulas.page == page_num %}
-								<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
-								class="btn btn-primary">
-									{{ page_num }}
-								</a>
+				<div class="pagination justify-content-end me-4">
+					<div class="row pagination mt-3">
+						<div class="text-right">
+							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
+							class="btn btn-outline-primary 
+							{% if favorite_formulas.page == 1 %}disabled{% endif %}">
+								&laquo;
+							</a>
+						<!-- Loop through the number of pages to display a link for each-->
+							{% for page_num in favorite_formulas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+								{% if page_num %}
+								<!-- Check for the active page and set the link to "Active"-->
+									{% if favorite_formulas.page == page_num %}
+									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+									class="btn btn-primary">
+										{{ page_num }}
+									</a>
+									{% else %}
+									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+									class="btn btn-outline-primary">
+										{{ page_num }}
+									</a>
+									{% endif %}
 								{% else %}
-								<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
-								class="btn btn-outline-primary">
-									{{ page_num }}
-								</a>
+									...
 								{% endif %}
-							{% else %}
-								...
-							{% endif %}
-						{% endfor %}
-						<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
-						class="btn btn-outline-primary
-						{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
-							&raquo;
-						</a>
+							{% endfor %}
+							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
+							class="btn btn-outline-primary
+							{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
+								&raquo;
+							</a>
+						</div>
 					</div>
-				</div>	
+				</div>
+					
 			</div>
 		</section>
 	</section>

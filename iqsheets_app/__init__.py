@@ -1,17 +1,9 @@
 ''' Init file for app '''
 import os
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
 from config import config
-from flask_migrate import Migrate
-from flask_login import LoginManager
-from flask_mail import Mail
-
-# Instantiate extensions
-db = SQLAlchemy()
-migrate = Migrate()
-login_manager = LoginManager()
-mail = Mail()
+from .extensions import db, migrate, login_manager, mail
+from .admin import create_admin
 
 def create_app(config_name=None):
     '''Factory to create Flask application'''
@@ -36,6 +28,9 @@ def create_app(config_name=None):
     # Flask Mail Instance
     mail.init_app(app)
 
+    # Flask Admin instantiation
+    create_admin(db).init_app(app)
+    
     with app.app_context():
         ### Blueprints ###
         from iqsheets_app.core.routes import core_blueprint

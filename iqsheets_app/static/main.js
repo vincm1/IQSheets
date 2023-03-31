@@ -74,3 +74,15 @@ const filterBtn = document.getElementById("filter-btn");
 filterBtn.addEventListener("click", () => {
     filterBtn.classList.add("active");
   });
+
+$(document).ready(function() {
+    $('#formula-form').submit(function(event) {
+      event.preventDefault(); // prevent form submission
+      if ($('#formel-btn').data('clicked')) { // check if button is clicked
+        this.submit(); // submit the form
+      }
+    });
+    $('#formel-btn').click(function() {
+      $(this).data('clicked', true); // set button clicked flag
+    });
+  });

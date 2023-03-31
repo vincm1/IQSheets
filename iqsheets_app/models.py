@@ -3,7 +3,9 @@ from iqsheets_app import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
+from flask_admin.contrib.sqla import ModelView  
 
+# Login Manager User loader
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
@@ -25,6 +27,7 @@ class User(db.Model, UserMixin):
     num_prompts = db.Column(db.Integer, nullable=False, default=0)
     num_tokens = db.Column(db.Integer, nullable=False, default=0)
     is_oauth = db.Column(db.Boolean, nullable=False, default=False)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
     favorites = db.relationship('Favorite', backref="user")
 
     def check_password(self, password):
@@ -67,3 +70,32 @@ class Favorite(db.Model):
         
     def __repr__(self):
         f"Formel mit {self.provider}, {self.favorite_type}, {self.command}, {self.prompt} wurde am {self.favorite_date} hinzugefügt."
+
+class Template(db.Model):
+    
+    __tablename__ = 'templates'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    template_name = db.Column(db.String(200), nullable=False, unique=True)
+    template_category = db.Column(db.String(60), nullable=True)
+    template_description = db.Column(db.String(200), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    s3_bucket_link = db.Column(db.String, nullable=False)
+    
+    def __init__(self, template_name, template_category, template_description, s3_bucket_link):
+        self.template_name = template_name
+        self.template_category = template_category
+        self.template_description = template_description
+        self.s3_bucket_link = s3_bucket_link
+        
+    def __repr__(self):
+        f"Template {template_name}, wurde mit {template_category} am {created_at} hinzugefügt."
+
+#### Flask-Admin View Models #### 
+
+class UserView(ModelView):
+    form_columns = ['id', 'username', 'email', 'job_description', 'profile_picture'
+                    'registration_date', 'is_confirmed', 'confirmed_on', 'premium', 
+                    'num_prompts', 'is_oauth']
+
