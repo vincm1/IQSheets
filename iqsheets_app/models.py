@@ -1,8 +1,11 @@
+import os
 from datetime import datetime
 from iqsheets_app import db, login_manager
+from flask import redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
+from flask_admin import AdminIndexView
 from flask_admin.contrib.sqla import ModelView  
 
 # Login Manager User loader
@@ -33,10 +36,11 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, is_admin):
         self.username = username
         self.email = email
         self.password_hash = generate_password_hash(password)
+        self.is_admin = is_admin
         
     def __repr__(self):
         f"User with {self.id} and {self.username}, {self.email} was created."
@@ -93,6 +97,14 @@ class Template(db.Model):
         f"Template {template_name}, wurde mit {template_category} am {created_at} hinzugefügt."
 
 #### Flask-Admin View Models #### 
+
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.username == os.environ.get("ADMIN_USER") and current_user.is_admin
+    
+    def inacessible_callback(self, name, **kwargs):
+        if not current_user.is_authenticated:
+            return redirect(url_for('user.login'))
 
 class UserView(ModelView):
     form_columns = ['id', 'username', 'email', 'job_description', 'profile_picture'

@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template
 from config import config
 from .extensions import db, migrate, login_manager, mail
-from .admin import create_admin
+from .admin import create_admin, create_admin_user
 
 def create_app(config_name=None):
     '''Factory to create Flask application'''
@@ -31,6 +31,8 @@ def create_app(config_name=None):
     # Flask Admin instantiation
     create_admin(db).init_app(app)
     
+    from iqsheets_app.models import User
+    
     with app.app_context():
         ### Blueprints ###
         from iqsheets_app.core.routes import core_blueprint
@@ -47,5 +49,9 @@ def create_app(config_name=None):
         app.register_blueprint(dashboard_blueprint)
 
         db.create_all()
-        
+        admin_user = User.query.filter_by(username=os.environ.get('ADMIN_USER')).first()
+        if not admin_user:
+            create_admin_user(username=os.environ.get('ADMIN_USER'), email=os.environ.get('ADMIN_EMAIL'), 
+                          password=os.environ.get('ADMIN_EMAIL'))
+                
         return app
