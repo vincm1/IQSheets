@@ -3,7 +3,8 @@ import os
 from flask import Flask, render_template
 from config import config
 from .extensions import db, migrate, login_manager, mail
-from .admin import create_admin, create_admin_user
+from .admin.admin import create_admin, create_admin_user
+from werkzeug.security import generate_password_hash
 
 def create_app(config_name=None):
     '''Factory to create Flask application'''
@@ -52,6 +53,6 @@ def create_app(config_name=None):
         admin_user = User.query.filter_by(username=os.environ.get('ADMIN_USER')).first()
         if not admin_user:
             create_admin_user(username=os.environ.get('ADMIN_USER'), email=os.environ.get('ADMIN_EMAIL'), 
-                          password=os.environ.get('ADMIN_EMAIL'))
-                
+                          password=(os.environ.get('ADMIN_EMAIL')))
+
         return app

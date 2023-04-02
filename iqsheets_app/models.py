@@ -5,8 +5,6 @@ from flask import redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, current_user
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
-from flask_admin import AdminIndexView
-from flask_admin.contrib.sqla import ModelView  
 
 # Login Manager User loader
 @login_manager.user_loader
@@ -36,11 +34,10 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __init__(self, username, email, password, is_admin):
+    def __init__(self, username, email, password):
         self.username = username
         self.email = email
         self.password_hash = generate_password_hash(password)
-        self.is_admin = is_admin
         
     def __repr__(self):
         f"User with {self.id} and {self.username}, {self.email} was created."
@@ -85,6 +82,8 @@ class Template(db.Model):
     template_description = db.Column(db.String(200), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    bucket = db.Column(db.String(100))
+    region = db.Column(db.String(100))
     s3_bucket_link = db.Column(db.String, nullable=False)
     
     def __init__(self, template_name, template_category, template_description, s3_bucket_link):
@@ -95,19 +94,4 @@ class Template(db.Model):
         
     def __repr__(self):
         f"Template {template_name}, wurde mit {template_category} am {created_at} hinzugefügt."
-
-#### Flask-Admin View Models #### 
-
-class MyAdminIndexView(AdminIndexView):
-    def is_accessible(self):
-        return current_user.is_authenticated and current_user.username == os.environ.get("ADMIN_USER") and current_user.is_admin
-    
-    def inacessible_callback(self, name, **kwargs):
-        if not current_user.is_authenticated:
-            return redirect(url_for('user.login'))
-
-class UserView(ModelView):
-    form_columns = ['id', 'username', 'email', 'job_description', 'profile_picture'
-                    'registration_date', 'is_confirmed', 'confirmed_on', 'premium', 
-                    'num_prompts', 'is_oauth']
-
+        
