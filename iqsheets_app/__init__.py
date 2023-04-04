@@ -48,11 +48,13 @@ def create_app(config_name=None):
         app.register_blueprint(oauth_blueprint, url_prefix='/login')
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
-
+        
         db.create_all()
+        
+        ### Create admin user ###
         admin_user = User.query.filter_by(username=os.environ.get('ADMIN_USER')).first()
         if not admin_user:
-            create_admin_user(username=os.environ.get('ADMIN_USER'), email=os.environ.get('ADMIN_EMAIL'), 
-                          password=(os.environ.get('ADMIN_EMAIL')))
+            create_admin_user(username=os.environ.get('ADMIN_USER'), email=os.environ.get('ADMIN_EMAIL'),
+                              password=generate_password_hash((os.environ.get('ADMIN_EMAIL'))))
 
         return app

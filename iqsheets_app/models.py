@@ -84,13 +84,14 @@ class Template(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     bucket = db.Column(db.String(100))
     region = db.Column(db.String(100))
-    s3_bucket_link = db.Column(db.String, nullable=False)
     
-    def __init__(self, template_name, template_category, template_description, s3_bucket_link):
+    def __init__(self, template_name, template_category, template_description, folder, bucket, region):
         self.template_name = template_name
         self.template_category = template_category
         self.template_description = template_description
-        self.s3_bucket_link = s3_bucket_link
+        self.folder = folder
+        self.bucket = bucket
+        self.region = region
         
     def __repr__(self):
         f"Template {template_name}, wurde mit {template_category} am {created_at} hinzugefügt."

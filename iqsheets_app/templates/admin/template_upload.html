@@ -2,9 +2,11 @@
 
 {% block body %}
   <h2>
-    <form method="POST" type="multipart/data" action="">
+    <form method="POST" enctype="multipart/form-data">
       {{form.hidden_tag()}}
-      {{form.template.label(class_="form-label")}}: {{form.template(class_="form-group", size=80)}}<br>
+      {{form.template_name.label(class_="form-label")}}: {{form.template_name(class_="form-group")}}<br>
+      {{form.template_category.label(class_="form-label")}}: {{form.template_category(class_="form-group")}}<br>
+      {{form.template_description.label(class_="form-label")}}: {{form.template_description()}}<br>
       {{form.submit(class_="btn btn-primary")}}
     </form>
   </h2>

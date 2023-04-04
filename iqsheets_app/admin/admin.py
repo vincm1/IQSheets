@@ -1,7 +1,10 @@
-from iqsheets_app.models import User, OAuth, Favorite, Template
+''' Admin init function '''
+from datetime import datetime
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView 
-from .views import MyAdminIndexView, UserView, AnalyticsView, TemplatesUploadView
+from iqsheets_app import db
+from iqsheets_app.models import User, OAuth, Favorite, Template
+from .views import MyAdminIndexView, AnalyticsView, TemplatesUploadView
 
 def create_admin(db):
     admin = Admin(name="IQSheet Admin", template_mode="bootstrap4", index_view=MyAdminIndexView())
