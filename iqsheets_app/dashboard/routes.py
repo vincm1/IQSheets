@@ -1,11 +1,12 @@
 """Routes for dashboard"""
-from flask import Blueprint, render_template, flash, send_file, redirect, url_for, request
+from flask import Blueprint, current_app, render_template, flash, send_file, redirect, url_for, request
 from flask_login import login_required, current_user
 from iqsheets_app import db
 from iqsheets_app.models import Favorite, Template
 from iqsheets_app.utils.decorators import check_confirmed_mail
 from iqsheets_app.openai import openai_chat
 from .forms import DashboardForm, FavoritesForm
+import boto3
 
 ################
 #### config ####
@@ -13,6 +14,14 @@ from .forms import DashboardForm, FavoritesForm
 
 dashboard_blueprint = Blueprint('dashboard', __name__)
 
+# initialize S3 client using boto3
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=current_app.config['AWS_ACCESS_KEY'],
+    aws_secret_access_key=current_app.config['AWS_SECRET_ACCESS_KEY'],
+    region_name=current_app.config['AWS_REGION']
+    )
+        
 ################
 #### routes ####
 ################
@@ -114,7 +123,7 @@ def templates():
         page = request.args.get('page', 1, type=int)
         templates = Favorite.query.filter_by().order_by(Template.created_at).paginate(page=page, per_page=9)
         
-    return render_template('dashboard/templates.html')
+    return render_template('dashboard/templates.html', templates=templates)
 
 @dashboard_blueprint.route('/download', methods=['GET'])
 def download():

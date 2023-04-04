@@ -12,6 +12,8 @@
         </div>
       </div>
 
+	  <!-- Templates -->
+	  {% for template in templates %}
       <div class="templates-cards mt-5">
           <div class="row">
             <div class="col-xl-4 col-lg-4 col-md-3 pl-4 response">
@@ -22,40 +24,43 @@
                   alt="Spreadsheet picture"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
+                  <h5 class="card-title">{{template.template_name}}</h5>
+				  <h6 class="card-tag">{{template.template_category}}</h5>
                   <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-									<div class="row">
-										<a href="{{url_for('dashboard.download')}}" class="btn btn-primary px-5">Download</a>
-									</div>
+                	{{template.template_description}}
+				  </p>
+					<div class="row justify-content-center">
+						{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
+						<a href="{{s3_template_link}}"
+						class="btn btn-primary col-10">Download</a>
+					</div>
                 </div>
               </div>
             </div>
           </div>
       </div>
+	  {% endfor %}
 
       <!-- Pagination Links-->
 				<div class="pagination justify-content-end me-4">
 					<div class="row pagination mt-3">
 						<div class="text-right">
-							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
+							<a href="{{ url_for('dashboard.templates', page=templates.prev_num) }}"
 							class="btn btn-outline-primary 
-							{% if favorite_formulas.page == 1 %}disabled{% endif %}">
+							{% if templates.page == 1 %}disabled{% endif %}">
 								&laquo;
 							</a>
 						<!-- Loop through the number of pages to display a link for each-->
-							{% for page_num in favorite_formulas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+							{% for page_num in templates.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 								{% if page_num %}
 								<!-- Check for the active page and set the link to "Active"-->
-									{% if favorite_formulas.page == page_num %}
-									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+									{% if templates.page == page_num %}
+									<a href="{{ url_for('dashboard.templates', page=page_num) }}"
 									class="btn btn-primary">
 										{{ page_num }}
 									</a>
 									{% else %}
-									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+									<a href="{{ url_for('dashboard.templates', page=page_num) }}"
 									class="btn btn-outline-primary">
 										{{ page_num }}
 									</a>
@@ -64,9 +69,9 @@
 									...
 								{% endif %}
 							{% endfor %}
-							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
+							<a href="{{ url_for('dashboard.templates', page=templates.next_num) }}"
 							class="btn btn-outline-primary
-							{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
+							{% if templates.page == templates.pages %}disabled{% endif %}">
 								&raquo;
 							</a>
 						</div>

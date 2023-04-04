@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ExcelGuru</title>
+    <title>IQSheets</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,13 +38,17 @@
   </head>
 
   <body>
+    
     <nav class="sidebar close">
       <header>
         <div class="image-text">
           <span class="image">
+
+            {% set s3_link =  "https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/profile_pictures/" + current_user.profile_picture %}
+            
             <a href="{{url_for('user.edit_user')}}"
               ><img
-                src="{{url_for('static', filename='profile_pictures/' + current_user.profile_picture)}}"
+                src="{{s3_link}}"
                 alt="Profilbild"
             /></a>
           </span>
