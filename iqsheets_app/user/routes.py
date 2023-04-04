@@ -1,6 +1,7 @@
 """Routes for user"""
 import os
 from datetime import datetime
+import boto3
 from flask import Blueprint, current_app, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from iqsheets_app import db, mail
@@ -113,8 +114,19 @@ def resend_confirmation():
 @check_confirmed_mail
 def edit_user():
     """Edit user profile"""
+    
+    # initialize S3 client using boto3
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=current_app.config['AWS_ACCESS_KEY'], 
+        aws_secret_access_key=current_app.config['AWS_SECRET_ACCESS_KEY'],
+        region_name=current_app.config['AWS_REGION']
+        )
+    
     user = User.query.filter_by(username=current_user.username).first()
     form = EditUserForm()
+    
+    folder = 'profile_pictures/'
     
     if form.validate_on_submit():
         for field in ['username', 'email', 'job_description']:
@@ -127,8 +139,12 @@ def edit_user():
             pic_filename = secure_filename(current_user.profile_picture.filename)
             # UUID
             pic_name = str(uuid.uuid1()) + "_" + pic_filename
-            current_user.profile_picture.save(os.path.join(current_app.root_path, 'static/profile_pictures', pic_name))
+            
+            ### Boto3 Aws ###
+            file = form.data['profile_picture']
+            s3_client.upload_fileobj(file, current_app.config['S3_BUCKET'], folder + pic_name)
             current_user.profile_picture = pic_name
+                
         else:
             current_user.profile_picture = current_user.profile_picture       
              
