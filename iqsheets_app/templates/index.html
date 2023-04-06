@@ -360,16 +360,16 @@
                         <img src="static/img/say-shape-right.png">
                 </div>
                 <div class="col-xl-4 col-lg-3">
-                    <form method="POST" action="">
-                        <form method="POST">
+                    
+                    <form method="POST" action="{{url_for('core.beta')}}">
                             <div class="d-flex flex-row ms-3">
-                                <input type="email" name="EMAIL" id="Beta-form-email" placeholder=" Email Address " class="p-2 placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '">
+                                {{form_bt.email(class_="form-control", placeholder="Emai-Adresse")}}
                                 <div class="form-icon">
                                     <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 p-3"><i class="fa-solid fa-arrow-right"></i></button>
                                 </div>
                             </div>    
-                        </form>
-                    
+                    </form>
+
                 </div>
             </div>
         </div>

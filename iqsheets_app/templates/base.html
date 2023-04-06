@@ -112,11 +112,14 @@
                                 </div>
                                 <!-- Form -->
                                 <div class="footer-form">
-                                    <form method="POST">
+                                    <form method="POST" action="{{url_for('core.newsletter')}}">
+                                        {{form_nl.hidden_tag()}}
                                         <div class="d-flex flex-row">
-                                            <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="p-2 placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '">
+                                            {{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
                                             <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 p-3"><i class="fa-solid fa-arrow-right"></i></button>
+                                                <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 p-3">
+                                                    <i class="fa-solid fa-arrow-right"></i>
+                                                </button>
                                             </div>
                                             <div class="mt-10 info"></div>
                                         </div>    
