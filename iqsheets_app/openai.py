@@ -5,7 +5,7 @@ import openai
 openai_key = os.getenv('OPENAI_KEY')
 
 openai.api_key = openai_key
-model_engine = "text-davinci-003" 
+model_engine = "gpt-3.5-turbo" 
 
 engines = openai.Engine.list()
 

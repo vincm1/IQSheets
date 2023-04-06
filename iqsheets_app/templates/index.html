@@ -33,9 +33,10 @@
     </section>
     
     <!-- Best Features Start -->
-    <section class="features pt-2" id="features">
+    <section class="features my-5" id="features">
         <div class="container">
-            <div class="row justify-content-center pt-4">
+
+            <div class="row justify-content-center pt-5">
                 <div class="col-xl-8 col-lg-10">
                     <!-- Section Tittle -->
                     <div class="row text-center pb-4">
@@ -46,64 +47,69 @@
                         </div>
                     </div>
                     <!-- Section caption -->
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="single-features mb-70">
-                                <div class="features-icon">
-                                    <span class="flaticon-support"></span>
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4">
+                                    <i class="fa-solid fa-file-excel fa-2xl"></i>
+                                    <i class="fa-solid fa-table fa-2xl mt-3 ms-1"></i>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>Excel & GSheets <i class="fa-solid fa-file-excel fa-1xl"></i> <i class="fa-solid fa-table"></i></h3>
+                                    <h3>Excel & GSheets</h3>
                                     <p>Wir unterstützen die beiden gängigsten Spreadsheet Tools.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="single-features mb-70">
-                                <div class="features-icon">
-                                    <span class="flaticon-support"></span>
+                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4 mt-2">
+                                    <i class="fa-solid fa-paper-plane fa-2xl"></i>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>Formeln <i class="fa-solid fa-paper-plane"></i></h3>
+                                    <h3>Formeln</h3>
                                     <p>Lass dir aus einfachen Textanweisungen direkt die passende Formel erstellen.</p>
                                 </div>
                             </div>
                         </div> 
-                        <div class="col-xl-6 col-lg-6 col-md-6 mt-2">
-                            <div class="single-features mb-70">
-                                <div class="features-icon">
-                                    <span class="flaticon-support"></span>
+                    </div>
+
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4">
+                                    <i class="fa-solid fa-lightbulb fa-2xl"></i>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>Erklärungen <i class="fa-solid fa-lightbulb"></i></h3>
+                                    <h3>Erklärungen</h3>
                                     <p>Lass dir komplizierte Formeln erklären und setze sie dann ein.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 mt-2">
-                            <div class="single-features mb-70">
-                                <div class="features-icon">
-                                    <span class="flaticon-support"></span>
+                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4 mt-2">
+                                    <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
                                 </div>
                                 <div class="features-caption">
-                                    <h3>VBA <i class="fa-solid fa-magnifying-glass"></i></h3>
+                                    <h3>VBA</h3>
                                     <p>Lass dir sogar passende Makros erstellen.</p>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Shpe -->
-                        <div class="features-shpae d-none d-lg-block">
-                            <img src="{{url_for('static', filename='img/best-features.png')}}" alt="">
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>
+            
+            <!-- Shpe -->
+                <div class="features-shape">
+                    <img src="{{url_for('static', filename='img/best-features.png')}}" class="mt-3" alt="">
+                </div>
         </div>
     </section>
     <!-- Best Features End -->
 
     <!-- Services Area Start -->
-    <section class="service-area my-2" id="vorteile">
+    <section class="service-area my-5" id="vorteile">
         <div class="container-fluid py-5">
             <!-- Section Tittle -->
             <div class="row d-flex justify-content-center">
@@ -346,17 +352,24 @@
     <!-- Say Something Start -->
     <section class="newsletter m-5">
         <div class="container">
-            <div class="row justify-content-between align-items-center">
+            <div class="row justify-content-center">
                 <div class="col-xl-4">
                         <div class="say-something-cap">
                             <h2>Melde Dich <span style="font-style:italic">jetzt</span> an als <br> Beta-Tester</h2>
                         </div>
+                        <img src="static/img/say-shape-right.png">
                 </div>
                 <div class="col-xl-4 col-lg-3">
                     <form method="POST" action="">
-                        <button type="submit" href="" class="btn btn-primary">Anmelden</button>
-                        <img src="static/img/say-shape-right.png" alt="" class="say-shape2 d-none d-lg-block">
-                    </form>  
+                        <form method="POST">
+                            <div class="d-flex flex-row ms-3">
+                                <input type="email" name="EMAIL" id="Beta-form-email" placeholder=" Email Address " class="p-2 placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '">
+                                <div class="form-icon">
+                                    <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 p-3"><i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>    
+                        </form>
+                    
                 </div>
             </div>
         </div>

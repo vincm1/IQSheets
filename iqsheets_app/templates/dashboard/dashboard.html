@@ -3,21 +3,21 @@
 		<section class="dashboard ms-3">
 			<div class="container-fluid mt-3">
 
-				{% if not current_user.premium %}
-					<div class="d-flex flex-row mb-5">
-						<div class="banner col-xl-8 text-center me-4">
-							<h3>{{current_user.num_prompts}} von 5 KI-Anfragen verbraucht</h3>
-						</div>
-						<div class="banner col-xl-3 text-center mx-3" id="premium-div">
-							<a href="{{url_for('dashboard.premium')}}">
-								<button class="btn btn-primary" id="premium-btn">
-									<i class='bx bx-diamond icon pe-3'></i>
-									Premium
-								</button>
-							</a>
-						</div>				
+			{% if not current_user.premium %}
+				<div class="d-flex flex-row my-5 premium-banner">
+					<div class="banner col-xl-6 text-center me-4">
+						<h3>{{current_user.num_prompts}} von 5 Gratis KI-Anfragen verbaucht</h3>
 					</div>
-				{% endif %}
+					<div class="banner col-xl-3 text-center mx-3" id="premium-div">
+						<a href="{{url_for('dashboard.premium')}}">
+							<button class="btn btn-primary" id="premium-btn">
+								<i class='bx bx-diamond icon pe-3'></i>
+									Premium
+							</button>
+						</a>
+					</div>				
+				</div>
+			{% endif %}
 
 				<div class="explanation col-xl-11 mb-5">
 					<h5>

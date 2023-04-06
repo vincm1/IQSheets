@@ -8,6 +8,8 @@ from iqsheets_app.openai import openai_chat
 from .forms import DashboardForm, FavoritesForm
 import boto3
 
+
+
 ################
 #### config ####
 ################
@@ -110,20 +112,26 @@ def delete_favorite(favorite_id):
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
 def templates():
     """ Route for templates """
-    page = request.args.get('page', 1, type=int)
-    templates = Template.query.order_by(Template.created_at).paginate(page=page, per_page=9)
-    
-    if request.method == 'POST' and request.form['filter_value'] == "Alle":
-    
-        page = request.args.get('page', 1, type=int)
-        templates = Template.query.filter_by().order_by(Template.created_at).paginate(page=page, per_page=9)
-    
-    elif request.method == 'POST':
-        filter_value = request.form['filter_value']
-        page = request.args.get('page', 1, type=int)
-        templates = Favorite.query.filter_by().order_by(Template.created_at).paginate(page=page, per_page=9)
+    if not current_user.premium:
+        templates = Template.query.order_by(Template.created_at).limit(3).all()
+        categorys = db.session.query(Template.template_category).distinct().all()
         
-    return render_template('dashboard/templates.html', templates=templates)
+    else:
+        page = request.args.get('page', 1, type=int)
+        templates = Template.query.order_by(Template.created_at).paginate(page=page, per_page=12)
+        categorys = db.session.query(Template.template_category).distinct().all()
+        
+        if request.method == 'POST' and request.form['filter_value'] == "Alle":
+        
+            page = request.args.get('page', 1, type=int)
+            templates = Template.query.order_by(Template.created_at).paginate(page=page, per_page=12)
+        
+        elif request.method == 'POST':
+            filter_value = request.form['filter_value']
+            page = request.args.get('page', 1, type=int)
+            templates = Template.query.filter_by(template_category=filter_value).order_by(Template.created_at).paginate(page=page, per_page=9)
+        
+    return render_template('dashboard/templates.html', templates=templates, categorys=categorys)
 
 @dashboard_blueprint.route('/download', methods=['GET'])
 def download():

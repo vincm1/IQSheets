@@ -375,13 +375,6 @@ body.dark .home .text{
     min-height: 10rem;
 }
 
-.dashboard .banner {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 10px 10px;
-    border-radius: 8px;
-}
-
 .dashboard #prompt-header {
     font-size: 28px;
 }
@@ -479,6 +472,17 @@ body.dark .home .text{
     color: var(--body-color);
 }
 
+
+/* ====== Templates Page ====== */
+
+
+.templates .card-img-top {
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+    align-self: center;
+}
+
 /* ====== Profile Page ====== */
 
 .profile #profile-premium-btn {
@@ -490,4 +494,13 @@ body.dark .home .text{
     background-color: var(--primary-color);
     color: var(--sidebar-color);
     border-color: var(--primary-color);
+}
+
+/* ====== Reused Page ====== */
+
+.premium-banner .banner {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 10px;
+    border-radius: 8px;
 }

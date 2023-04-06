@@ -88,6 +88,14 @@ nav {
     background-color: #87B1AC;
 }
 
+.features-icon:hover i {
+    color: #30444f;
+  }
+  
+.features-caption:hover h3 {
+    text-decoration: underline;
+}
+
 /* services */
 
 .service-area .services-caption-active {
