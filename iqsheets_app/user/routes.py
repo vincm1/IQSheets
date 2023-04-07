@@ -80,6 +80,7 @@ def confirm_email(token):
     email = confirm_token(token)
     user = User.query.filter_by(email=current_user.email).first_or_404()
     
+    
     if user.email == email:
         user.is_confirmed = True
         user.confirmed_on = datetime.now()
@@ -190,6 +191,8 @@ def user_payments(username):
 def reset_password_request():
     """ Sending a password request """
     form = ResetPasswordRequestForm()
+    form_nl = NewsletterForm()
+    
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.is_confirmed:
@@ -197,20 +200,21 @@ def reset_password_request():
             token = generate_confirmation_token(user.email)
             confirm_url = url_for('user.reset_password', token=token, _external=True)
             subject = f"Passwort Reset für {user.username} ExcelWizzard!"
-            html = render_template('user/email/reset_password.html', confirm_url=confirm_url)
+            html = render_template('user/email/reset_password.html', confirm_url=confirm_url, form_nl=form_nl)
             send_email(user.email, subject, html)
             flash('Prüfe deine Emails', 'success')
         else:
             flash('Noch nicht verifiziert', 'info')
             return redirect(url_for('user.unconfirmed'))
     return render_template('user/reset_password_request.html',
-                           title='Passwort zurücksetzen', form=form)
+                           title='Passwort zurücksetzen', form=form, form_nl=form_nl)
     
 @user_blueprint.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     """ Resetting password after clicking on tokenized mail link """
     email = confirm_token(token)   
     user = User.query.filter_by(email=email).first_or_404()
+    form_nl = NewsletterForm()
     
     if not user:
         return redirect(url_for('core.index'))
@@ -223,4 +227,4 @@ def reset_password(token):
         db.session.commit()
         flash('Passwort zurückgesetzt', 'success')
         return redirect(url_for('user.login'))
-    return render_template('user/reset_password.html', form=form)
+    return render_template('user/reset_password.html', form=form, form_nl=form_nl)
