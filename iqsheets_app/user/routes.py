@@ -15,6 +15,7 @@ import uuid as uuid
 from flask_mail import Message
 from iqsheets_app.utils.decorators import check_confirmed_mail
 from iqsheets_app.openai import openai_chat
+from iqsheets_app.core.forms import NewsletterForm
 
 ################
 #### config ####
@@ -30,6 +31,7 @@ user_blueprint = Blueprint('user', __name__)
 def register():
     """ Registering a local user """
     form = RegistrationForm()
+    form_nl = NewsletterForm()
     
     if form.validate_on_submit() and request.method == "POST":
         user = User(username=form.username.data, email=form.email.data, password=form.password.data)
@@ -46,13 +48,14 @@ def register():
         flash(f'Eine Bestätigungs-Email wurde an {user.email} geschickt.', 'success')
         return redirect(url_for('user.login'))
     
-    return render_template('user/signup.html', form=form)
+    return render_template('user/signup.html', form=form, form_nl=form_nl)
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     """Login User"""
     form = LoginForm()
     form_2 = ResetPasswordForm()
+    form_nl = NewsletterForm()
     
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -62,7 +65,7 @@ def login():
         login_user(user, remember=True)
         return redirect(url_for('dashboard.dashboard'))
     
-    return render_template('user/login.html', form=form)
+    return render_template('user/login.html', form=form, form_nl=form_nl)
 
 @user_blueprint.route('/logout')
 @login_required

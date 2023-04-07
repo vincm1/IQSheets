@@ -8,7 +8,7 @@ from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from sqlalchemy.orm.exc import NoResultFound
 from iqsheets_app.models import db, User, OAuth
 
-oauth_blueprint = make_google_blueprint(
+google_blueprint = make_google_blueprint(
     client_id=current_app.config['GOOGLE_OAUTH_CLIENT_ID'],
     client_secret=current_app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
     scope=["profile", "email"],
@@ -16,7 +16,7 @@ oauth_blueprint = make_google_blueprint(
 )
 
 # create/login local user on successful OAuth login
-@oauth_authorized.connect_via(oauth_blueprint)
+@oauth_authorized.connect_via(google_blueprint)
 def google_logged_in(blueprint, token):
     if not token:
         flash("Failed to log in.", category="error")
@@ -61,7 +61,7 @@ def google_logged_in(blueprint, token):
     return False
 
 # notify on OAuth provider error
-@oauth_error.connect_via(oauth_blueprint)
+@oauth_error.connect_via(google_blueprint)
 def google_error(blueprint, message, response):
     msg = ("OAuth error from {name}! " "message={message} response={response}").format(
         name=blueprint.name, message=message, response=response

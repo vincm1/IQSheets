@@ -24,7 +24,7 @@ def create_app(config_name=None):
     ### Flask Login Manager  ###
     login_manager.init_app(app)
     login_manager.session_protection = 'strong'
-    login_manager.login_view = "google.login"
+    login_manager.login_view = 'user.login'
     
     # Flask Mail Instance
     mail.init_app(app)
@@ -39,13 +39,14 @@ def create_app(config_name=None):
         from iqsheets_app.core.routes import core_blueprint
         from iqsheets_app.errors.routes import error_handlers_blueprint
         from iqsheets_app.user.routes import user_blueprint
-        from iqsheets_app.oauth.routes import oauth_blueprint
+        from iqsheets_app.oauth import google_blueprint, linkedin_blueprint
         from iqsheets_app.dashboard.routes import dashboard_blueprint
 
         ### Registering all Blueprints ###
         app.register_blueprint(core_blueprint)
         app.register_blueprint(error_handlers_blueprint)
-        app.register_blueprint(oauth_blueprint, url_prefix='/login')
+        app.register_blueprint(linkedin_blueprint, url_prefix="/login")
+        app.register_blueprint(google_blueprint, url_prefix="/login")
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
         
