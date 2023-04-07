@@ -8,9 +8,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from iqsheets_app.models import db, User, OAuth
 
 facebook_blueprint = make_facebook_blueprint(
-    client_id=current_app.config['facebook_OAUTH_CLIENT_ID'],
-    client_secret=current_app.config['facebook_OAUTH_CLIENT_SECRET'],
-    scope=["r_liteprofile", "r_emailaddress"],
+    client_id=current_app.config['FACEBOOK_OAUTH_CLIENT_ID'],
+    client_secret=current_app.config['FACEBOOK_OAUTH_CLIENT_SECRET'],
     redirect_url="http://127.0.0.1:5000/login/facebook/authorized",
     storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
 )
@@ -22,8 +21,7 @@ def facebook_logged_in(blueprint, token):
         flash("Failed to log in.", category="error")
         return False
 
-    resp = facebook.get("me")
-    email = facebook.get('emailAddress?q=members&projection=(elements*(handle~))')
+    resp = facebook.get("/me")
     
     if not resp.ok:
         msg = "Failed to fetch user info."
@@ -31,10 +29,9 @@ def facebook_logged_in(blueprint, token):
         return False
 
     facebook_info = resp.json()
-    email = email.json()
-    facebook_email = email['elements'][0]['handle~']['emailAddress']
     facebook_user_id = facebook_info["id"]
-    print(facebook_email)
+    print(facebook_info)
+    print(facebook_user_id)
     # Find this OAuth token in the database, or create it
     query = OAuth.query.filter_by(provider=blueprint.name, provider_user_id=facebook_user_id)
     try:
@@ -48,8 +45,7 @@ def facebook_logged_in(blueprint, token):
 
     else:
         # Create a new local user account for this user
-        user = User(username=facebook_info['localizedFirstName'] + " " + facebook_info['localizedLastName'], 
-                    email=facebook_email, password="")
+        user = User(username="", email="", password="")
         # Associate the new local user account with the OAuth token
         oauth.user = user
         user.is_confirmed = True

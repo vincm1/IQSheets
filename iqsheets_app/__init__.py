@@ -39,7 +39,7 @@ def create_app(config_name=None):
         from iqsheets_app.core.routes import core_blueprint
         from iqsheets_app.errors.routes import error_handlers_blueprint
         from iqsheets_app.user.routes import user_blueprint
-        from iqsheets_app.oauth import google_blueprint, linkedin_blueprint
+        from iqsheets_app.oauth import google_blueprint, linkedin_blueprint, facebook_blueprint
         from iqsheets_app.dashboard.routes import dashboard_blueprint
 
         ### Registering all Blueprints ###
@@ -47,6 +47,7 @@ def create_app(config_name=None):
         app.register_blueprint(error_handlers_blueprint)
         app.register_blueprint(linkedin_blueprint, url_prefix="/login")
         app.register_blueprint(google_blueprint, url_prefix="/login")
+        app.register_blueprint(facebook_blueprint, url_prefix="/login")
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
         
