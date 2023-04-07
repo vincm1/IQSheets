@@ -9,7 +9,7 @@ from iqsheets_app.models import User
 from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import uuid as uuid
 from flask_mail import Message
@@ -78,9 +78,8 @@ def logout():
 def confirm_email(token):
     """ Sending confirmation Email to user after signup """
     email = confirm_token(token)
-    user = User.query.filter_by(email=current_user.email).first_or_404()
-    
-    
+    user = User.query.filter_by(email=email).first_or_404()
+    print(user.email)
     if user.email == email:
         user.is_confirmed = True
         user.confirmed_on = datetime.now()
@@ -168,7 +167,7 @@ def change_password():
     
     form = ChangePasswordForm()
     
-    if form.validate_on_submit() and form.old_password.data == current_user.check_password(form.old_password.data):
+    if form.validate_on_submit() and user.check_password(form.old_password.data):
         current_user.password_hash = generate_password_hash(form.password.data)
         
         db.session.add(user)

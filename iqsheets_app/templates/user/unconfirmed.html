@@ -1,10 +1,15 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %}{% block content %}
 
-{% block content %}
-
-<h1>Willkommen bei ExcelWizzard!</h1>
-<br>
-<p>Leider hast Du deine Emailadresse noch nicht bestätig. Bitte checke dein Postfach und Spam-Ordner nach deinem Bestätigungslink</p>
-<p>Email nicht bekommen?<a href="{{url_for('user.resend_confirmation')}}">Erneut</a>.</p>
+<section class="home">
+    <div class="container-fluid ms-2 mt-3">
+        <h1>Willkommen bei <span>IQSheets</span></h1>
+        <br>
+        <p>Leider hast Du deine Emailadresse noch nicht bestätigt. <br> 
+            Bitte checke dein Postfach und Spam-Ordner nach deinem Bestätigungslink
+        </p>
+        <p>Email nicht bekommen?</p> <br> 
+        <a href="{{url_for('user.resend_confirmation')}}"><button class="btn btn-primary">Erneut senden</button></a>.
+    </div>
+</section>
 
 {% endblock %}

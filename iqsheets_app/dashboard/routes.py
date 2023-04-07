@@ -110,6 +110,8 @@ def delete_favorite(favorite_id):
     return redirect(url_for('dashboard.favorites', username=current_user.username))
 
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
 def templates():
     """ Route for templates """
     if not current_user.premium:
@@ -134,6 +136,8 @@ def templates():
     return render_template('dashboard/templates.html', templates=templates, categorys=categorys)
 
 @dashboard_blueprint.route('/download', methods=['GET'])
+@login_required
+@check_confirmed_mail
 def download():
     """ Route for templates download """
     filename = 'static/xlxs_templates/Calendar-Template.xlsx'
@@ -143,5 +147,7 @@ def download():
         return str(e)
         
 @dashboard_blueprint.route('/premium', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
 def premium():
     return render_template('dashboard/premium.html')
