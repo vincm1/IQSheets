@@ -3,7 +3,26 @@ from flask import Blueprint, current_app, render_template
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
 from .forms import NewsletterForm, ContactForm
+from flask_mail import Message
+from iqsheets_app import mail
 
+def send_email(to, subject, body):
+    """Function to send email
+
+    Args:
+        to (_type_): user
+        subject (_str__): Registration/Password
+        template (_type_): HTML Template
+    """
+    msg = Message(
+        subject,
+        recipients=[to],
+        sender=current_app.config['MAIL_DEFAULT_SENDER'],
+        body=body
+    )
+    print(msg)
+    mail.send(msg)
+    
 ################
 #### config ####
 ################
@@ -41,10 +60,16 @@ def impressum():
     form_nl = NewsletterForm()
     return render_template('impressum.html', form_nl=form_nl)
 
-@core_blueprint.route("/kontakt", methods=["GET"])
+@core_blueprint.route("/kontakt", methods=["GET", "POST"])
 def kontakt():
     form_nl = NewsletterForm()
     form_contact = ContactForm()
+    if form_contact.validate_on_submit():
+        send_email(
+         to=current_app.config['KONTAKT_IQSHEETS'],
+         subject=form_contact.betreff.data,
+         body=form_contact.text.data + ', ' + form_contact.name.data + ', ' + form_contact.email.data
+        )
     return render_template('kontakt.html', form_nl=form_nl, form_contact=form_contact)
 
 @core_blueprint.route("/abos", methods=["GET", "POST"])
