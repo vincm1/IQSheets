@@ -173,20 +173,20 @@ nav {
 /* Newsletter */
 
 /* Footer */
-.footer {
+footer {
     border-top: 1px solid var(--primary-color);
 }
 
-.footer ul {
+footer ul {
     list-style-type: none;
 }
 
-.footer ul a {
+footer ul a {
     color: var(--text-color);
     text-decoration: none;
 }
 
-.footer ul a:hover {
+footer ul a:hover {
     text-decoration: underline;
 }
 

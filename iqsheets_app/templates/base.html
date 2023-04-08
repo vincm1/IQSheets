@@ -61,20 +61,21 @@
     {% block content %} 
     
     {% endblock %}
-    <footer class="footer my-5">
-        <div class="container-fluid mt-5">
+    <footer>
+        <div class="container-fluid mt-5 mb-5">
             <!-- Footer Start-->
             <div class="footer-area footer-padding">
                 <div class="container">
                     <div class="row justify-content-between">
-                        <div class="col-lg-3 col-md-4 col-sm-8">
+                        <div class="col-lg-4 col-md-4 col-sm-8">
                             <div class="single-footer-caption">
                                 <div class="footer-title">
                                     <div class="footer-pera">
                                         <h4>Über <span id="logo-iq">IQ</span>Sheets</h4>
                                         <h6>Zeitsparen in Excel & Google Spreadsheets, dank smarter KI</h6>
-                                        <p class="info1">Mit dem smarten Formel-Generator und -Erklärer sparst du <br>
-                                            Zeit und Geld bei der Erstellung von Excel-Formeln.
+                                        <p class="info1">Mit dem smarten Formel-Generator und -Erklärer sparst du
+                                            Zeit und Geld bei der Erstellung von Excel-Formeln. Ein Produkt 
+                                            der Max Mustermann UG (haftungsbeschränkt).
                                         </p>
                                     </div>
                                 </div>
@@ -85,9 +86,9 @@
                                 <div class="footer-title">
                                     <h4>Quick Links</h4>
                                     <ul>
-                                        <li><a href="#">Preise</a></li>
-                                        <li><a href="#">FAQs</a></li>
-                                        <li><a href="#">Kontakt</a></li>
+                                        <li><a href="{{url_for('core.pricing')}}">Preise</a></li>
+                                        <li><a href="{{url_for('core.pricing', _anchor='FAQs')}}">FAQs</a></li>
+                                        <li><a href="{{url_for('core.impressum')}}">Impressum</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -97,8 +98,8 @@
                                 <div class="footer-title">
                                     <h4>Support</h4>
                                     <ul>
-                                        <li><a href="#">Feedback / Bug </a></li>
-                                        <li><a href="#">Impressum</a></li>
+                                        <li><a href="{{url_for('core.kontakt')}}">Feedback</a></li>
+                                        <li><a href="{{url_for('core.kontakt')}}">Kontakt</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -143,6 +144,7 @@
         <!-- Footer End-->
         </div>
     </footer>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

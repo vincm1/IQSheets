@@ -2,7 +2,7 @@
 from flask import Blueprint, current_app, render_template
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
-from .forms import NewsletterForm, BetaTestForm
+from .forms import NewsletterForm, ContactForm
 
 ################
 #### config ####
@@ -34,29 +34,29 @@ def mailchimp_newsletter(email):
 @core_blueprint.route("/home", methods=["GET","POST"])
 def index():
     form_nl = NewsletterForm()
-    form_bt = BetaTestForm()
-    return render_template('index.html', form_nl=form_nl, form_bt=form_bt)
+    return render_template('index.html', form_nl=form_nl)
 
-@core_blueprint.route("/abos")
+@core_blueprint.route("/impressum", methods=["GET"])
+def impressum():
+    form_nl = NewsletterForm()
+    return render_template('impressum.html', form_nl=form_nl)
+
+@core_blueprint.route("/kontakt", methods=["GET"])
+def kontakt():
+    form_nl = NewsletterForm()
+    form_contact = ContactForm()
+    return render_template('kontakt.html', form_nl=form_nl, form_contact=form_contact)
+
+@core_blueprint.route("/abos", methods=["GET", "POST"])
 def pricing():
-    return render_template('pricing.html')
+    form_nl = NewsletterForm()
+    return render_template('pricing.html', form_nl=form_nl)
 
 @core_blueprint.route("/newsletter", methods=["POST"])
 def newsletter():
     form_nl = NewsletterForm()
     
     if form_nl.validate_on_submit():
-        print(form_nl.email.data)
         status = mailchimp_newsletter(form_nl.email.data)
   
     return render_template('index.html', form_nl=form_nl)
-
-@core_blueprint.route("/beta")
-def beta():
-    form_nl = NewsletterForm()
-    form_bt = BetaTestForm()
-    
-    form = NewsletterForm()
-    status = mailchimp_newsletter(form.email.data)
-         
-    return render_template('index.html', form_nl=form_nl, form_bt=form_bt)

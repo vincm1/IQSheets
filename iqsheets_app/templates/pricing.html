@@ -65,8 +65,8 @@
     <!-- Pricing Card End -->
 
     <!-- FAQs Start -->
-    <section class="FAQs py-5" id="FAQs">
-        <div class="container">
+    <section class="FAQs mb-5 pb-5" id="FAQs">
+        <div class="container my-5 py-5">
 
             <div class="row justify-content-Center my-3">
                 <div class="text-center">
@@ -116,5 +116,31 @@
         </div>
     </section>
     <!-- FAQs End --> 
+    <!-- Say Something Start -->
+    <section class="newsletter mt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-4">
+                        <div class="say-something-cap">
+                            <h2>Melde Dich <span style="font-style:italic">jetzt</span> zu unserem<br>  Newsletter an.</h2>
+                        </div>
+                        <img src="static/img/say-shape-right.png">
+                </div>
+                <div class="col-xl-4 col-lg-3">
+                    
+                    <form method="POST" action="{{url_for('core.newsletter')}}">
+                            <div class="d-flex flex-row ms-3">
+                                {{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
+                                <div class="form-icon">
+                                    <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 p-3"><i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>    
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Say Something End -->
 </main>
 {% endblock %}
