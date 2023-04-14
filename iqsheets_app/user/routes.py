@@ -60,7 +60,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Falscher Username oder Passwort')
+            flash('Falscher Username oder Passwort', 'danger')
             return redirect(url_for('user.login'))
         login_user(user, remember=True)
         return redirect(url_for('dashboard.dashboard'))

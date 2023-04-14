@@ -82,6 +82,12 @@ nav {
     color: #30444f;
 }
 
+/* Video */
+
+.app-pictures video {
+    border: 2px solid var(--primary-color);
+}
+
 /* Features */
 
 .features {

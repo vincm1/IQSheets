@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <main>
     <!-- Hero Area-->
-    <section class="hero py-5">
+    <section class="hero my-5 py-5">
             <div class="slider-active">
                 <div class="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
                     <div class="container">
@@ -16,13 +16,13 @@
                                         <!-- Hero-btn -->
                                         <a class="btn btn-primary me-2" href="{{url_for('user.register')}}">Jetzt Formeln erstellen</a>
                                         <!-- Video Btn -->
-                                        <a data-animation="fadeInRight" target="_blank" data-delay="1.0s" class="btn btn-secondary" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><i class="fas fa-play pe-2"></i>Wie funktioniert <span id="logo-iq" style="font-size:14px">IQ</span>Sheets?</a>
+                                        <a data-animation="fadeInRight" target="_blank" data-delay="1.0s" class="btn btn-secondary" href="{{url_for('core.index',_anchor='video-description')}}"><i class="fas fa-play pe-2"></i>Wie funktioniert <span id="logo-iq" style="font-size:14px">IQ</span>Sheets?</a>
                                 </div>
                                 </div>
                             </div>
                             <div class="col-lg-5 ms-5 justify-content-end">
-                                <div class="hero__img d-none d-lg-block f-right" data-animation="fadeInRight" data-delay="1s">
-                                    <img src="{{url_for('static', filename='img/hero_right.png')}}" alt="">
+                                <div class="hero__img d-none d-lg-block f-right ms-5" data-animation="fadeInRight" data-delay="1s">
+                                    <img src="{{url_for('static', filename='img/undraw_completed_tasks_vs6q.svg')}}" alt="Landing Page" height="500rem">
                                 </div>
                             </div>
                         </div>
@@ -31,82 +31,32 @@
             </div>
         <!-- Slider Area End -->
     </section>
-    
-    <!-- Best Features Start -->
-    <section class="features my-5" id="features">
-        <div class="container">
-
-            <div class="row justify-content-center pt-5">
-                <div class="col-xl-8 col-lg-10">
-                    <!-- Section Tittle -->
-                    <div class="row text-center pb-4">
-                        <div class="col-lg-10 col-md-10">
-                            <div class="section-title">
-                                <h2>Die besten Features unserer App</h2>
-                            </div>
+   
+    <!-- Applic App Start -->
+    <section class="app-pictures py-5">
+        <div class="applic-apps">
+            <div class="container-fluid justify-content-center">
+                <div class="row justify-content-center">
+                    <!-- slider Heading -->
+                    <div class="col-xl-8 col-lg-8 col-md-8 text-center" id="video-description">
+                        <div class="single-cases-info">
+                            <h3>IQSheets<br></h3>
+                            <p>In nur wenigen Klicks zur Excel-Formel wie hier in dem Video gezeigt:</p>
                         </div>
                     </div>
-                    <!-- Section caption -->
-                    <div class="row justify-content-center mt-5">
-                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4">
-                                    <i class="fa-solid fa-file-excel fa-2xl"></i>
-                                    <i class="fa-solid fa-table fa-2xl mt-3 ms-1"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>Excel & GSheets</h3>
-                                    <p>Wir unterstützen die beiden gängigsten Spreadsheet Tools.</p>
-                                </div>
-                            </div>
+                    <!-- OwL -->
+                    <div class="d-flex flex-row justify-content-center mt-2 py-4">
+                        <div class="col-xl-12 col-lg-8 col-md-7 align-self-center text-center">
+                            <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" height="700" type="video/mp4" controls>
+                                Browser unterstützt Videowiedergabe nicht.
+                            </video>
                         </div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4 mt-2">
-                                    <i class="fa-solid fa-paper-plane fa-2xl"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>Formeln</h3>
-                                    <p>Lass dir aus einfachen Textanweisungen direkt die passende Formel erstellen.</p>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="row justify-content-center mt-5">
-                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4">
-                                    <i class="fa-solid fa-lightbulb fa-2xl"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>Erklärungen</h3>
-                                    <p>Lass dir komplizierte Formeln erklären und setze sie dann ein.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4 mt-2">
-                                    <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>VBA</h3>
-                                    <p>Lass dir sogar passende Makros erstellen.</p>
-                                </div>
-                            </div>
-                        </div> 
                     </div>
                 </div>
             </div>
-            
-            <!-- Shpe -->
-                <div class="features-shape">
-                    <img src="{{url_for('static', filename='img/best-features.png')}}" class="mt-3" alt="">
-                </div>
         </div>
     </section>
-    <!-- Best Features End -->
+    <!-- Applic App End -->
 
     <!-- Services Area Start -->
     <section class="service-area my-5" id="vorteile">
@@ -182,33 +132,78 @@
         </div>
     </section>
     <!-- Services Area End -->
-    
-    <!-- Applic App Start -->
-    <section class="app-pictures py-5">
-        <div class="applic-apps p-5">
-            <div class="container-fluid">
-                <div class="row justify-content-start">
-                    <!-- slider Heading -->
-                    <div class="col-xl-8 col-lg-8 col-md-8">
-                        <div class="single-cases-info mb-30">
-                            <h3>IQSheets<br> Screenshot</h3>
-                            <p>In nur wenigen Klicks zur Lösungen wie hier in dem Video erklärt:</p>
-                        </div>
-                    </div>
-                    <!-- OwL -->
-                    <div class="d-flex flex-row align-items-end">
-                        <div class="col-xl-12 col-lg-8 col-md-7">
-                            <div class="app-active owl-carousel align-items-end"> 
-                                <img src="static/img/App1.png" alt="">
-                                <img src="static/img/App2.png" alt="">
+
+     <!-- Best Features Start -->
+     <section class="features my-5" id="features">
+        <div class="container pb-5">
+
+            <div class="row justify-content-center mb-5 pt-5">
+                <div class="col-xl-8 col-lg-10">
+                    <!-- Section Tittle -->
+                    <div class="row text-center pb-4">
+                        <div class="col-lg-10 col-md-10">
+                            <div class="section-title">
+                                <h2>Die besten <span style="font-style:italic; text-decoration: underline">
+                                    Features</span> unserer App</h2>
                             </div>
                         </div>
+                    </div>
+                    <!-- Section caption -->
+                    <div class="row justify-content-start mt-5">
+                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4">
+                                    <i class="fa-solid fa-file-excel fa-2xl"></i>
+                                    <i class="fa-solid fa-table fa-2xl mt-3 ms-1"></i>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Excel & GSheets</h3>
+                                    <p>Wir unterstützen die beiden gängigsten Spreadsheet Tools.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4 mt-2">
+                                    <i class="fa-solid fa-paper-plane fa-2xl"></i>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Formeln</h3>
+                                    <p>Lass dir aus einfachen Textanweisungen direkt die passende Formel erstellen.</p>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4">
+                                    <i class="fa-solid fa-lightbulb fa-2xl"></i>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Erklärungen</h3>
+                                    <p>Lass dir komplizierte Formeln erklären und setze sie dann ein.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
+                            <div class="d-flex flex-row single-features">
+                                <div class="features-icon me-4 mt-2">
+                                    <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
+                                </div>
+                                <div class="features-caption">
+                                    <h3>VBA</h3>
+                                    <p>Lass dir sogar passende Makros erstellen.</p>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Applic App End -->
+    <!-- Best Features End -->
 
     <!-- Best Pricing Start -->
     <section class="pricing py-5" data-background="assets/img/gallery/best_pricingbg.jpg">

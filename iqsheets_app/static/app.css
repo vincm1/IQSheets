@@ -43,7 +43,8 @@ body.dark{
     --primary-color: #3a3b3c;
     --primary-color-light: #3a3b3c;
     --toggle-color: #fff;
-    --text-color: #ccc;
+    --text-color: #fff;
+    --whitebg-text-color: #707070;
 }
 
 /* ===== Btns ===== */
@@ -174,6 +175,10 @@ header .image-text .profession{
 }
 
 body.dark .sidebar header .toggle{
+    color: var(--text-color);
+}
+
+body.dark .home {
     color: var(--text-color);
 }
 
@@ -403,10 +408,18 @@ body.dark .home .text{
     font-style: italic;
 }
 
+body.dark .dashboard .card-header {
+    color: var(--text-color);
+}
+
 #favorite-btn:hover i {
     color: #fff; /* Change the color of the icon on hover */
     transition: color 0.3s ease-in-out; /* Add a smooth transition effect */
     font-weight: 900;
+}
+
+body.dark select{
+    color: var(--text-color);
 }
 
 /* ====== Favorites Page ====== */
@@ -483,6 +496,10 @@ body.dark .home .text{
     align-self: center;
 }
 
+body.dark .card-body{
+    color: var(--whitebg-text-color);
+}
+
 /* ====== Profile Page ====== */
 
 .profile #profile-premium-btn {
@@ -494,6 +511,15 @@ body.dark .home .text{
     background-color: var(--primary-color);
     color: var(--sidebar-color);
     border-color: var(--primary-color);
+}
+
+body.dark .card{
+    color: var(--whitebg-text-color);
+}
+
+body.dark .profile #profile-premium-btn {
+    color: var(--whitebg-text-color);
+    border-color: var(--whitebg-text-color);
 }
 
 /* ====== Reused Page ====== */
