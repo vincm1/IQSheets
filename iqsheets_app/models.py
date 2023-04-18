@@ -70,7 +70,7 @@ class Prompt(db.Model):
         self.user_id = user_id
         
     def __repr__(self):
-        f"Formel mit {self.provider}, {self.favorite_type}, {self.command}, {self.prompt} wurde am {self.favorite_date} hinzugefügt."
+        f"Formel mit {self.provider}, {self.command}, {self.prompt} wurde am {self.created_at} hinzugefügt."
 
 class Template(db.Model):
     

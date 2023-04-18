@@ -5,10 +5,8 @@ from iqsheets_app import db
 from iqsheets_app.models import Prompt, Template
 from iqsheets_app.utils.decorators import check_confirmed_mail
 from iqsheets_app.openai import openai_chat
-from .forms import DashboardForm, FavoritesForm
+from .forms import DashboardForm
 import boto3
-
-
 
 ################
 #### config ####
@@ -33,9 +31,8 @@ s3_client = boto3.client(
 @check_confirmed_mail
 def dashboard():
     """User Dashboard page"""
-    form = DashboardForm()  
-    form_2 = FavoritesForm()
-    return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
+    form = DashboardForm()
+    return render_template('dashboard/dashboard.html', form=form)
 
 @dashboard_blueprint.route('/dashboard/formel', methods=['GET', 'POST'])
 @login_required
@@ -43,8 +40,7 @@ def dashboard():
 def formel():
     """User Dashboard page"""
     form = DashboardForm()  
-    form_2 = FavoritesForm()
-    
+   
     if form.validate_on_submit():
         prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
         result = openai_chat(prompt)
@@ -64,19 +60,29 @@ def formel():
         # Converting OpenAi prompt to a usable text and formula if "formula selected" 
         text = result["choices"][0]["text"]
         formula = text[1:]
+        
+        return render_template('dashboard/dashboard.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
 
-        return render_template('dashboard/dashboard.html', form=form, form_2=form_2, explanation=explanation, formula=formula)
+    return render_template('dashboard/dashboard.html', form=form)
 
-    return render_template('dashboard/dashboard.html', form=form, form_2=form_2, explanation=explanation, formula=formula)
-
-@dashboard_blueprint.route('/dashboard/formel_feedback', methods=['POST'])
+@dashboard_blueprint.route('/dashboard/formel_feedback/<int:prompt_id>', methods=['POST'])
 @login_required
 @check_confirmed_mail
-def prompt_feedback():
+def prompt_feedback(prompt_id):
     ''' handles user feedback per prompt '''
-    if request.form['correct-btn'] == "correct-response":
-        print()
-
+    prompt = Prompt.query.filter_by(id=prompt_id).first()
+    if request.form['favorite-btn'] == "favorite-prompt":
+        prompt.favorite = True
+        db.session.commit()
+        return redirect(url_for('dashboard.favorites'))
+    elif request.form['correct-btn'] == "correct-response":
+        prompt.feedback = True
+        db.session.commit()
+        return redirect(url_for('dashboard.dashboard'))
+    else:
+        prompt.feedback = False
+        db.session.commit()
+        return redirect(url_for('dashboard.dashboard'))
     return redirect(url_for('dashboard.dashboard'))
 
 @dashboard_blueprint.route('/favoriten', methods=['GET', 'POST'])
@@ -85,46 +91,29 @@ def prompt_feedback():
 def favorites():
     """User favorite Excel Formulas"""
     page = request.args.get('page', 1, type=int)
-    favorite_formulas = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.createad_at).paginate(page=page, per_page=9)
+    favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True).order_by(Prompt.created_at).paginate(page=page, per_page=9)
     
     if request.method == 'POST' and request.form['filter_value'] == "Alle":
     
         page = request.args.get('page', 1, type=int)
-        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.favorite_date).paginate(page=page, per_page=9)
+        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.created_at).paginate(page=page, per_page=9)
     
     elif request.method == 'POST':
         filter_value = request.form['filter_value']
         page = request.args.get('page', 1, type=int)
-        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, provider=filter_value).order_by(Prompt.favorite_date).paginate(page=page, per_page=9)
+        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, provider=filter_value).order_by(Prompt.created_at).paginate(page=page, per_page=9)
         
     return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas)
-
-@dashboard_blueprint.route('/add_favorite', methods=['GET', 'POST'])
-@login_required
-@check_confirmed_mail
-def add_favorite():
-    """Add Formula/VBA to User favorites"""
-    form = FavoritesForm()
-    if form.validate_on_submit():
-        favorite = Favorite(user_id=current_user.id, provider=form.provider.data, favorite_type=form.favorite_type.data,
-                           method=form.method.data, command=form.command.data, prompt=form.prompt.data)
-        if favorite.provider:
-            db.session.add(favorite)
-            db.session.commit()
-        else:
-            redirect(url_for('dashboar.dashboard'))
-        return redirect(url_for('dashboard.favorites', username=current_user.username))
-    return redirect(url_for('dashboard.favorites', username=current_user.username))
 
 @dashboard_blueprint.route('/formel_<int:favorite_id>/delete', methods=['GET'])
 @login_required
 @check_confirmed_mail
 def delete_favorite(favorite_id):
     """Delete Formula/VBA to User favorites"""
-    favorite = Favorite.query.filter_by(id=favorite_id).first()
+    favorite = Prompt.query.filter_by(id=favorite_id).first()
     db.session.delete(favorite)
     db.session.commit()
-    flash('Formel erfolgreich gelöscht!', 'success')
+    flash('Favorit erfolgreich gelöscht!', 'success')
     return redirect(url_for('dashboard.favorites', username=current_user.username))
 
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])

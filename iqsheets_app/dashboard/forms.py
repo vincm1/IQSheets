@@ -8,7 +8,7 @@ class DashboardForm(FlaskForm):
     formula_explain = SelectField('Formel oder Erklärung', validators=[DataRequired()], choices=["Erstellen", "Erklären"], render_kw={'class': 'btn-group-toggle', 'data-toggle': 'buttons'})
     prompt = TextAreaField('Funktion die Zelle A1 mit Zelle B1 summiert z.B.', validators=[DataRequired(), Length(min=10, max=400)], render_kw={"style": "min-height: 10rem;"})
     submit = SubmitField('Formel')  
-class FavoritesForm(FlaskForm):
+class FeedbackForm(FlaskForm):
     provider = HiddenField()
     favorite_type = HiddenField()
     method = HiddenField()
