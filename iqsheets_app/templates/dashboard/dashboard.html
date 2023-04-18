@@ -67,20 +67,24 @@
 										<p id="copy-target">{{explanation}}</p>
 									</div>
 									<div class="d-flex flex-row">
-									<form method="POST" action="{{url_for('dashboard.prompt_feedback', prompt_id=prompt.id)}}">
-										<button class="p-2 btn btn-primary me-5 align-items-center" name="favorite-btn" value="favorite-prompt" id="favorite-btn">
-											<i class="fa-regular fa-heart ps-2 pe-1"></i> Favorit
-										</button>
-										<button class="p-2 btn btn-success px-3" name="correct-btn" value="correct-response" id="incorrect-btn">
-											<i class="fa-solid fa-check pe-2"></i> Richtig
-										</button>
-										<button class="p-2 btn btn-danger px-3" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
-											<i class="fa-solid fa-circle-xmark pe-2"></i> Falsch
-										</button>
-									</form>
-										<button class="p-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
-											<i class="fa-solid fa-copy pe-2"></i> Kopieren
-										</button>
+										<form method="POST" action="{{url_for('dashboard.prompt_favorite', prompt_id=prompt.id)}}">
+											<button class="p-2 btn btn-primary me-5 align-items-center" name="favorite-btn" value="favorite-prompt" id="favorite-btn">
+												<i class="fa-regular fa-heart ps-2 pe-1"></i> Favorit
+											</button>
+										</form>
+										<form method="POST" action="{{url_for('dashboard.positive_feedback', prompt_id=prompt.id)}}">
+											<button class="p-2 btn btn-success px-3" name="correct-btn" value="correct-response" id="incorrect-btn">
+												<i class="fa-solid fa-check pe-2"></i> Richtig
+											</button>
+										</form>
+										<form method="POST" action="{{url_for('dashboard.negative_feedback', prompt_id=prompt.id)}}">
+											<button class="p-2 btn btn-danger px-3" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
+												<i class="fa-solid fa-circle-xmark pe-2"></i> Falsch
+											</button>
+										</form>
+											<button class="p-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
+												<i class="fa-solid fa-copy pe-2"></i> Kopieren
+											</button>
 									</div>
 								</div>
 							</div>
@@ -101,7 +105,7 @@
 									</div>
 									<hr>
 									<div class="d-flex flex-row">
-										<form method="POST" action="{{url_for('dashboard.favorite', prompt_id=prompt.id)}}">
+										<form method="POST" action="{{url_for('dashboard.prompt_favorite', prompt_id=prompt.id)}}">
 											<button class="p-2 btn btn-primary me-5 align-items-center" name="favorite-btn" value="favorite-prompt" id="favorite-btn">
 												<i class="fa-regular fa-heart ps-2 pe-1"></i> Favorit
 											</button>

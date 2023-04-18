@@ -65,21 +65,37 @@ def formel():
 
     return render_template('dashboard/dashboard.html', form=form)
 
-@dashboard_blueprint.route('/dashboard/formel_feedback/<int:prompt_id>', methods=['POST'])
+@dashboard_blueprint.route('/dashboard/favorite/<int:prompt_id>', methods=['POST'])
 @login_required
 @check_confirmed_mail
-def prompt_feedback(prompt_id):
+def prompt_favorite(prompt_id):
     ''' handles user feedback per prompt '''
     prompt = Prompt.query.filter_by(id=prompt_id).first()
     if request.form['favorite-btn'] == "favorite-prompt":
         prompt.favorite = True
         db.session.commit()
         return redirect(url_for('dashboard.favorites'))
-    elif request.form['correct-btn'] == "correct-response":
+    return redirect(url_for('dashboard.dashboard'))
+
+@dashboard_blueprint.route('/dashboard/positive/<int:prompt_id>', methods=['POST'])
+@login_required
+@check_confirmed_mail
+def positive_feedback(prompt_id):
+    ''' handles user feedback per prompt '''
+    prompt = Prompt.query.filter_by(id=prompt_id).first()
+    if request.form['correct-btn'] == "correct-response":
         prompt.feedback = True
         db.session.commit()
         return redirect(url_for('dashboard.dashboard'))
-    else:
+    return redirect(url_for('dashboard.dashboard'))
+
+@dashboard_blueprint.route('/dashboard/negative/<int:prompt_id>', methods=['POST'])
+@login_required
+@check_confirmed_mail
+def negative_feedback(prompt_id):
+    ''' handles user feedback per prompt '''
+    prompt = Prompt.query.filter_by(id=prompt_id).first()
+    if request.form['incorrect-btn'] == "incorrect-response":
         prompt.feedback = False
         db.session.commit()
         return redirect(url_for('dashboard.dashboard'))
