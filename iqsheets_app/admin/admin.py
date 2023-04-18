@@ -3,7 +3,7 @@ from datetime import datetime
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView 
 from iqsheets_app import db
-from iqsheets_app.models import User, OAuth, Favorite, Template
+from iqsheets_app.models import User, OAuth, Prompt, Template
 from .views import MyAdminIndexView, AnalyticsView, TemplatesUploadView
 
 def create_admin(db):
@@ -12,7 +12,7 @@ def create_admin(db):
     # Add views
     admin.add_view(ModelView(User, db.session, endpoint="users_admin"))
     admin.add_view(ModelView(OAuth, db.session, endpoint="oauth_admin"))
-    admin.add_view(ModelView(Favorite, db.session))
+    admin.add_view(ModelView(Prompt, db.session))
     admin.add_view(ModelView(Template, db.session))
     admin.add_view(AnalyticsView(name='Analytics', endpoint='analytics'))
     admin.add_view(TemplatesUploadView(name='Template Upload', endpoint='templates'))

@@ -30,34 +30,29 @@
 		{% endif %}
 
 	  <!-- Templates -->
-      <div class="templates-cards mt-5">
-          <div class="row">
+    <div class="templates-cards mt-5">
+        <div class="row">
 			{% for template in templates %}
-            <div class="col-xl-3 col-lg-3 col-md-3 mb-3 response">
-              <div class="card w-30 h-70">
-                <img
-                  src="{{url_for('static', filename='img/spreadsheet-g1c355ce39_640.png' )}}"
-                  class="card-img-top"
-				  				alt="Spreadsheet picture"
-                />
-                <div class="card-body">
-                  	<h5 class="card-title">{{template.template_name}}</h5>
-				  			<h6 class="card-tag">{{template.template_category}}</h5>
-                  	<p class="card-text">
-                		{{template.template_description}}
-					</p>
-						<div class="row justify-content-center">
-									{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
-									<a href="{{s3_template_link}}"
-									class="btn btn-primary col-8">Download</a>
-									</div>
-                </div>
-              </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pb-2">
+				<div class="card w-100 h-100">
+					<div class="card-img">
+						<img src="{{url_for('static', filename='img/spreadsheet.jpg' )}}" 
+							class="card-img-top" alt="spreadsheet computer">
+						<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
+							{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
+							<a href="{{s3_template_link}}" class="btn btn-primary">Download</a>
+						</div>
+					</div>
+					<div class="card-body mt-3">
+					  <h5 class="card-title">{{template.template_name.split(".")[0]}}</h5>
+					  <p class="card-text py-2">{{template.template_description}}</p>
+					</div>
+				</div>
             </div>
 			{% endfor %}
-          </div>
-      </div>
-	  
+        </div>
+    </div>
+
 	  {% if current_user.premium %}
       <!-- Pagination Links-->
 				<div class="pagination justify-content-end me-4">

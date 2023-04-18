@@ -2,7 +2,7 @@
 from flask import Blueprint, current_app, render_template, flash, send_file, redirect, url_for, request
 from flask_login import login_required, current_user
 from iqsheets_app import db
-from iqsheets_app.models import Favorite, Template
+from iqsheets_app.models import Prompt, Template
 from iqsheets_app.utils.decorators import check_confirmed_mail
 from iqsheets_app.openai import openai_chat
 from .forms import DashboardForm, FavoritesForm
@@ -35,49 +35,67 @@ def dashboard():
     """User Dashboard page"""
     form = DashboardForm()  
     form_2 = FavoritesForm()
-    print(form.data)
+    return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
+
+@dashboard_blueprint.route('/dashboard/formel', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
+def formel():
+    """User Dashboard page"""
+    form = DashboardForm()  
+    form_2 = FavoritesForm()
+    
     if form.validate_on_submit():
-        print(form)
         prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
-        print(prompt)
         result = openai_chat(prompt)
-        print(result)
         # Increasing the amount of prompts and total tokens when prompt is generated
         current_user.num_prompts += 1
         current_user.num_tokens += result["usage"]["total_tokens"]
-        # Commiting numbers to db
-        db.session.commit()
-        
+        # Creating prompt instance
+        prompt = Prompt(user_id = current_user.id, provider=form.excel_google.data, method=form.info_prompt.data,
+                        request=form.formula_explain.data, command=form.prompt.data, prompt=result["choices"][0]["text"][1:])
+        # Commiting prompt and numbers to db
+        db.session.add(prompt)
+        db.session.commit()        
+
         # Converting OpenAi prompt to a usable text
         explanation = result["choices"][0]["text"]
         print(explanation)
         # Converting OpenAi prompt to a usable text and formula if "formula selected" 
         text = result["choices"][0]["text"]
-        start = text.find("=")
-        end = text.find(")")
-        formula = text[start:end+1]
+        formula = text[1:]
 
         return render_template('dashboard/dashboard.html', form=form, form_2=form_2, explanation=explanation, formula=formula)
- 
-    return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
 
-@dashboard_blueprint.route('/<username>/favoriten', methods=['GET', 'POST'])
+    return render_template('dashboard/dashboard.html', form=form, form_2=form_2, explanation=explanation, formula=formula)
+
+@dashboard_blueprint.route('/dashboard/formel_feedback', methods=['POST'])
 @login_required
 @check_confirmed_mail
-def favorites(username):
+def prompt_feedback():
+    ''' handles user feedback per prompt '''
+    if request.form['correct-btn'] == "correct-response":
+        print()
+
+    return redirect(url_for('dashboard.dashboard'))
+
+@dashboard_blueprint.route('/favoriten', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
+def favorites():
     """User favorite Excel Formulas"""
     page = request.args.get('page', 1, type=int)
-    favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+    favorite_formulas = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.createad_at).paginate(page=page, per_page=9)
     
     if request.method == 'POST' and request.form['filter_value'] == "Alle":
     
         page = request.args.get('page', 1, type=int)
-        favorite_formulas = Favorite.query.filter_by(user_id=current_user.id).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.favorite_date).paginate(page=page, per_page=9)
     
     elif request.method == 'POST':
         filter_value = request.form['filter_value']
         page = request.args.get('page', 1, type=int)
-        favorite_formulas = Favorite.query.filter_by(user_id=current_user.id, provider=filter_value).order_by(Favorite.favorite_date).paginate(page=page, per_page=9)
+        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, provider=filter_value).order_by(Prompt.favorite_date).paginate(page=page, per_page=9)
         
     return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas)
 

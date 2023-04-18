@@ -68,7 +68,7 @@
 						</div>
 					</div>
 						<div class="row justify-content-end mt-2 me-2">
-							{% if not current_user.is_premium %}
+							{% if not current_user.premium %}
 								<a href="{{url_for('core.pricing')}}" class="btn btn-outline-primary col-xl-2 mt-3 me-2 profile-btn" id="profile-premium-btn"><i class='bx bx-diamond icon pe-2'></i>Premium</a>
 							{% endif %}
 								{{form.submit(class="btn btn-primary col-xl-2 mt-3")}}

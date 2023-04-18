@@ -86,3 +86,12 @@ $(document).ready(function() {
       $(this).data('clicked', true); // set button clicked flag
     });
   });
+
+$(document).ready(function() {
+  $('#incorrect-btn').click(function(event) {
+    event.preventDefault();
+    $.post('/submit-form', {buttonName: 'incorrect-btn'});
+      // Or you can submit a form with the button name as a hidden input field
+      // $('#my-form').append('<input type="hidden" name="buttonName" value="incorrect-btn">').submit();
+  });
+});

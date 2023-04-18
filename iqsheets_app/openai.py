@@ -18,5 +18,5 @@ def openai_chat(prompt):
     stop=None,
     temperature=0.9,
     )
-
+    
     return completion

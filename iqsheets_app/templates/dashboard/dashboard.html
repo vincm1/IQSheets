@@ -22,11 +22,14 @@
 				<div class="explanation col-xl-11 mb-5">
 					<h5>
 						Konvertieren Sie jede Textanforderung in Excel- oder Google Sheets-Formeln 
-						mit unserer AI. Geben Sie eine detaillierte Beschreibung des Befehls ein, 
-						den Sie benötigen, und unsere KI wird sie innerhalb von Sekunden erstellen.
+						mit unserer AI.
+					</h5>
+					<h5>
+						Geben Sie eine detaillierte Beschreibung des Befehls ein, 
+						den Sie benötigen und unsere KI wird sie innerhalb von Sekunden erstellen.
 					</h5>
 					
-					<p class="pt-3">
+					<p class="pt-5">
 						*Wenn Sie falsche Ergebnisse erhalten, melden Sie diese bitte, 
 						damit wir unser KI-Modell verbessern können.
 					</p>
@@ -37,7 +40,7 @@
 					<!-- Prompt Field -->
 					<div class="d-flex flex-row justify-content-start">
 						<div class="col">
-							<form method="POST" id="formula-form">
+							<form method="POST" action="{{url_for('dashboard.formel')}}" id="formula-form">
 								{{form.hidden_tag()}}
 								{{form.excel_google(class_="select py-1 ps-2", role_="group")}}
 								{{form.info_prompt(class_="select py-1 ps-2 pe-5 ms-3", role_="group")}}
@@ -63,32 +66,38 @@
 									<div class="row">
 										<p id="copy-target">{{explanation}}</p>
 									</div>
-								<div class="row d-flex justify-content-end">
-									<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
-										{{form_2.csrf_token}}
-										{{form_2.provider(value=form.excel_google.data)}}
-										{{form_2.favorite_type(value=form.info_prompt.data)}}
-										{{form_2.method(value=form.formula_explain.data)}}
-										{{form_2.command(value=form.prompt.data)}}
-										{% if form.formula_explain.data == "Erklären" %}
-											{{form_2.prompt(value=explanation)}}
-											<button class="p-2 btn btn-primary" type="submit" name="favorite-btn" id="favorite-btn">
-												<i class="fa-regular fa-heart"></i> Favorit
-											</button>
-										{% endif %}
-									</form>
-										<div class="row d-flex">
-											<button class="p-2 btn btn-primary" onclick="copyToClipboard()" id="copy-btn">
+									<div class="row">
+										<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
+											{{form_2.csrf_token}}
+											{{form_2.provider(value=form.excel_google.data)}}
+											{{form_2.favorite_type(value=form.info_prompt.data)}}
+											{{form_2.method(value=form.formula_explain.data)}}
+											{{form_2.command(value=form.prompt.data)}}
+											{% if form.formula_explain.data == "Erklären" %}
+												{{form_2.prompt(value=explanation)}}
+												<button class="p-2 btn btn-primary px-3" type="submit" name="favorite-btn" id="favorite-btn">
+													<i class="fa-regular fa-heart"></i> Favorit
+												</button>
+											{% endif %}
+										</form>
+										<div class="d-flex justify-content-end mt-5">
+											<button class="p-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
 												<i class="fa-solid fa-copy"></i> Kopieren
 											</button>
-											<button class="p-2 btn btn-danger" id="incorrect-btn">
+										<form method="POST" action="{{url_for('dashboard.prompt_feedback')}}">
+											<button class="p-2 btn btn-success px-3" type="submit" name="correct-btn" value="correct-response" id="incorrect-btn">
+												<i class="fa-solid fa-check"></i> Richtig
+											</button>
+											<button class="p-2 btn btn-danger px-3" type="submit" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
 												<i class="fa-solid fa-circle-xmark"></i> Falsch
 											</button>
-										</div>
-								</div>
+										</form>	
+										</div>	
+									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 					<!-- Erklärung End -->
 
 					{% elif form.formula_explain.data == "Erstellen" %}
@@ -96,7 +105,7 @@
 						<div class="col-xl-6 col-sm-12 my-xl-0 my-sm-3 formula">
 							<div class="card">
 								<div class="card-header">
-								Formel
+									Formel
 								</div>
 								<div class="card-body p-3">
 									<div class="row">
@@ -104,24 +113,19 @@
 									</div>
 									<hr>
 									<div class="row d-flex justify-content-end">
-										<form method="POST" action="{{url_for('dashboard.add_favorite')}}">
-											{{form_2.csrf_token}}
-											{{form_2.provider(value=form.excel_google.data)}}
-											{{form_2.favorite_type(value=form.info_prompt.data)}}
-											{{form_2.method(value=form.formula_explain.data)}}
-											{{form_2.command(value=form.prompt.data)}}
-											{% if form.formula_explain.data == "Erstellen" %}
-												{{form_2.prompt(value=formula)}}
-												<button class="p-2 btn btn-primary me-2 pe-4 align-items-center" type="submit" name="favorite-btn" id="favorite-btn">
-													<i class="fa-regular fa-heart ps-2 pe-1"></i> Favorit
-												</button>
-												<button class="p-2 btn btn-primary me-2 pe-4 align-items-center" onclick="copyToClipboard()" id="copy-btn">
-													<i class="fa-solid fa-copy ps-2 pe-1"></i> Kopieren
-												</button>
-												<button class="p-2 btn btn-danger me-2 pe-4 align-item-center" id="incorrect-btn">
-													<i class="fa-solid fa-circle-xmark ps-2 pe-1"></i> Falsch
-												</button>
-											{% endif %}
+										<form method="POST">
+											<button class="p-2 btn btn-primary me-2 pe-4 align-items-center" type="submit" name="favorite-btn" id="favorite-btn">
+												<i class="fa-regular fa-heart ps-2 pe-1"></i> Favorit
+											</button>
+											<button class="p-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
+												<i class="fa-solid fa-copy pe-2"></i> Kopieren
+											</button>
+											<button class="p-2 btn btn-success px-3" type="submit" name="correct-btn" value="correct-response" id="incorrect-btn">
+												<i class="fa-solid fa-check pe-2"></i> Richtig
+											</button>
+											<button class="p-2 btn btn-danger px-3" type="submit" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
+												<i class="fa-solid fa-circle-xmark pe-2"></i> Falsch
+											</button>
 										</form>
 									</div>
 								</div>

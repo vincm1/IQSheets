@@ -1,10 +1,10 @@
-import os
+''' IQ_Sheets DB Models '''
 from datetime import datetime
-from iqsheets_app import db, login_manager
 from flask import redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, current_user
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
+from iqsheets_app import db, login_manager
 
 # Login Manager User loader
 @login_manager.user_loader
@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
     num_tokens = db.Column(db.Integer, nullable=False, default=0)
     is_oauth = db.Column(db.Boolean, nullable=False, default=False)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
-    favorites = db.relationship('Favorite', backref="user")
+    prompt = db.relationship('Prompt', backref="user")
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
@@ -46,27 +46,27 @@ class OAuth(OAuthConsumerMixin, db.Model):
     provider_user_id = db.Column(db.String(256), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     user = db.relationship(User)
-    
-class Favorite(db.Model):
-    
-    __tablename__ = "favorites"
-    
-    id = db.Column(db.Integer, primary_key=True)
-    
+
+class Prompt(db.Model):
+    __tablename__ = "prompts"
+     
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     provider = db.Column(db.String, nullable=False)
-    favorite_type = db.Column(db.String, nullable=False)
     method = db.Column(db.String, nullable=False)
     command = db.Column(db.String, nullable=False)
+    request = db.Column(db.String, nullable=False)
     prompt = db.Column(db.String, nullable=False)
-    favorite_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    favorite = db.Column(db.Boolean, nullable=False, default=False)
+    feedback = db.Column(db.Boolean, nullable=True)
     
-    def __init__(self, provider, favorite_type, method, command, prompt, user_id):
+    def __init__(self, provider, method, command, prompt, request, user_id):
         self.provider = provider
-        self.favorite_type = favorite_type
         self.method = method
         self.command = command
         self.prompt = prompt
+        self.request = request
         self.user_id = user_id
         
     def __repr__(self):
