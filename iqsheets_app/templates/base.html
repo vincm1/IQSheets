@@ -33,7 +33,7 @@
       <div class="container">
           <a class="navbar-brand" href="{{url_for('core.index')}}" id="logo"><span id="logo-iq">IQ</span>Sheets</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"><i class="fa-solid fa-angle-down"></i></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
             <div class="d-flex">
@@ -50,14 +50,15 @@
                 <li class="nav-item me-3">
                     <a class="nav-link" aria-current="page" href="{{url_for('core.index', _anchor='vorteile')}}">Vorteile</a>
                 </li>
+                <a class="btn btn-primary me-2" href="{{url_for('user.register')}}">Registrieren</a>
+                <a class="btn btn-outline-primary" href="{{url_for('user.login')}}">Login</a>
               </ul>
-                  <a class="btn btn-primary me-2" href="{{url_for('user.register')}}">Registrieren</a>
-                  <a class="btn btn-outline-primary" href="{{url_for('user.login')}}">Login</a>
+                  
             </div>
           </div>
       </div>
     </nav>
-    
+
     {% block content %} 
     
     {% endblock %}
@@ -71,9 +72,9 @@
                             <div class="single-footer-caption">
                                 <div class="footer-title">
                                     <div class="footer-pera">
-                                        <h4>Über <span id="logo-iq">IQ</span>Sheets</h4>
-                                        <h6>Zeitsparen in Excel & Google Spreadsheets, dank smarter KI</h6>
-                                        <p class="info1">Ein Produkt der Max Mustermann UG (haftungsbeschränkt). <br>
+                                        <h4><span id="logo-iq">IQ</span>Sheets</h4>
+                                        <h6>Zeitsparen in Excel & Google Spreadsheets, dank smarter KI.</h6>
+                                        <p class="info1">Ein Produkt der Mustermann UG (haftungsbeschränkt). <br>
                                             Mit dem smarten Formel-Generator und -Erklärer sparst du
                                             Zeit und Geld bei der Erstellung von Excel-Formeln. 
                                         </p>
@@ -118,7 +119,7 @@
                                         <div class="d-flex flex-row">
                                             {{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
                                             <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 p-3">
+                                                <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 px-3">
                                                     <i class="fa-solid fa-arrow-right"></i>
                                                 </button>
                                             </div>

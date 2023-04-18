@@ -112,7 +112,7 @@ def resend_confirmation():
     flash(f'Eine Bestätigungs-Email wurde an {current_user.email} geschickt.', 'success')
     return redirect(url_for('user.unconfirmed'))
 
-@user_blueprint.route('/edit_profil', methods=['GET', 'POST'])
+@user_blueprint.route('/profil_bearbeiten', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def edit_user():
@@ -158,7 +158,7 @@ def edit_user():
     
     return render_template('user/profil.html', form=form)
 
-@user_blueprint.route('/change_password', methods=['GET', 'POST'])
+@user_blueprint.route('/passwort', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def change_password():

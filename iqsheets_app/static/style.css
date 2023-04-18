@@ -82,6 +82,20 @@ nav {
     color: #30444f;
 }
 
+.navbar .navbar-toggler {
+    background-color: var(--primary-color);
+    
+}
+
+.navbar span .navbar-toggler-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-toggler-icon i {
+    color: #fff;
+}
+
 /* Video */
 
 .app-pictures video {
@@ -89,17 +103,24 @@ nav {
 }
 
 /* Features */
-
 .features {
+    background-color: #87B1AC;
+}
+
+.features .card{
     background-color: #87B1AC;
 }
 
 .features-icon:hover i {
     color: #30444f;
   }
-  
-.features-caption:hover h3 {
+
+.features .card-header h3:hover {
     text-decoration: underline;
+}
+
+.features .card-header i:hover {
+    color:#3a515e;
 }
 
 /* services */
@@ -129,30 +150,36 @@ nav {
     background-color: #87B1AC;
 }
 
+video {
+    max-width: 70%;
+    height: auto;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .d-flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
 /* Pricing */
- 
-.pricing .single-card {
+.pricing .row .col {
+    margin: 10px 50px;
+    padding: 0 10px;
+}
+
+.pricing .card {
     border: 1px solid;
-    border-color:#30444f;
-    border-radius: 10px;
+    border-color: var(--primary-color);
 }
 
-.pricing .single-card ul {
-    list-style-type: none; 
+.pricing .card .card-header {
+    background-color: var(--primary-color);
 }
 
-.pricing .single-card li {
-    margin: 10px 0;
-}
-
-.pricing .card-bottom .btn-primary {
-    margin: 2rem 0;
-    padding: 15px 90px;
-}
-
-.pricing .card-bottom i {
-    color: var(--primary-color);
-    font-size: 19px;
+.pricing .card-bottom {
+    margin: 20px;
 }
 
 /* Testimonials */
@@ -164,16 +191,38 @@ nav {
 /* FAQs */
 .FAQs {
     background-color: var(--primary-color);
-    
 }
 
-.accordion {
-    border: solid 2px #30444f;;
-    border-radius: 5px;
+.FAQs .accordion-header .collapsed {
+    border:1px var(--toggle-color) solid;
 }
 
-#flush-heading:after {
-    background-color: red;
+.FAQs .accordion-header .collapsed {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-style: italic;
+}
+
+.FAQs #accordionFlushExample .accordion-header:not(.show) {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-style: italic;
+}
+
+.FAQs #accordionFlushExample.accordion-button::before {
+    color: #FFF;
+  }
+
+.FAQs #accordionFlushExample .accordion-button:not(.collapsed) {
+    color: #fff;
+    background-color: var(--primary-color);
+    font-style: italic;
+}
+
+.FAQs #accordionFlushExample .accordion-body:not(.show) {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 1px var(--toggle-color) solid;
 }
 
 /* Newsletter */

@@ -61,7 +61,7 @@ def dashboard():
  
     return render_template('dashboard/dashboard.html', form=form, form_2=form_2)
 
-@dashboard_blueprint.route('/<username>/favorites', methods=['GET', 'POST'])
+@dashboard_blueprint.route('/<username>/favoriten', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def favorites(username):

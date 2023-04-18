@@ -9,8 +9,8 @@
                             <div class="col-lg-5 col-md-9 ">
                                 <div class="hero__caption">
                                     <span data-animation="fadeInUp" data-delay=".4s"><span id="logo-iq" style="font-size:20px;">IQ</span>Sheets</span>
-                                    <h1 data-animation="fadeInUp" data-delay=".6s">Textanweisungen sekundenschnell kostenlos <br>in <span style="font-size: 45px; font-style:italic;">Excel-Formeln</span> <br> verwandeln.</h1>
-                                    <p data-animation="fadeInUp" data-delay=".8s">Dank <span style="font-size:20px; font-style:italic;">KI </span> kein Kopfzerbrechen mehr in Ihrer Arbeit in <span style="font-size: 20px; font-style:italic;">Spreadsheets.</span></p>
+                                    <h1 data-animation="fadeInUp" data-delay=".6s">Textanweisungen sekundenschnell <br>in <span style="font-size: 45px; font-style:italic;">Excel-Formeln</span> <br> verwandeln.</h1>
+                                    <p data-animation="fadeInUp" data-delay=".8s">Dank smarter<span style="font-size:20px; font-style:italic;"> KI </span> kein Kopfzerbrechen mehr in während deiner täglichen Arbeit in <span style="font-size: 20px; font-style:italic;">Spreadsheets.</span></p>
                                     <!-- Slider btn -->
                                 <div class="slider-btns">
                                         <!-- Hero-btn -->
@@ -47,7 +47,8 @@
                     <!-- OwL -->
                     <div class="d-flex flex-row justify-content-center mt-2 py-4">
                         <div class="col-xl-12 col-lg-8 col-md-7 align-self-center text-center">
-                            <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" height="700" type="video/mp4" controls>
+                            <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" height="700" 
+                            type="video/mp4" controls>
                                 Browser unterstützt Videowiedergabe nicht.
                             </video>
                         </div>
@@ -133,81 +134,66 @@
     </section>
     <!-- Services Area End -->
 
-     <!-- Best Features Start -->
-     <section class="features my-5" id="features">
-        <div class="container pb-5">
-
-            <div class="row justify-content-center mb-5 pt-5">
-                <div class="col-xl-8 col-lg-10">
-                    <!-- Section Tittle -->
-                    <div class="row text-center pb-4">
-                        <div class="col-lg-10 col-md-10">
-                            <div class="section-title">
-                                <h2>Die besten <span style="font-style:italic; text-decoration: underline">
-                                    Features</span> unserer App</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Section caption -->
-                    <div class="row justify-content-start mt-5">
-                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4">
-                                    <i class="fa-solid fa-file-excel fa-2xl"></i>
-                                    <i class="fa-solid fa-table fa-2xl mt-3 ms-1"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>Excel & GSheets</h3>
-                                    <p>Wir unterstützen die beiden gängigsten Spreadsheet Tools.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4 mt-2">
-                                    <i class="fa-solid fa-paper-plane fa-2xl"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>Formeln</h3>
-                                    <p>Lass dir aus einfachen Textanweisungen direkt die passende Formel erstellen.</p>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="row justify-content-center mt-5">
-                        <div class="col-xl-5 col-lg-5 col-md-5 me-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4">
-                                    <i class="fa-solid fa-lightbulb fa-2xl"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>Erklärungen</h3>
-                                    <p>Lass dir komplizierte Formeln erklären und setze sie dann ein.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 ms-5">
-                            <div class="d-flex flex-row single-features">
-                                <div class="features-icon me-4 mt-2">
-                                    <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
-                                </div>
-                                <div class="features-caption">
-                                    <h3>VBA</h3>
-                                    <p>Lass dir sogar passende Makros erstellen.</p>
-                                </div>
-                            </div>
-                        </div> 
+    <!-- Best Features Start -->
+    <section class="features py-5 mt-5" id="features">
+        <div class="container py-5">
+            <!-- Section Title -->
+            <div class="row d-flex justify-content-center ">
+                <div class="col-lg-6 col-md-8">
+                    <div class="section-title text-center pb-5">
+                        <h2>Die besten <span style="font-style:italic; text-decoration: underline">Features</span> unserer App</h2>
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- Features -->
+            <div class="features">
+                <div class="container">
+                    <div class="row row-cols-2 text-center justify-content-center">
+                        <div class="card mb-1 rounded-0 border-0">
+                            <div class="card-header text-inline py-3 bg-transparent border-0">
+                                <i class="fa-solid fa-file-excel fa-2x pb-2 pe-2"></i>
+                                <h3 class="mb-0 d-inline-block">Excel & GSheets</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Wir unterstützen die beiden gängigsten Spreadsheet Tools.</p>
+                            </div>
+                        </div>
+                        <div class="card mb-1 rounded-0 border-0">
+                            <div class="card-header py-3 bg-transparent border-0">
+                                <i class="fa-solid fa-paper-plane fa-2x pb-2 pe-2"></i>
+                                <h3 class="mb-0 d-inline-block">Formeln</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Lass dir aus einfachen Textanweisungen direkt die passende Formel erstellen.</p>
+                            </div>
+                        </div>
+                        <div class="card mb-1 rounded-0 border-0">
+                            <div class="card-header py-3 bg-transparent border-0">
+                                <i class="fa-solid fa-lightbulb fa-2xl pb-2 pe-2"></i>
+                                <h3 class="mb-0 d-inline-block">Erklärungen</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Du verstehst eine komplexe Funktion nicht? Lass dir diese einfach erklären.</p>
+                            </div>
+                        </div>
+                        <div class="card mb-1 rounded-0 border-0">
+                            <div class="card-header py-3 bg-transparent border-0">
+                                <i class="fa-solid fa-magnifying-glass fa-2xl pb-2 pe-2"></i>
+                                <h3 class="mb-0 d-inline-block">VBA</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Lasse dir sogar passende Makros programmieren.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
     <!-- Best Features End -->
 
     <!-- Best Pricing Start -->
-    <section class="pricing py-5" data-background="assets/img/gallery/best_pricingbg.jpg">
-        <div class="container">
+    <section class="pricing pt-4 pb-5">
+        <div class="container py-4">
             <!-- Section Tittle -->
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-6 col-md-8">
@@ -221,44 +207,44 @@
 
     <!-- Pricing Card Start -->
         <div class="pricing-card-area py-5">
-            <div class="container text-center">
-                <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-4 col-md-6 me-5">
-                        <div class="single-card text-center mb-30">
-                            <div class="card-top py-3">
+            <div class="container justify-content-center">
+                <div class="row row-cols-1 row-cols-lg-3 mb-3 text-center justify-content-center">
+
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 h-100 shadow-sm">
+                            <div class="card-header py-3">
                                 <h4>Starter</h4>
                             </div>
-                            <div class="card-bottom justify-content-center">
-                                <ul>
-                                    <li><i class="fa-solid fa-check me-3"></i>Alle Features</li>
-                                    <li><i class="fa-solid fa-check me-3"></i>Best Practices</li>
-                                    <li><i class="fa-solid fa-check me-3"></i><span style="font-size: 18px;">5</span> KI-Abfragen <br> 
-                                        pro Monat</li>
-                                    <li><i class="fa-solid fa-check me-3"></i>Beschränkt Templates</li>
-                                    <li><i class="fa-solid fa-check me-3"></i>Kein Support</li>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">kostenlos</h1>
+                                <ul class="list-unstyled my-3 py-3">
+                                    <li class="py-1"><span style="font-size: 14px;">3 </span>Test KI Abfragen</li>
+                                    <li class="py-1">Best Practices</li>
+                                    <li class="py-1">Test Templates</li>
                                 </ul>
-                                <div class="container my-4">
-                                    <a href="{{url_for('user.register')}}"><button class="btn btn-outline-primary py-2 px-4">Kostenlos testen</button></a>
-                                </div>
-                                
+                            </div>
+                            <div class="card-bottom mb-3">
+                                <a href="{{url_for('user.register')}}"><button class="btn btn-outline-primary w-100">Kostenlos testen</button></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-card  text-center mb-30">
-                            <div class="card-top py-3">
-                                <h4>Profi</h4>
+                
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 h-100 shadow-sm">
+                            <div class="card-header py-3">
+                                <h4>Premium</h4>
                             </div>
-                            <div class="card-bottom">
-                                <ul>
-                                    <li><i class="fa-solid fa-check me-3"></i>Alle Features</li>
-                                    <li><i class="fa-solid fa-check me-3"></i>Best Practices</li>
-                                    <li><i class="fa-solid fa-check me-3"></i><span style="font-size: 18px;">Unbegrenzt</span> KI-Abfragen <br> 
-                                        pro Monat</li>
-                                    <li><i class="fa-solid fa-check me-3"></i>Alle Templates</li>
-                                    <li><i class="fa-solid fa-check me-3"></i>Support</li>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">4,99€ / mo </h1>
+                                <ul class="list-unstyled my-3 py-3">
+                                    <li class="py-1"><span style="font-style: oblique;">unbegrenzt </span>KI Abfragen</li>
+                                    <li class="py-1">Best Practices</li>
+                                    <li class="py-1">Alle Templates</li>
+                                    <li class="py-1">Support</li>
                                 </ul>
-                                <a href="{{url_for('user.register')}}"><button class="btn btn-primary">Loslegen</button></a>
+                            </div>
+                            <div class="card-bottom mb-3">
+                                <a href="{{url_for('user.register')}}"><button class="btn btn-primary py-3 w-100">Loslegen</button></a>
                             </div>
                         </div>
                     </div>
@@ -350,7 +336,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-4">
                         <div class="say-something-cap">
-                            <h2>Melde Dich <span style="font-style:italic">jetzt</span> zu unserem<br>  Newsletter an.</h2>
+                            <h2>Melde Dich <span style="font-style:italic">jetzt</span> zu unserem Newsletter an.</h2>
                         </div>
                         <img src="static/img/say-shape-right.png">
                 </div>
@@ -360,7 +346,7 @@
                             <div class="d-flex flex-row ms-3">
                                 {{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
                                 <div class="form-icon">
-                                    <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 p-3"><i class="fa-solid fa-arrow-right"></i></button>
+                                    <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 px-3"><i class="fa-solid fa-arrow-right"></i></button>
                                 </div>
                             </div>    
                     </form>
