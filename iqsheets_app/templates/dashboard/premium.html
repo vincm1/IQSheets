@@ -1,8 +1,48 @@
 {% extends "layout.html" %}{% block content %}
 	<section class="home">
-		<section class="premium">
-			<div class="container-fluid m-5">
-                <h1>Premium</h1>
+			<section class="premium mt-2">
+				<!-- Best Pricing Start -->
+				<section class="pricing pb-2">
+					<div class="container">
+						<!-- Section Tittle -->
+						<div class="row d-flex justify-content-center">
+							<div class="col-lg-6 col-md-8">
+								<div class="section-tittle section-tittle2 text-center">
+									<h2>Upgrade <span style="font-size: 38px;">jetzt </span></h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- Best Pricing End -->
+			
+				<!-- Pricing Card Start -->
+					<div class="pricing-card-area py-5">
+						<div class="container justify-content-center">
+							<div class="row row-cols-1 row-cols-lg-3 mb-3 text-center justify-content-center">
+								<div class="col">
+									<div class="card mb-4 rounded-3 h-100 shadow-sm">
+										<div class="card-header py-3">
+											<h4>Premium</h4>
+										</div>
+										<div class="card-body">
+											<h1 class="card-title pricing-card-title">4,99€ / mo </h1>
+											<ul class="list-unstyled my-3 py-3">
+												<li class="py-1"><span style="font-style: oblique;">unbegrenzt </span>KI Abfragen</li>
+												<li class="py-1">Best Practices</li>
+												<li class="py-1">Alle Templates</li>
+												<li class="py-1">Support</li>
+											</ul>
+										</div>
+										<div class="card-bottom m-3">
+											<a href="{{url_for('user.register')}}"><button class="btn btn-primary h-100 w-100 py-3">Loslegen</button></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- Pricing Card End -->
             </div>
 		</section>
 	</section>

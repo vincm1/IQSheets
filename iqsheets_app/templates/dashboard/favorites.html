@@ -21,15 +21,15 @@
 								<div class="card-header p-3">
 									{% if formula.provider == "Excel" %}
 										<i class="fa-solid fa-file-excel fa-2xl pe-2"></i>
-										{{formula.provider}}:<span id="favorite-provider">{{formula.favorite_type}} {{formula.method}}</span>
+										{{formula.provider}}:<span id="favorite-provider">{{formula.method}} {{formula.request}}</span>
 									{% else %}
 										<i class="fa-solid fa-table fa-2xl pe-2"></i>
-										{{formula.provider}}:<span id="favorite-provider">{{formula.favorite_type}} {{formula.method}}</span>
+										{{formula.provider}}:<span id="favorite-provider">{{formula.method}} {{formula.request}}</span>
 									{% endif %}
 								</div>
 		
 								<div class="card-body">
-									{% if formula.method == "Erstellen" %}
+									{% if formula.request == "Erstellen" %}
 										<div class="row m-2 text-start command">
 											<p>{{formula.command}}</p>
 										</div>
@@ -40,17 +40,22 @@
 												</button>
 											</p>
 											<div class="collapse m-2 p-3" id="formel_{{formula.id}}">
-												{{formula.prompt}}
+												<p class="copy-target">{{formula.prompt}}</p>
 											</div>
 										</div>
 										<hr>
 									{% else %}
-										<div class="row m-2 prompt">
-											{{formula.prompt}}
+										<div class="row m-2">
+											<p class="copy-target">{{formula.prompt}}</p>
 										</div>
 										<hr>
 									{% endif %}
 									<div class="d-flex flex-row-reverse">
+										<div class="p-2">
+											<button class="p-2 btn btn-outline-primary" onclick="copyToClipboard()" id="copy-btn">
+												<i class="fa-solid fa-copy"></i>
+											</button>
+										</div>
 										<div class="p-2">
 											<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="p-2">
 												<button class="btn btn-danger" id="incorrect-btn">
