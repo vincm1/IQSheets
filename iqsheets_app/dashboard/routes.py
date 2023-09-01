@@ -112,12 +112,13 @@ def favorites():
     if request.method == 'POST' and request.form['filter_value'] == "Alle":
     
         page = request.args.get('page', 1, type=int)
-        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.created_at).paginate(page=page, per_page=9)
+        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True).order_by(Prompt.created_at).paginate(page=page, per_page=9)
     
     elif request.method == 'POST':
         filter_value = request.form['filter_value']
         page = request.args.get('page', 1, type=int)
-        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, provider=filter_value).order_by(Prompt.created_at).paginate(page=page, per_page=9)
+        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True, 
+                                                   provider=filter_value).order_by(Prompt.created_at).paginate(page=page, per_page=9)
         
     return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas)
 

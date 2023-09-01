@@ -457,12 +457,12 @@ body.dark .home .text{
     font-size: 24px;
 }
 
-.dashboard #copy-btn {
+#copy-btn {
     border-color: var(--primary-color);
     color: var(--primary-color);
 }
 
-.dashboard #copy-btn:hover {
+#copy-btn:hover {
     border-color: var(--primary-color);
     background-color: var(--primary-color);
     color: #fff;
@@ -481,6 +481,8 @@ body.dark .dashboard .card-header {
 body.dark select{
     color: var(--text-color);
 }
+
+
 
 /* ====== Favorites Page ====== */
 .favorites .favorites-cards .card {

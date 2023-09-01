@@ -22,16 +22,16 @@
 				<div class="explanation col-xl-11 mb-5">
 					<h5>
 						Konvertieren Sie jede Textanforderung in Excel- oder Google Sheets-Formeln 
-						mit unserer AI.
+						mit Hilfe von AI.
 					</h5>
 					<h5>
 						Geben Sie eine detaillierte Beschreibung des Befehls ein, 
-						den Sie benötigen und unsere KI wird sie innerhalb von Sekunden erstellen.
+						den Sie benötigen und die KI erstellt sie innerhalb von Sekunden.
 					</h5>
 					
 					<p class="pt-5">
-						*Wenn Sie falsche Ergebnisse erhalten, melden Sie diese bitte, 
-						damit wir unser KI-Modell verbessern können.
+						*Falls Sie ein falsches Ergebnisse erhalten, melden Sie diese bitte, 
+						damit wir das KI-Modell verbessern können.
 					</p>
 					<hr>
 				</div>
@@ -68,21 +68,21 @@
 									</div>
 									<div class="d-flex flex-row">
 										<form method="POST" action="{{url_for('dashboard.prompt_favorite', prompt_id=prompt.id)}}">
-											<button class="p-2 btn btn-primary me-5 align-items-center" name="favorite-btn" value="favorite-prompt" id="favorite-btn">
+											<button class="p-2 pe-4 btn btn-primary me-5 align-items-center" name="favorite-btn" value="favorite-prompt" id="favorite-btn">
 												<i class="fa-regular fa-heart ps-2 pe-1"></i> Favorit
 											</button>
 										</form>
 										<form method="POST" action="{{url_for('dashboard.positive_feedback', prompt_id=prompt.id)}}">
-											<button class="p-2 btn btn-success px-3" name="correct-btn" value="correct-response" id="incorrect-btn">
+											<button class="p-2 me-2 btn btn-success px-3" name="correct-btn" value="correct-response" id="incorrect-btn">
 												<i class="fa-solid fa-check pe-2"></i> Richtig
 											</button>
 										</form>
 										<form method="POST" action="{{url_for('dashboard.negative_feedback', prompt_id=prompt.id)}}">
-											<button class="p-2 btn btn-danger px-3" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
+											<button class="p-2 me-2 btn btn-danger px-3" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
 												<i class="fa-solid fa-circle-xmark pe-2"></i> Falsch
 											</button>
 										</form>
-											<button class="p-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
+											<button class="p-2 me-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
 												<i class="fa-solid fa-copy pe-2"></i> Kopieren
 											</button>
 									</div>
@@ -111,16 +111,16 @@
 											</button>
 										</form>
 										<form method="POST" action="{{url_for('dashboard.positive_feedback', prompt_id=prompt.id)}}">
-											<button class="p-2 btn btn-success px-3" name="correct-btn" value="correct-response" id="incorrect-btn">
+											<button class="p-2 me-2 btn btn-success px-3" name="correct-btn" value="correct-response" id="incorrect-btn">
 												<i class="fa-solid fa-check pe-2"></i> Richtig
 											</button>
 										</form>
 										<form method="POST" action="{{url_for('dashboard.negative_feedback', prompt_id=prompt.id)}}">
-											<button class="p-2 btn btn-danger px-3" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
+											<button class="p-2 me-2 btn btn-danger px-3" name="incorrect-btn" value="incorrect-response" id="incorrect-btn">
 												<i class="fa-solid fa-circle-xmark pe-2"></i> Falsch
 											</button>
 										</form>
-											<button class="p-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
+											<button class="p-2 me-2 btn btn-outline-primary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
 												<i class="fa-solid fa-copy pe-2"></i> Kopieren
 											</button>
 									</div>

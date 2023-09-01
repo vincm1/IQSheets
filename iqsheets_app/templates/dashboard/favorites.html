@@ -40,28 +40,28 @@
 												</button>
 											</p>
 											<div class="collapse m-2 p-3" id="formel_{{formula.id}}">
-												<p class="copy-target">{{formula.prompt}}</p>
+												<p id="copy-target">{{formula.prompt}}</p>
 											</div>
 										</div>
 										<hr>
 									{% else %}
 										<div class="row m-2">
-											<p class="copy-target">{{formula.prompt}}</p>
+											<p id="copy-target">{{formula.prompt}}</p>
 										</div>
 										<hr>
 									{% endif %}
 									<div class="d-flex flex-row-reverse">
-										<div class="p-2">
-											<button class="p-2 btn btn-outline-primary" onclick="copyToClipboard()" id="copy-btn">
-												<i class="fa-solid fa-copy"></i>
-											</button>
-										</div>
 										<div class="p-2">
 											<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="p-2">
 												<button class="btn btn-danger" id="incorrect-btn">
 													<i class="fa-solid fa-trash"></i>
 												</button>
 											</a>
+										</div>
+										<div class="p-2">
+											<button class="btn btn-outline-primary" id="copy-btn" onclick="copyToClipboard()">
+												<i class="fa-solid fa-copy"></i>
+											</button>
 										</div>
 										<div class="p-2">
 											<span id="favorite-date">{{formula.created_at.strftime('%d.%m.%Y')}}</span>
