@@ -186,7 +186,7 @@ def user_payments(username):
     """ User payments routes """
     return render_template('user/payments.html', username=current_user.username)
 
-@user_blueprint.route('/reset_password_request', methods=['GET', 'POST'])
+@user_blueprint.route('/passwort_zuruecksetzen', methods=['GET', 'POST'])
 def reset_password_request():
     """ Sending a password request """
     form = ResetPasswordRequestForm()
@@ -203,8 +203,8 @@ def reset_password_request():
             send_email(user.email, subject, html)
             flash('Prüfe deine Emails', 'success')
         else:
-            flash('Noch nicht verifiziert', 'info')
-            return redirect(url_for('user.unconfirmed'))
+            flash('Kein Profil unter dieser Emailadresse', 'warning')
+            #return redirect(url_for('core.index'))
     return render_template('user/reset_password_request.html',
                            title='Passwort zurücksetzen', form=form, form_nl=form_nl)
     

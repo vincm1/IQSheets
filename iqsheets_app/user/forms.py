@@ -47,10 +47,11 @@ class ChangePasswordForm(FlaskForm):
     submit = SubmitField('Passwort speichern')
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Neues Passwort')
+    email = StringField('Email', validators=[DataRequired(), Email(message="Keine valide Emailadresse!")])
+    submit = SubmitField('Weiter')
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Neues Passwort', validators=[DataRequired(), Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])", 
-                            message="Passwort muss Sonderzeichen, Groß-Kleinschreibung.")])
-    confirm_pw = PasswordField('Wiederholen', validators=[DataRequired(), EqualTo('password')])
+    password = PasswordField('Neues Passwort', validators=[DataRequired(), Length(min=8, message="Mindestens 8 Zeichen!"),
+                                                           Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])", 
+                                                                message="Passwort muss Sonderzeichen, Groß-Kleinschreibung enthalten.")])
+    confirm_pw = PasswordField('Wiederholen', validators=[DataRequired(), EqualTo('password', message="Passwörter stimmen nicht überein!")])
     submit = SubmitField('Passwort bestätigen')
