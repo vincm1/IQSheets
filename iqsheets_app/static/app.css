@@ -603,7 +603,7 @@ body.dark select{
 
   .download-btn a:hover {
     padding: 10px 70px;
-  }
+}
 
 body.dark .card-body{
     color: var(--whitebg-text-color);
