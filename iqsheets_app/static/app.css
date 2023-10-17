@@ -482,6 +482,33 @@ body.dark select{
     color: var(--text-color);
 }
 
+.form-row {
+    margin: 0 15px;
+}
+
+.form-input {
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px 0; 
+}
+
+.form-input-2 {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 20px 5px; 
+}
+
+.form-check-input {
+    margin-top: 12px;
+    margin-left: 30px;
+    display: inline-block;
+}
+
+.form-check-input-2 {
+    margin-top: 3px;
+    margin-left: 30px;
+    display: inline-block;
+}
 
 
 /* ====== Favorites Page ====== */
