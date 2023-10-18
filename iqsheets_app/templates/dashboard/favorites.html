@@ -20,10 +20,10 @@
 							<div class="card h-100 w-100">
 								<div class="card-header p-3">
 									{% if formula.provider == "Excel" %}
-										<i class="fa-solid fa-file-excel fa-2xl pe-2"></i>
+									<img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="microsoft-excel-2019--v1"/>
 										{{formula.provider}}:<span id="favorite-provider">{{formula.method}} {{formula.request}}</span>
 									{% else %}
-										<i class="fa-solid fa-table fa-2xl pe-2"></i>
+									<img width="48" height="48" src="https://img.icons8.com/color/48/google-sheets.png" alt="google-sheets"/>
 										{{formula.provider}}:<span id="favorite-provider">{{formula.method}} {{formula.request}}</span>
 									{% endif %}
 								</div>

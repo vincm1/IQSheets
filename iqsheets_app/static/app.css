@@ -515,6 +515,9 @@ body.dark select{
     display: inline-block;
 }
 
+#sign-db {
+    margin-right: 10px;
+}
 
 /* ====== Favorites Page ====== */
 .favorites .favorites-cards .card {

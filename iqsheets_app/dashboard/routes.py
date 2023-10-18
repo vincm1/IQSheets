@@ -42,7 +42,7 @@ def dashboard():
 def formel():
     """User Dashboard page"""
     form = DashboardForm()  
-    gif = 'static/img/beam-a-person-is-typing-on-a-laptop.gif'
+    gif = '../static/img/beam-a-person-is-typing-on-a-laptop.gif'
    
     if form.validate_on_submit():
         prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
@@ -63,8 +63,6 @@ def formel():
         # Converting OpenAi prompt to a usable text and formula if "formula selected" 
         text = result["choices"][0]["text"]
         formula = text[1:]
-        
-        gif = 'static/img/beam-a-person-is-typing-on-a-laptop.gif'
         
         return render_template('dashboard/dashboard.html', form=form, explanation=explanation, formula=formula, prompt=prompt, gif=gif)
 

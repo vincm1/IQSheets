@@ -1,8 +1,7 @@
 ''' IQ_Sheets DB Models '''
 from datetime import datetime
-from flask import redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, current_user
+from flask_login import UserMixin
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 from iqsheets_app import db, login_manager
 
@@ -25,6 +24,7 @@ class User(db.Model, UserMixin):
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     premium = db.Column(db.Boolean, nullable=False, default=False)
+    newsletter = db.relationship('Newsletter', backref='user', lazy=True)
     num_prompts = db.Column(db.Integer, nullable=False, default=0)
     num_tokens = db.Column(db.Integer, nullable=False, default=0)
     is_oauth = db.Column(db.Boolean, nullable=False, default=False)
@@ -48,6 +48,8 @@ class OAuth(OAuthConsumerMixin, db.Model):
     user = db.relationship(User)
 
 class Prompt(db.Model):
+    """ DB Model for generated Prompts """ 
+    
     __tablename__ = "prompts"
      
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -73,6 +75,7 @@ class Prompt(db.Model):
         f"Formel mit {self.provider}, {self.command}, {self.prompt} wurde am {self.created_at} hinzugefügt."
 
 class Template(db.Model):
+    """ Class for Excel Templates """  
     
     __tablename__ = 'templates'
     
@@ -95,4 +98,22 @@ class Template(db.Model):
         
     def __repr__(self):
         f"Template {template_name}, wurde mit {template_category} am {created_at} hinzugefügt."
-        
+
+class Newsletter(db.Model):
+    """ DB Model for Newsletter registrations """ 
+    
+    __tablename__ = "newsletter"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String, nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
+                        nullable=True)
+    registered = db.Column(db.Boolean, default=True)
+    user = db.relationship(User)
+    
+    def __init__(self, email):
+        self.email = email
+
+    
+    def __repr__(self):
+        f"Newsletter mit {self.email} wurde am {self.created_at} hinzugefügt."
