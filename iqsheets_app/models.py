@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     premium = db.Column(db.Boolean, nullable=False, default=False)
-    newsletter = db.relationship('Newsletter', backref='user', lazy=True)
+    newsletter = db.relationship('Newsletter', backref='user')
     num_prompts = db.Column(db.Integer, nullable=False, default=0)
     num_tokens = db.Column(db.Integer, nullable=False, default=0)
     is_oauth = db.Column(db.Boolean, nullable=False, default=False)
@@ -106,14 +106,13 @@ class Newsletter(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=False, unique=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
-                        nullable=True)
     registered = db.Column(db.Boolean, default=True)
-    user = db.relationship(User)
+    timestamp = db.Column(db.DateTime, default=datetime.now())
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=True)
     
-    def __init__(self, email):
+    def __init__(self, email, user_id):
         self.email = email
-
-    
+        self.user_id = user_id
+        
     def __repr__(self):
         f"Newsletter mit {self.email} wurde am {self.created_at} hinzugefügt."
