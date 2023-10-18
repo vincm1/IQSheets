@@ -32,7 +32,9 @@ s3_client = boto3.client(
 def dashboard():
     """User Dashboard page"""
     form = DashboardForm()
-    return render_template('dashboard/dashboard.html', form=form)
+    gif = 'static/img/beam-a-person-is-typing-on-a-laptop.gif'
+    
+    return render_template('dashboard/dashboard.html', form=form, gif=gif)
 
 @dashboard_blueprint.route('/dashboard/formel', methods=['GET', 'POST'])
 @login_required
@@ -40,6 +42,7 @@ def dashboard():
 def formel():
     """User Dashboard page"""
     form = DashboardForm()  
+    gif = 'static/img/beam-a-person-is-typing-on-a-laptop.gif'
    
     if form.validate_on_submit():
         prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
@@ -61,9 +64,11 @@ def formel():
         text = result["choices"][0]["text"]
         formula = text[1:]
         
-        return render_template('dashboard/dashboard.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
+        gif = 'static/img/beam-a-person-is-typing-on-a-laptop.gif'
+        
+        return render_template('dashboard/dashboard.html', form=form, explanation=explanation, formula=formula, prompt=prompt, gif=gif)
 
-    return render_template('dashboard/dashboard.html', form=form)
+    return render_template('dashboard/dashboard.html', form=form, gif=gif)
 
 @dashboard_blueprint.route('/dashboard/favorite/<int:prompt_id>', methods=['POST'])
 @login_required

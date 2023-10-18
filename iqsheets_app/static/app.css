@@ -482,6 +482,11 @@ body.dark select{
     color: var(--text-color);
 }
 
+.explanation {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+
 .form-row {
     margin: 0 15px;
 }
