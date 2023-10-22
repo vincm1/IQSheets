@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block content %}
+<main>
+  <!-- Best Pricing Start -->
+  <section class="pricing pt-5 pb-2" data-background="assets/img/gallery/best_pricingbg.jpg">
+      <div class="container">
+          <!-- Section Tittle -->
+          <div class="row d-flex justify-content-center">
+              <div class="col-lg-6 col-md-8">
+                  <div class="section-tittle section-tittle2 text-center">
+                      <h2>Wähle <span style="font-size: 38px;">Dein</span> Model <span style="font-size: 38px;"></span></h2>
+                  </div>
+              </div>
+          </div>
+      </div>
+  <!-- Best Pricing End -->
+
+  <!-- Pricing Card Start -->
+      <div class="pricing-card-area py-5">
+          <div class="container justify-content-center">
+              <div class="row row-cols-1 row-cols-lg-3 mb-3 text-center justify-content-center">
+
+                  <div class="col">
+                      <div class="card mb-4 rounded-3 h-100 shadow-sm">
+                          <div class="card-header py-3">
+                              <h4>Starter</h4>
+                          </div>
+                          <div class="card-body">
+                              <h1 class="card-title pricing-card-title">kostenlos</h1>
+                              <ul class="list-unstyled my-3 py-3">
+                                  <li class="py-1"><span style="font-size: 14px;">3 </span>Test KI Abfragen</li>
+                                  <li class="py-1">Best Practices</li>
+                                  <li class="py-1">Test Templates</li>
+                              </ul>
+                          </div>
+                          <div class="card-bottom mb-3">
+                              <a href="https://buy.stripe.com/test_cN25kYggqaPy6ukcMO?prefilled_email={{user_email}}", target="_blank"><button class="btn btn-outline-primary w-100">Kostenlos testen</button></a>
+                          </div>
+                      </div>
+                  </div>
+              
+                  <div class="col">
+                      <div class="card mb-4 rounded-3 h-100 shadow-sm">
+                          <div class="card-header py-3">
+                              <h4>Premium</h4>
+                          </div>
+                          <div class="card-body">
+                              <h1 class="card-title pricing-card-title">4,99€ / mo </h1>
+                              <ul class="list-unstyled my-3 py-3">
+                                  <li class="py-1"><span style="font-style: oblique;">unbegrenzt </span>KI Abfragen</li>
+                                  <li class="py-1">Best Practices</li>
+                                  <li class="py-1">Alle Templates</li>
+                                  <li class="py-1">Support</li>
+                              </ul>
+                          </div>
+                          <div class="card-bottom mb-3">
+                              <a href="https://buy.stripe.com/test_14k9Be3tE6zi2e47st?prefilled_email={{user_email}}" target="_blank"><button class="btn btn-primary py-3 w-100">Loslegen</button></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- Pricing Card End -->
+</main>
+{% endblock %}

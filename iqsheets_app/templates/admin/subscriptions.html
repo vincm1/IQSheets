@@ -1,0 +1,22 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+  <h2>
+    Subs
+
+    {% for customer in customers %}
+        <p>{{customer.id}}</p>
+        <p>{{customer.adress}}</p>
+        <p>{{customer.email}}</p>
+        <p>{{customer.invoice_prefix}}</p>
+    {% endfor %}
+
+    {% for subscription in subscriptions %}
+        <p>{{subscription.id}}</p>
+        <p>{{subscription.created}}</p>
+        <p>{{subscription.customer}}</p>
+        <p>{{subscription.object}}</p>
+        <p>{{subscription["items"]["data"][0]["price"]["unit_amount"]}}</p>
+    {% endfor %}
+  </h2>
+{% endblock %}

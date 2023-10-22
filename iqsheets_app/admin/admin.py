@@ -4,7 +4,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView 
 from iqsheets_app import db
 from iqsheets_app.models import User, OAuth, Prompt, Template
-from .views import MyAdminIndexView, AnalyticsView, TemplatesUploadView
+from .views import MyAdminIndexView, AnalyticsView, TemplatesUploadView, SubscriptionsView
 
 def create_admin(db):
     admin = Admin(name="IQSheet Admin", template_mode="bootstrap4", index_view=MyAdminIndexView())
@@ -14,6 +14,7 @@ def create_admin(db):
     admin.add_view(ModelView(OAuth, db.session, endpoint="oauth_admin"))
     admin.add_view(ModelView(Prompt, db.session))
     admin.add_view(ModelView(Template, db.session))
+    admin.add_view(SubscriptionsView(name='Subscriptions', endpoint='subscriptions'))
     admin.add_view(AnalyticsView(name='Analytics', endpoint='analytics'))
     admin.add_view(TemplatesUploadView(name='Template Upload', endpoint='templates'))
     return admin

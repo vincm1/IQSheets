@@ -59,11 +59,13 @@ def login():
     
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Falscher Username oder Passwort', 'danger')
-            return redirect(url_for('user.login'))
-        login_user(user, remember=True)
-        return redirect(url_for('dashboard.dashboard'))
+        if user is None or not user.is_confirmed:
+            flash('Bitte bestätige erst deine Anmeldung', 'info')
+            if not user.check_password(form.password.data):
+                return redirect(url_for('user.login'))
+        else:
+            login_user(user, remember=True)
+            return redirect(url_for('dashboard.dashboard'))
     
     return render_template('user/login.html', form=form, form_nl=form_nl)
 
@@ -80,13 +82,14 @@ def confirm_email(token):
     email = confirm_token(token)
     user = User.query.filter_by(email=email).first_or_404()
     print(user.email)
+    form_nl = NewsletterForm()
     if user.email == email:
         user.is_confirmed = True
         user.confirmed_on = datetime.now()
         db.session.add(user)
         db.session.commit()
         flash('Account bestätigt', 'success')
-        return redirect(url_for('user.login'))
+        return render_template('stripe/checkout.html', user_email=email, form_nl=form_nl)
     else:
         flash('Der Bestätigungslink ist abgelaufen oder invalide.', 'danger')
     return redirect(url_for('core.index'))

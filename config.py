@@ -49,6 +49,9 @@ class DevelopmentConfig(BaseConfig):
     #Oauth
     GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
     GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
+    #Stripe test keys
+    STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_TEST')
+    STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_TEST')
 
 # Create the testing config
 class TestingConfig(BaseConfig):

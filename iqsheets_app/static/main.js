@@ -35,7 +35,6 @@ premium.addEventListener("mouseout", () => {
 	premiumBtn.innerText = "Premium";
 });
 
-
 const premiumProfileBtn = document.getElementById('profile-premium-btn');
 
 premiumProfileBtn.addEventListener("mouseover", () => {
@@ -69,7 +68,6 @@ function copyToClipboard() {
     document.body.removeChild(tempInput);
   }
 
-
 const filterBtn = document.getElementById("filter-btn");
 filterBtn.addEventListener("click", () => {
     filterBtn.classList.add("active");
@@ -95,3 +93,22 @@ $(document).ready(function() {
       // $('#my-form').append('<input type="hidden" name="buttonName" value="incorrect-btn">').submit();
   });
 });
+
+// // Initialize Stripe.js
+// const stripe = Stripe('pk_test_51MpD8VHjForJHjCt0k588Bqt0avQVFo4mn7qLGdEcskklPj0hEds8uJNe6qbQFUtglDgcNR58dpUpAViJcL2iyqG00cDOktWn0');
+// const aboButton = document.getElementById('abo-btn')
+
+// aboButton.addEventListener("click", () => {
+//   // Get Checkout Session ID
+//   fetch("/create-checkout-session")
+//   .then((result) => { return result.json(); })
+//   .then((data) => {
+//     console.log(data);
+//     // Redirect to Stripe Checkout
+//     return stripe.redirectToCheckout({sessionId: data.sessionId
+//     });
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
+// });

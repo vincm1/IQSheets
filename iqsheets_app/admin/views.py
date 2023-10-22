@@ -2,6 +2,7 @@
 ''' Views for flask admin '''
 import os
 import boto3
+import stripe
 from flask import current_app, redirect, url_for
 from flask_login import current_user
 from flask_admin import AdminIndexView, BaseView, expose
@@ -9,6 +10,8 @@ from iqsheets_app.admin.forms import TemplatesForm
 from flask_admin.contrib.sqla import ModelView 
 from iqsheets_app import db
 from iqsheets_app.models import Template
+
+stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2AbKIYPWl2LXKPW3U3h6Lu71E94Gf1NvrHKE00xPsZzRZZ"
 class MyAdminIndexView(AdminIndexView):
     ''' Index view for admin panel '''
     def is_accessible(self):
@@ -27,6 +30,13 @@ class AnalyticsView(BaseView):
     @expose('/')
     def index(self):
         return self.render('admin/analytics_index.html')
+    
+class SubscriptionsView(BaseView):
+    @expose('/')
+    def index(self):
+        customers = stripe.Customer.list()
+        subscriptions = stripe.Subscription.list()
+        return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions)
 
 class TemplatesUploadView(BaseView):
     @expose('/', methods=["GET","POST"])
