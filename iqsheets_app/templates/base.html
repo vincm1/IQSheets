@@ -28,92 +28,104 @@
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-md mt-4">
-      <div class="container">
-          <a class="navbar-brand" href="{{url_for('core.index')}}" id="logo"><span id="logo-iq">IQ</span>Sheets</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><i class="fa-solid fa-angle-down"></i></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-            <div class="d-flex">
-                <ul class="navbar-nav me-auto justify-content-end">
-                    <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="{{url_for('core.pricing')}}">Preise</a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="{{url_for('core.index', _anchor='features')}}">Features</a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="{{url_for('core.index', _anchor='vorteile')}}">Vorteile</a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="{{url_for('core.pricing', _anchor='FAQs')}}">FAQs</a>
-                    </li>
-                    <a class="btn btn-primary me-2" href="{{url_for('user.register')}}">Registrieren</a>
-                    <a class="btn btn-outline-primary" href="{{url_for('user.login')}}">Login</a>
-                </ul>  
-            </div>
-          </div>
-      </div>
-    </nav>
+	<body>
+		<nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
+			<div class="container">
+				<a class="navbar-brand" href="{{url_for('core.index')}}" id="logo">
+					<img class="navbar-brand-logo" src="static/img/logo.svg" alt="">
+				</a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
+					<ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+						<li class="nav-item">
+							<a class="nav-link" href="{{url_for('core.pricing')}}">Preise</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{url_for('core.index', _anchor='features')}}">Features</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{url_for('core.index', _anchor='vorteile')}}">Vorteile</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">FAQs</a>
+						</li>
+
+						<li class="nav-divider"></li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="#"><button class="btn btn-secondary d-lg-inline-block">Login</button></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"><button class="btn btn-primary d-lg-inline-block"><i class="fa-regular fa-user me-2"></i>Anmelden</button></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
     {% block content %} 
     
     {% endblock %}
+
     <footer>
-        <div class="container-fluid mt-5 mb-5">
+        <div class="container-fluid py-3">
+					<hr>
             <!-- Footer Start-->
             <div class="footer-area footer-padding">
-                <div class="container">
+                <div class="container py-2">
                     <div class="row justify-content-between">
-                        <div class="col-lg-4 col-md-4 col-sm-8">
-                            <div class="single-footer-caption">
-                                <div class="footer-title">
-                                    <div class="footer-pera">
-                                        <h4><span id="logo-iq">IQ</span>Sheets</h4>
-                                        <h6>Zeitersparnis in Excel & Google Spreadsheets, dank smarter KI.</h6>
-                                        <p class="info1">
-                                            Generiere dir mit dem KI-Tool von IQSheets in sekundenschnelle smarte Excel-Formeln und lasse dir unbekannte Formeln 
-                                            erklären und werde zum Spreadsheet-Profi. 
-                                        </p>
-                                        <p class="info1">Ein Produkt der PyMinds UG <span style="font-style:italic">(haftungsbeschränkt)</span><br>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-3 mb-7 mb-lg-0">
+                        	<div class="logo-area">
+														<div class="mb-4">
+															<a class="navbar-brand" href="{{url_for('core.index')}}" aria-label="Space">
+																<img class="navbar-brand-logo" src="static/img/logo-white.svg" alt="Image Description">
+															</a>
+														</div>
+														
+														<h6>Zeitersparnis in Excel & Google Spreadsheets, dank smarter KI.</h6>
+														<p class="info1">
+																Generiere dir mit dem KI-Tool von IQSheets in sekundenschnelle smarte Excel-Formeln und lasse dir unbekannte Formeln 
+																erklären und werde zum Spreadsheet-Profi. 
+														</p>
+                          </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-5">
+
+                        <div class="col-lg-3 mb-7 mb-lg-0">
                             <div class="single-footer-caption">
                                 <div class="footer-title">
-                                    <h4>Quick Links</h4>
-                                    <ul>
-                                        <li><a href="{{url_for('core.pricing')}}">Preise</a></li>
-                                        <li><a href="{{url_for('core.pricing', _anchor='FAQs')}}">FAQs</a></li>
-                                        <li><a href="{{url_for('core.impressum')}}">Impressum</a></li>
+																		<h6 class="footer-heading">Quick Links</h6>
+																</div>
+                                    <ul class="footer-list">
+                                        <li class="footer-link"><a href="{{url_for('core.pricing')}}">Preise</a></li>
+                                        <li class="footer-link pt-2"><a href="{{url_for('core.pricing', _anchor='FAQs')}}">FAQs</a></li>
+																				<li class="footer-link pt-2"><a href="{{url_for('core.pricing', _anchor='AGB')}}">AGB</a></li>
+                                        <li class="footer-link pt-2"><a href="{{url_for('core.impressum')}}">Impressum</a></li>
                                     </ul>
-                                </div>
                             </div>
-                        </div>
+                          </div>
+
                         <div class="col-lg-2 col-md-4 col-sm-7">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-title">
-                                    <h4>Support</h4>
-                                    <ul>
-                                        <li><a href="{{url_for('core.kontakt')}}">Feedback</a></li>
-                                        <li><a href="{{url_for('core.kontakt')}}">Kontakt</a></li>
+                                    <h6 class="footer-heading">Support</h6>
+                                    <ul class="footer-list">
+                                        <li class="footer-link"><a href="{{url_for('core.kontakt')}}">Feedback</a></li>
+                                        <li class="footer-link pt-2"><a href="{{url_for('core.kontakt')}}">Kontakt</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-3 col-md-6 col-sm-8">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-title">
-                                    <h4>Newsletter</h4>
+                                    <h6 class="footer-heading">Newsletter</h6>
                                     <div class="footer-pera footer-pera2">
-                                    <p>Verpasse keine Updates, jetzt zum Newsletter anmelden.</p>
-                                </div>
+                                    	<p>Verpasse keine Updates, jetzt zum Newsletter anmelden.</p>
+                                		</div>
                                 <!-- Form -->
                                 <div class="footer-form">
                                     <form method="POST" action="{{url_for('core.newsletter')}}">
@@ -129,18 +141,37 @@
                                         </div>    
                                     </form>
                                 </div>
+
                                 </div>
-                                </div>
+
                             </div>
                         </div>
+
                     </div>
-                    <!-- Copy-Right -->
-                    <div class="row align-items-center">
-                        <div class="col-xl-12 ">
-                            <div class="footer-copy-right">
-                            </div>
-                        </div>
-                    </div>
+             		</div>
+
+								<div class="container mt-2">
+									<!-- Copy-Right -->
+									<div class="row align-items-center">
+										<hr>
+											<div class="col-xl-12">
+													<div class="footer-copy-right">
+														<div class="row">
+															<div class="col-9">
+																<p>© IQSheets ein Produkt der <br> 
+																	PyMinds UG (haftungsbeschränkt)</p>
+															</div>
+															<div class="col-3 align-items-end social-btns">
+																<button class="btn btn-primary mx-1"><i class="fa-brands fa-facebook fa-2xl"></i></button>
+																<button class="btn btn-primary mx-1"><i class="fa-brands fa-linkedin fa-2xl"></i></button>
+																<button class="btn btn-primary mx-1"><i class="fa-brands fa-twitter fa-2xl"></i></button>
+															</div>
+														</div>
+													</div>
+											</div>
+									</div>
+								</div>
+                    
                 </div>
             </div>
         </div>

@@ -1,36 +1,66 @@
 {% extends "base.html" %} {% block content %}
 <main>
-    <!-- Hero Area-->
-    <section class="hero my-5 py-5">
-            <div class="slider-active">
-                <div class="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
-                    <div class="container">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-lg-5 col-md-9 ">
-                                <div class="hero__caption">
-                                    <span data-animation="fadeInUp" data-delay=".4s"><span id="logo-iq" style="font-size:20px;">IQ</span>Sheets</span>
-                                    <h1 data-animation="fadeInUp" data-delay=".6s">Textanweisungen sekundenschnell <br>in <span style="font-size: 45px; font-style:italic;">Excel-Formeln</span> <br> verwandeln.</h1>
-                                    <p data-animation="fadeInUp" data-delay=".8s">Dank smarter<span style="font-size:20px; font-style:italic;"> KI </span> kein Kopfzerbrechen mehr in während deiner täglichen Arbeit in <span style="font-size: 20px; font-style:italic;">Spreadsheets.</span></p>
-                                    <!-- Slider btn -->
-                                <div class="slider-btns">
-                                        <!-- Hero-btn -->
-                                        <a class="btn btn-primary me-2" href="{{url_for('user.register')}}">Jetzt Formeln erstellen</a>
-                                        <!-- Video Btn -->
-                                        <a data-animation="fadeInRight" data-delay="1.0s" class="btn btn-secondary" href="{{url_for('core.index',_anchor='video-description')}}"><i class="fas fa-play pe-2"></i>Wie funktioniert <span id="logo-iq" style="font-size:14px">IQ</span>Sheets?</a>
-                                </div>
-                                </div>
+
+    <section class="hero">
+        <div class="position-relative overflow-hidden">
+            <div class="container content-space-2 py-5">
+              <div class="row justify-content-center align-items-lg-center">
+                <div class="col-md-8 col-lg-6 mb-7 mb-lg-0">
+                  <!-- Heading -->
+                  <div class="pe-lg-3 mb-7">
+                    <h1 class="display-3 text-white mb-3 mb-md-5">Solving problems for every
+                      <span class="text-warning">
+                        <span class="js-typedjs"
+                              data-hs-typed-options='{
+                                "strings": ["team.", "startup.", "business."],
+                                "typeSpeed": 90,
+                                "loop": true,
+                                "backSpeed": 30,
+                                "backDelay": 2500
+                              }'></span>
+                      </span>
+                    </h1>
+                    <p class="lead text-white-70">Built on standard web technology, teams use Space to build beautiful cross-platform hybrid apps in a fraction of the time.</p>
+                  </div>
+                  <!-- End Heading -->
+    
+                    <div class="row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                        <!-- Info Block -->
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                            <span class="svg-icon text-white">
+                            </span>
                             </div>
-                            <div class="col-lg-5 ms-5 justify-content-end">
-                                <div class="hero__img d-none d-lg-block f-right ms-5" data-animation="fadeInRight" data-delay="1s">
-                                    <img src="{{url_for('static', filename='img/undraw_completed_tasks_vs6q.svg')}}" alt="Landing Page" height="500rem">
-                                </div>
+        
+                            <div class="flex-grow-1 ms-4">
+                            <h6 class="text-white mb-0">24 hours</h6>
+                            <p class="text-white-70">Response time</p>
                             </div>
                         </div>
+                        <!-- End Info Block -->
+                        </div>
                     </div>
+
                 </div>
             </div>
-        <!-- Slider Area End -->
+            </div>
+
+            <div class="position-absolute top-0 end-0">
+                <img src="./static/components/shape-3-soft-light.svg" alt="SVG" width="500">
+            </div>
+            <div class="position-absolute bottom-0 end-0 me-10">
+                <img src="./static/components/shape-1-soft-light.svg" alt="SVG" width="250">
+            </div>
+            <div class="position-absolute bottom-0 start-0">
+                <img src="./static/components/shape-2-soft-light.svg" alt="SVG" width="400">
+            </div>
+
     </section>
+    
+
+        
+    </div>  
    
     <!-- Applic App Start -->
     <section class="app-pictures py-5">
