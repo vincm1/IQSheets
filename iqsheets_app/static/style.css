@@ -1,10 +1,6 @@
 @charset "UTF-8";
-/*!
- * Bootstrap  v5.2.2 (https://getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@600&family=Barlow+Condensed&display=swap');
+
 :root {
   --bs-blue: #334AC0;
   --bs-indigo: #6610f2;
@@ -49,8 +45,8 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 81, 89, 108;
   --bs-body-bg-rgb: 255, 255, 255;
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --bs-font-sans-serif: 'Albert Sans', sans-serif;
+  --bs-font-monospace: 'Barlow Condensed', sans-serif; */
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: Roboto, sans-serif;
   --bs-body-font-size: 1rem;
@@ -69,9 +65,11 @@
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 6.1875rem;
   --bs-link-color: #008060;
+  --bs-link-color-hover: rgba(0, 128, 96, 0.2);
   --bs-link-hover-color: #005c45;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fcf1e6;
+  --bs-background-light: #E5F8F3;
 }
 
 *,
@@ -91,6 +89,10 @@ body {
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--bs-dark);
 }
 
 /* BTNs */
@@ -122,12 +124,14 @@ a {
 }
 
 .btn-secondary:hover {
-    background-color: var(--bs-success);
+    background-color: var(--bs-link-color-hover);
     color: var(--bs-link-hover-color);
-    opacity: 80%;
 }
 
 /* Navbar */
+nav {
+    background-color: var(--bs-background-light);
+}
 
 .navbar-brand {
     color: #005c45;
@@ -152,8 +156,87 @@ a {
 /* LANDING PAGE  */
 
 .hero {
-    background-color: #005c45;
-    color: var(--bs-body-bg)
+    background-color: var(--bs-background-light);
+    color: var(--bs-link-hover-color);
+    font-style: bold;
+}
+
+.hero h1 {
+    color: var(--bs-link-hover-color);
+}
+
+#changing-text {
+    color: var(--bs-warning);
+    font-style: bold;
+}
+
+.hero-benefits span h3 {
+    color: var(--bs-link-hover-color)
+}
+
+/* Features */
+
+.vorteil-container {
+    margin: 10px;
+    padding: 5px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 10px;
+}
+
+.service-icon i {
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 10px 50px;
+    color: var(--bs-link-hover-color);
+}
+
+
+/* How to */
+
+.line {
+    border: 2px solid;
+}
+
+.how-to-icon i {
+    border-radius: 50%;
+    border: 1px solid;
+    padding: 25px;
+    color: var(--bs-link-hover-color);
+}
+
+.services-caption h2 {
+    color: var(--bs-link-hover-color);
+}
+
+.services-caption i {
+    color: var(--bs-link-color);
+
+}
+
+/* Video-section */
+
+.video-container {
+    background-color: var(--bs-background-light); 
+}
+
+/* Pricing */
+
+.pricing text-primary span {
+    color:#008060;
+}
+
+.pricing-info {
+    background-color: var(--bs-link-color-hover);
+    border-radius: 5px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.pricing-info i {
+    color: var(--bs-link-color);
+}
+
+.preis {
+    color: var(--bs-link-hover-color);
 }
 
 /* Footer */
@@ -190,8 +273,4 @@ footer {
 
 .footer-link a:hover {
     text-decoration: underline;
-}
-
-footer .social-btns {
-    gap: 30px;
 }

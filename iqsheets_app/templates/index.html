@@ -3,166 +3,248 @@
 
     <section class="hero">
         <div class="position-relative overflow-hidden">
-            <div class="container content-space-2 py-5">
+            <div class="container-fluid content-space-2 py-5">
               <div class="row justify-content-center align-items-lg-center">
-                <div class="col-md-8 col-lg-6 mb-7 mb-lg-0">
+                <div class="col-md-7 col-lg-5 mb-7 mb-lg-0">
                   <!-- Heading -->
                   <div class="pe-lg-3 mb-7">
-                    <h1 class="display-3 text-white mb-3 mb-md-5">Solving problems for every
-                      <span class="text-warning">
-                        <span class="js-typedjs"
-                              data-hs-typed-options='{
-                                "strings": ["team.", "startup.", "business."],
-                                "typeSpeed": 90,
-                                "loop": true,
-                                "backSpeed": 30,
-                                "backDelay": 2500
-                              }'></span>
-                      </span>
+                    <h1 class="display-3 mb-3 mb-md-5">Zeitsparen in Excel für
+                        <div id="text-container">
+                            <p id="changing-text">Controller.</p>
+                        </div>
                     </h1>
-                    <p class="lead text-white-70">Built on standard web technology, teams use Space to build beautiful cross-platform hybrid apps in a fraction of the time.</p>
+                    <div class="d-grid d-sm-flex gap-2 mb-5">
+                        <a href="{{url_for('user.register')}}"><button class="btn btn-primary" href="">Jetzt registrieren</button></a>
+                        <a class="btn btn-secondary me-2" href="https://www.youtube.com/watch?v=0qisGSwZym4" role="button" data-fslightbox="youtube-video">
+                          Demovideo <i class="fa-solid fa-play fa-xl ms-2"></i>
+                        </a>
+                    </div>
+                    <div class="row mt-5 hero-benefits">
+                        <div class="col-lg-8 mt-2">
+                          <div class="row">
+                            <div class="col-lg-4 mb-3 mb-sm-0">
+                              <h2 class="hero-info">50%</h2>
+                              <p>Zeitersparnis dank KI-Formeln</p>
+                            </div>
+                            <!-- End Col -->
+            
+                            <div class="col-lg-4 mb-3 mb-sm-0 mr-2">
+                              <span class="h3 d-block text-primary">10%</span>
+                              <p>more revenue from new sellers</p>
+                            </div>
+                            <!-- End Col -->
+            
+                            <div class="col-4">
+                              <span class="h3 d-block text-primary">67%</span>
+                              <p>reduction in expansion costs</p>
+                            </div>
+                            <!-- End Col -->
+                          </div>
+                          <!-- End Row -->
+                        </div>
+                        <!-- End Col -->
+                      </div>
                   </div>
                   <!-- End Heading -->
-    
-                    <div class="row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                        <!-- Info Block -->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                            <span class="svg-icon text-white">
-                            </span>
-                            </div>
-        
-                            <div class="flex-grow-1 ms-4">
-                            <h6 class="text-white mb-0">24 hours</h6>
-                            <p class="text-white-70">Response time</p>
-                            </div>
-                        </div>
-                        <!-- End Info Block -->
-                        </div>
-                    </div>
 
                 </div>
+                <div class="col-lg-4 justify-content-end">
+                    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+                    <dotlottie-player src="https://lottie.host/0351042f-3b37-420c-98c7-2c681d3e4dcc/PohXkhh0Hq.json" background="transparent" speed="1" style="width: 700px; height: 700px;" loop autoplay></dotlottie-player>
+                </div>
+                
             </div>
             </div>
 
-            <div class="position-absolute top-0 end-0">
-                <img src="./static/components/shape-3-soft-light.svg" alt="SVG" width="500">
+            <div class="position-absolute bottom-0 end-0 mt-2 mb-5">
+                <img src="static/components/shape-1.svg" id="pic" alt="SVG" width="200">
             </div>
-            <div class="position-absolute bottom-0 end-0 me-10">
-                <img src="./static/components/shape-1-soft-light.svg" alt="SVG" width="250">
-            </div>
-            <div class="position-absolute bottom-0 start-0">
-                <img src="./static/components/shape-2-soft-light.svg" alt="SVG" width="400">
-            </div>
-
     </section>
-    
 
-        
-    </div>  
-   
-    <!-- Applic App Start -->
-    <section class="app-pictures py-5">
-        <div class="applic-apps">
-            <div class="container-fluid justify-content-center">
+    <!-- Advantages -->
+    <section class="advantages py-5">
+            <div class="container py-5">
                 <div class="row justify-content-center">
                     <!-- slider Heading -->
-                    <div class="col-xl-8 col-lg-8 col-md-8 text-center" id="video-description">
-                        <div class="single-cases-info">
-                            <h3>IQSheets<br></h3>
-                            <p>In nur wenigen Klicks zur Excel-Formel wie hier in dem Video gezeigt:</p>
-                        </div>
-                    </div>
-                    <!-- OwL -->
-                    <div class="d-flex flex-row justify-content-center mt-2 py-4">
-                        <div class="col-xl-12 col-lg-8 col-md-7 align-self-center text-center">
-                            <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" height="700" 
-                            type="video/mp4" controls>
-                                Browser unterstützt Videowiedergabe nicht.
-                            </video>
-                        </div>
+                    <div class="col-xl-12 text-center" id="video-description">
+                        <h3>Die wichtigsten Vorteile auf einem Blick</h3>
+                        <p class="pt-2">Egal ob Google oder Excel, spare jetzt jede Menge Zeit und Frust in deinem Arbeitsalltag!</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- Applic App End -->
-
-    <!-- Services Area Start -->
-    <section class="service-area my-5" id="vorteile">
-        <div class="container-fluid py-5">
-            <!-- Section Tittle -->
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section-tittle text-center">
-                        <h2>Wie hilft dir <span style="font-size:33px"><span id="logo-iq" style="font-size:40px">IQ</span>Sheets</span> im Spreadsheet Alltag?</h2>
-                    </div>
-                </div>
-            </div>
-            <!-- Section caption -->
-            <div class="container-fluid">
-                <div class="row py-5">
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="services-caption text-center mb-30 px-5 py-5">
-                            <div class="service-icon">
-                                <i class="fa-solid fa-bolt fa-3x"></i>
+                <div class="row mt-5 justify-content-center">
+                    <div class="col-lg-3 col-md-1 vorteil-container">
+                        <div class="services-caption">
+                            <div class="service-icon text-center p-3">
+                                <i class="fa-regular fa-clock fa-3x"></i>
+                                <h4 class="text-center pt-3">Formeln 10x schneller</h4>
                             </div> 
-                            <div class="service-cap pt-4">
-                                <h4>Formeln 10x schneller</h4>
-                                <p class="pt-2">Generieren Sie die benötigten Formeln in sekundenschnelle. 
+                            <div class="service-cap pt-2 px-3">
+                                <p>Generieren Sie die benötigten Formeln in sekundenschnelle. 
                                 Keine Zeit und Nerven mehr mit der Erstellung von Formeln 
                                 durch lange Internetrecherche verschwenden.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="services-caption text-center mb-30 px-5 py-5">
-                            <div class="service-icon">
+                    <div class="col-lg-3 col-md-1 vorteil-container">
+                        <div class="services-caption">
+                            <div class="service-icon text-center p-3">
                                 <i class="fa-solid fa-chalkboard-user fa-3x"></i>
+                                <h4 class="text-center pt-3">Spreadsheet Profi werden</h4>
                             </div> 
-                            <div class="service-cap pt-4">
-                                <h4>Spreadsheet Profi werden</h4>
-                                <p class="pt-2">
-                                    Ob Anfänger oder Fortgeschritten in Excel/Google Sheets. Mit IQSheets jetzt zum kann 
+                            <div class="service-cap pt-2 px-3">   
+                                <p>
+                                    Ob Anfänger oder Profi, mit IQSheets jetzt zum kann 
                                     Tabellenkalkulations-Profi werden.
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="services-caption text-center mb-30 px-5 py-5">
-                            <div class="service-icon">
-                                <i class="fa-regular fa-clock fa-3x"></i>
+                    </div> 
+                    <div class="col-lg-3 col-md-1 vorteil-container">
+                        <div class="services-caption">
+                            <div class="service-icon text-center p-3">
+                                <i class="fa-solid fa-lightbulb fa-3x"></i>
+                                <h4 class="text-center pt-3">Neue Ideen</h4>
                             </div> 
-                            <div class="service-cap pt-4">
-                                <h4>Zeitersparnis</h4>
-                                <p class="pt-2">Keine komplexe Formeln merken oder stundenlang 
-                                    diese von Grund auf neu erstellen. Speichere dir deine Favoriten einfach ab!</p>
+                            <div class="service-cap pt-2 px-3">
+                                <p>Entdecke mit IQSheets neue Lösungen für deinen Alltag und über 
+                                    100 Vorlagen für Google Sheets und Excel.
+                                </p>       
                             </div>
                         </div>
-                    </div> 
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="services-caption text-center mb-30 px-5 py-5">
-                            <div class="service-icon">
-                                <i class="fa-solid fa-lightbulb fa-3x"></i>
-                            </div> 
-                            <div class="service-cap pt-4">
-                                <h4>Neue Ideen</h4>
-                                <p class="pt-2">Entdecke mit IQSheets neue <br>
-                                    Lösungen für deine Arbeitsalltag und über 
-                                    <span style="font-size:20px; font-style:italic">100 Vorlagen</span><br>
-                                    für Google Sheets und Excel.
-                                </p>
-                            </div>
+                    </div>     
+                </div>
+            </div>
+            <div class="container py-4">
+                <hr>
+            </div>
+    </section>
+    <!-- Applic App End -->
+
+    <!-- How to -->
+    <section class="how-to py-5">
+        <div class="container pb-5">
+            <div class="row justify-content-center">
+                <!-- slider Heading -->
+                <div class="col-xl-12 text-center" id="video-description">
+                    <h3>Wie funktioniert die App?</h3>
+                    <p>In nur drei Schritten zur perfekten Excel/Google Spreadsheet Formel.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-3 col-md-1 how-to-container">
+                    <div class="services-caption text-center">
+                        <div class="how-to-icon">
+                            <i class="fa-regular fa-clock fa-3x"></i>
+                        </div> 
+                        <div class="service-cap pt-4">
+                            <h6>Problem identifizieren</h6>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-1 how-to-container">
+                    <div class="services-caption text-center">
+                        <div class="how-to-icon">
+                            <i class="fa-solid fa-brain fa-3x"></i>
+                        </div> 
+                        <div class="service-cap pt-4">
+                            <h6>Company reviewed</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-1 how-to-container">
+                    <div class="services-caption text-center">
+                        <div class="how-to-icon">
+                            <i class="fa-solid fa-check-to-slot fa-3x"></i>
+                        </div> 
+                        <div class="service-cap pt-4">
+                            <h6>Company accepted</h6>
+                        </div>
+                    </div>
+                </div>   
             </div>
-            
         </div>
     </section>
-    <!-- Services Area End -->
+
+    <section>
+        <div class="container-fluid video-container">
+            <!-- OwL -->
+            <div class="col-xl-12 text-center pt-5">
+                <p>In nur drei Schritten zur perfekten Excel/Google Spreadsheet Formel.</p>
+            </div>
+            <div class="justify-content-center py-4 mb-5">
+                <div class="col-xl-12 col-lg-8 col-md-7 align-self-center text-center">
+                    <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" height="500" 
+                    type="video/mp4" controls>
+                        Browser unterstützt Videowiedergabe nicht.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+            <!-- Pricing -->
+        <div class="container pricing mt-5">
+            <!-- Heading -->
+            <div class="mb-5 text-center pt-5 py-2">
+                <h3>Ein Plan für Jeden</h3>
+                <p>Pay as you go, jederzeit kündbar.</p>
+            </div>
+            <!-- End Heading -->
+        
+            <div class="row justify-content-center">
+                <div class="col-lg-4" style="border-right: 1px solid #8C98A4;">
+                    <div class="justify-content-center text-center">
+                        <img class="avatar avatar-xxl avatar-4x3" src="static/components/oc-money-profits.svg" alt="Image Description" height="200px" width="200px">
+                        <h2 class="preis"> € 4,99</h2>
+                        <p>Pro Monat</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 ms-5 mt-3">
+                    <div class="mb-4">
+                        <h5>Beinhaltet alles, was du benötigst:</h5>
+                    </div>
+            
+                    <!-- List Checked -->
+                    <ul class="list-checked list-checked-primary mb-0">
+                        <li class="list-checked-item">Up to 10 people <i class="fa-regular fa-circle-question text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="The number of teammates that can access your Space workspace"></i></li>
+                        <li class="list-checked-item">Unlimited apps</li>
+                        <li class="list-checked-item">Sales opportunities <i class="bi-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Track potential sales, such as a bid, deal or proposal."></i></li>
+                        <li class="list-checked-item">API access & Space integration <i class="bi-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Programmatically manage Segment workspaces, sources, destinations, and more"></i></li>
+                        <li class="list-checked-item">Advanced account security <i class="bi-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Protect your workspace with personalized security settings"></i></li>
+                        <li class="list-checked-item">Enterprise response SLA</li>
+                    </ul>
+                <!-- End List Checked -->
+                </div>
+            </div>
+            <!-- End Col -->
+           
+            <!-- End Row -->
+            <div class="row justify-content-center my-5">
+                <div class="pricing-info mx-auto" style="max-width: 40.25rem;">
+                    <!-- Alert -->
+                    <div class="alert alert-soft-primary" role="alert">
+                        <div class="d-sm-flex align-items-sm-center">
+                        <div class="flex-shrink-0 mb-3 mb-sm-0">
+                        </div>
+                        <div><i class="fa-solid fa-bell fa-2xl me-2"></i></div>
+                        <div class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
+                            Empowering independent business owners everywhere
+                        </div>
+                        <div class="flex-shrink-0 ms-sm-3">
+                            <a class="btn btn-primary" href="#">Kostenlos probieren</a>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- End Alert -->
+                </div>
+                
+            </div>
+            <hr>
+        </div>
+  <!-- End Pricing -->
+    </section>
 
     <!-- Best Features Start -->
     <section class="features py-5 mt-5" id="features">
@@ -221,68 +303,6 @@
     </section>
     <!-- Best Features End -->
 
-    <!-- Best Pricing Start -->
-    <section class="pricing pt-4 pb-5">
-        <div class="container py-4">
-            <!-- Section Tittle -->
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                    <div class="section-tittle section-tittle2 text-center">
-                        <h2>Starte <span style="font-size: 38px;">kostenlos</span>. Upgrade jederzeit zum <span style="font-size: 38px;">Premium</span> unkompliziert.</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- Best Pricing End -->
-
-    <!-- Pricing Card Start -->
-        <div class="pricing-card-area py-5">
-            <div class="container justify-content-center">
-                <div class="row row-cols-1 row-cols-lg-3 mb-3 text-center justify-content-center">
-
-                    <div class="col">
-                        <div class="card mb-4 rounded-3 h-100 shadow-sm">
-                            <div class="card-header py-3">
-                                <h4>Starter</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">kostenlos</h1>
-                                <ul class="list-unstyled my-3 py-3">
-                                    <li class="py-1"><span style="font-size: 14px;">3 </span>Test KI Abfragen</li>
-                                    <li class="py-1">Best Practices</li>
-                                    <li class="py-1">Test Templates</li>
-                                </ul>
-                            </div>
-                            <div class="card-bottom mb-3">
-                                <a href="{{url_for('user.register')}}"><button class="btn btn-outline-primary w-100">Kostenlos testen</button></a>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="col">
-                        <div class="card mb-4 rounded-3 h-100 shadow-sm">
-                            <div class="card-header py-3">
-                                <h4>Premium</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">4,99€ / mo </h1>
-                                <ul class="list-unstyled my-3 py-3">
-                                    <li class="py-1"><span style="font-style: oblique;">unbegrenzt </span>KI Abfragen</li>
-                                    <li class="py-1">Best Practices</li>
-                                    <li class="py-1">Alle Templates</li>
-                                    <li class="py-1">Support</li>
-                                </ul>
-                            </div>
-                            <div class="card-bottom mb-3">
-                                <a href="{{url_for('user.register')}}"><button class="btn btn-primary py-3 w-100">Loslegen</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Pricing Card End -->
 
     <!-- Testimonials -->
     <section class="testimonials py-5">

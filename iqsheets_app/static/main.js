@@ -1,3 +1,21 @@
+// Get the element where you want to change the text
+var changingTextElement = document.getElementById("changing-text");
+
+// Define an array of text messages to cycle through
+var textMessages = ["Logistiker.", "Vertriebler.", "Einkäufer.", "Alle."];
+
+// Initialize an index to track the current message
+var currentIndex = 0;
+
+// Function to update the text
+function updateText() {
+    changingTextElement.textContent = textMessages[currentIndex];
+    currentIndex = (currentIndex + 1) % textMessages.length;
+}
+
+// Change the text every 3 seconds (3000 milliseconds)
+var interval = setInterval(updateText, 3000);
+
 const body = document.querySelector('body'),
       sidebar = body.querySelector('nav'),
       toggle = body.querySelector(".toggle"),
