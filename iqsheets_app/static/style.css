@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@600&family=Barlow+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Rubik:wght@500&display=swap');
 
 :root {
   --bs-blue: #334AC0;
@@ -46,7 +46,7 @@
   --bs-body-color-rgb: 81, 89, 108;
   --bs-body-bg-rgb: 255, 255, 255;
   --bs-font-sans-serif: 'Albert Sans', sans-serif;
-  --bs-font-monospace: 'Barlow Condensed', sans-serif; */
+  --bs-font-monospace: 'Barlow Condensed', sans-serif;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: Roboto, sans-serif;
   --bs-body-font-size: 1rem;
@@ -70,6 +70,9 @@
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fcf1e6;
   --bs-background-light: #E5F8F3;
+  --bs-background-yellow: rgb(254,248,242);
+  --bs-font-headings: font-family: 'Rubik', sans-serif;;
+  --bs-body-font: font-family: 'Roboto Mono', monospace;
 }
 
 *,
@@ -92,7 +95,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: var(--bs-dark);
+    font-family: var(--bs-font-monospace);
+    color: var(--bs-link-hover-color);
 }
 
 /* BTNs */
@@ -103,10 +107,8 @@ a {
 
 .btn-primary,
 .btn-primary:hover {
-    all: unset;
     background-color: var(--bs-link-color);
     border:none;
-    padding: 10px 15px;
     border-radius: 5px;
     color: var(--bs-body-bg);
 }
@@ -117,10 +119,13 @@ a {
 
 .btn-secondary,
 .btn-secondary:hover {
-    all: unset;
     border: none;
-    padding: 10px 30px;
     border-radius: 5px;
+}
+
+.btn-secondary {
+    background-color: unset;
+    color: var(--bs-link-color);
 }
 
 .btn-secondary:hover {
@@ -131,10 +136,7 @@ a {
 /* Navbar */
 nav {
     background-color: var(--bs-background-light);
-}
-
-.navbar-brand {
-    color: #005c45;
+    margin-top: 0px;
 }
 
 .nav-item a {
@@ -145,6 +147,11 @@ nav {
 .nav-item a:hover {
     text-decoration: none;
     color: var(--bs-link-hover-color);
+}
+
+.navbar-brand-logo {
+    width: 150px;
+    height: 150px;
 }
 
 .nav-divider {
@@ -176,6 +183,8 @@ nav {
 
 /* Features */
 
+.
+
 .vorteil-container {
     margin: 10px;
     padding: 5px;
@@ -184,39 +193,85 @@ nav {
 }
 
 .service-icon i {
-    border-radius: 5px;
-    border: 1px solid;
     padding: 10px 50px;
     color: var(--bs-link-hover-color);
 }
 
+.vorteil-container {
+    margin: 10px;
+    padding: 5px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 10px;
+    display: block;
+    /* top: 0px;
+    position: relative;
+    max-width: 262px;
+    border-radius: 4px;
+    padding: 32px 24px;
+    margin: 12px; */
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+    border: 1px solid var(--bs-link-color);
+  
+    &:hover {
+      transition: all 0.2s ease-out;
+      box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+      top: -4px;
+      border: 1px solid var(--bs-link-color-hover);
+    }
+  
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -16px;
+      right: -16px;
+      height: 32px;
+      width: 32px;
+      border-radius: 32px;
+      transform: scale(2);
+      transform-origin: 50% 50%;
+      transition: transform 0.15s ease-out;
+    }
+  
+    &:hover:before {
+      transform: scale(2.15);
+    }
+  }
+  
+
 
 /* How to */
 
-.line {
-    border: 2px solid;
+.how-to {
+    background-color: var(--bs-link-color);
+    color: var(--bs-background-light);
+}
+
+.how-to-heading {
+    color: var(--bs-warning);
 }
 
 .how-to-icon i {
+    color: var(--bs-warning);
     border-radius: 50%;
-    border: 1px solid;
+    border: 1px solid var(--bs-background-light);
     padding: 25px;
-    color: var(--bs-link-hover-color);
 }
 
 .services-caption h2 {
-    color: var(--bs-link-hover-color);
+    color: var(--bs-background-color);
 }
 
 .services-caption i {
     color: var(--bs-link-color);
-
 }
 
 /* Video-section */
 
 .video-container {
-    background-color: var(--bs-background-light); 
+    background-color: var(--bs-link-color); 
 }
 
 /* Pricing */
@@ -236,6 +291,88 @@ nav {
 }
 
 .preis {
+    color: var(--bs-link-hover-color);
+}
+
+/* Features */
+.features {
+    background-color: var(--bs-background-yellow);
+}
+
+.feature-table {
+    width: 400px;
+    border-spacing: 20px;
+    padding: 10px 10px;
+}
+
+.feature-table tr th {
+    border-bottom: none;
+    margin-bottom: 100px;
+}
+
+.feature-table tr {
+    border-bottom: 1px solid;
+    margin-bottom: 100px;
+}
+
+.feature-table tr {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.feature-table td {
+    padding: 10px 10px;
+}
+
+.feature-table 
+
+#check-mark {
+    color: var(--bs-link-color);
+    opacity: 0.4;
+    box-shadow: inset;
+}
+
+#soon {
+    background-color: var(--bs-background-light);
+    color: var(--bs-link-hover-color);
+    border: 0.5px solid var(--bs-link-hover-color);
+    border-radius: 30px;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.key-facts {
+    border-right: 0.5px solid;
+}
+
+/* Testimonials */
+
+.testimonials {
+    background-color: var(--bs-background-yellow);
+}
+
+.carousel-indicators {
+    bottom: -40px;
+}
+
+#carousel-btn {
+    margin-top: 100px;
+    background-color: var(--bs-background-light);
+    height: 10px;
+    width: 10px;
+    border: 0.5px solid var(--bs-link-hover-color);
+    border-radius: 50%;
+}
+
+.testimonial-card {
+    border-color: var(--bs-link-hover-color);
+}
+
+.testimonial-card h6 {
+    color: var(--bs-link-hover-color);
+}
+
+.testimonial-divider {
     color: var(--bs-link-hover-color);
 }
 

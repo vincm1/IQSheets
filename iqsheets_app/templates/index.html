@@ -1,59 +1,44 @@
 {% extends "base.html" %} {% block content %}
 <main>
-
     <section class="hero">
-        <div class="position-relative overflow-hidden">
-            <div class="container-fluid content-space-2 py-5">
-              <div class="row justify-content-center align-items-lg-center">
-                <div class="col-md-7 col-lg-5 mb-7 mb-lg-0">
+            <div class="container pt-2 pb-5">
+              <div class="row align-items-top">
+                <div class="col-lg-7">
                   <!-- Heading -->
-                  <div class="pe-lg-3 mb-7">
-                    <h1 class="display-3 mb-3 mb-md-5">Zeitsparen in Excel für
-                        <div id="text-container">
-                            <p id="changing-text">Controller.</p>
+                  <div class="pe-lg-3 mb-7 justify-content-sm-center">
+                    <h1 class="display-3 text-inline">AI-generierte Formeln für
+                        <div id="text-container" style="display: inline;">
+                          <p id="changing-text" style="display: inline;">Controller.</p>
                         </div>
-                    </h1>
-                    <div class="d-grid d-sm-flex gap-2 mb-5">
+                      </h1>
+                    <h4 class="pt-3 pb-5">Erstelle komplexe Formeln in sekundenschnelle durch einfache Textanweisungen.</h4>
+                    <div class="d-grid d-sm-flex gap-2 mt-2 mb-5">
                         <a href="{{url_for('user.register')}}"><button class="btn btn-primary" href="">Jetzt registrieren</button></a>
                         <a class="btn btn-secondary me-2" href="https://www.youtube.com/watch?v=0qisGSwZym4" role="button" data-fslightbox="youtube-video">
                           Demovideo <i class="fa-solid fa-play fa-xl ms-2"></i>
                         </a>
                     </div>
-                    <div class="row mt-5 hero-benefits">
-                        <div class="col-lg-8 mt-2">
-                          <div class="row">
-                            <div class="col-lg-4 mb-3 mb-sm-0">
-                              <h2 class="hero-info">50%</h2>
-                              <p>Zeitersparnis dank KI-Formeln</p>
-                            </div>
-                            <!-- End Col -->
-            
-                            <div class="col-lg-4 mb-3 mb-sm-0 mr-2">
-                              <span class="h3 d-block text-primary">10%</span>
-                              <p>more revenue from new sellers</p>
-                            </div>
-                            <!-- End Col -->
-            
-                            <div class="col-4">
-                              <span class="h3 d-block text-primary">67%</span>
-                              <p>reduction in expansion costs</p>
-                            </div>
-                            <!-- End Col -->
-                          </div>
-                          <!-- End Row -->
-                        </div>
-                        <!-- End Col -->
-                      </div>
+                    <div class="row hero-benefits gap-3">
+                      <div class="col-lg-3 col-sm-12">
+                        <h2 class="hero-info">50%</h2>
+                        <p>Zeitersparnis dank KI-Formeln</p>
+                      </div>  
+                      <div class="col-lg-3 col-sm-12">
+                        <h2 class="hero-info">10x</h2>
+                        <p>Mehr Produktivität in Spreadsheets</p>
+                      </div> 
+                      <div class="col-lg-3 col-sm-12">
+                        <h2 class="hero-info">20%</h2>
+                        <p>Zeitersparnis dank KI-Formeln</p>
+                      </div> 
+                    </div>
                   </div>
-                  <!-- End Heading -->
-
                 </div>
-                <div class="col-lg-4 justify-content-end">
+                <div class="col-lg-4 d-none d-lg-block">
                     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-                    <dotlottie-player src="https://lottie.host/0351042f-3b37-420c-98c7-2c681d3e4dcc/PohXkhh0Hq.json" background="transparent" speed="1" style="width: 700px; height: 700px;" loop autoplay></dotlottie-player>
+                    <dotlottie-player src="https://lottie.host/0351042f-3b37-420c-98c7-2c681d3e4dcc/PohXkhh0Hq.json" background="transparent" speed="1" style="width: 600px; height: 600px;" loop autoplay></dotlottie-player>
                 </div>
-                
-            </div>
+              </div>
             </div>
 
             <div class="position-absolute bottom-0 end-0 mt-2 mb-5">
@@ -61,72 +46,81 @@
             </div>
     </section>
 
-    <!-- Advantages -->
-    <section class="advantages py-5">
+    <!-- Features -->
+    <section class="features-1 pt-2 pb-5">
             <div class="container py-5">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" id="features">
                     <!-- slider Heading -->
-                    <div class="col-xl-12 text-center" id="video-description">
-                        <h3>Die wichtigsten Vorteile auf einem Blick</h3>
+                    <div class="col-xl-12 text-center">
+                        <h3>Die wichtigsten Features auf einem Blick</h3>
                         <p class="pt-2">Egal ob Google oder Excel, spare jetzt jede Menge Zeit und Frust in deinem Arbeitsalltag!</p>
                     </div>
                 </div>
-                <div class="row mt-5 justify-content-center">
-                    <div class="col-lg-3 col-md-1 vorteil-container">
+                <div class="row mt-4 justify-content-center gap-3">
+                    <div class="col-lg-5 col-md-1 vorteil-container">
                         <div class="services-caption">
-                            <div class="service-icon text-center p-3">
-                                <i class="fa-regular fa-clock fa-3x"></i>
-                                <h4 class="text-center pt-3">Formeln 10x schneller</h4>
+                            <div class="service-icon text-center py-4 p-3 text-center">
+                                <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+                                <h4 class="text-center pt-4">Formeln</h4>
                             </div> 
-                            <div class="service-cap pt-2 px-3">
-                                <p>Generieren Sie die benötigten Formeln in sekundenschnelle. 
-                                Keine Zeit und Nerven mehr mit der Erstellung von Formeln 
-                                durch lange Internetrecherche verschwenden.</p>
+                            <div class="service-cap py-2 px-3 text-center">
+                                <p>Generiere in Sekunden die benötigten Formeln mit unserer KI und spare Zeit sowie Nerven.
+                                   Schluss mit langwieriger Internetrecherche zur Formelerstellung.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-1 vorteil-container">
-                        <div class="services-caption">
-                            <div class="service-icon text-center p-3">
-                                <i class="fa-solid fa-chalkboard-user fa-3x"></i>
-                                <h4 class="text-center pt-3">Spreadsheet Profi werden</h4>
-                            </div> 
-                            <div class="service-cap pt-2 px-3">   
-                                <p>
-                                    Ob Anfänger oder Profi, mit IQSheets jetzt zum kann 
-                                    Tabellenkalkulations-Profi werden.
-                                </p>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="col-lg-3 col-md-1 vorteil-container">
-                        <div class="services-caption">
-                            <div class="service-icon text-center p-3">
-                                <i class="fa-solid fa-lightbulb fa-3x"></i>
-                                <h4 class="text-center pt-3">Neue Ideen</h4>
-                            </div> 
-                            <div class="service-cap pt-2 px-3">
-                                <p>Entdecke mit IQSheets neue Lösungen für deinen Alltag und über 
-                                    100 Vorlagen für Google Sheets und Excel.
-                                </p>       
-                            </div>
-                        </div>
-                    </div>     
+                    <div class="col-lg-5 col-md-1 vorteil-container">
+                      <div class="services-caption">
+                          <div class="service-icon text-center py-4 p-3 text-center">
+                              <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+                              <h4 class="text-center pt-4">Erklärungen</h4>
+                          </div> 
+                          <div class="service-cap py-2 px-3 text-center">
+                              <p>Lass dir komplexe Formeln, die von deinen Kollegen in Excel geschrieben wurden, ganz einfach vom System erklären. 
+                                Verstehe und optimiere deine Arbeitsblätter mühelos.</p>
+                          </div>
+                      </div>
+                    </div>
                 </div>
-            </div>
-            <div class="container py-4">
-                <hr>
+                <div class="row mt-3 justify-content-center gap-3">
+                  <div class="col-lg-5 col-md-1 vorteil-container">
+                      <div class="services-caption">
+                          <div class="service-icon text-center py-4 p-3 text-center">
+                              <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+                              <h4 class="text-center pt-4">VBA</h4>
+                          </div> 
+                          <div class="service-cap py-2 px-3 text-center">
+                              <p>Entdecke die Leichtigkeit der VBA-Code-Erstellung, auch ohne Programmiererfahrung. 
+                                Vereinfache deine Arbeitsabläufe und spare wertvolle Zeit bei der Erstellung komplexer 
+                                Automatisierungslösungen.</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-5 col-md-1 vorteil-container">
+                    <div class="services-caption">
+                        <div class="service-icon text-center py-4 p-3 text-center">
+                            <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+                            <h4 class="text-center pt-4">SQL</h4>
+                        </div> 
+                        <div class="service-cap py-2 px-3 text-center">
+                            <p>Entdecke müheloses SQL-Code-Generieren, selbst ohne Entwicklererfahrung,
+                              um Datenabfragen zu vereinfachen und Zeit zu sparen.</p>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              </div>
             </div>
     </section>
-    <!-- Applic App End -->
-
+    <!-- Features End -->
+    
     <!-- How to -->
     <section class="how-to py-5">
         <div class="container pb-5">
             <div class="row justify-content-center">
                 <!-- slider Heading -->
                 <div class="col-xl-12 text-center" id="video-description">
-                    <h3>Wie funktioniert die App?</h3>
+                    <h3 class="how-to-heading">Wie funktioniert die App?</h3>
                     <p>In nur drei Schritten zur perfekten Excel/Google Spreadsheet Formel.</p>
                 </div>
             </div>
@@ -134,10 +128,10 @@
                 <div class="col-lg-3 col-md-1 how-to-container">
                     <div class="services-caption text-center">
                         <div class="how-to-icon">
-                            <i class="fa-regular fa-clock fa-3x"></i>
+                          <i class="fa-regular fa-clock fa-3x"></i>
                         </div> 
                         <div class="service-cap pt-4">
-                            <h6>Problem identifizieren</h6>
+                            <h6>Textanweisung eingeben</h6>
                         </div>
                     </div>
                 </div>
@@ -147,7 +141,7 @@
                             <i class="fa-solid fa-brain fa-3x"></i>
                         </div> 
                         <div class="service-cap pt-4">
-                            <h6>Company reviewed</h6>
+                            <h6>KI generiert Formel</h6>
                         </div>
                     </div>
                 </div>
@@ -157,7 +151,7 @@
                             <i class="fa-solid fa-check-to-slot fa-3x"></i>
                         </div> 
                         <div class="service-cap pt-4">
-                            <h6>Company accepted</h6>
+                            <h6>Formel oder VBA übernehmen </h6>
                         </div>
                     </div>
                 </div>   
@@ -167,13 +161,9 @@
 
     <section>
         <div class="container-fluid video-container">
-            <!-- OwL -->
-            <div class="col-xl-12 text-center pt-5">
-                <p>In nur drei Schritten zur perfekten Excel/Google Spreadsheet Formel.</p>
-            </div>
             <div class="justify-content-center py-4 mb-5">
                 <div class="col-xl-12 col-lg-8 col-md-7 align-self-center text-center">
-                    <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" height="500" 
+                    <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" height="600" 
                     type="video/mp4" controls>
                         Browser unterstützt Videowiedergabe nicht.
                     </video>
@@ -209,7 +199,7 @@
                     <!-- List Checked -->
                     <ul class="list-checked list-checked-primary mb-0">
                         <li class="list-checked-item">Up to 10 people <i class="fa-regular fa-circle-question text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="The number of teammates that can access your Space workspace"></i></li>
-                        <li class="list-checked-item">Unlimited apps</li>
+                        <li class="list-checked-item">Unlimitierte</li>
                         <li class="list-checked-item">Sales opportunities <i class="bi-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Track potential sales, such as a bid, deal or proposal."></i></li>
                         <li class="list-checked-item">API access & Space integration <i class="bi-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Programmatically manage Segment workspaces, sources, destinations, and more"></i></li>
                         <li class="list-checked-item">Advanced account security <i class="bi-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Protect your workspace with personalized security settings"></i></li>
@@ -239,9 +229,7 @@
                     </div>
                     <!-- End Alert -->
                 </div>
-                
             </div>
-            <hr>
         </div>
   <!-- End Pricing -->
     </section>
@@ -253,117 +241,203 @@
             <div class="row d-flex justify-content-center ">
                 <div class="col-lg-6 col-md-8">
                     <div class="section-title text-center pb-5">
-                        <h2>Die besten <span style="font-style:italic; text-decoration: underline">Features</span> unserer App</h2>
+                        <h2>Unlock Space’s full potential</h2>
+                        <h6>Modernize all the ways you work.</h6>
                     </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mb-5">
+                <div class="col-6 align-items-end mb-4">
+                    <div>
+                        <img src="{{url_for('static', filename='components/oc-error.svg')}}" alt="" height="300px" width="300px">
+                    </div>
+                </div>
+                <div class="col-6 mb-5">
+                    <table class="feature-table">
+                        <thead>
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col" class="text-center">Others</th>
+                              <th scope="col" class="text-center">IQSheets</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="p-4 m-4">
+                              <th scope="row">Excel</th>
+                              <td class="text-center py-2 pe-2">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">VBA</th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">GSheets</th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Erklärungen</th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">SQL <i class="bi-info-circle text-muted small ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Shows activities completed by each user and the specific activity types."></i></th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <p class="pt-2" id="soon">Soon</p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Support <i class="bi-info-circle text-muted small ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Shows activities completed by each user and the specific activity types."></i></th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                          </tbody>
+                    </table>
                 </div>
             </div>
             <!-- Features -->
-            <div class="features">
-                <div class="container">
-                    <div class="row row-cols-2 text-center justify-content-center">
-                        <div class="card mb-1 rounded-0 border-0">
-                            <div class="card-header text-inline py-3 bg-transparent border-0">
-                                <i class="fa-solid fa-file-excel fa-2x pb-2 pe-2"></i>
-                                <h3 class="mb-0 d-inline-block">Excel & GSheets</h3>
-                            </div>
-                            <div class="card-body">
-                                <p>Wir unterstützen die beiden gängigsten Spreadsheet Tools.</p>
-                            </div>
-                        </div>
-                        <div class="card mb-1 rounded-0 border-0">
-                            <div class="card-header py-3 bg-transparent border-0">
-                                <i class="fa-solid fa-paper-plane fa-2x pb-2 pe-2"></i>
-                                <h3 class="mb-0 d-inline-block">Formeln</h3>
-                            </div>
-                            <div class="card-body">
-                                <p>Lass dir aus einfachen Textanweisungen direkt die passende Formel erstellen.</p>
-                            </div>
-                        </div>
-                        <div class="card mb-1 rounded-0 border-0">
-                            <div class="card-header py-3 bg-transparent border-0">
-                                <i class="fa-solid fa-lightbulb fa-2xl pb-2 pe-2"></i>
-                                <h3 class="mb-0 d-inline-block">Erklärungen</h3>
-                            </div>
-                            <div class="card-body">
-                                <p>Du verstehst eine komplexe Funktion nicht? Lass dir diese einfach erklären.</p>
-                            </div>
-                        </div>
-                        <div class="card mb-1 rounded-0 border-0">
-                            <div class="card-header py-3 bg-transparent border-0">
-                                <i class="fa-solid fa-magnifying-glass fa-2xl pb-2 pe-2"></i>
-                                <h3 class="mb-0 d-inline-block">VBA</h3>
-                            </div>
-                            <div class="card-body">
-                                <p>Lasse dir sogar passende Makros programmieren.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row justify-content-center text-center my-5">
+              <div class="col-3 key-facts">
+                <h2 class="text-center">45k+</h2>
+                <p>clients from freelancers to corporate companies</p>
+              </div>
+              <div class="col-3 key-facts">
+                <h2 class="text-center">45k+</h2>
+                <p>clients from freelancers to corporate companies</p>
+              </div>
+              <div class="col-3 key-facts">
+                <h2 class="text-center">45k+</h2>
+                <p>clients from freelancers to corporate companies</p>
+              </div>
             </div>
+            <hr class="mt-5">
     </section>
-    <!-- Best Features End -->
-
 
     <!-- Testimonials -->
-    <section class="testimonials py-5">
+    <section class="testimonials pt-1 pb-5">
         <div class="customers">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-8">
                         <div class="section-tittle text-center">
-                            <h2>Was unsere <span style="font-size: 35px; font-style:italic">Nutzer</span><br> über <span style="font-size: 35px; font-style:italic">Uns</span> sagen.</h2>
+                          <h2>Space powers ambitious entrepreneurs all over the world</h2>
                         </div>
+                        <div class="section-subtittle text-center mt-2">
+                          <h6>Das sagen unsere Kunden über IQSheets:</h6>
+                      </div>
                     </div>
                 </div>
             </div>
             <div class="container text-center py-5">
                 <div id="carouselExampleIndicators" class="carousel slide">
                     <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" id="carousel-btn"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" id="carousel-btn"></button>
+                      <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <div class="textimonial-img mb-2">
-                            <img src="static/img/testi1.png" alt="">
-                        </div>
-                        <div class="textimonial-cap">
-                            <h6>Maria, Account Managerin</h6>
-                            <h4>"Auswertungen dauern nur noch 1/2 so lange."</h4>
-                            <p>Für die Kundenauswertungen nutze Ich täglich Excel mit vielen Verknüpfungen. <br>
-                                Dank IQSheets spare ich immens Zeit indem ich mir sekundenschnell die passende Formel erstellen lasse.
-                            </p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <div class="textimonial-img mb-2">
-                            <img src="static/img/testi2.png" alt="">
-                        </div>
-                        <div class="textimonial-cap">
-                            <h6>Tim, Team Lead Außendienst</h6>
-                            <h4>"Fokus auf wichtige Dinge"</h4>
-                            <p>Dank der App verschwende ich meine Zeit nicht mehr in Auswertungen <br>in Google Sheets,
-                                sondern kann mich darauf konzentrieren, <br> das Verkaufstalent meiner MAs zu entwickeln.</p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <div class="single-customer mb-100">
-                            <div class="textimonial-img mb-2">
-                                <img src="static/img/testi3.png" alt="">
-                            </div>
-                            <div class="textimonial-cap">
-                                <h6>Marco, Buchhalter</h6>
-                                <h4>"Täglich im Einsatz"</h4>
-                                <p>Als Buchhalter ist die Arbeit in Excel Alltag. <br> 
-                                    IQSheets erleichtert mir diesen, wenn ich mal wieder eine Formel suche, oder
-                                    <br> eine neue Spreadsheet Vorlage brauche.
+                        <div class="row justify-content-center gap-2">
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="static/img/testi1.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Lorem Ipsum Lorem"
                                 </p>
+                              </div>
                             </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="static/img/testi1.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Lorem Ipsum Lorem"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="static/img/testi1.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Lorem Ipsum Lorem"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="row justify-content-center gap-2">
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="static/img/testi1.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Lorem Ipsum Lorem"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="static/img/testi2.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Tim, Einkaufsleiter</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Lorem Ipsum Lorem"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="static/img/testi3.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Marcel, Controller</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Lorem Ipsum Lorem"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="carousel-controls py-5">
+                    <!-- <div class="carousel-controls pt-5">
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
@@ -371,8 +445,8 @@
                           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
-                          </button>
-                    </div>
+                        </button>
+                    </div> -->
                 </div>
             </div>
             </div>
@@ -380,31 +454,31 @@
     </section>   
     <!-- Our Customer End -->
 
-    <!-- Say Something Start -->
-    <section class="newsletter mt-5">
+    <section class="calculator py-5">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-4">
-                        <div class="say-something-cap">
-                            <h2>Melde Dich <span style="font-style:italic">jetzt</span> zu unserem Newsletter an.</h2>
-                        </div>
-                        <img src="static/img/say-shape-right.png">
+          <div class="section-title text-center">
+            <h2>Wie viel kannst du die Stunde sparen?</h2>
+          </div>
+            <div class="card">
+              <div class="row">
+                <div class="col-lg-6">
+                  Test  
                 </div>
-                <div class="col-xl-4 col-lg-3">
-                    
-                    <form method="POST" action="{{url_for('core.newsletter')}}">
-                            <div class="d-flex flex-row ms-3">
-                                {{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
-                                <div class="form-icon">
-                                    <button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 px-3"><i class="fa-solid fa-arrow-right"></i></button>
-                                </div>
-                            </div>    
-                    </form>
-
+                <div class="col-lg-6">
+                  Test
                 </div>
+              </div>
             </div>
         </div>
     </section>
-    <!-- Say Something End -->
+
+    <section class="faqs">
+        <div class="container">
+            <div class="card">
+                FAQs
+            </div>
+        </div>
+    </section>
+
 </main>
 {% endblock %}
