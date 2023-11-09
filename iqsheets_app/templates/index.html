@@ -329,7 +329,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="testimonials mt-5 pb-5">
+  <section class="testimonials mt-5 pb-5">
         <div class="customers">
             <div class="container">
                 <div class="row d-flex justify-content-center">
@@ -447,162 +447,177 @@
             </div>
             </div>
         </div>
-    </section>   
+  </section>   
     <!-- Our Customer End -->
 
-    <section class="calculator py-3">
-        <div class="container">
-          <div class="section-title text-center">
-            <h2>Wie viel kannst du die Stunde sparen?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+  <section class="calculator py-3">
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>Wie viel kannst du die Stunde sparen?</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+      </div>
+        <div class="row pt-5">
+          <div class="col-4 fact-col">
+            <h4>350 Mio Prompts</h4>
+            <p>Automatisch generiert</p>
           </div>
-            <div class="row pt-5">
-              <div class="col-4 fact-col">
-                <h4>350 Mio Prompts</h4>
-                <p>Automatisch generiert</p>
-              </div>
-              <div class="col-4 fact-col">
-                <h5>350 Mio Prompts</h5>
-                <p>Automatisch generiert</p>
-              </div>
-              <div class="col-4 fact-col">
-                <h5>350 Mio Prompts</h5>
-                <p>Automatisch generiert</p>
-              </div>
-            </div>
-            <div class="row justify-content-center my-5">
-              <div class="pricing-info mx-auto" style="max-width: 40.25rem;">
-                  <!-- Alert -->
-                  <div class="alert alert-soft-primary" role="alert">
-                      <div class="d-sm-flex align-items-sm-center">
-                      
-                      <div><i class="fa-solid fa-bolt-lightning fa-2xl me-2"></i></div>
-                      <div class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
-                        Jetzt deine Ersparniss berechnen
-                      </div>
-                      <div class="mt-2">
-                          <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-secondary px-3" id="calcualate-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                          Berechnen
-                        </button>
-                      </div>
-                      </div>
+          <div class="col-4 fact-col">
+            <h5>350 Mio Prompts</h5>
+            <p>Automatisch generiert</p>
+          </div>
+          <div class="col-4 fact-col">
+            <h5>350 Mio Prompts</h5>
+            <p>Automatisch generiert</p>
+          </div>
+        </div>
+        <div class="row justify-content-center my-5">
+          <div class="pricing-info mx-auto" style="max-width: 40.25rem;">
+              <!-- Alert -->
+              <div class="alert alert-soft-primary" role="alert">
+                  <div class="d-sm-flex align-items-sm-center">
+                  
+                  <div><i class="fa-solid fa-bolt-lightning fa-2xl me-2"></i></div>
+                  <div class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
+                    Jetzt deine Ersparniss berechnen
                   </div>
-                  <!-- End Alert -->
+                  <div class="mt-2">
+                      <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-secondary px-3" id="calcualate-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Berechnen
+                    </button>
+                  </div>
+                  </div>
               </div>
+              <!-- End Alert -->
           </div>
-            
-          </div>
-            <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Errechne deine Erspr</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        
+      </div>
+        <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Errechne deine Erspr</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row justify-content-center">
+                <div class="col-lg-6 justify-content-center">
+                  <form id="calculator-form">
+                    <div class="mt-3">
+                      <label for="hours" class="form-label text-center">Stündlicher Arbeitsaufwand pro Woche mit Excel oder GSheets?</label>
+                      <input class="form-control" type="number" id="hours" required>
+                    </div>
+                    <div class="mt-3">
+                      <label class="form-label" for="hourly-wage">Dein Stundenlohn in €</label>
+                      <p class="calculator-form-explanation">(Tipp: Jahresgehalt / 2052)</p>
+                      <input class="form-control" type="number" id="hourly-wage" required>
+                    </div>
+                    <div class="mt-3 text-center">
+                      <button type="button" class="btn btn-secondary px-5 py-1" id="calculate">Berechnen</button>
+                    </div>
+                  </form>
                 </div>
-                <div class="modal-body">
-                  <div class="row justify-content-center">
-                    <div class="col-lg-6 justify-content-center">
-                      <form id="calculator-form">
-                        <div class="mt-3">
-                          <label for="hours" class="form-label text-center">Stündlicher Arbeitsaufwand pro Woche mit Excel oder GSheets?</label>
-                          <input class="form-control" type="number" id="hours" required>
-                        </div>
-                        <div class="mt-3">
-                          <label class="form-label" for="hourly-wage">Dein Stundenlohn in €</label>
-                          <p class="calculator-form-explanation">(Tipp: Jahresgehalt / 2052)</p>
-                          <input class="form-control" type="number" id="hourly-wage" required>
-                        </div>
-                        <div class="mt-3 text-center">
-                          <button type="button" class="btn btn-secondary px-5 py-1" id="calculate">Berechnen</button>
-                        </div>
-                      </form>
+                <div class="col-lg-6 text-center">
+                  <div class="mt-3">
+                    <p>Deine mögliche Ersparniss in EUR</p>
+                    <div class="card">
+                      <div class="card-body" id="result"></div>
                     </div>
-                    <div class="col-lg-6 text-center">
-                      <div class="mt-3">
-                        <p>Deine mögliche Ersparniss in EUR</p>
-                        <div class="card">
-                          <div class="card-body" id="result"></div>
-                        </div>
-                      </div>
-                      <div class="mt-3 text center">
-                        <button class="btn btn-primary py-2 px-5">Jetzt registrieren</button>
-                      </div>
-                    </div>
+                  </div>
+                  <div class="mt-3 text center">
+                    <button class="btn btn-primary py-2 px-5">Jetzt registrieren</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-    </section>
+      </div>
+    </div>    
+  </section>
 
-    <section class="faqs mt-2 mb-5">
-        <div class="container">
-          <div class="section-title text-center">
-            <h2>FAQs</h2>
-            <p>Häufig gestellte Fragen.</p>
-          </div>
-          <div class="row justify-content-center">
-            <div class="card col-8 faq-card card-lg shadow-lg">
-              <div class="card-body">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Wie funktioniert IQSheets?
-                      </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">Nach Anmeldung erhältst du Zugriff auf dein persönliches Dashboard.
-                        In diesem kannst du durch Sprachanweisungen ganz einfach mit unserer 
-                        KI deine benötigte Formel kreeieren oder erklären lassen.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Gibt es eine kostenlose Testversion?
-                      </button>
-                    </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">Ja, du kannst IQSheets eine Woche mit allen unseren Features testen. Nach Ablauf geht deine Test-Version 
-                        in unser Abo für 4,99€ den Monat über, solltest du nicht rechtzeitig gekündigt haben.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Wie kann ich das Premium-Abo kündigen?
-                      </button>
-                    </h2>
-                    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">Das Abo kannst du in deinem persönlichen Dashboard jederzeit unter Account > Abo verwalten kündigen.</div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                        Wie kann ich das Premium-Abo kündigen?
-                      </button>
-                    </h2>
-                    <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">Das Abo kannst du in deinem persönlichen Dashboard jederzeit unter Account > Abo verwalten kündigen.</div>
-                    </div>
+  <section class="faqs mt-2 mb-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <img src="{{url_for('static', filename='img/oc-looking-for-answers.svg')}}" height="230" alt="FAQ-picture">
+      </div>
+      <div class="section-title text-center pt-5">
+        <h2>FAQs</h2>
+        <p>Häufig gestellte Fragen.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="card col-8 faq-card card-lg shadow-lg">
+          <div class="card-body">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Wie funktioniert IQSheets?
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Nach Anmeldung erhältst du Zugriff auf dein persönliches Dashboard.
+                    In diesem kannst du durch Sprachanweisungen ganz einfach mit unserer 
+                    KI deine benötigte Formel kreeieren oder erklären lassen.
                   </div>
                 </div>
               </div>
-              <div class="card-footer text-center">
-                <p>Trotzem noch offene Fragen?</p>
-                <button class="btn btn-secondary" id="support-btn"><a href="mailto:" id="support-faq">Unser Support Team kontaktieren ></a></button>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Gibt es eine kostenlose Testversion?
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Ja, du kannst IQSheets eine Woche mit allen unseren Features testen. Nach Ablauf geht deine Test-Version 
+                    in unser Abo für 4,99€ den Monat über, solltest du nicht rechtzeitig gekündigt haben.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Wie kann ich das Premium-Abo kündigen?
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Das Abo kannst du in deinem persönlichen Dashboard jederzeit unter Account > Abo verwalten kündigen.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    Wie kann ich das Premium-Abo kündigen?
+                  </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Das Abo kannst du in deinem persönlichen Dashboard jederzeit unter Account > Abo verwalten kündigen.</div>
+                </div>
               </div>
             </div>
           </div>
+          <div class="card-footer text-center">
+            <p>Trotzem noch offene Fragen?</p>
+            <button class="btn btn-secondary" id="support-btn"><a href="mailto:" id="support-faq">Unser Support Team kontaktieren ></a></button>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8 text-center py-3">
+          <h3 class="pt-2">Du hast ein Projekt im Kopf?</h3>
+          <h3 class="py-2">Jetzt mit IQSheets starten und Zeit und Geld sparen</h3>
+          <button class="btn btn-primary px-5 py-2">Jetzt testen</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 {% endblock %}

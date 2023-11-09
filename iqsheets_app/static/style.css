@@ -477,7 +477,7 @@ nav {
 }
 
 .accordion-button {
-    color: var(--bs-link-color);
+    font-style: bold 26px;
 }
 
 .accordion-body {
@@ -496,10 +496,24 @@ nav {
     border: 1px solid var(--bs-link-hover-color)
 }
 
+/* CTA */
+
+.cta {
+    background-color: var(--bs-link-hover-color);
+}
+
+.cta h3 {
+    color: var(--bs-body-bg);
+}
+
+.cta h6 {
+    color: var(--bs-body-color);
+}
+
 /* Footer */
 
 footer {
-    background-color: #005c45;
+    background-color: var(--bs-link-hover-color);
     color: #fff;
     font-size: 14px;
 }
