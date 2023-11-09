@@ -16,6 +16,29 @@ function updateText() {
 // Change the text every 3 seconds (3000 milliseconds)
 var interval = setInterval(updateText, 3000);
 
+
+// Calculator Landing Page // 
+
+document.getElementById("calculate").addEventListener("click", function() {
+  var hours = parseFloat(document.getElementById("hours").value);
+  var hourlyWage = parseFloat(document.getElementById("hourly-wage").value);
+  
+  if (!isNaN(hours) && !isNaN(hourlyWage)) {
+      var totalEarnings = hours * hourlyWage;
+      document.getElementById("result").innerHTML = totalEarnings.toFixed(2) + "€";
+  } else {
+      document.getElementById("result").innerHTML = "Trage deine Daten ein.";
+  }
+});
+
+// End Calculator //
+
+$(document).ready(function(){
+  $('.accordion-item').on('click', function(){
+      $(this).toggleClass('active');
+  });
+});
+
 const body = document.querySelector('body'),
       sidebar = body.querySelector('nav'),
       toggle = body.querySelector(".toggle"),

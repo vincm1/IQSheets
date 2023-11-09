@@ -113,7 +113,9 @@ a {
     color: var(--bs-body-bg);
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
     background-color: var(--bs-link-hover-color);
 }
 
@@ -128,7 +130,9 @@ a {
     color: var(--bs-link-color);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:active,
+.btn-secondary:focus {
     background-color: var(--bs-link-color-hover);
     color: var(--bs-link-hover-color);
 }
@@ -182,8 +186,6 @@ nav {
 }
 
 /* Features */
-
-.
 
 .vorteil-container {
     margin: 10px;
@@ -245,18 +247,13 @@ nav {
 /* How to */
 
 .how-to {
-    background-color: var(--bs-link-color);
-    color: var(--bs-background-light);
+    background-color: var(--bs-background-light);
 }
 
-.how-to-heading {
-    color: var(--bs-warning);
-}
-
-.how-to-icon i {
+.how-to-icon i::before {
     color: var(--bs-warning);
     border-radius: 50%;
-    border: 1px solid var(--bs-background-light);
+    border: 2px solid var(--bs-link-color);
     padding: 25px;
 }
 
@@ -268,10 +265,20 @@ nav {
     color: var(--bs-link-color);
 }
 
+.how-to h6 {
+    color: var(--bs-body-color);
+    font-size: 22px;
+}
+
+
 /* Video-section */
 
 .video-container {
-    background-color: var(--bs-link-color); 
+    background-color: var(--bs-background-light);
+}
+
+#landing-video {
+    border-radius: 10px;
 }
 
 /* Pricing */
@@ -284,6 +291,20 @@ nav {
     background-color: var(--bs-link-color-hover);
     border-radius: 5px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.pricing ul {
+    list-style: none;
+    padding-left: 0; /* Remove padding to eliminate the gap */
+    margin-left: 0; 
+}
+
+.pricing ul li {
+    text-align: left;
+}
+
+.pricing ul li i {
+    color: var(--bs-link-color);
 }
 
 .pricing-info i {
@@ -342,13 +363,12 @@ nav {
 }
 
 .key-facts {
-    border-right: 0.5px solid;
+    border-right: 0.5px solid var(--bs-link-color);
 }
 
 /* Testimonials */
 
 .testimonials {
-    background-color: var(--bs-background-yellow);
 }
 
 .carousel-indicators {
@@ -374,6 +394,106 @@ nav {
 
 .testimonial-divider {
     color: var(--bs-link-hover-color);
+}
+
+.testimonial-card {
+    display: block;
+    position: relative;
+    max-width: 262px;
+    background-color: #f2f8f9;
+    border-radius: 4px;
+    padding: 32px 24px;
+    margin: 12px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+  
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -16px;
+      right: -16px;
+      background: var(--bs-link-color-hover);
+      height: 32px;
+      width: 32px;
+      border-radius: 32px;
+      transform: scale(1);
+      transform-origin: 50% 50%;
+      transition: transform 0.25s ease-out;
+    }
+  
+    &:hover:before {
+      transform: scale(30);
+    }
+  }
+  
+  .card1:hover {
+    p {
+      transition: all 0.3s ease-out;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    h3 {
+      transition: all 0.3s ease-out;
+      color: #ffffff;
+    }
+  }
+
+/* Calculator */
+
+.calculator-card {
+    color: var(--bs-link-color);
+    background-color: var(--bs-link-color-hover);
+}
+
+#calculate {
+    border: 1px solid var(--bs-link-color-hover);
+}
+
+#result {
+    color: var(--bs-orange);
+    font-size: 30px;
+}
+
+#calcualate-btn{
+    border: 1px solid var(--bs-link-color-hover);
+}
+
+/* FAQs */
+.faq-card {
+    border: 1px solid var(--bs-link-color-hover);
+}
+
+.faq-card .card-body {
+    border-bottom: none;
+}
+
+.accordion-button:focus,
+.accordion-button:active,
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+    background-color: var(--bs-link-color-hover);
+    color: var(--bs-link-color);
+}
+
+.accordion-button {
+    color: var(--bs-link-color);
+}
+
+.accordion-body {
+    background-color: var(--bs-link-color-hover);
+}
+
+.faq-card .card-footer {
+    background-color: var(--bs-background-yellow);
+}
+
+#support-faq {
+    color: var(--bs-link-color);
+}
+
+#support-btn {
+    border: 1px solid var(--bs-link-hover-color)
 }
 
 /* Footer */
