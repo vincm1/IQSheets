@@ -1,8 +1,88 @@
-{% extends "base.html" %} {% block content %}
+{% extends "main.html" %} {% block content %}
 <main>
   <!-- Signup messages -->  
-  <section class="signup py-5">
-    <div class="container">
+    <section class="signup">
+      <div class="mx-3">
+        <div class="row justify-content-center">
+          <!-- Flash messages -->
+          <div class="flashmessages">
+            <div class="col-md-4 col-sm-4 align-self-end flashmessages">
+              {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible fade show align-self-end" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
+          </div>
+          <!-- Login Card -->
+          <div class="col-md-4 col-sm-4">
+            <div class="card shadow-lg p-3">
+              <div class="card-top text-center">
+                <h2 class="pt-2">Registrierung</h2>
+                <p class="pt-2">Bereits einen Account? <a class="ps-3" href="{{url_for('user.login')}}">Login</a></p>
+              </div>
+              <div class="card-body">
+                <form method="POST" action="{{url_for('user.register')}}">
+                  {{form.hidden_tag()}}
+                  <div class="form-group mb-3">
+                    {{form.username(placeholder="Benutzername", class="form-control")}}
+                    {% for error in form.username.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show my-1" role="alert">
+                        {{error}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="form-group my-3">
+                    {{form.email(placeholder="Email Adresse", class="form-control")}}
+                    {% for error in form.email.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show my-1" role="alert">
+                        {{error}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="form-group my-3">
+                    {{form.password(placeholder="Passwort", class="form-control")}}
+                    {% for error in form.password.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show my-1" role="alert">
+                        {{error}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="form-group my-3">
+                    {{form.confirm_pw(placeholder="Passwort bestätigen", class="form-control")}}
+                    {% for error in form.confirm_pw.errors %}
+                      <div class="alert alert-danger alert-dismissible fade show my-1" role="alert">
+                        {{error}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="form-group">
+                    {{form.submit(class="btn btn-primary py-2 w-100")}}
+                  </div>
+              </form>
+                <hr class="mt-4">
+                <div class="social-signup pt-2 text-center">
+                  <button class="btn btn-primary social-signup me-1"><a href="{{url_for('google.login')}}"><i class="fa-brands fa-google fa-xl p-3" id="google"></i></a></button>
+                  <button class="btn btn-primary social-signup ms-1"><a href="{{url_for('linkedin.login')}}"><i class="fa-brands fa-linkedin fa-xl p-3" id="linkedin"></i></a></button>
+                  <!-- <a class="social-signup mx-2" href="{{url_for('facebook.login')}}"><i class="fa-brands fa-facebook p-2" id="facebook"></i></a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <div class="container">
       <div class="card">
         <div class="signup-form p-5">
           <h4><span id="logo-iq">IQ</span>Sheets</h4>
@@ -51,13 +131,10 @@
                       {{form.submit(class="btn btn-primary py-2 px-4")}}
                       <a class="social-signup ms-5 me-2" href="{{url_for('google.login')}}"><i class="fa-brands fa-google p-2" id="google"></i></a>
                       <a class="social-signup mx-2" href="{{url_for('linkedin.login')}}"><i class="fa-brands fa-linkedin p-2" id="linkedin"></i></a>
-                      <!-- <a class="social-signup mx-2" href="{{url_for('facebook.login')}}"><i class="fa-brands fa-facebook p-2" id="facebook"></i></a> -->
+                      <a class="social-signup mx-2" href="{{url_for('facebook.login')}}"><i class="fa-brands fa-facebook p-2" id="facebook"></i></a>
                     </div>
                 </form>
             </div>
-            <div class="col-xl-6 col-lg-6">
-                <img src="static/img/signup.png" class="rounded mx-auto d-block" alt="signup image" />
-            </div> 
           </div>
         </div>
       </div>
@@ -76,9 +153,9 @@
           {% endif %}
         {% endwith %}
       </div>
-    </div>
-    
-  </section>
+    </div> -->
+<!--     
+  </section> -->
 </main>
 
 {% endblock %}

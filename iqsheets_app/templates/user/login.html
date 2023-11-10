@@ -1,49 +1,53 @@
-{% extends "base.html" %} {% block content %}
+{% extends "main.html" %} {% block content %}
 
 <main>
-  <section class="signup mt-2 mb-5 pb-5">
-    <div class="container my-5">
-      <div class="flashmessages mt-5">
-        <div class="col-6 align-self-end flashmessages">
-          {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-              {% for category, message in messages %}
-              <div class="alert alert-{{ category }} alert-dismissible fade show align-self-end" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-        </div>
-      </div>
-  
-      <div class="card my-5 py-5">
-        <div class="signup-form p-4">
-          <div class="row justify-content-start">
-            <div class="col-xl-6 col-lg-6">
-                <div class="signup-image">
-                    <img src="static/img/login.png" class="rounded mx-auto d-block" alt="login image" />
+  <section class="signup">
+    <div class="mx-3">
+      <div class="row justify-content-center">
+        <!-- Flash messages -->
+        <div class="flashmessages">
+          <div class="col-md-4 col-sm-4 align-self-end flashmessages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show align-self-end" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            </div> 
-            <div class="col-xl-4 col-lg-4">
-                <h2 class="form-title pb-4">Login</h2>
-                <form method="POST" action="{{url_for('user.login')}}">
-                      {{form.hidden_tag()}}
-                    <div class="form-group my-3">
-                      {{form.username(placeholder="Username", class="form-control")}}
-                    </div>
-                    <div class="form-group my-3">
-                      {{form.password(placeholder="Passwort", class="form-control")}}
-                    </div>
-                    <div class="d-flex flex-row my-4">
-                      {{form.submit(class="btn btn-primary px-5")}}
-                      <a class="social-signup ms-5 me-2" href="{{url_for('google.login')}}"><i class="fa-brands fa-google p-2" id="google"></i></a>
-                      <a class="social-signup mx-2" href="{{url_for('linkedin.login')}}"><i class="fa-brands fa-linkedin p-2" id="linkedin"></i></a>
-                      <!-- <a class="social-signup mx-2" href="{{url_for('facebook.login')}}"><i class="fa-brands fa-facebook p-2" id="facebook"></i></a> -->
-                    </div>
-                </form>
-                <a href="{{url_for('user.reset_password_request')}}">Passwort vergessen?</a>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+        <!-- Login Card -->
+        <div class="col-md-4 col-sm-4">
+          <div class="card shadow-lg p-3">
+            <div class="card-top text-center">
+              <h2 class="pt-2">Login</h2>
+              <p class="pt-3">Noch keinen Account? <a class="text-right" href="{{url_for('user.register')}}">Registrieren</a></p>
+            </div>
+            <div class="card-body">
+              <form method="POST" action="{{url_for('user.login')}}">
+                  {{form.hidden_tag()}}
+                <div class="form-group mt-2 mb-4">
+                  {{form.username(placeholder="Benutzername", class="form-control")}}
+                </div>
+                <div class="form-group my-4">
+                  {{form.password(placeholder="Passwort", class="form-control")}}
+                </div>
+                <div class="form-group mt-3 text-center">
+                  {{form.submit(class="btn btn-primary w-100 py-2")}}
+                </div>
+                <div class="form-group pt-4 text-center">
+                  <a href="{{url_for('user.reset_password_request')}}" class="pt-5">Passwort vergessen?</p>
+                </div>
+              </form>
+              <hr class="mt-4">
+              <div class="social-signup pt-2 text-center">
+                <button class="btn btn-primary social-signup me-1"><a href="{{url_for('google.login')}}"><i class="fa-brands fa-google fa-xl p-3" id="google"></i></a></button>
+                <button class="btn btn-primary social-signup ms-1"><a href="{{url_for('linkedin.login')}}"><i class="fa-brands fa-linkedin fa-xl p-3" id="linkedin"></i></a></button>
+                <!-- <a class="social-signup mx-2" href="{{url_for('facebook.login')}}"><i class="fa-brands fa-facebook p-2" id="facebook"></i></a> -->
+              </div>
             </div>
           </div>
         </div>

@@ -461,11 +461,22 @@ nav {
 
 /* FAQs */
 .faq-card {
-    border: 1px solid var(--bs-link-color-hover);
+    border: 2px solid var(--bs-link-color-hover);
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.faqs .card-footer {
+    border-top: none;
 }
 
 .faq-card .card-body {
     border-bottom: none;
+}
+
+.accordion {
+    padding: 0 0;
+    margin: 0 0;
 }
 
 .accordion-button:focus,
@@ -502,12 +513,41 @@ nav {
     background-color: var(--bs-link-hover-color);
 }
 
-.cta h3 {
+.cta h3, .cta h5{
     color: var(--bs-body-bg);
 }
 
-.cta h6 {
-    color: var(--bs-body-color);
+/* Login */
+
+.signup {
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 200px;
+    background: linear-gradient(to bottom right, var(--bs-link-color-hover) 70%, transparent 50%);
+    text-align: center; /* Center text within the signup section */
+  }
+
+  .signup .card {
+    margin-top: 50px; /* Add some space between the top of the card and the section */
+  }
+
+  .signup .card-top h2,
+  .signup a {
+    color: var(--bs-link-color);
+  }
+
+  .signup a:hover {
+    color: var(--bs-link-color);
+    text-decoration: underline;
+  }
+
+  .social-signup i {
+    color: var(--bs-background-light);
+  }
+
+#signup-btn {
+    display: block;
+    width: 100%;
 }
 
 /* Footer */
