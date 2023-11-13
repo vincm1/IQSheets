@@ -2,19 +2,20 @@ import os
 from flask import current_app, Blueprint, redirect, url_for, render_template, request, jsonify, abort
 import stripe 
 
-stripe_blueprint = Blueprint('stripe', __name__)
-
 # This is your test secret API key.
 stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
 
 YOUR_DOMAIN = 'http://localhost:5000'
 
-@stripe_blueprint.route('/subscriptions')
-def all_subscriptions():
-    """ Generating all Subscriptions """ 
-    subscriptions = stripe.Subscription.list()
-    print(subscriptions)
-    return subscriptions
+stripe_customers = stripe.Subscription.list()
+stripe_subscriptions = stripe.Subscription.list()
+
+# @stripe_blueprint.route('/subscriptions')
+# def all_subscriptions():
+#     """ Generating all Subscriptions """ 
+#     subscriptions = stripe.Subscription.list()
+#     print(subscriptions)
+#     return subscriptions
 
 # @stripe_blueprint('/payment')
 # def payment():

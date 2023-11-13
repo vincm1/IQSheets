@@ -1,22 +1,56 @@
 {% extends 'admin/master.html' %}
 
 {% block body %}
-  <h2>
-    Subs
 
+<h2>Customers</h2>
+<table class="table">
+  <thead>
+    <th scope="col" class="me-2">Customer ID</th>
+    <th scope="col" class="me-2">Customer Address</th>
+    <th scope="col" class="me-2">Customer Email</th>
+  </thead>
+  <tbody>
     {% for customer in customers %}
-        <p>{{customer.id}}</p>
-        <p>{{customer.adress}}</p>
-        <p>{{customer.email}}</p>
-        <p>{{customer.invoice_prefix}}</p>
+      <tr>
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.address.country }}</td>
+        <td>{{ customer.email }}</td>
+      </tr>
     {% endfor %}
-
+  </tbody>
+</table>
+<br>
+<hr>
+<h2>Subscriptions</h2>
+<table class="table">
+  <thead>
+    <th class="me-2">Stripe Subscription ID</th>
+    <th class="me-2">Stripe Subscription Customer ID</th>
+    <th class="me-2">Subscription created date</th>
+    <th class="me-2">Subscription fee</th>
+    <th class="me-2">Payment Cycle date start</th>
+    <th class="me-2">Payment Cycle date end</th>
+    <th class="me-2">Trial Start date</th>
+    <th class="me-2">Trial End date</th>
+    <th class="me-2">Status</th>
+  </thead>
+  <tbody>
     {% for subscription in subscriptions %}
-        <p>{{subscription.id}}</p>
-        <p>{{subscription.created}}</p>
-        <p>{{subscription.customer}}</p>
-        <p>{{subscription.object}}</p>
-        <p>{{subscription["items"]["data"][0]["price"]["unit_amount"]}}</p>
+      <tr>
+        <td>{{subscription.id}}</td>
+        <td>{{subscription.customer}}</td>
+        <td>{{subscription.created}}</td>
+        <td>{{subscription["items"]["data"][0]["price"]["unit_amount"]}}</td>
+        <td>{{subscription.currrent_period_start}}</td>
+        <td>{{subscription.currrent_period_end}}</td>
+        <td>{{subscription.trial_start}}</td>
+        <td>{{subscription.trial_end}}</td>
+        <td>{{subscription.status}}</td>
+      </tr>
     {% endfor %}
-  </h2>
+  </tbody>
+</table>
+
+<p>{{stripe_customer}}</p>
+<p>{{stripe_subscription}}</p>
 {% endblock %}

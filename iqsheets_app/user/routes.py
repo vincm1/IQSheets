@@ -64,6 +64,11 @@ def login():
             if not user.check_password(form.password.data):
                 return redirect(url_for('user.login'))
         else:
+            user.check_payment()
+            user.stripe_customer_id = stripe_customer_id
+            user.stripe_sub_id = stripe_subscription_id
+            db.session.add(user)
+            db.session.commit()
             login_user(user, remember=True)
             return redirect(url_for('dashboard.dashboard'))
     
@@ -89,7 +94,9 @@ def confirm_email(token):
         db.session.add(user)
         db.session.commit()
         flash('Account bestätigt', 'success')
-        return render_template('stripe/checkout.html', user_email=email, form_nl=form_nl)
+        stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}&prefilled_benutzername={user.username}"
+        return redirect(stripe_link)
+        # return render_template('stripe/checkout.html', user_email=email, form_nl=form_nl)
     else:
         flash('Der Bestätigungslink ist abgelaufen oder invalide.', 'danger')
     return redirect(url_for('core.index'))
@@ -110,7 +117,7 @@ def resend_confirmation():
     token = generate_confirmation_token(current_user.email)
     confirm_url = url_for('user.confirm_email', token=token, _external=True)
     html = render_template('user/email/activate.html', confirm_url=confirm_url)
-    subject = "Bitte bestätige Deine Email für ExcelWizzard!"
+    subject = "Bitte bestätige Deine Email für IQSheets!"
     send_email(current_user.email, subject, html)
     flash(f'Eine Bestätigungs-Email wurde an {current_user.email} geschickt.', 'success')
     return redirect(url_for('user.unconfirmed'))
@@ -230,3 +237,4 @@ def reset_password(token):
         flash('Passwort zurückgesetzt', 'success')
         return redirect(url_for('user.login'))
     return render_template('user/reset_password.html', form=form, form_nl=form_nl)
+

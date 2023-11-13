@@ -1,9 +1,14 @@
 ''' IQ_Sheets DB Models '''
 from datetime import datetime
+import stripe
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 from iqsheets_app import db, login_manager
+
+stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2AbKIYPWl2LXKPW3U3h6Lu71E94Gf1NvrHKE00xPsZzRZZ"
+
+YOUR_DOMAIN = 'http://localhost:5000'
 
 # Login Manager User loader
 @login_manager.user_loader
@@ -24,6 +29,8 @@ class User(db.Model, UserMixin):
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     premium = db.Column(db.Boolean, nullable=False, default=False)
+    stripe_customer_id = db.Column(db.String, nullable=True, default=None)
+    stripe_sub_id = db.Column(db.String, nullable=True, default=None)
     newsletter = db.relationship('Newsletter', backref='user')
     num_prompts = db.Column(db.Integer, nullable=False, default=0)
     num_tokens = db.Column(db.Integer, nullable=False, default=0)
@@ -32,8 +39,23 @@ class User(db.Model, UserMixin):
     prompt = db.relationship('Prompt', backref="user")
 
     def check_password(self, password):
+        """ check hashed password """ 
         return check_password_hash(self.password_hash, password)
-
+    
+    def check_payment(self):
+        """ Check whether payment of a user was successful """
+        if self.is_admin is False and self.stripe_customer_id is None: 
+            try:
+                stripe_customer = stripe.Customer.list(email=self.email)
+                stripe_cust_id = stripe_customer["data"][0]["id"]
+                stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
+                print(stripe_subscription_id)
+                stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
+            except stripe.error.InvalidRequestError as e:
+                # Handle the error, e.g., log it or raise a specific exception
+                print(f"Error checking payment: {e}")
+        return stripe_cust_id, stripe_subscription_id
+           
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
@@ -41,6 +63,7 @@ class User(db.Model, UserMixin):
         
     def __repr__(self):
         f"User with {self.id} and {self.username}, {self.email} was created."
+
 class OAuth(OAuthConsumerMixin, db.Model):
     
     provider_user_id = db.Column(db.String(256), unique=True, nullable=False)

@@ -137,6 +137,12 @@ a {
     color: var(--bs-link-hover-color);
 }
 
+/* Flashmessages  */
+
+.alert-success {
+    background-color: var(--bs-link-color);
+    color: var(--bs-background-light);
+}
 /* Navbar */
 nav {
     background-color: var(--bs-background-light);
@@ -521,33 +527,34 @@ nav {
 
 .signup {
     position: relative;
-    padding-top: 50px;
-    padding-bottom: 200px;
-    background: linear-gradient(to bottom right, var(--bs-link-color-hover) 70%, transparent 50%);
-    text-align: center; /* Center text within the signup section */
-  }
-
-  .signup .card {
-    margin-top: 50px; /* Add some space between the top of the card and the section */
-  }
-
-  .signup .card-top h2,
+    height: 100vh;
+    background: linear-gradient(to bottom right, var(--bs-link-color-hover) 80%, transparent 50%);
+    text-align: center;
+}
+    
+.signup .card-top h2,
   .signup a {
     color: var(--bs-link-color);
-  }
+}
 
-  .signup a:hover {
+.signup a:hover {
     color: var(--bs-link-color);
     text-decoration: underline;
-  }
+}
 
-  .social-signup i {
+.social-signup i {
     color: var(--bs-background-light);
-  }
+}
 
 #signup-btn {
     display: block;
     width: 100%;
+}
+
+/* Calculator */
+
+.calculator-line {
+    border-right: 1px solid var(--bs-link-hover-color);
 }
 
 /* Footer */

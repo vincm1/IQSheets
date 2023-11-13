@@ -3,6 +3,7 @@
 import os
 import boto3
 import stripe
+from datetime import datetime
 from flask import current_app, redirect, url_for
 from flask_login import current_user
 from flask_admin import AdminIndexView, BaseView, expose
@@ -15,7 +16,7 @@ stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2
 class MyAdminIndexView(AdminIndexView):
     ''' Index view for admin panel '''
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.username == os.environ.get("ADMIN_USER") and current_user.is_admin
+        return True
     
     def inacessible_callback(self, name, **kwargs):
         if not current_user.is_authenticated:
@@ -36,7 +37,11 @@ class SubscriptionsView(BaseView):
     def index(self):
         customers = stripe.Customer.list()
         subscriptions = stripe.Subscription.list()
-        return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions)
+        email = '200283885@aston.ac.uk'
+        stripe_customer = stripe.Customer.search(query=f"email={email}")
+        stripe_subscription = stripe.Subscription.search(query=f"customer={stripe_customer}")
+        return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions, 
+                           stripe_customer=stripe_customer, stripe_subscription=stripe_subscription)
 
 class TemplatesUploadView(BaseView):
     @expose('/', methods=["GET","POST"])

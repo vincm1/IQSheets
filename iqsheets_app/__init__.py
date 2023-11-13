@@ -41,7 +41,6 @@ def create_app(config_name=None):
         from iqsheets_app.user.routes import user_blueprint
         from iqsheets_app.oauth import google_blueprint, linkedin_blueprint, facebook_blueprint
         from iqsheets_app.dashboard.routes import dashboard_blueprint
-        from iqsheets_app.stripe.payments import stripe_blueprint
 
         ### Registering all Blueprints ###
         app.register_blueprint(core_blueprint)
@@ -51,7 +50,6 @@ def create_app(config_name=None):
         app.register_blueprint(facebook_blueprint, url_prefix="/login")
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
-        app.register_blueprint(stripe_blueprint)
         
         db.create_all()
         
