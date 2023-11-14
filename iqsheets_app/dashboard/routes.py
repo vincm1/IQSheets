@@ -3,7 +3,7 @@ from flask import Blueprint, current_app, render_template, flash, send_file, red
 from flask_login import login_required, current_user
 from iqsheets_app import db
 from iqsheets_app.models import Prompt, Template
-from iqsheets_app.utils.decorators import check_confirmed_mail
+from iqsheets_app.utils.decorators import check_confirmed_mail, check_payment_oauth
 from iqsheets_app.openai import openai_chat
 from .forms import DashboardForm
 import boto3
@@ -29,6 +29,7 @@ s3_client = boto3.client(
 @dashboard_blueprint.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def dashboard():
     """User Dashboard page"""
     form = DashboardForm()
@@ -39,6 +40,7 @@ def dashboard():
 @dashboard_blueprint.route('/dashboard/formel', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def formel():
     """User Dashboard page"""
     form = DashboardForm()  
@@ -71,6 +73,7 @@ def formel():
 @dashboard_blueprint.route('/dashboard/favorite/<int:prompt_id>', methods=['POST'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def prompt_favorite(prompt_id):
     ''' handles user feedback per prompt '''
     prompt = Prompt.query.filter_by(id=prompt_id).first()
@@ -83,6 +86,7 @@ def prompt_favorite(prompt_id):
 @dashboard_blueprint.route('/dashboard/positive/<int:prompt_id>', methods=['POST'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def positive_feedback(prompt_id):
     ''' handles user feedback per prompt '''
     prompt = Prompt.query.filter_by(id=prompt_id).first()
@@ -95,6 +99,7 @@ def positive_feedback(prompt_id):
 @dashboard_blueprint.route('/dashboard/negative/<int:prompt_id>', methods=['POST'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def negative_feedback(prompt_id):
     ''' handles user feedback per prompt '''
     prompt = Prompt.query.filter_by(id=prompt_id).first()
@@ -107,6 +112,7 @@ def negative_feedback(prompt_id):
 @dashboard_blueprint.route('/favoriten', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def favorites():
     """User favorite Excel Formulas"""
     page = request.args.get('page', 1, type=int)
@@ -128,6 +134,7 @@ def favorites():
 @dashboard_blueprint.route('/formel_<int:favorite_id>/delete', methods=['GET'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def delete_favorite(favorite_id):
     """Delete Formula/VBA to User favorites"""
     favorite = Prompt.query.filter_by(id=favorite_id).first()
@@ -139,6 +146,7 @@ def delete_favorite(favorite_id):
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def templates():
     """ Route for templates """
     if not current_user.premium:
@@ -165,6 +173,7 @@ def templates():
 @dashboard_blueprint.route('/download', methods=['GET'])
 @login_required
 @check_confirmed_mail
+@check_payment_oauth
 def download():
     """ Route for templates download """
     filename = 'static/xlxs_templates/Calendar-Template.xlsx'

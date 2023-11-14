@@ -1,4 +1,4 @@
-""" Oauth routes """
+""" Google Oauth routes """
 from datetime import datetime
 from flask import current_app, flash, url_for, redirect
 from flask_login import current_user, login_user
@@ -29,20 +29,30 @@ def google_logged_in(blueprint, token):
         return False
 
     google_info = resp.json()
-    google_user_id = google_info["id"]
+    google_user_id = google_info["id"]   
+    stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={google_info['email']}"
     
-    # Find this OAuth token in the database, or create it
-    query = OAuth.query.filter_by(provider=blueprint.name, provider_user_id=google_user_id)
-    try:
-        oauth = query.one()
-    except NoResultFound:
+    # Check if the Google email is already associated with an account
+    existing_user = User.query.filter_by(email=google_info['email']).first()
+    
+    if existing_user:
+        # Find or create the OAuth token for the user
+        oauth = OAuth.query.filter_by(provider=blueprint.name, provider_user_id=google_user_id).first()
+        
+        if not oauth:
+            # Create a new OAuth token for the existing user
+            oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, token=token)
+            oauth.user = existing_user
+            db.session.add(oauth)
+            db.session.commit()
+
+        # Log in the existing user
+        login_user(existing_user, remember=True)
+        return redirect(url_for('dashboard.dashboard'))
+    else:
+        # Create a new OAuth token for the user
         oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, token=token)
 
-    if oauth.user:
-        login_user(oauth.user)
-        return redirect(url_for('dashboard.dashboard'))
-
-    else:
         # Create a new local user account for this user
         user = User(username=google_info["name"], email=google_info["email"], password="")
         # Associate the new local user account with the OAuth token
@@ -53,8 +63,7 @@ def google_logged_in(blueprint, token):
         # Save and commit our database models
         db.session.add_all([user, oauth])
         db.session.commit()
-        # Log in the new local user account
-        login_user(user)
+        login_user(user, remember=True)
         return redirect(url_for('dashboard.dashboard'))
 
     # Disable Flask-Dance's default behavior for saving the OAuth token

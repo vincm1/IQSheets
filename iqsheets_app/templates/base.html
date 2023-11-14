@@ -53,12 +53,11 @@
 						<li class="nav-item me-3">
 							<a class="nav-link" href="{{url_for('core.index', _anchor='faqs')}}">FAQs</a>
 						</li>
-
-						<li class="nav-item">
-							<button class="btn btn-secondary me-2"><a href="{{url_for('user.login')}}">Login</a></button>
+						<li class="nav-item me-2">
+							<a href="{{url_for('user.login')}}"><button class="btn btn-secondary">Login</button></a>
 						</li>
 						<li class="nav-item">
-							<button class="btn btn-primary"><a href="{{url_for('user.register')}}"><i class="fa-regular fa-user me-2"></i>Anmelden</a></button>
+							<a href="{{url_for('user.register')}}"><button class="btn btn-primary"><i class="fa-regular fa-user me-2"></i>Anmelden</button></a>
 						</li>
 					</ul>
 				</div>
