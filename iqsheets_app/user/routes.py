@@ -59,20 +59,27 @@ def login():
     
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.is_confirmed:
-            flash('Bitte bestätige erst deine Anmeldung', 'info')
-            if not user.check_password(form.password.data):
-                return redirect(url_for('user.login'))
+        if user is not None and user.check_password(form.password.data):
+            if user.is_admin:
+                login_user(user, remember=True)
+                return redirect(url_for('dashboard.dashboard'))
+            else:
+                if user.stripe_customer_id and user.stripe_sub_id:
+                    login_user(user, remember=True)
+                    return redirect(url_for('dashboard.dashboard'))
+                else:
+                    stripe_customer_id, stripe_subscription_id = user.check_payment()
+                    user.stripe_customer_id = stripe_customer_id
+                    user.stripe_sub_id = stripe_subscription_id
+                    db.session.add(user)
+                    db.session.commit()
+                    login_user(user, remember=True)
+                    return redirect(url_for('dashboard.dashboard'))
         else:
-            user.check_payment()
-            user.stripe_customer_id = stripe_customer_id
-            user.stripe_sub_id = stripe_subscription_id
-            db.session.add(user)
-            db.session.commit()
-            login_user(user, remember=True)
-            return redirect(url_for('dashboard.dashboard'))
-    
-    return render_template('user/login.html', form=form, form_nl=form_nl)
+            flash('Prüfe deine Anmeldedaten', 'danger')
+            return redirect(url_for('user.login'))
+ 
+    return render_template('user/login.html', form=form, form_2=form_2, form_nl=form_nl)    
 
 @user_blueprint.route('/logout')
 @login_required
