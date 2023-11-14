@@ -25,6 +25,8 @@ def create_app(config_name=None):
     login_manager.init_app(app)
     login_manager.session_protection = 'strong'
     login_manager.login_view = 'user.login'
+    login_manager.login_message = "Bitte logge dich ein."
+    login_manager.login_message_category = "warning"
     
     # Flask Mail Instance
     mail.init_app(app)

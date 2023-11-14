@@ -30,7 +30,6 @@ def google_logged_in(blueprint, token):
 
     google_info = resp.json()
     google_user_id = google_info["id"]   
-    stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={google_info['email']}"
     
     # Check if the Google email is already associated with an account
     existing_user = User.query.filter_by(email=google_info['email']).first()
@@ -41,9 +40,10 @@ def google_logged_in(blueprint, token):
         
         if not oauth:
             # Create a new OAuth token for the existing user
-            oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, token=token)
+            oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, provider_user_email=google_info["email"], token=token)
             oauth.user = existing_user
-            db.session.add(oauth)
+            oauth.user.is_oauth = True
+            db.session.add_all([existing_user, oauth])
             db.session.commit()
 
         # Log in the existing user
@@ -51,7 +51,7 @@ def google_logged_in(blueprint, token):
         return redirect(url_for('dashboard.dashboard'))
     else:
         # Create a new OAuth token for the user
-        oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, token=token)
+        oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, provider_user_email=google_info["email"], token=token)
 
         # Create a new local user account for this user
         user = User(username=google_info["name"], email=google_info["email"], password="")

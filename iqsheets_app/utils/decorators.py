@@ -1,6 +1,7 @@
 from functools import wraps
 from flask import flash, redirect, url_for
-from flask_login import current_user
+from flask_login import current_user, login_user
+from iqsheets_app.models import db
 
 def check_confirmed_mail(func):
     @wraps(func)
@@ -16,8 +17,17 @@ def check_payment_oauth(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
         stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={current_user.email}"
-        if current_user.stripe_customer_id is None and current_user.stripe_sub_id is None:
-            return redirect(stripe_link)
+        if current_user.stripe_customer_id and current_user.stripe_sub_id:
+            login_user(current_user, remember=True)
+            return redirect(url_for('dashboard.dashboard'))
+        else:
+            stripe_customer_id, stripe_subscription_id = current_user.check_payment()
+            current_user.stripe_customer_id = stripe_customer_id
+            current_user.stripe_sub_id = stripe_subscription_id
+            db.session.add(current_user)
+            db.session.commit()
+            login_user(current_user, remember=True)
+            return redirect(url_for('dashboard.dashboard'))
         return func(*args, **kwargs)
 
     return decorated_function

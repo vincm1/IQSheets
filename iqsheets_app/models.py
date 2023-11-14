@@ -67,6 +67,7 @@ class User(db.Model, UserMixin):
 class OAuth(OAuthConsumerMixin, db.Model):
     
     provider_user_id = db.Column(db.String(256), unique=True, nullable=False)
+    provider_user_email = db.Column(db.String(400), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     user = db.relationship(User)
 
