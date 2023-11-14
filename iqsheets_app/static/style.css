@@ -154,14 +154,30 @@ nav {
     color: var(--bs-body-color);
 }
 
+.navbar-brand .iq {
+    background-color: var(--bs-link-hover-color);
+    border-radius: 50px;
+    padding: 12px 12px;
+    color: var(--bs-background-light);
+    font-size: 28px;
+    text-transform: capitalize;
+    font-family: var(--bs-body-font);
+}
+
+.navbar-brand .sheets {
+    color: var(--bs-link-hover-color);
+    font-size: 28px;
+    text-transform: capitalize;
+    font-family: var(--bs-body-heading-font);
+}
+
+.navbar-brand a:hover {
+    all: unset;
+}
+
 .nav-item a:hover {
     text-decoration: none;
     color: var(--bs-link-hover-color);
-}
-
-.navbar-brand-logo {
-    width: 150px;
-    height: 150px;
 }
 
 .nav-divider {
@@ -565,6 +581,27 @@ footer {
     font-size: 14px;
 }
 
+footer .navbar-brand .iq {
+    background-color: var(--bs-background-light);
+    border-radius: 50px;
+    padding: 12px 12px;
+    color: var(--bs-link-color);
+    font-size: 28px;
+    text-transform: capitalize;
+    font-family: var(--bs-body-font);
+}
+
+footer .navbar-brand .sheets {
+    color: var(--bs-background-light);
+    font-size: 28px;
+    text-transform: capitalize;
+    font-family: var(--bs-body-heading-font);
+}
+
+footer .navbar-brand a:hover {
+    all: unset;
+}
+
 .footer-heading {
     font-size: 16px;
     font-weight: bold;
@@ -591,4 +628,8 @@ footer {
 
 .footer-link a:hover {
     text-decoration: underline;
+}
+
+.footer-desc {
+    color: var(--bs-background-light)
 }

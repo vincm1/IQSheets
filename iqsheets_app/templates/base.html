@@ -28,11 +28,10 @@
   </head>
   
 	<body>
-		<nav class="navbar navbar-expand-lg bg-body-tertiary py-0">
-      <div class="container">
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container py-2">
         <a class="navbar-brand" href="{{url_for('core.index')}}" id="logo">
-					<img class="navbar-brand-logo" src="{{url_for('static', filename='logos/logo.svg')}}" height="0" 
-          alt="IQSheets Logo">
+          <span class="iq me-1">IQ</span><span class="sheets">Sheets</span>
 				</a>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,10 +53,10 @@
 							<a class="nav-link" href="{{url_for('core.index', _anchor='faqs')}}">FAQs</a>
 						</li>
 						<li class="nav-item me-2">
-							<a href="{{url_for('user.login')}}"><button class="btn btn-secondary">Login</button></a>
+							<a href="{{url_for('user.login')}}"><button class="btn btn-secondary inline-block">Login</button></a>
 						</li>
-						<li class="nav-item">
-							<a href="{{url_for('user.register')}}"><button class="btn btn-primary"><i class="fa-regular fa-user me-2"></i>Anmelden</button></a>
+						<li class="nav-item inline-block">
+							<a href="{{url_for('user.register')}}"><button class="btn btn-primary inline-block"><i class="fa-regular fa-user me-2"></i>Anmelden</button></a>
 						</li>
 					</ul>
 				</div>
@@ -77,13 +76,10 @@
                     <div class="row justify-content-between">
                         <div class="col-lg-3 mb-7 mb-lg-0">
                         	<div class="logo-area">
-														<div class="mb-4">
-															<a class="navbar-brand" href="{{url_for('core.index')}}" aria-label="Space">
-																<img class="navbar-brand-logo" src="{{url_for('static', filename='logos/logo-white.svg')}}" alt="Image Description">
-															</a>
-														</div>
-														
-														<h6>Zeitersparnis in Excel & Google Spreadsheets, dank smarter KI.</h6>
+                            <a class="navbar-brand" href="{{url_for('core.index')}}" id="logo">
+                              <span class="iq me-1">IQ</span><span class="sheets">Sheets</span>
+                            </a>
+														<h6 class="footer-desc pt-3">Zeitersparnis in Excel & Google Spreadsheets, dank smarter KI.</h6>
 														<p class="info1">
 																Generiere dir mit dem KI-Tool von IQSheets in sekundenschnelle smarte Excel-Formeln und lasse dir unbekannte Formeln 
 																erklären und werde zum Spreadsheet-Profi. 
