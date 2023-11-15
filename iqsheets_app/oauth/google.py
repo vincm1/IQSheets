@@ -45,10 +45,22 @@ def google_logged_in(blueprint, token):
             oauth.user.is_oauth = True
             db.session.add_all([existing_user, oauth])
             db.session.commit()
+        
+        # Check if Stripe payment exists for account
+        if existing_user.stripe_customer_id and existing_user.stripe_sub_id:
+            # Log in the existing user
+            login_user(existing_user, remember=True)
+            return redirect(url_for('dashboard.dashboard'))
+        else:
+            # Redirect to Stripe signup if payment details are missing
+            stripe_customer_id, stripe_subscription_id = existing_user.check_payment()
+            existing_user.stripe_customer_id = stripe_customer_id
+            existing_user.stripe_sub_id = stripe_subscription_id
+            db.session.add(existing_user)
+            db.session.commit()
+            login_user(existing_user, remember=True)
+            return redirect(url_for('dashboard.dashboard'))
 
-        # Log in the existing user
-        login_user(existing_user, remember=True)
-        return redirect(url_for('dashboard.dashboard'))
     else:
         # Create a new OAuth token for the user
         oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, provider_user_email=google_info["email"], token=token)
@@ -63,8 +75,9 @@ def google_logged_in(blueprint, token):
         # Save and commit our database models
         db.session.add_all([user, oauth])
         db.session.commit()
-        login_user(user, remember=True)
-        return redirect(url_for('dashboard.dashboard'))
+        # Redirect to Stripe signup if payment details are missing
+        stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}"
+        return redirect(stripe_link)
 
     # Disable Flask-Dance's default behavior for saving the OAuth token
     return False

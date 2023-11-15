@@ -16,8 +16,6 @@ linkedin_blueprint = make_linkedin_blueprint(
     storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
 )
 
-stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2AbKIYPWl2LXKPW3U3h6Lu71E94Gf1NvrHKE00xPsZzRZZ"
-
 # create/login local user on successful OAuth login
 @oauth_authorized.connect_via(linkedin_blueprint)
 def linkedin_logged_in(blueprint, token):
@@ -61,8 +59,13 @@ def linkedin_logged_in(blueprint, token):
             return redirect(url_for('dashboard.dashboard'))
         else:
             # Redirect to Stripe signup if payment details are missing
-            stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={existing_user.email}"
-            return redirect(stripe_link)
+            stripe_customer_id, stripe_subscription_id = existing_user.check_payment()
+            existing_user.stripe_customer_id = stripe_customer_id
+            existing_user.stripe_sub_id = stripe_subscription_id
+            db.session.add(existing_user)
+            db.session.commit()
+            login_user(existing_user, remember=True)
+            return redirect(url_for('dashboard.dashboard'))
     
     else:
         # Create a new OAuth token for the user
@@ -79,8 +82,8 @@ def linkedin_logged_in(blueprint, token):
         db.session.add_all([user, oauth])
         db.session.commit()
         # Redirect to Stripe signup if payment details are missing
-        login_user(user, remember=True)
-        return redirect(url_for('dashboard.dashboard'))
+        stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}"
+        return redirect(stripe_link)
     
     # Disable Flask-Dance's default behavior for saving the OAuth token
     return False
