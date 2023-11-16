@@ -44,17 +44,26 @@ class User(db.Model, UserMixin):
     
     def check_payment(self):
         """ Check whether payment of a user was successful """
-        if self.is_admin is False and self.stripe_customer_id is None: 
+        if self.is_admin is False: 
             try:
-                stripe_customer = stripe.Customer.list(email=self.email)
-                stripe_cust_id = stripe_customer["data"][0]["id"]
-                stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
-                print(stripe_subscription_id)
-                stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
+                resp = stripe.Customer.list(email=self.email)
+                if resp.get('data'):
+                    print(resp["data"])
+                    stripe_cust_id = resp["data"][0]["id"]
+                    stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
+                    stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
+                    self.stripe_customer_id = stripe_cust_id
+                    self.stripe_sub_id = stripe_cust_id
+                    db.session.add(self)
+                    db.session.commit()
+                else:
+                    self.stripe_customer_id = None
+                    self.stripe_sub_id = None
+                    db.session.add(self)
+                    db.session.commit()
             except stripe.error.InvalidRequestError as e:
                 # Handle the error, e.g., log it or raise a specific exception
                 print(f"Error checking payment: {e}")
-        return stripe_cust_id, stripe_subscription_id
            
     def __init__(self, username, email, password):
         self.username = username

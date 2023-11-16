@@ -2,7 +2,7 @@
 import os
 from datetime import datetime
 import boto3
-from flask import Blueprint, current_app, render_template, redirect, request, flash, url_for
+from flask import Blueprint, Markup, current_app, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from iqsheets_app import db, mail
 from iqsheets_app.models import User
@@ -42,7 +42,7 @@ def register():
         token = generate_confirmation_token(user.email)
         confirm_url = url_for('user.confirm_email', token=token, _external=True)
         html = render_template('user/email/activate.html', confirm_url=confirm_url)
-        subject = "Bitte bestätige Deine Email für ExcelWizzard!"
+        subject = "Bitte bestätige Deine Email für IQSheets!"
         send_email(user.email, subject, html)
         
         flash(f'Eine Bestätigungs-Email wurde an {user.email} geschickt.', 'success')
@@ -59,26 +59,31 @@ def login():
     
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user is not None and user.check_password(form.password.data):
-            if user.is_admin:
-                login_user(user, remember=True)
-                return redirect(url_for('dashboard.dashboard'))
-            else:
-                if user.stripe_customer_id and user.stripe_sub_id:
-                    login_user(user, remember=True)
-                    return redirect(url_for('dashboard.dashboard'))
+        # Check if user exist
+        if user:
+            # Check if user confirmed registration link
+            if user.is_confirmed:
+                # Check password of user
+                if user.check_password(form.password.data):
+                    if user.is_admin:
+                        login_user(user, remember=True)
+                        return redirect(url_for('dashboard.dashboard'))
+                    else:
+                        user.check_payment()
+                        if user.stripe_customer_id and user.stripe_sub_id is not None:
+                            login_user(user, remember=True)
+                            return redirect(url_for('dashboard.dashboard'))
+                        else:
+                            flash(Markup('Kontaktiere unseren Support - <a href="{{url_for("core.index")}}">Supportseite</a>'), 'danger')
+                            return redirect(url_for('user.login'))    
                 else:
-                    stripe_customer_id, stripe_subscription_id = user.check_payment()
-                    user.stripe_customer_id = stripe_customer_id
-                    user.stripe_sub_id = stripe_subscription_id
-                    db.session.add(user)
-                    db.session.commit()
-                    login_user(user, remember=True)
-                    return redirect(url_for('dashboard.dashboard'))
+                    flash('Prüfe deine Anmeldedaten!', 'danger')
+                    return redirect(url_for('user.login'))
+            else:
+                flash('Bitte bestätige deine Anmeldung per Link', 'danger')
         else:
-            flash('Prüfe deine Anmeldedaten', 'danger')
+            flash('Prüfe deine Anmeldedaten!', 'danger')
             return redirect(url_for('user.login'))
- 
     return render_template('user/login.html', form=form, form_2=form_2, form_nl=form_nl)    
 
 @user_blueprint.route('/logout')

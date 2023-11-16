@@ -1,6 +1,5 @@
 from datetime import datetime
-import stripe
-from flask import current_app, flash, url_for, redirect
+from flask import Markup, current_app, flash, url_for, redirect
 from flask_login import current_user, login_user
 from flask_dance.contrib.linkedin import make_linkedin_blueprint, linkedin
 from flask_dance.consumer import oauth_authorized, oauth_error
@@ -53,19 +52,13 @@ def linkedin_logged_in(blueprint, token):
             db.session.commit()
         
         # Check if Stripe payment exists for account
-        if existing_user.stripe_customer_id and existing_user.stripe_sub_id:
-            # Log in the existing user
+        existing_user.check_payment()
+        if existing_user.stripe_customer_id and existing_user.stripe_sub_id is not None:
             login_user(existing_user, remember=True)
             return redirect(url_for('dashboard.dashboard'))
         else:
-            # Redirect to Stripe signup if payment details are missing
-            stripe_customer_id, stripe_subscription_id = existing_user.check_payment()
-            existing_user.stripe_customer_id = stripe_customer_id
-            existing_user.stripe_sub_id = stripe_subscription_id
-            db.session.add(existing_user)
-            db.session.commit()
-            login_user(existing_user, remember=True)
-            return redirect(url_for('dashboard.dashboard'))
+            flash(Markup('Kontaktiere unseren Support - <a href="{{url_for("core.index")}}">Supportseite</a>'), 'danger')
+            # return redirect(url_for('user.login'))   
     
     else:
         # Create a new OAuth token for the user
