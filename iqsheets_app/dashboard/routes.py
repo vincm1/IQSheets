@@ -60,21 +60,20 @@ def formulas():
 @check_confirmed_mail
 def formel():
     """User Dashboard page"""
-    form = DashboardForm()  
-    gif = '../static/img/beam-a-person-is-typing-on-a-laptop.gif'
+    form = DashboardForm()
    
     if form.validate_on_submit():
-        prompt = form.formula_explain.data + " " + form.excel_google.data + form.info_prompt.data + ": " + form.prompt.data
+        prompt = form.formula_explain.data + " " + form.excel_google.data + ": " + form.prompt.data
         result = openai_chat(prompt)
         # Increasing the amount of prompts and total tokens when prompt is generated
         current_user.num_prompts += 1
         current_user.num_tokens += result["usage"]["total_tokens"]
         # Creating prompt instance
-        prompt = Prompt(user_id = current_user.id, provider=form.excel_google.data, method=form.info_prompt.data,
-                        request=form.formula_explain.data, command=form.prompt.data, prompt=result["choices"][0]["text"][1:])
+        # prompt = Prompt(user_id = current_user.id, provider=form.excel_google.data, 
+        #                 request=form.formula_explain.data, command=form.prompt.data, prompt=result["choices"][0]["text"][1:])
         # Commiting prompt and numbers to db
-        db.session.add(prompt)
-        db.session.commit()        
+        # db.session.add(prompt)
+        # db.session.commit()        
 
         # Converting OpenAi prompt to a usable text
         explanation = result["choices"][0]["text"]
@@ -83,9 +82,9 @@ def formel():
         text = result["choices"][0]["text"]
         formula = text[1:]
         
-        return render_template('dashboard/dashboard.html', form=form, explanation=explanation, formula=formula, prompt=prompt, gif=gif)
+        return render_template('dashboard/formula_page.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
 
-    return render_template('dashboard/dashboard.html', form=form, gif=gif)
+    return render_template('dashboard/formula_page.html', form=form)
 
 @dashboard_blueprint.route('/dashboard/favorite/<int:prompt_id>', methods=['POST'])
 @login_required

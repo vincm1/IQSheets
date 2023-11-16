@@ -92,6 +92,69 @@ p {
     color: var(--bs-body-color);
 }
 
+body {
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--bs-font-monospace);
+      color: var(--bs-link-hover-color);
+  }
+  
+  /* BTNs */
+  a {
+      text-decoration: none;
+      color: var(--bs-body-color);
+  }
+  
+  .btn-primary,
+  .btn-primary:hover {
+      background-color: var(--bs-link-color);
+      border:none;
+      border-radius: 5px;
+      color: var(--bs-body-bg);
+  }
+  
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .btn-primary:active {
+      background-color: var(--bs-link-hover-color);
+  }
+  
+  .btn-secondary,
+  .btn-secondary:hover {
+      border: none;
+      border-radius: 5px;
+  }
+  
+  .btn-secondary {
+      background-color: unset;
+      color: var(--bs-link-color);
+  }
+  
+  .btn-secondary:hover,
+  .btn-secondary:active,
+  .btn-secondary:focus {
+      background-color: var(--bs-link-color-hover);
+      color: var(--bs-link-hover-color);
+  }
+  
+  /* Flashmessages  */
+  
+  .alert-success {
+      background-color: var(--bs-link-color);
+      color: var(--bs-background-light);
+  }
+
 /* Sidebar */
 
 .sidebar {
@@ -170,12 +233,47 @@ p {
   }
 
 /* Formel-Components */
+.db-card label {
+    color: var(--bs-body-color);
+}
 
 .form-input {
-    border: 2px solid var(--bs-link-color);
+    border: 1px solid var(--bs-link-color-hover);
     border-radius: 15px;
 }
 
+.form-input-text {
+    border: 1px solid var(--bs-link-color-hover);
+    border-radius: 15px;
+}
+
+.form-input-text:focus-visible {
+    border: 1px solid var(--bs-link-color);
+    border-radius: 15px;
+}
+
+.form-input:hover {
+    border: 2px solid var(--bs-link-color);
+    background-color: var(--bs-link-color-hover);
+}
+
 .form-input label {
-    text-align: center;
+    padding-left: 1rem;
+}
+
+.form-input input[type='radio'] {
+    margin-left: 1rem;
+}
+
+.form-input input[type='radio']:hover {
+    box-shadow: 0 6px 12px var(--bs-link-color-hover);
+}
+
+.form-input input[type='radio']:checked:hover {
+    box-shadow: 0 6px 12px var(--bs-link-color-hover);
+    accent-color: var(--bs-link-hover-color);
+}
+
+.form-input input[type='radio']:checked{
+    accent-color: var(--bs-link-hover-color);
 }

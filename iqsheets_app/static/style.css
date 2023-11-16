@@ -143,6 +143,7 @@ a {
     background-color: var(--bs-link-color);
     color: var(--bs-background-light);
 }
+
 /* Navbar */
 nav {
     background-color: var(--bs-background-light);
