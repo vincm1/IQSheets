@@ -26,15 +26,34 @@ s3_client = boto3.client(
 #### routes ####
 ################
 
-@dashboard_blueprint.route('/dashboard', methods=['GET', 'POST'])
+@dashboard_blueprint.route('/dashboard', methods=['GET'])
 @login_required
 @check_confirmed_mail
 def dashboard():
     """User Dashboard page"""
+    return render_template('dashboard/dashboard.html')
+
+@dashboard_blueprint.route('/formulas', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
+def formulas():
+    """Formel page"""
     form = DashboardForm()
-    gif = 'static/img/beam-a-person-is-typing-on-a-laptop.gif'
-    
-    return render_template('dashboard/dashboard.html', form=form, gif=gif)
+    return render_template('dashboard/formula_page.html', form=form)
+
+# @dashboard_blueprint.route('/dashboard', methods=['GET'])
+# @login_required
+# @check_confirmed_mail
+# def dashboard():
+#     """User Dashboard page"""
+#     return render_template('dashboard/dashboard.html')
+
+# @dashboard_blueprint.route('/dashboard', methods=['GET'])
+# @login_required
+# @check_confirmed_mail
+# def dashboard():
+#     """User Dashboard page"""
+#     return render_template('dashboard/dashboard.html')
 
 @dashboard_blueprint.route('/dashboard/formel', methods=['GET', 'POST'])
 @login_required

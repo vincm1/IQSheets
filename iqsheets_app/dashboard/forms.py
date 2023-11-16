@@ -4,10 +4,9 @@ from wtforms import HiddenField, TextAreaField, SelectField, RadioField, SubmitF
 from wtforms.validators import DataRequired, Length
 
 class DashboardForm(FlaskForm):
-    excel_google = RadioField('Die Formel/Erklärung ist für...?', validators=[DataRequired()], choices=["Excel", "Google Sheets"], render_kw={'class': 'form-check-input'})
-    info_prompt = RadioField('Was möchtest du generieren?', validators=[DataRequired()], choices=["Formel", "VBA"], render_kw={'class': 'form-check-input'})
-    formula_explain = RadioField('Formel oder Erklärung', validators=[DataRequired()], choices=["Erstellen", "Erklären"], render_kw={'class': 'form-check-input'})
-    prompt = TextAreaField('Welches Problem versuchen Sie zu lösen oder welche Formel wollen Sie verstehen? Versuchen Sie, so genau wie möglich zu sein.', validators=[DataRequired(), Length(min=10, max=400)], render_kw={"style": "min-height: 10rem;"})
+    excel_google = RadioField('Die Formel/Erklärung ist für...?', validators=[DataRequired()], choices=["Excel", "Google Sheets"], render_kw={'class': 'form-select-input'})
+    formula_explain = RadioField('Formel oder Erklärung', validators=[DataRequired()], choices=["Erstellen", "Erklären"], render_kw={'class': 'form-select-input'})
+    prompt = TextAreaField('Beschreiben Sie die Formel, die Sie erstellen möchten. Versuchen Sie, so detailliert wie möglich zu sein.', validators=[DataRequired(), Length(min=10, max=400)], render_kw={"style": "min-height: 10rem;"})
     submit = SubmitField('Formel generieren')  
 class FeedbackForm(FlaskForm):
     provider = HiddenField()

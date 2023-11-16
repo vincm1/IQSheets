@@ -1,0 +1,55 @@
+{% extends "layout.html" %}{% block content %}
+	<div class="heading mx-3">
+		<h3>Formel AI Assistent</h3>
+	</div>
+	<div class="formula-cards mt-5 mx-3">
+        <div class="row">
+            <div class="col-6">
+                <div class="card shadow-lg">
+                    <div class="card-body p-4">
+                        <h4>Input</h4>
+                        <div class="py-3">
+                            <form method="POST" action="{{url_for('dashboard.formel')}}" id="formula-form">
+                                {{form.hidden_tag()}}
+                                <div class="row">
+                                    {{form.excel_google.label(class_="pb-1")}}
+                                    {% for subfield in form.excel_google %}
+										<div class="col-lg-5 form-input mt-3 mx-3 py-2">
+											{% if subfield.data == "Excel" %}
+												<img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="microsoft-excel-2019--v1"/>
+											{% else %}
+												<img width="48" height="48" src="https://img.icons8.com/color/48/google-sheets.png" alt="google-sheets"/>
+											{% endif %}
+											{{subfield.label}}
+											{{subfield}}
+										</div>
+									{% endfor %}
+                                </div>
+                                <div class="row mt-5">
+                                    {{form.formula_explain.label(class_="mb-1")}}
+									{% for subfield in form.formula_explain %}
+										<div class="col-5 form-input-2 me-5 text-center"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
+											{{ subfield.label }}
+											{{ subfield }}
+										</div>
+									{% endfor %}
+									{{form.prompt.label(class="mb-2")}}	
+									{{form.prompt(class="form-control p-2", placeholder="Summe Spalte A wenn Spalte B das Wort 'Sales' enthält z.B.")}}	
+									{{form.submit(class="btn btn-primary col-12 my-2", id="formel-btn")}}
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card shadow-lg">
+                    <div class="card-body p-4">
+                        <h4>Output</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+{% endblock %}
