@@ -1,9 +1,26 @@
 {% extends "base.html" %} {% block content %}
 <main>
     <!-- Hero Area-->
-    <section class="hero">
-        <h1> This is a 404 error</h1>
-    </section>
+    <section class="error py-5">
+        <div class="container pt-5 pb-5">
+          <div class="row">
+            <div class="col-lg-6 justify-content-center">
+              <img src="{{url_for('static', filename='components/oc-thinking.svg')}}" alt="picture 404" id="error-pic">
+            </div>
+            <div class="col-lg-6 col-md-8 pt-sm-5">
+              <!-- Heading -->
+              <div class="pe-lg-3 mb-7 justify-content-sm-center">
+                <h1 class="display-3 text-inline"><span id="errorword">HOPPLA!</span> SEITE NICHT GEFUNDEN.
+                </h1>
+                <h4 class="pt-3 pb-5">Melde dich jetzt an und lasse dir komplexe Formeln in sekundenschnelle durch einfache Textanweisungen generieren.</h4>
+                <div class="d-grid d-sm-flex gap-2 mt-2 mb-5 justify-content-center">
+                    <a href="{{url_for('user.register')}}"><button class="btn btn-primary px-5 py-3" href="">Jetzt registrieren</button></a>
+                </div>
+              </div>
+            </div>    
+          </div>
+      </div>
+</section>
     <!-- Say Something End -->
 </main>
 {% endblock %}

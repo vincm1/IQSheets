@@ -48,7 +48,7 @@ class ChangePasswordForm(FlaskForm):
 
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(message="Keine valide Emailadresse!")])
-    submit = SubmitField('Weiter')
+    submit = SubmitField('Passwort zurücksetzen')
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Neues Passwort', validators=[DataRequired(), Length(min=8, message="Mindestens 8 Zeichen!"),
                                                            Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])", 
