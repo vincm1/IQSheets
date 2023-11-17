@@ -31,119 +31,74 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: 'Arial', sans-serif;
-      }
-
-      #sidebar {
-        height: 100vh;
-        width: 250px;
-        position: fixed;
-        top: 0;
-        left: -250px;
-        background-color: #333;
-        padding-top: 60px;
-        transition: all 0.3s;
-      }
-
-      #sidebar.show {
-        left: 0;
-      }
-
-      #sidebar .sidebar-header {
-        text-align: center;
-        padding: 20px;
-        background-color: #555;
-      }
-
-      #sidebar ul.components {
-        padding: 20px 0;
-        border-bottom: 1px solid #4e4e4e;
-      }
-
-      #sidebar ul p {
-        color: white;
-        padding: 10px;
-      }
-
-      #sidebar ul li a {
-        padding: 10px;
-        font-size: 1.2em;
-        display: block;
-        color: white;
-      }
-
-      #sidebar ul li a:hover {
-        color: #007bff;
-        background: #fff;
-        text-decoration: none;
-      }
-
-      #sidebar ul li.active {
-        background: #007bff;
-        color: #fff;
-      }
-
-      #sidebar .toggle-btn {
-        position: absolute;
-        top: 0;
-        left: 250px;
-      }
-  </style>
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="row flex-nowrap">
-          <div class="sidebar col-md-2 col-xl-2 px-sm-1 px-0">
-              <div class="sidebar-menu d-flex flex-column align-items-center align-items-sm-start ps-2 pt-2 min-vh-100">
-                  <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <a class="navbar-brand" id="logo">
-                      <span class="iq me-1">IQ</span><span class="sheets">Sheets</span>
-                    </a>
-                  </a>
-                  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start pt-5" id="menu">
-                    <li>
-                        <a href="#" class="nav-link align-middle">
-                          <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> 
-                        </a>
-                    </li>
-                    <h6 class="pt-3">Tools</h6>
-                    <li>
-                      <a href="#" class="nav-link align-middle">
-                        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Formeln</span> </a>
-                    </li>
-                    <li>
-                      <a href="#" class="nav-link align-middle">
-                        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">VBA</span> </a>
-                    </li>
-                  </ul>
-                  <hr>
-                  <div class="dropdown pb-4">
-                      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% set s3_link =  "https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/profile_pictures/" + current_user.profile_picture %}  
-                        <img src="{{s3_link}}" alt="hugenerd" width="40" height="40" class="rounded-circle">
-                          <span class="d-none d-sm-inline mx-1">{{current_user.username}}</span>
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu text-small shadow">
-                          <li><a class="dropdown-item" href="#">New project...</a></li>
-                          <li><a class="dropdown-item" href="#">Settings</a></li>
-                          <li><a class="dropdown-item" href="#">Profile</a></li>
-                          <li>
-                              <hr class="dropdown-divider">
-                          </li>
-                          <li><a class="dropdown-item" href="{{url_for('user.logout')}}">Logout</a></li>
-                      </ul>
-                  </div>
-              </div>
+    <div id="wrapper">
+      <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+          <a class="logo" href="{{url_for('dashboard.dashboard')}}" id="logo">
+            <span class="iq me-1">IQ</span><span class="sheets">Sheets</span>
+          </a>
+        </div>
+        <ul class="sidebar-nav">
+          <li class="active nav-item my-2">
+            <a href="{{url_for('dashboard.dashboard')}}"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+          </li>
+          <hr>
+          <li class="nav-item my-2">
+            <a href="#"><i class="fa-solid fa-square-root-variable"></i>Formeln</a>
+          </li>
+          <li class="nav-item my-2">
+            <a href="#"><i class="fa-solid fa-code"></i>Skripte</a>
+          </li>
+          <li class="nav-item my-2">
+            <a href="#"><i class="fa-solid fa-database"></i>SQL</a>
+          </li>
+          <li class="nav-item my-2">
+            <a href="#"><i class="fa-solid fa-wave-square"></i>RegEx</a>
+          </li>
+          <li class="nav-item my-2">
+            <a href="#"><i class="fa-solid fa-heart"></i>Favoriten</a>
+          </li>
+          <li class="nav-item my-2">
+            <a href="#"><i class="fa-solid fa-wallet"></i>Zahlungen</a>
+          </li>
+        </ul>
+        <div class="dropdown user-menu">
+          <div class="d-flex inline-block justify-content-center">
+            {% set s3_link =  "https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/profile_pictures/" + current_user.profile_picture %}
+            <a href=""><img src="{{s3_link}}" alt="" width="32" height="32" class="rounded-circle me-3"></a>
+            <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong id="username">{{current_user.username}}</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear fa-xs pe-2"></i>Settings</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear fa-xs pe-2"></i>Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{url_for('user.logout')}}"><i class="fa-solid fa-right-from-bracket fa-xs pe-2"></i>Logout</a></li>
+            </ul>
           </div>
-          <div class="col py-3 content">
-            {% block content %} 
-            {% endblock %}
+        </div>        
+      </aside>
+
+      <div id="navbar-wrapper">
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid" style="padding-left:2px">
+          <div class="navbar-header d-inline-block">
+            <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa-solid fa-arrow-right fa-xl"></i></a>
           </div>
+          </div>
+          <hr>
+        </nav>
       </div>
-  </div>
+
+      {% block content %}
+      {% endblock %}
+    
+    </div>
+
+    
     <!-- <nav class="sidebar close">
       <header>
         <div class="image-text">
@@ -261,13 +216,8 @@
     <script src="https://js.stripe.com/v3/"></script>
     <!-- JS file -->
     <script src="{{url_for('static', filename='main.js')}}" charset="utf-8"></script>
+    <script src="{{url_for('static', filename='sidebar.js')}}" charset="utf-8"></script>
     <!-- Stripe JS -->
     <script src="https://js.stripe.com/v3/"></script>
-    <script>
-      $(document).ready(function () {
-        $("#sidebarCollapse").on("click", function () {
-          $("#sidebar").toggleClass("show");
-        });
-      });
-    </script>
+
 </html>

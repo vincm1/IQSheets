@@ -101,6 +101,9 @@ body {
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
     background-color: var(--bs-body-bg);
+    padding-bottom: 30px;
+    position: relative;
+    min-height: 100%;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
@@ -114,6 +117,12 @@ body {
   a {
       text-decoration: none;
       color: var(--bs-body-color);
+      transition: background 0.2s, color 0.2s;
+  }
+
+  a:hover,
+  a:focus {
+    text-decoration: none;
   }
   
   .btn-primary,
@@ -156,43 +165,283 @@ body {
   }
 
 /* Sidebar */
+  
+  #wrapper {
+    padding-left: 0;
+    transition: all 0.5s ease;
+    position: relative;
+  }
+  
+  #sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--bs-link-hover-color);
+    transition: all 0.3s ease;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+  
+  .sidebar-brand .logo {
+    position: absolute;
+    margin-left: 12px;
+    margin-top:10px;
+    padding: 10px 0;
+  }
 
-.sidebar {
-    color: var(--bs-body-color);
+  .iq {
     background-color: var(--bs-background-light);
-}
-
-.sidebar a,
-.sidebar a:hover {
-    color: var(--bs-link-color);
-}
-
-.sidebar .nav-link {
-    padding-left: 10px;
-}
-
-.sidebar .nav-link:hover {
-    background-color: var(--bs-link-color-hover);
-    color: var(--bs-link-color);
-    border-radius: 10px;
-}
-
-.navbar-brand .iq {
-    background-color: var(--bs-link-hover-color);
     border-radius: 50px;
-    padding: 12px 12px;
-    color: var(--bs-background-light);
-    font-size: 28px;
+    padding: 10px 10px;
+    color: var(--bs-link-color);
+    font-size: 24px;
     text-transform: capitalize;
     font-family: var(--bs-body-font);
-}
+  }
 
-.navbar-brand .sheets {
+  .sheets {
+      color: var(--bs-background-light);
+      font-size: 28px;
+      text-transform: capitalize;
+      font-family: var(--bs-body-heading-font);
+  }
+  
+  .sidebar-brand h2 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .sidebar-nav {
+    position: absolute;
+    top: 75px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .sidebar-nav > li {
+    text-indent: 10px;
+    line-height: 42px;
+  }
+  .sidebar-nav > li a {
+    display: block;
+    text-decoration: none;
+    color: var(--bs-background-light);
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .sidebar-nav > li > a:hover,
+  .sidebar-nav > li.active > a {
+    text-decoration: none;
+    color: var(--bs-warning);
+    background: var(--bs-link-color-hover);
+  }
+
+  .sidebar-nav > li > a i.fa,
+  .sidebar-nav > li > a i.fa-solid {
+    font-size: 24px;
+    width: 60px;
+  }
+
+  .user-menu {
+    position: absolute;
+    left: 104px;
+    bottom: 15px;
+    transform: translateX(-50%); /* This will center the menu */
+    width: 100%; /* Adjust the width as needed */
+    /* Additional styling for user-menu */
+  }
+
+  .user-menu .dropdown-menu{
+    background-color: var(--bs-link-hover-color);
+  }
+
+  .user-menu .dropdown-item:hover{
+    color: var(--bs-warning);
+    background: var(--bs-link-color-hover);
+  }
+
+  .user-menu a{
+    color: var(--bs-background-light);
+  }
+
+  .user-menu #username{
+    color: var(--bs-background-light);
+  }
+  
+  #navbar-wrapper {
+      width: 100%;
+      position: absolute;
+      z-index: 1;
+  }
+
+  #wrapper.toggled #navbar-wrapper {
+      position: absolute;
+      margin-right: -250px;
+  }
+  #navbar-wrapper .navbar {
+    border-width: 0 0 0 0;
+    font-size: 0px;
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+  #navbar-wrapper .navbar a {
     color: var(--bs-link-hover-color);
-    font-size: 28px;
-    text-transform: capitalize;
-    font-family: var(--bs-body-heading-font);
-}
+    background-color: var(--bs-link-color-hover);
+    padding: 0.5rem;
+    border-radius: 50px;
+  }
+  #navbar-wrapper .navbar a:hover {
+    color: var(--bs-warning);
+  }
+  
+  #content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 5px;
+    top: 10px;
+  }
+  #wrapper.toggled #content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+  }
+  
+  @media (min-width: 992px) {
+    #wrapper {
+      padding-left: 250px;
+    }
+    
+    #wrapper.toggled {
+      padding-left: 60px;
+    }
+  
+    #sidebar-wrapper {
+      width: 250px;
+    }
+    
+    #wrapper.toggled #sidebar-wrapper {
+      width: 60px;
+    }
+    
+    #wrapper.toggled #navbar-wrapper {
+      position: absolute;
+      margin-right: -190px;
+  }
+    
+    #wrapper.toggled #content-wrapper {
+      position: absolute;
+      margin-right: -190px;
+    }
+  
+    #navbar-wrapper {
+      position: relative;
+    }
+  
+    #wrapper.toggled {
+      padding-left: 60px;
+    }
+  
+    #content-wrapper {
+      position: relative;
+      top: 0;
+    }
+  
+    #wrapper.toggled #navbar-wrapper,
+    #wrapper.toggled #content-wrapper {
+      position: relative;
+      margin-right: 60px;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    #wrapper {
+      padding-left: 60px;
+    }
+  
+    #sidebar-wrapper {
+      width: 60px;
+    }
+    
+  #wrapper.toggled #navbar-wrapper {
+      position: absolute;
+      margin-right: -250px;
+  }
+    
+    #wrapper.toggled #content-wrapper {
+      position: absolute;
+      margin-right: -250px;
+    }
+  
+    #navbar-wrapper {
+      position: relative;
+    }
+  
+    #wrapper.toggled {
+      padding-left: 250px;
+    }
+  
+    #content-wrapper {
+      position: relative;
+      top: 0;
+    }
+  
+    #wrapper.toggled #navbar-wrapper,
+    #wrapper.toggled #content-wrapper {
+      position: relative;
+      margin-right: 250px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    #wrapper {
+      padding-left: 0;
+    }
+  
+    #sidebar-wrapper {
+      width: 0;
+    }
+  
+    #wrapper.toggled #sidebar-wrapper {
+      width: 250px;
+    }
+    #wrapper.toggled #navbar-wrapper {
+      position: absolute;
+      margin-right: -250px;
+    }
+  
+    #wrapper.toggled #content-wrapper {
+      position: absolute;
+      margin-right: -250px;
+    }
+  
+    #navbar-wrapper {
+      position: relative;
+    }
+  
+    #wrapper.toggled {
+      padding-left: 250px;
+    }
+  
+    #content-wrapper {
+      position: relative;
+      top: 0;
+    }
+  
+    #wrapper.toggled #navbar-wrapper,
+    #wrapper.toggled #content-wrapper {
+      position: relative;
+      margin-right: 250px;
+    }
+  }
 
 /* Content */
 
