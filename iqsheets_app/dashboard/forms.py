@@ -7,6 +7,7 @@ class DashboardForm(FlaskForm):
     excel_google = RadioField('Die Formel/Erklärung ist für...?', validators=[DataRequired()], choices=["Excel", "Google Sheets"])
     formula_explain = RadioField('Formel oder Erklärung', validators=[DataRequired()], choices=["Erstellen", "Erklären"], render_kw={'class': 'form-select-input'})
     prompt = TextAreaField('Beschreiben Sie die Formel, die Sie erstellen möchten. Versuchen Sie, so detailliert wie möglich zu sein.', validators=[DataRequired(), Length(min=10, max=400)], render_kw={"style": "min-height: 10rem;"})
+    source_route = HiddenField()
     submit = SubmitField('Formel generieren')
     
 class FeedbackForm(FlaskForm):

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}{% block content %}
 	<div class="heading mx-4 mt-3">
-		<h3>AI Formel Assistent</h3>
+		<h3>AI Skript Assistent</h3>
 	</div>
 	<div class="formula-cards mt-3 mx-3">
         <div class="row">
@@ -10,16 +10,16 @@
                         <h4>Input</h4>
                         <hr>
                         <div class="py-3">
-                            <form method="POST" action="{{url_for('dashboard.formel', type='formula')}}" id="formula-form">
+                            <form method="POST" action="{{url_for('dashboard.formel', type='skripte')}}" id="formula-form">
                                 {{form.hidden_tag()}}
                                 <div class="row">
                                     {{form.excel_google.label(class_="pb-1")}}
                                     {% for subfield in form.excel_google %}
 										<div class="col-lg-5 form-input mt-3 mx-3 py-2">
 											{% if subfield.data == "Excel" %}
-												<img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="microsoft-excel-2019--v1"/>
+												<img width="48" height="48" src="{{url_for('static', filename='img/vba-script.svg')}}"/>
 											{% else %}
-												<img width="48" height="48" src="https://img.icons8.com/color/48/google-sheets.png" alt="google-sheets"/>
+												<img width="48" height="48" src="{{url_for('static', filename='img/apps-script.svg')}}" alt="google-sheets"/>
 											{% endif %}
 											{{subfield.label}}
 											{{subfield(id="checkbtn")}}

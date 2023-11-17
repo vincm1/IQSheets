@@ -33,32 +33,19 @@ def dashboard():
     """User Dashboard page"""
     return render_template('dashboard/dashboard.html')
 
-@dashboard_blueprint.route('/formulas', methods=['GET', 'POST'])
+@dashboard_blueprint.route('/<type>', methods=['GET'])
 @login_required
 @check_confirmed_mail
-def formulas():
-    """Formel page"""
+def prompter(type):
+    """User Dashboard page"""
     form = DashboardForm()
-    return render_template('dashboard/formula_page.html', form=form)
+    print(type)
+    return render_template(f'dashboard/{type}_page.html', form=form)
 
-# @dashboard_blueprint.route('/dashboard', methods=['GET'])
-# @login_required
-# @check_confirmed_mail
-# def dashboard():
-#     """User Dashboard page"""
-#     return render_template('dashboard/dashboard.html')
-
-# @dashboard_blueprint.route('/dashboard', methods=['GET'])
-# @login_required
-# @check_confirmed_mail
-# def dashboard():
-#     """User Dashboard page"""
-#     return render_template('dashboard/dashboard.html')
-
-@dashboard_blueprint.route('/dashboard/formel', methods=['GET', 'POST'])
+@dashboard_blueprint.route('/<type>/result', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
-def formel():
+def formel(type):
     """User Dashboard page"""
     form = DashboardForm()
    
@@ -82,7 +69,7 @@ def formel():
         text = result["choices"][0]["text"]
         formula = text[1:]
         
-        return render_template('dashboard/formula_page.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
+        return render_template(f'dashboard/{type}_page.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
 
     return render_template('dashboard/formula_page.html', form=form)
 
@@ -190,9 +177,3 @@ def download():
         return send_file(filename)
     except Exception as e:
         return str(e)
-        
-@dashboard_blueprint.route('/premium', methods=['GET', 'POST'])
-@login_required
-@check_confirmed_mail
-def premium():
-    return render_template('dashboard/premium.html')
