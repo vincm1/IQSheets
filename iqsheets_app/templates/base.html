@@ -93,9 +93,9 @@
 																		<h6 class="footer-heading">Quick Links</h6>
 																</div>
                                     <ul class="footer-list">
-                                        <li class="footer-link"><a href="{{url_for('core.pricing')}}">Preise</a></li>
-                                        <li class="footer-link pt-2"><a href="{{url_for('core.pricing', _anchor='FAQs')}}">FAQs</a></li>
-																				<li class="footer-link pt-2"><a href="{{url_for('core.pricing', _anchor='AGB')}}">AGB</a></li>
+                                        <li class="footer-link"><a href="{{url_for('core.index', _anchor='Pricing')}}">Preise</a></li>
+                                        <li class="footer-link pt-2"><a href="{{url_for('core.index', _anchor='faqs')}}">FAQs</a></li>
+																				<li class="footer-link pt-2"><a href="/">AGB</a></li>
                                         <li class="footer-link pt-2"><a href="{{url_for('core.impressum')}}">Impressum</a></li>
                                     </ul>
                             </div>
@@ -121,8 +121,8 @@
                                     	<p>Verpasse keine Updates, jetzt zum Newsletter anmelden.</p>
                                 		</div>
                                   <!-- Form -->
-                                  <div class="footer-form">
-                                      <form method="POST" action="{{url_for('core.newsletter')}}">
+                                  <div class="footer-form" id="newsletter-form-anchor">
+                                      <form method="POST" action="{{url_for('core.newsletter')}}" id="newsletterForm">
                                           {{form_nl.hidden_tag()}}
                                           <div class="d-flex flex-row">
                                               {{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
@@ -133,7 +133,20 @@
                                               </div>
                                               <div class="mt-10 info"></div>
                                           </div>    
-                                      </form>
+                                        </form>
+                                      <!-- Flash messages -->
+                                      <div class="flashmessages mt-2">
+                                        {% with messages = get_flashed_messages(with_categories=true) %}
+                                          {% if messages %}
+                                            {% for category, message in messages %}
+                                              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                                {{ message }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                              </div>
+                                            {% endfor %}
+                                          {% endif %}
+                                        {% endwith %}
+                                      </div>
                                   </div>
                                 </div>
                             </div>
@@ -180,5 +193,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- JS file -->
     <script src="{{url_for('static', filename='main.js')}}" charset="utf-8"></script>
+    <script src="{{url_for('static', filename='newsletter.js')}}" charset="utf-8"></script>
   </body>
 </html>

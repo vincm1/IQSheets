@@ -139,13 +139,11 @@ class Newsletter(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=False, unique=True)
-    registered = db.Column(db.Boolean, default=True)
-    timestamp = db.Column(db.DateTime, default=datetime.now())
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=True)
     
-    def __init__(self, email, user_id):
+    def __init__(self, email):
         self.email = email
-        self.user_id = user_id
         
     def __repr__(self):
         f"Newsletter mit {self.email} wurde am {self.created_at} hinzugefügt."

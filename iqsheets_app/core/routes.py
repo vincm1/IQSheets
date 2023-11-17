@@ -1,9 +1,10 @@
 ''' Core routes for landing page etc. '''
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, render_template, jsonify, request, flash, redirect, url_for
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
 from flask_mail import Message
-from iqsheets_app import mail
+from iqsheets_app import mail, db
+from iqsheets_app.models import Newsletter
 from .forms import NewsletterForm, ContactForm
 
 ################
@@ -39,7 +40,6 @@ def mailchimp_newsletter(email):
         })
 
         response = client.lists.add_list_member(current_app.config['MAILCHIMP_AUDIENCE_ID'], {"email_address": email, "status": "subscribed"})
-        print(response)
         return response
     
     except ApiClientError as error:
@@ -78,16 +78,21 @@ def kontakt():
                 + form_contact.email.data)
     return render_template('kontakt.html', form_nl=form_nl, form_contact=form_contact)
 
-@core_blueprint.route("/abos", methods=["GET", "POST"])
-def pricing():
-    ''' Abos and Pricing Page '''
-    form_nl = NewsletterForm()
-    return render_template('pricing.html', form_nl=form_nl)
-
 @core_blueprint.route("/newsletter", methods=["POST"])
 def newsletter():
-    ''' Newsletter subscription route ''' 
-    form_nl = NewsletterForm()   
-    if form_nl.validate_on_submit():
-        mailchimp_newsletter(form_nl.email.data)
-    return render_template('index.html', form_nl=form_nl)
+    ''' Newsletter subscription route '''
+    form = NewsletterForm()
+    if request.method == 'POST' and form.validate_on_submit():  # Ensure the form is valid
+        email = form.email.data
+        response = mailchimp_newsletter(email)
+        print(type(response))
+        if response == 400:
+            flash('Anmeldung hat nicht geklappt!', 'danger')
+            return redirect(url_for('core.index', _anchor='newsletter-form-anchor'))
+        else:
+            newsletter = Newsletter(email=email)
+            db.session.add(newsletter)
+            db.session.commit()
+            flash('Erfolgreich angemeldet!', 'success')
+            return redirect(url_for('core.index', _anchor='newsletter-form-anchor'))
+    return redirect(url_for('core.index'))
