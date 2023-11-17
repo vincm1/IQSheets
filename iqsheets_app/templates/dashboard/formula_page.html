@@ -10,7 +10,7 @@
                         <h4>Input</h4>
                         <hr>
                         <div class="py-3">
-                            <form method="POST" action="{{url_for('dashboard.formel', type='formula')}}" id="formula-form">
+                            <form method="POST" action="{{url_for('dashboard.formel', prompt_type='formula')}}" id="formula-form">
                                 {{form.hidden_tag()}}
                                 <div class="row">
                                     {{form.excel_google.label(class_="pb-1")}}

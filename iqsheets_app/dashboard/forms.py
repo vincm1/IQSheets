@@ -1,12 +1,44 @@
 """ Forms for DB """
 from flask_wtf import FlaskForm
-from wtforms import HiddenField, TextAreaField, SelectField, RadioField, SubmitField
+from wtforms import HiddenField, TextAreaField, RadioField, SubmitField
 from wtforms.validators import DataRequired, Length
 
-class DashboardForm(FlaskForm):
-    excel_google = RadioField('Die Formel/Erklärung ist für...?', validators=[DataRequired()], choices=["Excel", "Google Sheets"])
+class FormelForm(FlaskForm):
+    excel_google = RadioField('Die Formel ist für...?', validators=[DataRequired()], choices=["Excel", "Google Sheets"])
     formula_explain = RadioField('Formel oder Erklärung', validators=[DataRequired()], choices=["Erstellen", "Erklären"], render_kw={'class': 'form-select-input'})
     prompt = TextAreaField('Beschreiben Sie die Formel, die Sie erstellen möchten. Versuchen Sie, so detailliert wie möglich zu sein.', validators=[DataRequired(), Length(min=10, max=400)], render_kw={"style": "min-height: 10rem;"})
+    source_route = HiddenField()
+    submit = SubmitField('Formel generieren')
+    
+class SkriptForm(FlaskForm):
+    vba_app = RadioField('Das Skript ist für...?', validators=[DataRequired()], 
+                        choices=["Excel - VBA", "GSheets - Apps"])
+    formula_explain = RadioField('Code oder Erklärung', validators=[DataRequired()], 
+                                 choices=["Erstellen", "Erklären"], 
+                                 render_kw={'class': 'form-select-input'})
+    prompt = TextAreaField('Beschreibe das Skript, das du erstellen möchtest möglichst detailliert.',
+                           validators=[DataRequired(), Length(min=10, max=400)],
+                           render_kw={"style": "min-height: 10rem;",
+                                      "placeholder":"z.B.: Erstelle mir ein Skript das alle Zellen < 100 EUR rot färbt."})
+    source_route = HiddenField()
+    submit = SubmitField('Formel generieren')
+
+class SqlForm(FlaskForm):
+    formula_explain = RadioField('Query erstellen oder Query erklären?...', validators=[DataRequired()], choices=["Erstellen", "Erklären"], render_kw={'class': 'form-select-input'})
+    prompt = TextAreaField('Beschreibe die Query, die du erstellen möchtest so detailliert wie möglich.',
+                           validators=[DataRequired(), Length(min=10, max=400)], 
+                           render_kw={"style": "min-height: 10rem;",
+                                      "placeholder": "z.B. Schreibe eine Query die alle Nutzer über 18J abfragt."})
+    source_route = HiddenField()
+    submit = SubmitField('Formel generieren')
+
+class RegExForm(FlaskForm):
+    formula_explain = RadioField('RegEx erstellen oder Query erklären?...', validators=[DataRequired()], 
+                                choices=["Erstellen", "Erklären"], render_kw={'class': 'form-select-input'})
+    prompt = TextAreaField('Beschreibe die RegEx, die du erstellen möchtest möglichst detailliert.',
+                            validators=[DataRequired(), Length(min=10, max=400)], 
+                            render_kw={"style": "min-height: 10rem;",
+                                       "placeholder": "z.B. Erstelle eine RegEx die prüft ob Sonderzeichen sowie Groß- und Kleinschreibung"})
     source_route = HiddenField()
     submit = SubmitField('Formel generieren')
     

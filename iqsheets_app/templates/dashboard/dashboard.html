@@ -6,7 +6,7 @@
 		<h4><i class="fa-solid fa-door-open pe-2"></i> <span class="welcome-msg">Willkommen auf deinem Dashboard, {{current_user.username}}</span></h4>
 			<div class="row mt-5">
 				<div class="col-4">
-					<a href="{{url_for('dashboard.formulas')}}" class="custom-link">
+					<a href="{{url_for('dashboard.prompter', prompt_type='formula')}}" class="custom-link">
 						<div class="card dashboard-card" >
 							<div class="card-body m-2">
 								<div class="text-center">
@@ -19,7 +19,7 @@
 					</a>
 				</div>
 				<div class="col-4">
-					<a href="{{url_for('dashboard.favorites')}}" class="custom-link">
+					<a href="{{url_for('dashboard.prompter', prompt_type='skripte')}}" class="custom-link">
 						<div class="card dashboard-card">
 							<div class="card-body m-2">
 								<div class="text-center">
@@ -33,7 +33,7 @@
 					</a>
 				</div>
 				<div class="col-4">
-					<a href="{{url_for('dashboard.favorites')}}" class="custom-link">
+					<a href="{{url_for('dashboard.prompter', prompt_type='sql')}}" class="custom-link">
 						<div class="card dashboard-card">
 							<div class="card-body m-2">
 								<div class="text-center">
@@ -48,7 +48,7 @@
 			</div>
 			<div class="row mt-3">
 				<div class="col-4">
-					<a href="{{url_for('dashboard.favorites')}}" class="custom-link">
+					<a href="{{url_for('dashboard.prompter', prompt_type='regex')}}" class="custom-link">
 						<div class="card dashboard-card">
 							<div class="card-body m-2">
 								<div class="text-center">

@@ -5,7 +5,7 @@ from iqsheets_app import db
 from iqsheets_app.models import Prompt, Template
 from iqsheets_app.utils.decorators import check_confirmed_mail, check_payment_oauth
 from iqsheets_app.openai import openai_chat
-from .forms import DashboardForm
+from .forms import FormelForm, SkriptForm, SqlForm, RegExForm
 import boto3
 
 ################
@@ -33,21 +33,34 @@ def dashboard():
     """User Dashboard page"""
     return render_template('dashboard/dashboard.html')
 
-@dashboard_blueprint.route('/<type>', methods=['GET'])
+@dashboard_blueprint.route('/<prompt_type>', methods=['GET'])
 @login_required
 @check_confirmed_mail
-def prompter(type):
+def prompter(prompt_type):
     """User Dashboard page"""
-    form = DashboardForm()
-    print(type)
-    return render_template(f'dashboard/{type}_page.html', form=form)
+    if prompt_type == "formula":
+        form = FormelForm()
+    elif prompt_type == "skripte":
+        form = SkriptForm()
+    elif prompt_type == "sql":
+        form = SqlForm()
+    else:
+        form = RegExForm()
+    return render_template(f'dashboard/{prompt_type}_page.html', form=form)
 
-@dashboard_blueprint.route('/<type>/result', methods=['GET', 'POST'])
+@dashboard_blueprint.route('/<prompt_type>/result', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
-def formel(type):
+def formel(prompt_type):
     """User Dashboard page"""
-    form = DashboardForm()
+    if prompt_type == "formula":
+        form = FormelForm()
+    elif prompt_type == "skripte":
+        form = SkriptForm()
+    elif prompt_type == "sql":
+        form = SqlForm()
+    else:
+        form = RegExForm()
    
     if form.validate_on_submit():
         prompt = form.formula_explain.data + " " + form.excel_google.data + ": " + form.prompt.data
@@ -69,7 +82,7 @@ def formel(type):
         text = result["choices"][0]["text"]
         formula = text[1:]
         
-        return render_template(f'dashboard/{type}_page.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
+        return render_template(f'dashboard/{prompt_type}_page.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
 
     return render_template('dashboard/formula_page.html', form=form)
 

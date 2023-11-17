@@ -10,13 +10,13 @@
                         <h4>Input</h4>
                         <hr>
                         <div class="py-3">
-                            <form method="POST" action="{{url_for('dashboard.formel', type='skripte')}}" id="formula-form">
+                            <form method="POST" action="{{url_for('dashboard.formel', prompt_type='skripte')}}" id="formula-form">
                                 {{form.hidden_tag()}}
                                 <div class="row">
-                                    {{form.excel_google.label(class_="pb-1")}}
-                                    {% for subfield in form.excel_google %}
+                                    {{form.vba_app.label(class_="pb-1")}}
+                                    {% for subfield in form.vba_app %}
 										<div class="col-lg-5 form-input mt-3 mx-3 py-2">
-											{% if subfield.data == "Excel" %}
+											{% if subfield.data == "Excel - VBA" %}
 												<img width="48" height="48" src="{{url_for('static', filename='img/vba-script.svg')}}"/>
 											{% else %}
 												<img width="48" height="48" src="{{url_for('static', filename='img/apps-script.svg')}}" alt="google-sheets"/>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="row mt-4">
                                     {{form.prompt.label(class="mb-2")}}	
-									{{form.prompt(class="form-input-text p-2 mx-2", placeholder="Summe Spalte A wenn Spalte B das Wort 'Sales' enthält z.B.")}}	
+									{{form.prompt(class="form-input-text p-2 mx-2")}}	
                                 </div>
 								<div class="row mt-3">
                                     {{form.submit(class="btn btn-primary w-100 mx-2 py-2")}}
