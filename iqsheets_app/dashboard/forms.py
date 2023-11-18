@@ -7,7 +7,6 @@ class FormelForm(FlaskForm):
     excel_google = RadioField('Die Formel ist für...?', validators=[DataRequired()], choices=["Excel", "Google Sheets"])
     formula_explain = RadioField('Formel oder Erklärung', validators=[DataRequired()], choices=["Erstellen", "Erklären"], render_kw={'class': 'form-select-input'})
     prompt = TextAreaField('Beschreiben Sie die Formel, die Sie erstellen möchten. Versuchen Sie, so detailliert wie möglich zu sein.', validators=[DataRequired(), Length(min=10, max=400)], render_kw={"style": "min-height: 10rem;"})
-    source_route = HiddenField()
     submit = SubmitField('Formel generieren')
     
 class SkriptForm(FlaskForm):
@@ -20,7 +19,6 @@ class SkriptForm(FlaskForm):
                            validators=[DataRequired(), Length(min=10, max=400)],
                            render_kw={"style": "min-height: 10rem;",
                                       "placeholder":"z.B.: Erstelle mir ein Skript das alle Zellen < 100 EUR rot färbt."})
-    source_route = HiddenField()
     submit = SubmitField('Formel generieren')
 
 class SqlForm(FlaskForm):
@@ -29,7 +27,6 @@ class SqlForm(FlaskForm):
                            validators=[DataRequired(), Length(min=10, max=400)], 
                            render_kw={"style": "min-height: 10rem;",
                                       "placeholder": "z.B. Schreibe eine Query die alle Nutzer über 18J abfragt."})
-    source_route = HiddenField()
     submit = SubmitField('Formel generieren')
 
 class RegExForm(FlaskForm):
@@ -39,7 +36,6 @@ class RegExForm(FlaskForm):
                             validators=[DataRequired(), Length(min=10, max=400)], 
                             render_kw={"style": "min-height: 10rem;",
                                        "placeholder": "z.B. Erstelle eine RegEx die prüft ob Sonderzeichen sowie Groß- und Kleinschreibung"})
-    source_route = HiddenField()
     submit = SubmitField('Formel generieren')
     
 class FeedbackForm(FlaskForm):

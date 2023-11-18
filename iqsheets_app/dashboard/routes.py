@@ -3,7 +3,7 @@ from flask import Blueprint, current_app, render_template, flash, send_file, red
 from flask_login import login_required, current_user
 from iqsheets_app import db
 from iqsheets_app.models import Prompt, Template
-from iqsheets_app.utils.decorators import check_confirmed_mail, check_payment_oauth
+from iqsheets_app.utils.decorators import check_confirmed_mail
 from iqsheets_app.openai import openai_chat
 from .forms import FormelForm, SkriptForm, SqlForm, RegExForm
 import boto3
@@ -33,11 +33,15 @@ def dashboard():
     """User Dashboard page"""
     return render_template('dashboard/dashboard.html')
 
-@dashboard_blueprint.route('/<prompt_type>', methods=['GET'])
+@dashboard_blueprint.route('/<prompt_type>', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def prompter(prompt_type):
     """User Dashboard page"""
+    valid_prompt_types = ["formula", "skripte", "sql", "regex"]
+    if prompt_type not in valid_prompt_types:
+    # Handle invalid prompt_type, maybe redirect to a default page or show an error
+        return redirect(url_for('dashboard.dashboard'))
     if prompt_type == "formula":
         form = FormelForm()
     elif prompt_type == "skripte":
@@ -46,7 +50,8 @@ def prompter(prompt_type):
         form = SqlForm()
     else:
         form = RegExForm()
-    return render_template(f'dashboard/{prompt_type}_page.html', form=form)
+
+    return render_template(f"dashboard/{prompt_type}_page.html", form=form)
 
 @dashboard_blueprint.route('/<prompt_type>/result', methods=['GET', 'POST'])
 @login_required
@@ -62,25 +67,39 @@ def formel(prompt_type):
     else:
         form = RegExForm()
    
-    if form.validate_on_submit():
-        prompt = form.formula_explain.data + " " + form.excel_google.data + ": " + form.prompt.data
+    if request.method == 'POST' and form.validate_on_submit():
+        form_data = form.data
+        form_data['prompt_type'] = prompt_type.capitalize()
+        keys = ["prompt_type","excel_google", "vba_app", "formula_explain", "prompt"]
+        prompt = []
+        for key in keys:
+            if key in form_data:
+                prompt.append(form_data[key])
+        prompt = " ".join(prompt)
         result = openai_chat(prompt)
-        # Increasing the amount of prompts and total tokens when prompt is generated
-        current_user.num_prompts += 1
-        current_user.num_tokens += result["usage"]["total_tokens"]
-        # Creating prompt instance
-        # prompt = Prompt(user_id = current_user.id, provider=form.excel_google.data, 
-        #                 request=form.formula_explain.data, command=form.prompt.data, prompt=result["choices"][0]["text"][1:])
-        # Commiting prompt and numbers to db
-        # db.session.add(prompt)
-        # db.session.commit()        
+        print(result)
+        # if prompt_type == "formula": 
+        #     prompt = form.formula_explain.data + " " + form.excel_google.data + ": " + form.prompt.data
+        #     result = openai_chat(prompt)
+        #     # Increasing the amount of prompts and total tokens when prompt is generated
+        #     current_user.num_prompts += 1
+        #     current_user.num_tokens += result["usage"]["total_tokens"]
+        # # Creating prompt instance
+        # # prompt = Prompt(user_id = current_user.id, provider=form.excel_google.data, 
+        # #                 request=form.formula_explain.data, command=form.prompt.data, prompt=result["choices"][0]["text"][1:])
+        # # Commiting prompt and numbers to db
+        # # db.session.add(prompt)
+        # # db.session.commit()        
 
-        # Converting OpenAi prompt to a usable text
-        explanation = result["choices"][0]["text"]
-        print(explanation)
-        # Converting OpenAi prompt to a usable text and formula if "formula selected" 
-        text = result["choices"][0]["text"]
-        formula = text[1:]
+        # # Converting OpenAi prompt to a usable text
+        # explanation = result["choices"][0]["text"]
+        # print(explanation)
+        # # Converting OpenAi prompt to a usable text and formula if "formula selected" 
+        # text = result["choices"][0]["text"]
+        # formula = text[1:]
+        explanation = "Lorem"
+        formula = "Ipsum"
+        prompt= "Dolors"
         
         return render_template(f'dashboard/{prompt_type}_page.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
 

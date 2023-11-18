@@ -1,22 +1,18 @@
 import os
 from dotenv import load_dotenv
-import openai
+from openai import OpenAI
+from flask_login import current_user
 
 openai_key = os.getenv('OPENAI_KEY')
 
-openai.api_key = openai_key
-model_engine = "text-davinci-003" 
-
-engines = openai.Engine.list()
+client = OpenAI(api_key=openai_key)
 
 def openai_chat(prompt):
-    completion = openai.Completion.create( 
-    engine=model_engine,
-    prompt=prompt,
-    max_tokens=1024,
-    n=1,
-    stop=None,
-    temperature=0.9,
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": prompt}],
+        user=f"user_{current_user.id}",
+        temperature=0,
+        max_tokens=1024
     )
-    
-    return completion
+    return response
