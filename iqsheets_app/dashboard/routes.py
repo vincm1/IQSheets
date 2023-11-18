@@ -77,33 +77,33 @@ def formel(prompt_type):
                 prompt.append(form_data[key])
         prompt = " ".join(prompt)
         result = openai_chat(prompt)
-        print(result)
-        # if prompt_type == "formula": 
-        #     prompt = form.formula_explain.data + " " + form.excel_google.data + ": " + form.prompt.data
-        #     result = openai_chat(prompt)
-        #     # Increasing the amount of prompts and total tokens when prompt is generated
-        #     current_user.num_prompts += 1
-        #     current_user.num_tokens += result["usage"]["total_tokens"]
-        # # Creating prompt instance
-        # # prompt = Prompt(user_id = current_user.id, provider=form.excel_google.data, 
-        # #                 request=form.formula_explain.data, command=form.prompt.data, prompt=result["choices"][0]["text"][1:])
-        # # Commiting prompt and numbers to db
-        # # db.session.add(prompt)
-        # # db.session.commit()        
+        answer = result.choices[0].message.content
+        print(type(result), answer)
+        
+        prompt = form.formula_explain.data + " " + form.excel_google.data + ": " + form.prompt.data
+        result = openai_chat(prompt)
+        # Increasing the amount of prompts and total tokens when prompt is generated
+        # current_user.num_prompts += 1
+        # current_user.num_tokens += result["usage"]["total_tokens"]
+        
+        # Creating prompt instance
+        # prompt = Prompt(user_id = current_user.id, provider=form.excel_google.data, 
+        #                 request=form.formula_explain.data, command=form.prompt.data, prompt=result["choices"][0]["text"][1:])
+        # Commiting prompt and numbers to db
+        # db.session.add(prompt)
+        # db.session.commit()        
 
         # # Converting OpenAi prompt to a usable text
         # explanation = result["choices"][0]["text"]
         # print(explanation)
+        
         # # Converting OpenAi prompt to a usable text and formula if "formula selected" 
         # text = result["choices"][0]["text"]
         # formula = text[1:]
-        explanation = "Lorem"
-        formula = "Ipsum"
-        prompt= "Dolors"
         
-        return render_template(f'dashboard/{prompt_type}_page.html', form=form, explanation=explanation, formula=formula, prompt=prompt)
+        return render_template(f'dashboard/{prompt_type}_page.html', answer=answer, form=form, prompt=prompt)
 
-    return render_template('dashboard/formula_page.html', form=form)
+    return render_template(f'dashboard/{prompt_type}_page.html', form=form)
 
 @dashboard_blueprint.route('/dashboard/favorite/<int:prompt_id>', methods=['POST'])
 @login_required

@@ -28,7 +28,6 @@ class User(db.Model, UserMixin):
     registration_date = db.Column(db.DateTime, default=datetime.now)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
-    premium = db.Column(db.Boolean, nullable=False, default=False)
     stripe_customer_id = db.Column(db.String, nullable=True, default=None)
     stripe_sub_id = db.Column(db.String, nullable=True, default=None)
     newsletter = db.relationship('Newsletter', backref='user')
@@ -88,20 +87,17 @@ class Prompt(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    provider = db.Column(db.String, nullable=False)
-    method = db.Column(db.String, nullable=False)
+    prompt_type = db.Column(db.String, nullable=False)
     command = db.Column(db.String, nullable=False)
-    request = db.Column(db.String, nullable=False)
     prompt = db.Column(db.String, nullable=False)
     favorite = db.Column(db.Boolean, nullable=False, default=False)
     feedback = db.Column(db.Boolean, nullable=True)
     
-    def __init__(self, provider, method, command, prompt, request, user_id):
+    def __init__(self, prompt_type, command, prompt, user_id):
         self.provider = provider
-        self.method = method
+        self.prompt_type = prompt_type
         self.command = command
         self.prompt = prompt
-        self.request = request
         self.user_id = user_id
         
     def __repr__(self):
