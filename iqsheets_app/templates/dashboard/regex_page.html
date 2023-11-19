@@ -25,7 +25,6 @@
                                     {{form.prompt.label(class="mb-2")}}	
 									{{form.prompt(class="form-input-text p-2 mx-2")}}	
                                 </div>
-                                    {{form.source_route(value="RegEx")}}
 								<div class="row mt-3">
                                     {{form.submit(class="btn btn-primary w-100 mx-2 py-2")}}
                                 </div>
@@ -67,33 +66,28 @@
                     <div class="card-body p-4">
                         <h4>Output</h4>
                         <hr>
-						{% if answer %}
 							<div class="result">
+                                <p>Hier steht deine Lösung:</p>
 								<div class="card">
 									<div class="card-body">
+                                        {% if answer %}
 										<div class="row">
-											<p class="mt-2 mb-3 me-2 ms-2 p-3" id="copy-target">{{answer}}</p>
+											<p class="" id="copy-target">{{answer}}</p>
 										</div>
+                                        {% endif %}
 									</div>
 								</div>
-								<div class="d-flex flex-row mt-2">
-									<button class="p-2 me-2 btn btn-outline-secondary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
+								<div class="d-flex flex-row mt-3">
+                                    <a href="{{url_for('dashboard.prompt_favorite')}}">
+                                        <button class="p-2 me-2 btn btn-secondary px-3 me-2" id="copy-btn">
+                                            <i class="fa-solid fa-copy pe-2"></i> Favorit
+                                        </button>	
+                                    </a>
+									<button class="p-2 me-2 btn btn-secondary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
 										<i class="fa-solid fa-copy pe-2"></i> Kopieren
-									</button>	
+									</button>
 								</div>
 							</div>
-						<!-- Erklärung End -->
-
-						<!-- Formel End-->	
-						{% else %}
-						<!-- Unsubmitted -->
-							<div class="card-body">
-								<div class="row">
-									<p>Lass dir eine Formel erstellen oder Erklären.</p>
-								</div>
-							</div>
-							<!-- Unsubmitted End-->
-						{% endif %}
 					</div>
                 </div>
             </div>

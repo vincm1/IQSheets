@@ -2,9 +2,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Rubik:wght@500&display=swap');
 
-@charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Rubik:wght@500&display=swap');
-
 :root {
   --bs-blue: #334AC0;
   --bs-indigo: #6610f2;
@@ -525,4 +522,27 @@ body {
 
 .form-input input[type='radio']:checked{
     accent-color: var(--bs-link-hover-color);
+}
+
+.result .card {
+  border-color: var(--bs-link-hover-color);
+  min-height: 20vh;
+}
+
+#copy-btn {
+  border: 1px solid var(--bs-link-color);
+}
+
+#favoritebtn {
+  background: var(--bs-link-hover-color);
+  border: 1px solid var(--bs-link-hover-color);
+  color: var(--bs-background-light);
+}
+
+#wrongbtn {
+  background-color: var(--bs-warning);
+}
+
+#favoritebtn:hover {
+  color: var(--bs-warning);
 }

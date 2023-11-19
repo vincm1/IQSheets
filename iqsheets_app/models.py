@@ -88,20 +88,19 @@ class Prompt(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     prompt_type = db.Column(db.String, nullable=False)
-    command = db.Column(db.String, nullable=False)
     prompt = db.Column(db.String, nullable=False)
-    favorite = db.Column(db.Boolean, nullable=False, default=False)
+    result = db.Column(db.String, )
+    favorite = db.Column(db.Boolean, nullable=True, default=False)
     feedback = db.Column(db.Boolean, nullable=True)
     
-    def __init__(self, prompt_type, command, prompt, user_id):
-        self.provider = provider
+    def __init__(self, prompt_type, prompt, result, user_id):
         self.prompt_type = prompt_type
-        self.command = command
         self.prompt = prompt
+        self.result = result
         self.user_id = user_id
         
     def __repr__(self):
-        f"Formel mit {self.provider}, {self.command}, {self.prompt} wurde am {self.created_at} hinzugefügt."
+        f"Formel mit {self.prompt_type}, {self.prompt} wurde am {self.created_at} hinzugefügt."
 
 class Template(db.Model):
     """ Class for Excel Templates """  
