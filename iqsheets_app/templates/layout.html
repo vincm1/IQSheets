@@ -62,7 +62,7 @@
             <a href="{{url_for('dashboard.favorites')}}"><i class="fa-solid fa-heart"></i>Favoriten</a>
           </li>
           <li class="nav-item my-2">
-            <a href="{{url_for('user.user_payments', username=current_user.username)}}"><i class="fa-solid fa-wallet"></i>Zahlungen</a>
+            <a href="{{url_for('dashboard.templates', username=current_user.username)}}"><i class="fa-solid fa-wallet"></i>Templates</a>
           </li>
         </ul>
         <div class="dropdown user-menu">
@@ -73,8 +73,8 @@
               <strong id="username">{{current_user.username}}</strong>
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear fa-xs pe-2"></i>Settings</a></li>
-              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear fa-xs pe-2"></i>Profile</a></li>
+              <li><a class="dropdown-item" href="{{url_for('user.user_payments', username=current_user.username)}}"><i class="fa-solid fa-wallet fa-xs pe-2"></i>Zahlungen</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear fa-xs pe-2"></i>Profil</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{{url_for('user.logout')}}"><i class="fa-solid fa-right-from-bracket fa-xs pe-2"></i>Logout</a></li>
             </ul>

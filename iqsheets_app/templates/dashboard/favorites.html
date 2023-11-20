@@ -6,9 +6,10 @@
 				<div class="favorite-btns mb-2">
 					<div class="row align-items-start">
 						<form method="POST">
-							<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
-							<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Excel">Excel</button>
-							<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Google Sheets">Google Sheets</button>
+							<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
+							{% for type in prompt_types %}
+							<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="{{type.capitalize()}}">{{type.capitalize()}}</button>
+							{% endfor %}	
 						</form>
 					</div>
 				</div>
@@ -17,39 +18,50 @@
 					<div class="row">
 						{% for formula in favorite_formulas %}
 						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-2 response">
-							<div class="card h-100 w-100">
+							<div class="card shadow-lg h-100 w-100">
 								<div class="card-header p-3">
-									{% if formula.provider == "Excel" %}
-									<img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="microsoft-excel-2019--v1"/>
-										{{formula.provider}}:<span id="favorite-provider">{{formula.method}} {{formula.request}}</span>
+									{% if formula.prompt_type == "Formula" %}
+										<i class="fa-solid fa-square-root-variable fa-xl" id="badge-icon"></i>
+									{% elif formula.prompt_type == "Skripte" %}
+										<i class="fa-solid fa-code fa-xl" id="badge-icon"></i>
+									{% elif formula.prompt_type == "Sql" %}
+										<i class="fa-solid fa-database fa-xl" id="badge-icon"></i>
 									{% else %}
-									<img width="48" height="48" src="https://img.icons8.com/color/48/google-sheets.png" alt="google-sheets"/>
-										{{formula.provider}}:<span id="favorite-provider">{{formula.method}} {{formula.request}}</span>
+										<i class="fa-solid fa-wave-square fa-xl" id="badge-icon"></i>
+									{% endif %}
+									<span class="badge rounded-pill shadow-lg ms-3" id={{formula.prompt_type}}>{{formula.prompt_type}}</span>
+									<span class="badge rounded-pill" id={{formula.category}}>{{formula.category}}</span>
+									{% set days_diff = (today-formula.created_at).days %}
+									{% if days_diff >= 1 %}
+										<span class="badge rounded-pill float-end" id="favorite-date"><i class="fa-regular fa-clock fa-rotate-180 pe-1"></i>
+											{{days_diff}} d
+										</span>
+									{% else %}
+									{% set hours_diff = ((today-formula.created_at).total_seconds() / 3600) | round %}	
+										<span class="badge rounded-pill float-end" id="favorite-date"><i class="fa-regular fa-clock fa-rotate-180 pe-1"></i>
+											{{hours_diff}} h
+										</span>
 									{% endif %}
 								</div>
-		
 								<div class="card-body">
-									{% if formula.request == "Erstellen" %}
-										<div class="row m-2 text-start command">
-											<p>{{formula.command}}</p>
-										</div>
-										<div class="row m-2 text-start prompt">
-											<p class="align-self-end">
-												<button class="btn btn-primary px-5" type="button" data-bs-toggle="collapse" data-bs-no-animation="true" data-bs-target="#formel_{{formula.id}}" aria-expanded="false" aria-controls="formel_{{formula.id}}">
-												  Formel
-												</button>
-											</p>
-											<div class="collapse m-2 p-3" id="formel_{{formula.id}}">
-												<p id="copy-target">{{formula.prompt}}</p>
-											</div>
-										</div>
-										<hr>
-									{% else %}
-										<div class="row m-2">
+									<div class="row m-2 text-start command">
+										<p>{{formula.command}}</p>
+									</div>
+									<div class="row m-2 text-start prompt">
+										<p class="align-self-end">
+											<button class="btn btn-primary px-5" type="button" data-bs-toggle="collapse" data-bs-no-animation="true" data-bs-target="#formel_{{formula.id}}" aria-expanded="false" aria-controls="formel_{{formula.id}}">
+											  Formel
+											</button>
+										</p>
+										<div class="collapse m-2 p-3" id="formel_{{formula.id}}">
 											<p id="copy-target">{{formula.prompt}}</p>
 										</div>
-										<hr>
-									{% endif %}
+									</div>
+									<hr>
+									<div class="row m-2">
+										<p id="copy-target">{{formula.prompt}}</p>
+									</div>
+									<hr>
 									<div class="d-flex flex-row-reverse">
 										<div class="p-2">
 											<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="p-2">
@@ -59,12 +71,12 @@
 											</a>
 										</div>
 										<div class="p-2">
-											<button class="btn btn-outline-primary" id="copy-btn" onclick="copyToClipboard()">
+											<button class="btn btn-secondary" id="copy-btn" onclick="copyToClipboard()">
 												<i class="fa-solid fa-copy"></i>
 											</button>
 										</div>
 										<div class="p-2">
-											<span id="favorite-date">{{formula.created_at.strftime('%d.%m.%Y')}}</span>
+											
 										</div>
 									</div>
 								</div>

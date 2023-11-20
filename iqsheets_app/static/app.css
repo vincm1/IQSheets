@@ -546,3 +546,60 @@ body {
 #favoritebtn:hover {
   color: var(--bs-warning);
 }
+
+/* Favorites */
+
+#filter-btn {
+  border: 1px solid var(--bs-link-hover-color);
+
+}
+
+.favorite-cards .card {
+  border: 1px solid var(--bs-link-hover-color);
+}
+
+.favorite-cards .card-header {
+  background-color: var(--bs-background-yellow);
+  border-bottom: 1px solid var(--bs-link-hover-color);
+}
+
+#badge-icon {
+  color: var(--bs-link-hover-color);
+}
+
+.badge {
+  font-size: 13px;
+  padding: 10px 20px;
+}
+
+.favorite-cards #Formula {
+  background-color: var(--bs-primary);
+}
+
+.favorite-cards #Skripte {
+  background-color: var(--bs-link-hover-color);
+}
+
+.favorite-cards #Sql {
+  background-color: var(--bs-success);
+}
+
+.favorite-cards #Regex {
+  background-color: var(--bs-green);
+}
+
+.favorite-cards #Erstellen {
+  background-color: var(--bs-background-yellow);
+  border: 0.5px solid var(--bs-link-hover-color);
+  color: var(--bs-link-hover-color);
+}
+
+.favorite-cards #Erklären {
+  background-color: var(--bs-background-yellow);
+  border: 0.5px solid var(--bs-link-hover-color);
+  color: var(--bs-link-hover-color);
+}
+
+#favorite-date {
+  background-color: var(--bs-gray-500);
+}

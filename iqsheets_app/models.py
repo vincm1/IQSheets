@@ -88,13 +88,15 @@ class Prompt(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     prompt_type = db.Column(db.String, nullable=False)
+    category = db.Column(db.String, nullable=False)
     prompt = db.Column(db.String, nullable=False)
-    result = db.Column(db.String, )
+    result = db.Column(db.String)
     favorite = db.Column(db.Boolean, nullable=True, default=False)
     feedback = db.Column(db.Boolean, nullable=True)
     
-    def __init__(self, prompt_type, prompt, result, user_id):
+    def __init__(self, prompt_type, category, prompt, result, user_id):
         self.prompt_type = prompt_type
+        self.category = category
         self.prompt = prompt
         self.result = result
         self.user_id = user_id

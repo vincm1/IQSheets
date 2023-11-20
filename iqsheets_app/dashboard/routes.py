@@ -1,4 +1,6 @@
 """Routes for dashboard"""
+import boto3
+from datetime import datetime
 from flask import Blueprint, current_app, render_template, flash, send_file, redirect, url_for, request
 from flask_login import login_required, current_user
 from iqsheets_app import db
@@ -6,7 +8,6 @@ from iqsheets_app.models import Prompt, Template
 from iqsheets_app.utils.decorators import check_confirmed_mail
 from iqsheets_app.openai import openai_chat
 from .forms import FormelForm, SkriptForm, SqlForm, RegExForm
-import boto3
 
 ################
 #### config ####
@@ -85,8 +86,8 @@ def formel(prompt_type):
         current_user.num_tokens += result.usage.total_tokens
     
         # Creating prompt instance
-        prompt = Prompt(user_id = current_user.id, prompt_type=prompt_type.capitalize(), prompt=prompt, 
-                        result=answer)
+        prompt = Prompt(user_id = current_user.id, prompt_type=prompt_type.capitalize(), category=form.formula_explain.data,
+                        prompt=form.prompt.data, result=answer)
         # Commiting prompt and numbers to db
         db.session.add(prompt)
         db.session.commit()
@@ -121,8 +122,12 @@ def negative_feedback(prompt_id):
 def favorites():
     """User favorite Excel Formulas"""
     page = request.args.get('page', 1, type=int)
-    favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True).order_by(Prompt.created_at).paginate(page=page, per_page=9)
-    
+    favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, 
+                                               favorite=True).order_by(Prompt.created_at).paginate(page=page, 
+                                                                                                   per_page=30)
+    # prompt_types = db.session.query(Prompt.prompt_type).distinct().all()
+    prompt_types = ["formula", "skripte", "sql", "regex"]
+    today = datetime.now()
     if request.method == 'POST' and request.form['filter_value'] == "Alle":
     
         page = request.args.get('page', 1, type=int)
@@ -132,9 +137,10 @@ def favorites():
         filter_value = request.form['filter_value']
         page = request.args.get('page', 1, type=int)
         favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True, 
-                                                   provider=filter_value).order_by(Prompt.created_at).paginate(page=page, per_page=9)
+                                                   prompt_type=filter_value).order_by(Prompt.created_at).paginate(page=page, per_page=30)
         
-    return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas)
+        
+    return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas, prompt_types=prompt_types, today=today)
 
 @dashboard_blueprint.route('/formel_<int:favorite_id>/delete', methods=['GET'])
 @login_required
@@ -152,25 +158,19 @@ def delete_favorite(favorite_id):
 @check_confirmed_mail
 def templates():
     """ Route for templates """
-    if not current_user.premium:
-        templates = Template.query.order_by(Template.created_at).limit(3).all()
-        categorys = db.session.query(Template.template_category).distinct().all()
+    page = request.args.get('page', 1, type=int)
+    templates = Template.query.order_by(Template.created_at).paginate(page=page, per_page=12)
+    categorys = db.session.query(Template.template_category).distinct().all()
         
-    else:
+    if request.method == 'POST' and request.form['filter_value'] == "Alle":
         page = request.args.get('page', 1, type=int)
         templates = Template.query.order_by(Template.created_at).paginate(page=page, per_page=12)
-        categorys = db.session.query(Template.template_category).distinct().all()
         
-        if request.method == 'POST' and request.form['filter_value'] == "Alle":
-        
-            page = request.args.get('page', 1, type=int)
-            templates = Template.query.order_by(Template.created_at).paginate(page=page, per_page=12)
-        
-        elif request.method == 'POST':
-            filter_value = request.form['filter_value']
-            page = request.args.get('page', 1, type=int)
-            templates = Template.query.filter_by(template_category=filter_value).order_by(Template.created_at).paginate(page=page, per_page=9)
-        
+    elif request.method == 'POST':
+        filter_value = request.form['filter_value']
+        page = request.args.get('page', 1, type=int)
+        templates = Template.query.filter_by(template_category=filter_value).order_by(Template.created_at).paginate(page=page, per_page=9)
+            
     return render_template('dashboard/templates.html', templates=templates, categorys=categorys)
 
 @dashboard_blueprint.route('/download', methods=['GET'])
