@@ -212,7 +212,6 @@ def user_payments(username):
 def reset_password_request():
     """ Sending a password request """
     form = ResetPasswordRequestForm()
-    form_nl = NewsletterForm()
     
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -220,22 +219,21 @@ def reset_password_request():
             
             token = generate_confirmation_token(user.email)
             confirm_url = url_for('user.reset_password', token=token, _external=True)
-            subject = f"Passwort Reset für {user.username} ExcelWizzard!"
-            html = render_template('user/email/reset_password.html', confirm_url=confirm_url, form_nl=form_nl)
+            subject = f"Passwort Reset für {user.username} IQSheets!"
+            html = render_template('user/email/reset_password.html', confirm_url=confirm_url)
             send_email(user.email, subject, html)
             flash('Prüfe deine Emails', 'success')
         else:
             flash('Kein Profil unter dieser Emailadresse', 'warning')
             #return redirect(url_for('core.index'))
     return render_template('user/reset_password_request.html',
-                           title='Passwort zurücksetzen', form=form, form_nl=form_nl)
+                           title='Passwort zurücksetzen', form=form)
     
 @user_blueprint.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     """ Resetting password after clicking on tokenized mail link """
     email = confirm_token(token)   
     user = User.query.filter_by(email=email).first_or_404()
-    form_nl = NewsletterForm()
     
     if not user:
         return redirect(url_for('core.index'))
@@ -248,5 +246,5 @@ def reset_password(token):
         db.session.commit()
         flash('Passwort zurückgesetzt', 'success')
         return redirect(url_for('user.login'))
-    return render_template('user/reset_password.html', form=form, form_nl=form_nl)
+    return render_template('user/reset_password.html', form=form)
 

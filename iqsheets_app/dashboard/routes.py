@@ -38,9 +38,13 @@ def dashboard():
     time_saved = num_prompts * 0.5
     fav_prompt_type = db.session.query(Prompt.prompt_type,func.count(Prompt.id)).filter(
                         Prompt.user_id == current_user.id).group_by(Prompt.prompt_type).all()
-    most_used = max(fav_prompt_type, key=lambda item: item[1])
+    if fav_prompt_type:
+        most_used = max(fav_prompt_type, key=lambda item: item[1])
+        most_used = most_used[0].upper()
+    else:
+        most_used = "/"
     return render_template('dashboard/dashboard.html', num_prompts=num_prompts, 
-                           favorites=favorite_prompt, most_used=most_used[0].upper(), 
+                           favorites=favorite_prompt, most_used=most_used, 
                            time_saved=time_saved)
 
 @dashboard_blueprint.route('/<prompt_type>', methods=['GET', 'POST'])

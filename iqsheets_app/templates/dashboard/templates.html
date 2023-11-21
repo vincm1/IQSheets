@@ -1,6 +1,5 @@
 {% extends "layout.html" %}{% block content %}
-<section class="home">
-  <section class="templates ms-3">
+<section class="templates ms-3">
     <div class="container-fluid mt-3">
       <div class="favorite-btns mb-2">
         <div class="row align-items-start">
@@ -12,7 +11,7 @@
 			</form>
         </div>
       </div>
-	  <!-- Templates -->
+	<!-- Templates -->
     <div class="templates-cards mt-5">
         <div class="row">
 			{% for template in templates %}
@@ -36,7 +35,6 @@
         </div>
     </div>
 
-	  {% if current_user.premium %}
       <!-- Pagination Links-->
 				<div class="pagination justify-content-end me-4">
 					<div class="row pagination mt-3">
@@ -73,9 +71,7 @@
 						</div>
 					</div>
 				</div>
-        {% endif %}
       </div>
     </div>
   </section>
-</section>
 {% endblock %}
