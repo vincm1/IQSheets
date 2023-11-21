@@ -154,3 +154,11 @@ $(document).ready(function() {
       // $('#my-form').append('<input type="hidden" name="buttonName" value="incorrect-btn">').submit();
   });
 });
+
+const sidebarToggleBtn = document.getElementById("sidebar-toggle");
+const icon = document.getElementById("toggle-icon");
+
+icon.addEventListener("click", () => {
+  icon.classList.remove("fa-solid fa-arrow-left fa-xl");
+  icon.classList.add("fa-solid fa-arrow-right fa-xl");
+});

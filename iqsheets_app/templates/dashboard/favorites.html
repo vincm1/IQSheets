@@ -1,144 +1,111 @@
 {% extends "layout.html" %}{% block content %}
-	<section class="home">
-		<section class="favorites">
-			<div class="container-fluid mt-3 align-items-left">
-				
-				<div class="favorite-btns mb-2">
-					<div class="row align-items-start">
-						<form method="POST">
-							<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
-							{% for type in prompt_types %}
-							<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="{{type.capitalize()}}">{{type.capitalize()}}</button>
-							{% endfor %}	
-						</form>
-					</div>
-				</div>
-				
-				<div class="favorite-cards">
-					<div class="row">
-						{% for formula in favorite_formulas %}
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-2 response">
-							<div class="card shadow-lg h-100 w-100">
-								<div class="card-header p-3">
-									{% if formula.prompt_type == "Formula" %}
-										<i class="fa-solid fa-square-root-variable fa-xl" id="badge-icon"></i>
-									{% elif formula.prompt_type == "Skripte" %}
-										<i class="fa-solid fa-code fa-xl" id="badge-icon"></i>
-									{% elif formula.prompt_type == "Sql" %}
-										<i class="fa-solid fa-database fa-xl" id="badge-icon"></i>
-									{% else %}
-										<i class="fa-solid fa-wave-square fa-xl" id="badge-icon"></i>
-									{% endif %}
-									<span class="badge rounded-pill shadow-lg ms-3" id={{formula.prompt_type}}>{{formula.prompt_type}}</span>
-									<span class="badge rounded-pill" id={{formula.category}}>{{formula.category}}</span>
-									{% set days_diff = (today-formula.created_at).days %}
-									{% if days_diff >= 1 %}
-										<span class="badge rounded-pill float-end" id="favorite-date"><i class="fa-regular fa-clock fa-rotate-180 pe-1"></i>
-											{{days_diff}} d
-										</span>
-									{% else %}
-									{% set hours_diff = ((today-formula.created_at).total_seconds() / 3600) | round %}	
-										<span class="badge rounded-pill float-end" id="favorite-date"><i class="fa-regular fa-clock fa-rotate-180 pe-1"></i>
-											{{hours_diff}} h
-										</span>
-									{% endif %}
-								</div>
-								<div class="card-body">
-									<div class="row m-2 text-start command">
-										<p>{{formula.command}}</p>
-									</div>
-									<div class="row m-2 text-start prompt">
-										<p class="align-self-end">
-											<button class="btn btn-primary px-5" type="button" data-bs-toggle="collapse" data-bs-no-animation="true" data-bs-target="#formel_{{formula.id}}" aria-expanded="false" aria-controls="formel_{{formula.id}}">
-											  Formel
-											</button>
-										</p>
-										<div class="collapse m-2 p-3" id="formel_{{formula.id}}">
-											<p id="copy-target">{{formula.prompt}}</p>
-										</div>
-									</div>
-									<hr>
-									<div class="row m-2">
-										<p id="copy-target">{{formula.prompt}}</p>
-									</div>
-									<hr>
-									<div class="d-flex flex-row-reverse">
-										<div class="p-2">
-											<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="p-2">
-												<button class="btn btn-danger" id="incorrect-btn">
-													<i class="fa-solid fa-trash"></i>
-												</button>
-											</a>
-										</div>
-										<div class="p-2">
-											<button class="btn btn-secondary" id="copy-btn" onclick="copyToClipboard()">
-												<i class="fa-solid fa-copy"></i>
-											</button>
-										</div>
-										<div class="p-2">
-											
-										</div>
-									</div>
-								</div>
+<section class="favorites">
+	<div class="container-fluid mt-3 align-items-left">
+		
+		<div class="favorite-btns mb-2">
+			<div class="row align-items-start">
+				<form method="POST">
+					<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
+					{% for type in prompt_types %}
+					<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="{{type.capitalize()}}">{{type.capitalize()}}</button>
+					{% endfor %}	
+				</form>
+			</div>
+		</div>
+		
+		<div class="favorite-cards">
+			<div class="row">
+				{% for formula in favorite_formulas %}
+				<div class="col-xl-4 col-lg-3 col-md-6 col-sm-12 py-2 response">
+					<div class="card">
+						<div class="card-header py-4">
+							{% if formula.prompt_type == "Formula" %}
+								<i class="fa-solid fa-square-root-variable fa-xl" id="badge-icon"></i>
+							{% elif formula.prompt_type == "Skripte" %}
+								<i class="fa-solid fa-code fa-xl" id="badge-icon"></i>
+							{% elif formula.prompt_type == "Sql" %}
+								<i class="fa-solid fa-database fa-xl" id="badge-icon"></i>
+							{% else %}
+								<i class="fa-solid fa-wave-square fa-xl" id="badge-icon"></i>
+							{% endif %}
+							<span class="badge rounded-pill shadow-lg ms-3" id={{formula.prompt_type}}>{{formula.prompt_type}}</span>
+							<span class="badge rounded-pill" id={{formula.category}}>{{formula.category}}</span>
+							{% set days_diff = (today-formula.created_at).days %}
+							{% if days_diff >= 1 %}
+								<span class="badge rounded-pill float-end" id="favorite-date"><i class="fa-regular fa-clock fa-rotate-180 pe-1"></i>
+									{{days_diff}} d
+								</span>
+							{% else %}
+							{% set hours_diff = ((today-formula.created_at).total_seconds() / 3600) | round %}	
+								<span class="badge rounded-pill float-end" id="favorite-date"><i class="fa-regular fa-clock fa-rotate-180 pe-1"></i>
+									{{hours_diff}} h
+								</span>
+							{% endif %}
+						</div>
+						<div class="card-body mx-2">
+							<div class="row user-input">
+								<p>Input</p>
+								<p id="prompt-input">{{formula.prompt}}</p>
+							</div>
+							<div class="row ki-output">
+								<p>Output</p>
+								<p class="p-3" id="copy-target">{{formula.result}}</p>
 							</div>
 						</div>
-					{% endfor %}
-					</div>
-				</div>
-
-				<div class="flashmessages my-5">
-					<div class="row col-xl-4 col-lg-4 col-md-3 flashmessages">
-						{% with messages = get_flashed_messages(with_categories=true) %}
-							{% if messages %}
-								{% for category, message in messages %}
-								<div class="alert alert-{{ category }} alert-dismissible fade show justify-content-end" role="alert">
-									{{ message }}
-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-								</div>
-								{% endfor %}
-							{% endif %}
-						{% endwith %}
-					</div>
-				</div>
-
-				<!-- Pagination Links-->
-				<div class="pagination justify-content-end me-4">
-					<div class="row pagination mt-3">
-						<div class="text-right">
-							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
-							class="btn btn-outline-primary 
-							{% if favorite_formulas.page == 1 %}disabled{% endif %}">
-								&laquo;
-							</a>
-						<!-- Loop through the number of pages to display a link for each-->
-							{% for page_num in favorite_formulas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-								{% if page_num %}
-								<!-- Check for the active page and set the link to "Active"-->
-									{% if favorite_formulas.page == page_num %}
-									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
-									class="btn btn-primary">
-										{{ page_num }}
-									</a>
-									{% else %}
-									<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
-									class="btn btn-outline-primary">
-										{{ page_num }}
-									</a>
-									{% endif %}
-								{% else %}
-									...
-								{% endif %}
-							{% endfor %}
-							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
-							class="btn btn-outline-primary
-							{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
-								&raquo;
-							</a>
+						<div class="card-footer">
+							<div class="d-flex gap-1">
+								<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="">
+									<button class="btn btn-danger px-3" id="incorrect-btn">
+										<i class="fa-solid fa-trash"></i>
+									</button>
+								</a>
+								<button class="btn btn-secondary px-3" id="copy-btn" onclick="copyToClipboard()">
+									<i class="fa-solid fa-copy pe-2"></i>Kopieren
+								</button>		
+							</div>
 						</div>
 					</div>
 				</div>
-					
+				{% endfor %}
 			</div>
-		</section>
-	</section>
+		</div>
+
+		<!-- Pagination Links-->
+		<div class="pagination justify-content-end me-4">
+			<div class="row pagination mt-3">
+				<div class="text-right">
+					<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.prev_num) }}"
+					class="btn btn-outline-primary 
+					{% if favorite_formulas.page == 1 %}disabled{% endif %}">
+						&laquo;
+					</a>
+				<!-- Loop through the number of pages to display a link for each-->
+					{% for page_num in favorite_formulas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+						{% if page_num %}
+						<!-- Check for the active page and set the link to "Active"-->
+							{% if favorite_formulas.page == page_num %}
+							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+							class="btn btn-primary">
+								{{ page_num }}
+							</a>
+							{% else %}
+							<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=page_num) }}"
+							class="btn btn-outline-primary">
+								{{ page_num }}
+							</a>
+							{% endif %}
+						{% else %}
+							...
+						{% endif %}
+					{% endfor %}
+					<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
+					class="btn btn-outline-primary
+					{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
+						&raquo;
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>		
 {% endblock %}

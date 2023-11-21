@@ -1,6 +1,7 @@
 """Routes for dashboard"""
 import boto3
 from datetime import datetime
+from sqlalchemy import func
 from flask import Blueprint, current_app, render_template, flash, send_file, redirect, url_for, request
 from flask_login import login_required, current_user
 from iqsheets_app import db
@@ -32,7 +33,15 @@ s3_client = boto3.client(
 @check_confirmed_mail
 def dashboard():
     """User Dashboard page"""
-    return render_template('dashboard/dashboard.html')
+    num_prompts = Prompt.query.filter_by(user_id=current_user.id).count()
+    favorite_prompt =  Prompt.query.filter_by(user_id=current_user.id, favorite=True).count()
+    time_saved = num_prompts * 0.5
+    fav_prompt_type = db.session.query(Prompt.prompt_type,func.count(Prompt.id)).filter(
+                        Prompt.user_id == current_user.id).group_by(Prompt.prompt_type).all()
+    most_used = max(fav_prompt_type, key=lambda item: item[1])
+    return render_template('dashboard/dashboard.html', num_prompts=num_prompts, 
+                           favorites=favorite_prompt, most_used=most_used[0].upper(), 
+                           time_saved=time_saved)
 
 @dashboard_blueprint.route('/<prompt_type>', methods=['GET', 'POST'])
 @login_required

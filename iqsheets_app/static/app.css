@@ -153,6 +153,10 @@ body {
       background-color: var(--bs-link-color-hover);
       color: var(--bs-link-hover-color);
   }
+
+  .dashboard-cards:hover .card-body i {
+    color: var(--bs-link-hover-color);
+  }
   
   /* Flashmessages  */
   
@@ -452,6 +456,32 @@ body {
     color: var(--bs-body-color);
 }
 
+.dashboard-info .card {
+  background: var(--bs-link-hover-color);
+  color: var(--bs-background-light);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+  transition: box-shadow 0.3s ease; /* Add a smooth transition effect */
+}
+
+.dashboard-info .card:hover {
+  /* Set the box-shadow style for when the card is hovered */
+  box-shadow: 0 10px 18px var(--bs-link-color-hover); /* Adjust the values as needed */
+}
+
+.dashboard-info .card-header {
+  border-bottom: none;
+}
+
+.dashboard-info .card-header p {
+  color: var(--bs-background-light);
+  font-size: 16px;
+}
+
+.dashboard-info .card-body p {
+  color: var(--bs-background-light);
+  font-size: 28px;
+}
+
 .heading {
     border-bottom: 1px solid var(--bs-link-color);
 }
@@ -549,13 +579,34 @@ body {
 
 /* Favorites */
 
+.favorite-cards {
+  min-height: 70vh;
+}
+
 #filter-btn {
   border: 1px solid var(--bs-link-hover-color);
-
 }
 
 .favorite-cards .card {
   border: 1px solid var(--bs-link-hover-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make card fill parent's height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+  transition: box-shadow 0.3s ease; /* Add a smooth transition effect */
+}
+
+.favorite-cards .card:hover {
+  box-shadow: 0 12px 18px var(--bs-link-color-hover); /* Adjust the values as needed */
+}
+
+.favorite-cards .card-body {
+  flex-grow: 1;
+}
+
+.favorite-cards .card-footer {
+  background-color: transparent;
+  border-top: none;
 }
 
 .favorite-cards .card-header {
@@ -602,4 +653,14 @@ body {
 
 #favorite-date {
   background-color: var(--bs-gray-500);
+}
+
+#prompt-input {
+  background-color: red;
+} 
+
+#copy-target {
+  background-color: var(--bs-link-color-hover);
+  border: 1px solid var(--bs-link-color);
+  border-radius:  10px;
 }
