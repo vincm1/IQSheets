@@ -68,7 +68,6 @@ def impressum():
 @core_blueprint.route("/kontakt", methods=["GET", "POST"])
 def kontakt():
     ''' Contact Page '''
-    form_nl = NewsletterForm()
     form_contact = ContactForm()
     if form_contact.validate_on_submit():
         send_email(
@@ -76,7 +75,7 @@ def kontakt():
             subject=form_contact.betreff.data,
             body=form_contact.text.data + ', ' + form_contact.name.data + ', ' 
                 + form_contact.email.data)
-    return render_template('kontakt.html', form_nl=form_nl, form_contact=form_contact)
+    return render_template('kontakt.html', form_contact=form_contact)
 
 @core_blueprint.route("/newsletter", methods=["POST"])
 def newsletter():

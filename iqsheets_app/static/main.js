@@ -26,6 +26,7 @@ document.getElementById("calculate").addEventListener("click", function() {
   if (!isNaN(hours) && !isNaN(hourlyWage)) {
       var totalEarnings = hours * hourlyWage;
       document.getElementById("result").innerHTML = totalEarnings.toFixed(2) + "€";
+      document.getElementById("result2").innerHTML = hours * 0.25;
   } else {
       document.getElementById("result").innerHTML = "Trage deine Daten ein.";
   }

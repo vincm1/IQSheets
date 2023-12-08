@@ -472,7 +472,12 @@ nav {
 
 #result {
     color: var(--bs-orange);
-    font-size: 30px;
+    font-size: 25px;
+}
+
+#result2 {
+    color: var(--bs-orange);
+    font-size: 25px;
 }
 
 #calcualate-btn{
@@ -523,7 +528,7 @@ nav {
     color: var(--bs-link-color);
 }
 
-#support-btn {
+#supportbtn {
     border: 1px solid var(--bs-link-hover-color)
 }
 

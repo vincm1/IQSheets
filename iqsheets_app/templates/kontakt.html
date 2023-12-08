@@ -1,7 +1,70 @@
-{% extends "base.html" %} {% block content %}
+{% extends "main.html" %} {% block content %}
+<main>
+  <section class="signup">
+    <div class="container mx-auto pt-5">
+      <div class="row justify-content-center pt-5">
+        <div class="col-sm-4 pt-5">
+          <!-- Flash messages -->
+          <div class="flashmessages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-6">
+          <!-- Contact Card -->
+          <div class="card shadow-lg p-3 text-center login-card">
+            <div class="card-top">
+              <h2 class="pt-2">Kontakt / Feedback</h2>
+              <p class="pt-3">Schildere uns Dein Anliegen per Mail.</p>
+            </div>
+            <div class="card-body">
+              <form method="POST" action="{{url_for('user.login')}}">
+                {{form_contact.hidden_tag()}}
+                <div class="form-group mt-2 mb-4">
+                  {{form_contact.name(placeholder="Name", class="form-control")}}
+                </div>
+                <div class="form-group my-4">
+                  {{form_contact.email(placeholder="Email-Adresse", class="form-control")}}
+                </div>
+                <div class="form-group mt-5">
+                  {{form_contact.betreff(placeholder="Betreff", class="form-control")}}
+                </div>
+                <div class="form-group mt-3">
+                  {{form_contact.text(placeholder="Schildere uns dein Anliegen", class="form-control")}}
+                </div>
+                <div class="form-group mt-3">
+                  {{form_contact.submit(class="btn btn-primary w-100 py-2")}}
+                </div>
+              </form>
+              <hr class="mt-4">
+              <div class="social-signup pt-2">
+                <a class="text-right pe-1" href="{{url_for('user.register')}}">Registrieren</a>
+                /
+                <a class="text-right ps-1" href="{{url_for('user.login')}}">Login</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
 <main>
     <!-- Hero Area-->
-    <section class="hero py-5">
+    <!-- <section class="hero py-5">
         <div class="container">
             <div class="card py-5">
                 <div class="contact-form p-4">
@@ -36,7 +99,3 @@
                 </div>
               </div>
         </div>
-        <!-- Slider Area End -->
-    </section>
-</main>
-{% endblock %}
