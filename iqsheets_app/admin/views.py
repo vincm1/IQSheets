@@ -37,11 +37,7 @@ class SubscriptionsView(BaseView):
     def index(self):
         customers = stripe.Customer.list()
         subscriptions = stripe.Subscription.list()
-        email = '200283885@aston.ac.uk'
-        stripe_customer = stripe.Customer.search(query=f"email={email}")
-        stripe_subscription = stripe.Subscription.search(query=f"customer={stripe_customer}")
-        return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions, 
-                           stripe_customer=stripe_customer, stripe_subscription=stripe_subscription)
+        return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions)
 
 class TemplatesUploadView(BaseView):
     @expose('/', methods=["GET","POST"])

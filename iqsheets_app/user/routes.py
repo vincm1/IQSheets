@@ -212,7 +212,7 @@ def user_payments(username):
 def reset_password_request():
     """ Sending a password request """
     form = ResetPasswordRequestForm()
-    
+    form_nl = NewsletterForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.is_confirmed:
@@ -220,14 +220,14 @@ def reset_password_request():
             token = generate_confirmation_token(user.email)
             confirm_url = url_for('user.reset_password', token=token, _external=True)
             subject = f"Passwort Reset für {user.username} IQSheets!"
-            html = render_template('user/email/reset_password.html', confirm_url=confirm_url)
+            html = render_template('user/email/reset_password.html', confirm_url=confirm_url, form_nl=form_nl)
             send_email(user.email, subject, html)
             flash('Prüfe deine Emails', 'success')
         else:
             flash('Kein Profil unter dieser Emailadresse', 'warning')
             #return redirect(url_for('core.index'))
     return render_template('user/reset_password_request.html',
-                           title='Passwort zurücksetzen', form=form)
+                           title='Passwort zurücksetzen', form=form, form_nl=form_nl)
     
 @user_blueprint.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):

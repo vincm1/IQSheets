@@ -664,3 +664,9 @@ body {
   border: 1px solid var(--bs-link-color);
   border-radius:  10px;
 }
+
+/* TEMPLATES  */
+
+.templates .card {
+  border: 1px solid var(--bs-link-color-hover);
+}

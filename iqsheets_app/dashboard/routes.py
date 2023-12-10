@@ -182,7 +182,7 @@ def templates():
     elif request.method == 'POST':
         filter_value = request.form['filter_value']
         page = request.args.get('page', 1, type=int)
-        templates = Template.query.filter_by(template_category=filter_value).order_by(Template.created_at).paginate(page=page, per_page=9)
+        templates = Template.query.filter_by(template_category=filter_value).order_by(Template.created_at).paginate(page=page, per_page=12)
             
     return render_template('dashboard/templates.html', templates=templates, categorys=categorys)
 

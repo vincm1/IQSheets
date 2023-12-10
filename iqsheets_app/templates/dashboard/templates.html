@@ -1,77 +1,81 @@
 {% extends "layout.html" %}{% block content %}
 <section class="templates ms-3">
-    <div class="container-fluid mt-3">
-      <div class="favorite-btns mb-2">
-        <div class="row align-items-start">
-          <form method="POST">
-            <button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
-            {% for category in categorys %}
-				<button class="btn btn-outline-primary" id="filter-btn" type="submit" name="filter_value" value="{{category[0]}}">{{category[0]}}</button>
-			{% endfor %}
-			</form>
-        </div>
-      </div>
+    <div class="container-fluid mt-3 align-items-left">
+		<div class="favorite-btns mb-2">
+			<div class="row align-items-start">
+			<form method="POST">
+				<button class="btn btn-secondary" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
+				{% for category in categorys %}
+					<button class="btn btn-secondary" id="filter-btn" type="submit" name="filter_value" value="{{category[0]}}">{{category[0]}}</button>
+				{% endfor %}
+				</form>
+			</div>
+		</div>
 	<!-- Templates -->
-    <div class="templates-cards mt-5">
-        <div class="row">
-			{% for template in templates %}
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pb-2">
-				<div class="card w-100 h-100">
-					<div class="card-img">
-						<img src="{{url_for('static', filename='img/spreadsheet.jpg' )}}" 
-							class="card-img-top" alt="spreadsheet computer">
-						<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
-							{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
-							<a href="{{s3_template_link}}" class="btn btn-primary">Download</a>
+		<div class="templates-cards mt-5">
+			<div class="row">
+				{% for template in templates %}
+				<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pb-2">
+					<div class="card shadow-lg w-100 h-100">
+						<div class="card-img">
+							<img src="{{url_for('static', filename='img/spreadsheet.jpg' )}}" 
+								class="card-img-top" alt="spreadsheet computer">
+							<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
+								{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
+								<a href="{{s3_template_link}}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
+							</div>
+						</div>
+						<div class="card-body mt-3">
+						<h5 class="card-title">{{template.template_name.split(".")[0]}}</h5>
+						<p class="card-text py-2">{{template.template_description}}</p>
 						</div>
 					</div>
-					<div class="card-body mt-3">
-					  <h5 class="card-title">{{template.template_name.split(".")[0]}}</h5>
-					  <p class="card-text py-2">{{template.template_description}}</p>
-					</div>
 				</div>
-            </div>
-			{% endfor %}
-        </div>
-    </div>
+				{% endfor %}
+			</div>
+		</div>
 
-      <!-- Pagination Links-->
-				<div class="pagination justify-content-end me-4">
-					<div class="row pagination mt-3">
-						<div class="text-right">
-							<a href="{{ url_for('dashboard.templates', page=templates.prev_num) }}"
-							class="btn btn-outline-primary 
-							{% if templates.page == 1 %}disabled{% endif %}">
-								&laquo;
+    <!-- Pagination Links-->
+		<div class="pagination justify-content-end me-4">
+			<div class="row pagination mt-3">
+				<div class="text-right">
+					{% if templates.page != 1 %}
+						<a href="{{ url_for('dashboard.templates', page=templates.prev_num) }}"
+						class="btn btn-secondary
+						{% if templates.page == 1 %}disabled{% endif %}">
+							&laquo;
+						</a>
+					{% endif %}
+				<!-- Loop through the number of pages to display a link for each-->
+					{% for page_num in templates.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+						{% if page_num %}
+						<!-- Check for the active page and set the link to "Active"-->
+							{% if templates.page == page_num %}
+							<a href="{{ url_for('dashboard.templates', page=page_num) }}"
+							class="btn btn-primary">
+								{{ page_num }}
 							</a>
-						<!-- Loop through the number of pages to display a link for each-->
-							{% for page_num in templates.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-								{% if page_num %}
-								<!-- Check for the active page and set the link to "Active"-->
-									{% if templates.page == page_num %}
-									<a href="{{ url_for('dashboard.templates', page=page_num) }}"
-									class="btn btn-primary">
-										{{ page_num }}
-									</a>
-									{% else %}
-									<a href="{{ url_for('dashboard.templates', page=page_num) }}"
-									class="btn btn-outline-primary">
-										{{ page_num }}
-									</a>
-									{% endif %}
-								{% else %}
-									...
-								{% endif %}
-							{% endfor %}
-							<a href="{{ url_for('dashboard.templates', page=templates.next_num) }}"
-							class="btn btn-outline-primary
-							{% if templates.page == templates.pages %}disabled{% endif %}">
-								&raquo;
+							{% else %}
+							<a href="{{ url_for('dashboard.templates', page=page_num) }}"
+							class="btn btn-secondary">
+								{{ page_num }}
 							</a>
-						</div>
-					</div>
+							{% endif %}
+						{% else %}
+							...
+						{% endif %}
+					{% endfor %}
+					{% if templates.page != templates.pages %}
+					<a href="{{ url_for('dashboard.templates', page=templates.next_num) }}"
+					class="btn btn-secondary
+					{% if templates.page == templates.pages %}disabled{% endif %}">
+						&raquo;
+					</a>
+					{% endif %}
 				</div>
-      </div>
+			</div>
+		</div>
+		
     </div>
-  </section>
+</section>
 {% endblock %}
