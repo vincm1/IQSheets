@@ -52,7 +52,7 @@ class User(db.Model, UserMixin):
                     stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
                     stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
                     self.stripe_customer_id = stripe_cust_id
-                    self.stripe_sub_id = stripe_cust_id
+                    self.stripe_sub_id = stripe_subscription_id
                     db.session.add(self)
                     db.session.commit()
                 else:

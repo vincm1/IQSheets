@@ -27,16 +27,17 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Passwort', validators=[DataRequired()])
     submit = SubmitField('Login')
+    
 class EditUserForm(FlaskForm):
-    username = StringField('Username', validators=[ Optional(), check_username])
-    email = EmailField('Email', validators=[Email(), Optional(), check_email])
+    firstname = StringField('Vorname', validators=[Optional()], )
+    lastname = StringField('Nachname', validators=[ Optional()])
     job_description = StringField('Berufsbezeichnung', validators=[Optional()])
-    profile_picture = FileField('Profilbild', render_kw={'accept': 'image/*', 'class': 'd-none'}, id='file-input')
     submit = SubmitField('Speichern')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.profile_picture.label = Markup('<i class="bx bx-camera"></i>')
+    
+class EditUserEmailForm(FlaskForm):
+    new_email = EmailField('Email', validators=[Email(), check_email])
+    new_email_confirm = EmailField('Email', validators=[Email(), EqualTo('new_email', message="E-mail Adressen stimmen nicht überein!")])
+    submit = SubmitField('Speichern')
 class ChangePasswordForm(FlaskForm):
     old_password = PasswordField('Altes Passwort', validators=[DataRequired()])
     password = PasswordField('Neues Passwort', validators=[DataRequired(), Length(min=8, message="Mindestens 8 Zeichen!"),

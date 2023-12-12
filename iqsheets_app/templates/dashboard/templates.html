@@ -18,12 +18,35 @@
 				<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pb-2">
 					<div class="card shadow-lg w-100 h-100">
 						<div class="card-img">
-							<img src="{{url_for('static', filename='img/spreadsheet.jpg' )}}" 
+							{% if template.template_category == 'Business' %}
+								<img src="{{url_for('static', filename='img/templates/business.jpg' )}}" 
+									class="card-img-top" alt="spreadsheet computer">
+								<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
+									{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
+									<a href="{{s3_template_link}}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
+								</div>
+							{% elif template.template_category == 'Projektmanagement' %}
+								<img src="{{url_for('static', filename='img/templates/projektmanagement.jpg' )}}" 
 								class="card-img-top" alt="spreadsheet computer">
-							<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
+								<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
 								{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
-								<a href="{{s3_template_link}}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
-							</div>
+									<a href="{{s3_template_link}}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
+								</div>
+							{% elif template.template_category == 'Zeitmanagement' %}
+								<img src="{{url_for('static', filename='img/templates/zeitmanagement.jpg' )}}" 
+								class="card-img-top" alt="spreadsheet computer">
+								<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
+								{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
+									<a href="{{s3_template_link}}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
+								</div>
+							{% else %}
+								<img src="{{url_for('static', filename='img/templates/produktivität.jpg' )}}" 
+								class="card-img-top" alt="spreadsheet computer">
+								<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
+								{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
+									<a href="{{s3_template_link}}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
+								</div>
+							{% endif %}
 						</div>
 						<div class="card-body mt-3">
 						<h5 class="card-title">{{template.template_name.split(".")[0]}}</h5>

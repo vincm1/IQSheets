@@ -40,7 +40,7 @@ def dashboard():
                         Prompt.user_id == current_user.id).group_by(Prompt.prompt_type).all()
     if fav_prompt_type:
         most_used = max(fav_prompt_type, key=lambda item: item[1])
-        most_used = most_used[0].upper()
+        most_used = most_used[0].capitalize()
     else:
         most_used = "/"
     return render_template('dashboard/dashboard.html', num_prompts=num_prompts, 

@@ -1,12 +1,13 @@
 """Routes for user"""
 import os
 from datetime import datetime
+import stripe
 import boto3
 from flask import Blueprint, Markup, current_app, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from iqsheets_app import db, mail
 from iqsheets_app.models import User
-from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm
+from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm, EditUserEmailForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -22,6 +23,10 @@ from iqsheets_app.core.forms import NewsletterForm
 ################
 
 user_blueprint = Blueprint('user', __name__)
+
+stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2AbKIYPWl2LXKPW3U3h6Lu71E94Gf1NvrHKE00xPsZzRZZ"
+
+YOUR_DOMAIN = 'http://localhost:5000'
 
 ################
 #### routes ####
@@ -134,51 +139,44 @@ def resend_confirmation():
     flash(f'Eine Bestätigungs-Email wurde an {current_user.email} geschickt.', 'success')
     return redirect(url_for('user.unconfirmed'))
 
-@user_blueprint.route('/profil_bearbeiten', methods=['GET', 'POST'])
+@user_blueprint.route('/einstellungen/profil', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
 def edit_user():
     """Edit user profile"""
-    
-    # initialize S3 client using boto3
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id=current_app.config['AWS_ACCESS_KEY'], 
-        aws_secret_access_key=current_app.config['AWS_SECRET_ACCESS_KEY'],
-        region_name=current_app.config['AWS_REGION']
-        )
-    
-    user = User.query.filter_by(username=current_user.username).first()
     form = EditUserForm()
-    
-    folder = 'profile_pictures/'
-    
     if form.validate_on_submit():
-        for field in ['username', 'email', 'job_description']:
-            if getattr(form, field).data and getattr(current_user, field) != getattr(form, field).data:
-                setattr(current_user, field, getattr(form, field).data)
-                
-        if form.data['profile_picture'] and current_user.profile_picture !=  form.data['profile_picture']:
-            current_user.profile_picture = form.profile_picture.data
-            # Image name
-            pic_filename = secure_filename(current_user.profile_picture.filename)
-            # UUID
-            pic_name = str(uuid.uuid1()) + "_" + pic_filename
-            
-            ### Boto3 Aws ###
-            file = form.data['profile_picture']
-            s3_client.upload_fileobj(file, current_app.config['S3_BUCKET'], folder + pic_name)
-            current_user.profile_picture = pic_name
-                
-        else:
-            current_user.profile_picture = current_user.profile_picture       
-             
-        db.session.add(user)
+        current_user.firstname = form.firstname.data
+        current_user.lastname = form.lastname.data
+        current_user.job_description = form.job_description.data
+        db.session.add(current_user)
         db.session.commit()
         flash("Profil erfolgreich bearbeitet!", "success")
-        return render_template('user/profil.html', form=form)
     
-    return render_template('user/profil.html', form=form)
+    return render_template('user/profil.html', form=form, active_page='edit_user')
+
+@user_blueprint.route('/einstellungen/email', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
+def edit_email():
+    """Edit user profile"""
+    form = EditUserEmailForm()
+    return render_template('user/email.html', form=form, active_page='edit_email')
+
+@user_blueprint.route('/einstellungen/passwort', methods=['GET', 'POST'])
+@login_required
+@check_confirmed_mail
+def edit_password():
+    """Edit user profile"""
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_user.password = generate_password_hash(form.new_password)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Passwort erfolgreich geändert", "success")
+
+    return render_template('user/password.html', form=form, active_page='edit_passwort')
+
 
 @user_blueprint.route('/passwort', methods=['GET', 'POST'])
 @login_required
@@ -201,12 +199,17 @@ def change_password():
     
     return render_template('user/password.html', form=form)
 
-@user_blueprint.route('/<username>/payments', methods=['GET'])
+@user_blueprint.route('/payments', methods=['GET'])
 @login_required
 @check_confirmed_mail
-def user_payments(username):
+def user_payments():
     """ User payments routes """
-    return render_template('user/payments.html', username=current_user.username)
+    stripe_sub_id = current_user.stripe_sub_id
+    sub = stripe.Subscription.retrieve(id=stripe_sub_id)
+    stripe_cust_id = current_user.stripe_customer_id
+    
+    return render_template('user/payments.html', username=current_user.username, sub=sub,
+                           stripe_cust_id=stripe_cust_id, stripe_sub_id=stripe_sub_id)
 
 @user_blueprint.route('/passwort_zuruecksetzen', methods=['GET', 'POST'])
 def reset_password_request():

@@ -1,5 +1,7 @@
 {% extends "layout.html" %}{% block content %}
 	<section class="home">
   		<h1>{{current_user.username}} Payments</h1>
+		{{stripe_cust_id, stripe_sub_id}}
+		{{sub}}
 	</section>
 {% endblock %}

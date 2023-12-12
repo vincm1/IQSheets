@@ -11,19 +11,15 @@
                 <a href="{{url_for('user.edit_email')}}"><button class="btn btn-secondary {{ 'active' if active_page == 'edit_email' else '' }}">E-Mail</button></a>
                 <a href="{{url_for('user.edit_password')}}"><button class="btn btn-secondary {{ 'active' if active_page == 'edit_password' else '' }}">Passwort</button></a>
             </div>
-	
 			<hr class="mx-2">
 			<div class="container data justify-content-center">
 				<form action="" method="POST" >
 					{{form.hidden_tag()}}
 					<div class="form-group col-6 justify-content-center my-4">
-						{{form.firstname(class="form-control", placeholder="Vorname (optional)")}}
+						{{form.new_email(class="form-control", placeholder="Neue Emailadresse")}}
 					</div>
 					<div class="form-group col-6 justify-content-center my-4">
-						{{form.lastname(class="form-control", placeholder="Nachname (optional)")}}
-					</div>
-					<div class="form-group col-6 justify-content-center my-4">
-						{{form.job_description(class="form-control", placeholder="Berufsbezeichnung (optional)")}}
+						{{form.new_email_confirm(class="form-control", placeholder="Emailadresse bestätigen")}}
 					</div>
 					{{form.submit(class="btn btn-primary py-2 px-5 my-3")}}
 				</form>
