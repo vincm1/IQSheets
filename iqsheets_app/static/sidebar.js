@@ -1,33 +1,29 @@
-const $sidebarToggler  = document.querySelector('#sidebar-toggle');
-const $toggleIcon  = document.querySelector('#toggle-icon');
+const $sidebarToggler = document.querySelector('#sidebar-toggle');
+const $toggleIcon = document.querySelector('#toggle-icon');
 const $wrapper = document.querySelector('#wrapper');
-const $userDropdown = document.querySelector('#user-dropdown-toggle');
+
+// Function to toggle sidebar
+function toggleSidebar() {
+    const isToggled = $wrapper.classList.toggle('toggled');
+    $toggleIcon.className = isToggled ? "fa-solid fa-arrow-right fa-xl" : "fa-solid fa-arrow-left fa-xl";
+    localStorage.setItem('sidebarToggled', isToggled);
+}
 
 $sidebarToggler.addEventListener('click', (e) => {
     e.preventDefault();
-    $wrapper.classList.toggle('toggled');
-    localStorage.setItem('sidebarToggled', $wrapper.classList.contains('toggled'));
-    const sidebarToggled = localStorage.getItem('sidebarToggled') === 'true';
-    if (sidebarToggled) {
-        $wrapper.classList.add('toggled');
-        $toggleIcon.className = "fa-solid fa-arrow-right fa-xl";
-    }
-    else {
-        $toggleIcon.className = "fa-solid fa-arrow-left fa-xl";
-    }
+    toggleSidebar();
 });
 
 // When the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
-
-   
-    if (sidebarToggled) {
+    // Apply the initial toggle state from localStorage
+    if (localStorage.getItem('sidebarToggled') === 'true') {
         $wrapper.classList.add('toggled');
         $toggleIcon.className = "fa-solid fa-arrow-right fa-xl";
-    }
-    else {
+    } else {
         $toggleIcon.className = "fa-solid fa-arrow-left fa-xl";
     }
+
     // Get all nav items
     var navItems = document.querySelectorAll('.sidebar-nav .nav-item');
 

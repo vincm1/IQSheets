@@ -169,8 +169,8 @@ body {
   
   #wrapper {
     padding-left: 0;
-    transition: all 0.5s ease;
     position: relative;
+    transition: all 0.2s ease;
   }
   
   #sidebar-wrapper {
@@ -183,7 +183,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     background: var(--bs-link-hover-color);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
   
   #wrapper.toggled #sidebar-wrapper {

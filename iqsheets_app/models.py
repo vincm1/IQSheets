@@ -26,6 +26,8 @@ class User(db.Model, UserMixin):
     job_description = db.Column(db.String(100), nullable=True)
     password_hash = db.Column(db.String, nullable=False)
     registration_date = db.Column(db.DateTime, default=datetime.now)
+    cancellation_date = db.Column(db.DateTime, default=None, nullable=True)
+    is_cancelled = db.Column(db.Boolean, default=False, nullable=True)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     stripe_customer_id = db.Column(db.String, nullable=True, default=None)
