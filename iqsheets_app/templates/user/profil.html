@@ -10,13 +10,10 @@
 				<a href="{{url_for('user.edit_user')}}" class="col-12 mx-2">
 					<button class="btn btn-secondary {{ 'active' if active_page == 'edit_user' else '' }} px-5 py-2">Profil</button>
 				</a>
-                <a href="{{url_for('user.edit_email')}}" class="mx-2 col-sm-12">
-					<button class="btn btn-secondary {{ 'active' if active_page == 'edit_email' else '' }} px-5 py-2">E-Mail</button>
-				</a>
-				{% if not current_user.oauth %}
-                <a href="{{url_for('user.edit_password')}}" class="mx-2 col-sm-12">
-					<button class="btn btn-secondary {{ 'active' if active_page == 'edit_password' else '' }} px-5 py-2">Passwort</button>
-				</a>
+				{% if not current_user.is_oauth %}
+					<a href="{{url_for('user.edit_password')}}" class="mx-2 col-sm-12">
+						<button class="btn btn-secondary {{ 'active' if active_page == 'edit_password' else '' }} px-5 py-2">Passwort</button>
+					</a>
 				{% endif %}
             </div>
 	
@@ -42,13 +39,16 @@
 				<form action="" method="POST">
 					{{form.hidden_tag()}}
 					<div class="form-group my-4 col-6 offset-md-3">
-						{{form.firstname(class="form-control", placeholder="Vorname (optional)")}}
+						{{form.firstname(class="form-control", placeholder=(current_user.firstname if 
+							current_user.firstname else "Vorname (optional)"))}}
 					</div>
 					<div class="form-group my-4 col-6 offset-md-3">
-						{{form.lastname(class="form-control", placeholder="Nachname (optional)")}}
+						{{form.lastname(class="form-control", placeholder=(current_user.lastname if 
+							current_user.lastname else "Nachname (optional)"))}}
 					</div>
 					<div class="form-group my-4 col-6 offset-md-3">
-						{{form.job_description(class="form-control", placeholder="Berufsbezeichnung (optional)")}}
+						{{form.job_description(class="form-control", placeholder=(current_user.job_description 
+							if current_user.job_description else "Berufsbezeichnung (optional)"))}}
 					</div>
 					{{form.submit(class="btn btn-primary py-2 px-5 mt-3 mb-5")}}
 				</form>

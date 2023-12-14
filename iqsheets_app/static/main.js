@@ -34,79 +34,6 @@ document.getElementById("calculate").addEventListener("click", function() {
 
 // End Calculator //
 
-$(document).ready(function(){
-  $('.accordion-item').on('click', function(){
-      $(this).toggleClass('active');
-  });
-});
-
-const body = document.querySelector('body'),
-      sidebar = body.querySelector('nav'),
-      toggle = body.querySelector(".toggle"),
-      searchBtn = body.querySelector(".search-box"),
-      modeSwitch = body.querySelector(".toggle-switch"),
-      modeText = body.querySelector(".mode-text");
-
-toggle.addEventListener("click" , () =>{
-    sidebar.classList.toggle("close");
-})
-
-searchBtn.addEventListener("click" , () =>{
-    sidebar.classList.remove("close");
-})
-
-modeSwitch.addEventListener("click" , () =>{
-    body.classList.toggle("dark");
-    
-    if(body.classList.contains("dark")){
-        modeText.innerText = "Light mode";
-    }else{
-        modeText.innerText = "Dark mode";
-        
-    }
-});
-
-// Get the button:
-let mybutton = document.getElementById("myBtn");
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
-
-const premium = document.getElementById('premium')
-const premiumBtn = document.getElementById('premium-btn');
-
-premium.addEventListener("mouseover", () => {
-	premiumBtn.innerText = "Upgrade";
-});
-
-premium.addEventListener("mouseout", () => {
-	premiumBtn.innerText = "Premium";
-});
-
-const premiumProfileBtn = document.getElementById('profile-premium-btn');
-
-premiumProfileBtn.addEventListener("mouseover", () => {
-	premiumProfileBtn.innerText = "Upgrade";
-});
-
-premiumProfileBtn.addEventListener("mouseout", () => {
-	premiumProfileBtn.innerHTML = "<i class='bx bx-diamond icon pe-2'></i>Premium";
-});
-
 function copyToClipboard() {
     /* Get the text from the element with the ID "copy-target" */
     var copyText = document.getElementById("copy-target").innerText;
@@ -156,10 +83,3 @@ $(document).ready(function() {
   });
 });
 
-const sidebarToggleBtn = document.getElementById("sidebar-toggle");
-const icon = document.getElementById("toggle-icon");
-
-icon.addEventListener("click", () => {
-  icon.classList.remove("fa-solid fa-arrow-left fa-xl");
-  icon.classList.add("fa-solid fa-arrow-right fa-xl");
-});

@@ -255,7 +255,7 @@ body {
 
   .user-menu {
     position: absolute;
-    left: 104px;
+    left: 80px;
     bottom: 15px;
     transform: translateX(-50%); /* This will center the menu */
     width: 100%; /* Adjust the width as needed */
@@ -264,6 +264,12 @@ body {
 
   .user-menu .dropdown-menu{
     background-color: var(--bs-link-hover-color);
+    position: relative;
+    left: 80%;
+    bottom: 15px;
+    transform: translateX(-50%); /* This will center the menu */
+    width: 60%; /* Adjust the width as needed */
+    /* Additional styling for user-menu */
   }
 
   .user-menu .dropdown-item:hover{
@@ -277,6 +283,8 @@ body {
 
   .user-menu #username{
     color: var(--bs-background-light);
+    font-size: 14px;
+    word-break: break-word;
   }
   
   #navbar-wrapper {
@@ -316,6 +324,14 @@ body {
     margin-right: -250px;
   }
   
+  .dropdown-toggle .toggle-hide {
+    display: none; /* Hide elements when sidebar is toggled */
+  }
+
+  #usericon {
+    color: #fff;
+  }
+
   @media (min-width: 992px) {
     #wrapper {
       padding-left: 250px;

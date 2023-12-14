@@ -3,7 +3,14 @@
 		<h3>Dashboard</h3>
 	</div>
 	<div class="dashboard-info mt-4 mx-4">
-		<h4><i class="fa-solid fa-door-open pe-2"></i> <span class="welcome-msg">Willkommen auf deinem Dashboard, {{current_user.username}}</span></h4>
+		<h4><i class="fa-solid fa-door-open pe-2"></i> 
+			{% if current_user.firstname %}
+			<span class="welcome-msg">Willkommen auf deinem Dashboard 
+				{{current_user.firstname}}
+			</span></h4>
+			{% else %}
+			<span class="welcome-msg">Willkommen auf deinem Dashboard</span></h4>
+			{% endif %}
 		<div class="row pt-4 text-center">
 			<div class="col-lg-3">
 				<div class="card number-card">

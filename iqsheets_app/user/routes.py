@@ -1,20 +1,17 @@
 """Routes for user"""
-import os
 from datetime import datetime
 import stripe
-import boto3
-from flask import Blueprint, Markup, current_app, render_template, redirect, request, flash, url_for
+from flask import Blueprint, Markup, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
-from iqsheets_app import db, mail
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_mail import Message
+from iqsheets_app import db
 from iqsheets_app.models import User
-from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm, EditUserEmailForm
+from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
-from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-import uuid as uuid
-from flask_mail import Message
-from iqsheets_app.utils.decorators import check_confirmed_mail
+from iqsheets_app.utils.decorators import check_confirmed_mail, non_oauth_required
 from iqsheets_app.openai import openai_chat
 from iqsheets_app.core.forms import NewsletterForm
 
@@ -138,49 +135,43 @@ def resend_confirmation():
     flash(f'Eine Bestätigungs-Email wurde an {current_user.email} geschickt.', 'success')
     return redirect(url_for('user.unconfirmed'))
 
-@user_blueprint.route('/einstellungen/profil', methods=['GET', 'POST'])
+@user_blueprint.route('/einstellungen/profil', methods=['GET','POST'])
 @login_required
 @check_confirmed_mail
 def edit_user():
     """Edit user profile"""
     form = EditUserForm()
-    if form.validate_on_submit():
-        current_user.firstname = form.firstname.data
-        current_user.lastname = form.lastname.data
-        current_user.job_description = form.job_description.data
+    if form.validate_on_submit() and request.method == 'POST':
+        if form.firstname.data and form.firstname.data != current_user.firstname:
+            current_user.firstname = form.firstname.data
+        if form.lastname.data and form.lastname.data != current_user.lastname:
+            current_user.lastname = form.lastname.data
+        if form.lastname.data and form.job_description.data != current_user.job_description:
+            current_user.job_description = form.job_description.data
         db.session.add(current_user)
         db.session.commit()
         flash("Profil erfolgreich bearbeitet", "success")
     
     return render_template('user/profil.html', form=form, active_page='edit_user')
 
-@user_blueprint.route('/einstellungen/email', methods=['GET', 'POST'])
-@login_required
-@check_confirmed_mail
-def edit_email():
-    """Edit user profile"""
-    form = EditUserEmailForm()
-    if form.validate_on_submit():
-        current_user.firstname = form.firstname.data
-        current_user.lastname = form.lastname.data
-        current_user.job_description = form.job_description.data
-        db.session.add(current_user)
-        db.session.commit()
-        flash("Email erfolgreich bearbeitet!", "success")
-    return render_template('user/email.html', form=form, active_page='edit_email')
-
 @user_blueprint.route('/einstellungen/passwort', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail
+@non_oauth_required
 def edit_password():
     """Edit user profile"""
     form = ChangePasswordForm()
-    if form.validate_on_submit():
-        current_user.password = generate_password_hash(form.new_password)
-        db.session.add(current_user)
-        db.session.commit()
-        flash("Passwort erfolgreich geändert", "success")
-
+    if form.validate_on_submit() and request.method == 'POST':
+        if current_user.check_password(form.old_password.data):
+            if current_user.check_password(form.password.data):
+                flash("Neues Passwort identisch!", 'danger')
+            else:
+                current_user.password_hash = generate_password_hash(form.password.data)
+                db.session.add(current_user)
+                db.session.commit()
+                flash("Passwort erfolgreich geändert!", "success")
+        else:
+            flash('Altes Passwort stimmt nicht!', 'danger')
     return render_template('user/change_password.html', form=form, active_page='edit_password')
 
 @user_blueprint.route('/payments', methods=['GET'])
@@ -210,6 +201,7 @@ def reset_password_request():
             html = render_template('user/email/reset_password.html', confirm_url=confirm_url, form_nl=form_nl)
             send_email(user.email, subject, html)
             flash('Prüfe deine Emails', 'success')
+            redirect(url_for('user.login'))
         else:
             flash('Kein Profil unter dieser Emailadresse', 'warning')
             #return redirect(url_for('core.index'))
