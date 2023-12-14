@@ -13,6 +13,23 @@
             </div>
 	
 			<hr class="mx-2">
+			<div class="flashmessages">
+				{% with messages = get_flashed_messages(with_categories=true) %} {% if
+				messages %} {% for category, message in messages %}
+				<div
+				  class="alert alert-{{ category }} alert-dismissible fade show"
+				  role="alert"
+				>
+				  <strong>{{ message }}</strong>
+				  <button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="alert"
+					aria-label="Close"
+				  ></button>
+				</div>
+				{% endfor %} {% endif %} {% endwith %}
+			</div>
 			<div class="container data justify-content-center">
 				<form action="" method="POST" >
 					{{form.hidden_tag()}}

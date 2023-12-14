@@ -64,8 +64,7 @@ def linkedin_logged_in(blueprint, token):
         # Create a new OAuth token for the user
         oauth = OAuth(provider=blueprint.name, provider_user_id=linkedin_user_id, provider_user_email=linkedin_email, token=token)
         # Create a new local user account for this user
-        user = User(username=linkedin_info['localizedFirstName'] + " " + linkedin_info['localizedLastName'],
-                    email=str(linkedin_email), password="")
+        user = User(email=str(linkedin_email), password="")
         # Associate the new local user account with the OAuth token
         oauth.user = user
         user.is_confirmed = True

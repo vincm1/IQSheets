@@ -20,7 +20,6 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String, nullable=False)
     job_description = db.Column(db.String(100), nullable=True)
     profile_picture = db.Column(db.String, nullable=True, default='default_profile_picture.png')
@@ -64,8 +63,7 @@ class User(db.Model, UserMixin):
                 # Handle the error, e.g., log it or raise a specific exception
                 print(f"Error checking payment: {e}")
            
-    def __init__(self, username, email, password):
-        self.username = username
+    def __init__(self, email, password):
         self.email = email
         self.password_hash = generate_password_hash(password)
         

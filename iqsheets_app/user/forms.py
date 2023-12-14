@@ -5,18 +5,12 @@ from wtforms import StringField, PasswordField, EmailField, SubmitField, FileFie
 from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp, Optional
 from iqsheets_app.models import User
 
-#### Checks: Nutzername & Email bereits vorhanden. ####
-def check_username(self, field):
-    """ check if username already registered """
-    if User.query.filter_by(username=field.data).first():
-        raise ValidationError(f'Nutzername bereits registriert!')
-        
+#### Check: Email bereits vorhanden. ####
 def check_email(self, field):
     """ check if email aready registered """
     if User.query.filter_by(email=field.data).first():
         raise ValidationError(f'Email bereits registriert!')
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), check_username])
     email = EmailField('Email', validators=[Email(), DataRequired(), check_email])
     password = PasswordField('Passwort', validators=[DataRequired(), Length(min=8, message="Mindestens 8 Zeichen!"), 
                             EqualTo('confirm_pw', message="Passwörter stimmen nicht überein!"),
@@ -24,7 +18,7 @@ class RegistrationForm(FlaskForm):
     confirm_pw = PasswordField('Passwort bestätigen', validators=[DataRequired()])
     submit = SubmitField('Registrieren')
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    email = EmailField('Email', validators=[Email(), DataRequired()])
     password = PasswordField('Passwort', validators=[DataRequired()])
     submit = SubmitField('Login')
     

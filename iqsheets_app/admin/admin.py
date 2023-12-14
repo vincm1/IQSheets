@@ -19,12 +19,12 @@ def create_admin(db):
     admin.add_view(TemplatesUploadView(name='Template Upload', endpoint='templates'))
     return admin
 
-def create_admin_user(username, email, password):
+def create_admin_user(email, password):
     """ Function Creates admin user """
     if not password:
         raise ValueError('No ADMIN_USER_PASSWORD environment variable set')
 
-    admin_user = User(username=username, email=email, password=password)
+    admin_user = User(email=email, password=password)
     admin_user.is_admin = True
     admin_user.is_confirmed = True
     admin_user.premium = True

@@ -60,7 +60,7 @@ def google_logged_in(blueprint, token):
         oauth = OAuth(provider=blueprint.name, provider_user_id=google_user_id, provider_user_email=google_info["email"], token=token)
 
         # Create a new local user account for this user
-        user = User(username=google_info["name"], email=google_info["email"], password="")
+        user = User(email=google_info["email"], password="")
         # Associate the new local user account with the OAuth token
         oauth.user = user
         user.is_confirmed = True

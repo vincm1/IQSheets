@@ -29,15 +29,6 @@
               <div class="card-body">
                 <form method="POST" action="{{url_for('user.register')}}">
                   {{form.hidden_tag()}}
-                  <div class="form-group mb-3">
-                    {{form.username(placeholder="Benutzername", class="form-control")}}
-                    {% for error in form.username.errors %}
-                      <div class="alert alert-danger alert-dismissible fade show my-1" role="alert">
-                        {{error}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-                    {% endfor %}
-                  </div>
                   <div class="form-group my-3">
                     {{form.email(placeholder="Email Adresse", class="form-control")}}
                     {% for error in form.email.errors %}

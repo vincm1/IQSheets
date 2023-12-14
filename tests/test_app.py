@@ -8,7 +8,7 @@ def test_home(client):
     
 def test_registration(client):
     response = client.post('/register', data=dict(
-                            username="vince_test", email="vince@test.de",
+                            email="vince@test.de",
                             password="Test_PW123!", confirm_pw="Test_PW123!"),
                             follow_redirects=True)
     assert response.status_code == 200

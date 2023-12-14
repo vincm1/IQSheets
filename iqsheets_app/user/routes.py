@@ -39,7 +39,7 @@ def register():
     form_nl = NewsletterForm()
     
     if form.validate_on_submit() and request.method == "POST":
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        user = User(email=form.email.data, password=form.password.data)
 
         db.session.add(user)
         db.session.commit()
@@ -63,7 +63,7 @@ def login():
     form_nl = NewsletterForm()
     
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
         # Check if user exist
         if user:
             # Check if user confirmed registration link
@@ -111,8 +111,7 @@ def confirm_email(token):
         db.session.add(user)
         db.session.commit()
         flash('Account bestätigt', 'success')
-        stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}&prefilled_benutzername={user.username}"
-        return redirect(stripe_link)
+        stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}"
         # return render_template('stripe/checkout.html', user_email=email, form_nl=form_nl)
     else:
         flash('Der Bestätigungslink ist abgelaufen oder invalide.', 'danger')
@@ -151,7 +150,7 @@ def edit_user():
         current_user.job_description = form.job_description.data
         db.session.add(current_user)
         db.session.commit()
-        flash("Profil erfolgreich bearbeitet!", "success")
+        flash("Profil erfolgreich bearbeitet", "success")
     
     return render_template('user/profil.html', form=form, active_page='edit_user')
 
@@ -161,6 +160,13 @@ def edit_user():
 def edit_email():
     """Edit user profile"""
     form = EditUserEmailForm()
+    if form.validate_on_submit():
+        current_user.firstname = form.firstname.data
+        current_user.lastname = form.lastname.data
+        current_user.job_description = form.job_description.data
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Email erfolgreich bearbeitet!", "success")
     return render_template('user/email.html', form=form, active_page='edit_email')
 
 @user_blueprint.route('/einstellungen/passwort', methods=['GET', 'POST'])
@@ -175,29 +181,7 @@ def edit_password():
         db.session.commit()
         flash("Passwort erfolgreich geändert", "success")
 
-    return render_template('user/password.html', form=form, active_page='edit_passwort')
-
-
-@user_blueprint.route('/passwort', methods=['GET', 'POST'])
-@login_required
-@check_confirmed_mail
-def change_password():
-    """Edit user password"""
-    user = User.query.filter_by(username=current_user.username).first()
-    
-    form = ChangePasswordForm()
-    
-    if form.validate_on_submit() and user.check_password(form.old_password.data):
-        current_user.password_hash = generate_password_hash(form.password.data)
-        
-        db.session.add(user)
-        db.session.commit()
-        flash("Passwort erfolgreich bearbeitet!", "success")
-        return redirect(url_for('dashboard.dashboard'))
-    else:
-        flash("Altes Passwort stimmt nicht!", "warning")
-    
-    return render_template('user/password.html', form=form)
+    return render_template('user/change_password.html', form=form, active_page='edit_passwort')
 
 @user_blueprint.route('/payments', methods=['GET'])
 @login_required
@@ -208,8 +192,8 @@ def user_payments():
     sub = stripe.Subscription.retrieve(id=stripe_sub_id)
     stripe_cust_id = current_user.stripe_customer_id
     
-    return render_template('user/payments.html', username=current_user.username, sub=sub,
-                           stripe_cust_id=stripe_cust_id, stripe_sub_id=stripe_sub_id)
+    return render_template('user/payments.html', sub=sub, stripe_cust_id=stripe_cust_id,
+                           stripe_sub_id=stripe_sub_id)
 
 @user_blueprint.route('/passwort_zuruecksetzen', methods=['GET', 'POST'])
 def reset_password_request():
@@ -222,7 +206,7 @@ def reset_password_request():
             
             token = generate_confirmation_token(user.email)
             confirm_url = url_for('user.reset_password', token=token, _external=True)
-            subject = f"Passwort Reset für {user.username} IQSheets!"
+            subject = f"Passwort Reset für {user.email} IQSheets!"
             html = render_template('user/email/reset_password.html', confirm_url=confirm_url, form_nl=form_nl)
             send_email(user.email, subject, html)
             flash('Prüfe deine Emails', 'success')
