@@ -670,3 +670,14 @@ body {
 .templates .card {
   border: 1px solid var(--bs-link-color-hover);
 }
+
+/* SETTINGS */
+
+.settings .card .btn-secondary {
+  border: 2px solid var(--bs-link-color-hover);
+}
+
+.btn-secondary.active {
+  background-color: var(--bs-link-color-hover);
+  color: var(--bs-link-color)
+}

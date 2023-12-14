@@ -181,7 +181,7 @@ def edit_password():
         db.session.commit()
         flash("Passwort erfolgreich geändert", "success")
 
-    return render_template('user/change_password.html', form=form, active_page='edit_passwort')
+    return render_template('user/change_password.html', form=form, active_page='edit_password')
 
 @user_blueprint.route('/payments', methods=['GET'])
 @login_required

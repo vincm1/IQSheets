@@ -21,8 +21,9 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=False)
+    firstname = db.Column(db.String(50), nullable=True)
+    lastname = db.Column(db.String(50), nullable=True)
     job_description = db.Column(db.String(100), nullable=True)
-    profile_picture = db.Column(db.String, nullable=True, default='default_profile_picture.png')
     password_hash = db.Column(db.String, nullable=False)
     registration_date = db.Column(db.DateTime, default=datetime.now)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)

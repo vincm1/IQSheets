@@ -6,14 +6,22 @@
 <div class="settings mt-3 mx-3">
 	<div class="col-6 text-center">
 		<div class="card shadow-lg">
-			<div class="flex-row justify-content-center align-items-center my-2">
-				<a href="{{url_for('user.edit_user')}}"><button class="btn btn-secondary {{ 'active' if active_page == 'edit_user' else '' }}">Profil</button></a>
-                <a href="{{url_for('user.edit_email')}}"><button class="btn btn-secondary {{ 'active' if active_page == 'edit_email' else '' }}">E-Mail</button></a>
-                <a href="{{url_for('user.edit_password')}}"><button class="btn btn-secondary {{ 'active' if active_page == 'edit_password' else '' }}">Passwort</button></a>
+			<div class="flex-row justify-content-center align-items-center mt-3 mb-2">
+				<a href="{{url_for('user.edit_user')}}" class="col-12 mx-2">
+					<button class="btn btn-secondary {{ 'active' if active_page == 'edit_user' else '' }} px-5 py-2">Profil</button>
+				</a>
+                <a href="{{url_for('user.edit_email')}}" class="mx-2 col-sm-12">
+					<button class="btn btn-secondary {{ 'active' if active_page == 'edit_email' else '' }} px-5 py-2">E-Mail</button>
+				</a>
+				{% if not current_user.oauth %}
+                <a href="{{url_for('user.edit_password')}}" class="mx-2 col-sm-12">
+					<button class="btn btn-secondary {{ 'active' if active_page == 'edit_password' else '' }} px-5 py-2">Passwort</button>
+				</a>
+				{% endif %}
             </div>
 	
 			<hr class="mx-2">
-			<div class="flashmessages">
+			<div class="flashmessages mx-4">
 				{% with messages = get_flashed_messages(with_categories=true) %} {% if
 				messages %} {% for category, message in messages %}
 				<div
@@ -30,19 +38,19 @@
 				</div>
 				{% endfor %} {% endif %} {% endwith %}
 			</div>
-			<div class="container data justify-content-center">
-				<form action="" method="POST" >
+			<div class="container settings-data justify-content-center">
+				<form action="" method="POST">
 					{{form.hidden_tag()}}
-					<div class="form-group col-6 justify-content-center my-4">
+					<div class="form-group my-4 col-6 offset-md-3">
 						{{form.firstname(class="form-control", placeholder="Vorname (optional)")}}
 					</div>
-					<div class="form-group col-6 justify-content-center my-4">
+					<div class="form-group my-4 col-6 offset-md-3">
 						{{form.lastname(class="form-control", placeholder="Nachname (optional)")}}
 					</div>
-					<div class="form-group col-6 justify-content-center my-4">
+					<div class="form-group my-4 col-6 offset-md-3">
 						{{form.job_description(class="form-control", placeholder="Berufsbezeichnung (optional)")}}
 					</div>
-					{{form.submit(class="btn btn-primary py-2 px-5 my-3")}}
+					{{form.submit(class="btn btn-primary py-2 px-5 mt-3 mb-5")}}
 				</form>
 			</div>
 		</div>
