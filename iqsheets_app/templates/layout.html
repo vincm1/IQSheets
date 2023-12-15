@@ -38,7 +38,7 @@
       <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
           <a class="logo" href="{{url_for('dashboard.dashboard')}}" id="logo">
-            <span class="iq me-1">IQ</span><span class="sheets">Sheets</span>
+            <span class="iq me-2">IQ</span><span class="sheets">Sheets</span>
           </a>
         </div>
         <ul class="sidebar-nav">
@@ -65,17 +65,17 @@
             <a href="{{url_for('dashboard.templates')}}"><i class="fa-solid fa-wallet"></i>Templates</a>
           </li>
         </ul>
-        <div class="dropdown align-self-left user-menu text-center mx-5">
+        <div class="dropdown user-menu text-center">
             <i class="fa-solid fa-circle-user fa-2xl my-2 py-2" id="usericon"></i>
-            <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle mx-2" id="user-dropdown-toggle" 
+            <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle" id="user-dropdown-toggle" 
               data-bs-toggle="dropdown" aria-expanded="false">
               {% if current_user.firstname and current_user.lastname %}
-              <strong id="username">{{current_user.firstname}} {{current_user.lastname}}</strong>
+              <strong class="username text-center" id="usernameid" >{{current_user.firstname}} {{current_user.lastname}}</strong>
               {% else %}
-              <strong id="username">{{current_user.email}}</strong>
+              <strong class="username text-center" id="usernameid">{{current_user.email}}</strong>
               {% endif %}
             </a>
-            <ul class="dropdown-menu text-small shadow">
+            <ul class="dropdown-menu text-small shadow mb-2">
               <li><a class="dropdown-item" href="https://billing.stripe.com/p/login/test_28o3fw9S44IEfOE8ww" target="_blank">
                 <i class="fa-solid fa-wallet fa-xs pe-2"></i>Zahlungen</a>
               </li>
@@ -88,10 +88,10 @@
 
       <div id="navbar-wrapper">
         <nav class="navbar navbar-inverse">
-          <div class="container-fluid" style="padding-left:10px">
-          <div class="navbar-header d-inline-block">
-            <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa-solid fa-arrow-left fa-xl" id="toggle-icon"></i></a>
-          </div>
+          <div class="container-fluid" style="padding-left:3px">
+            <div class="navbar-header d-inline-block">
+              <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa-solid fa-arrow-left" id="toggle-icon"></i></a>
+            </div>
           </div>
           <hr>
         </nav>

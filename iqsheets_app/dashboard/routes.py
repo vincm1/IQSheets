@@ -83,7 +83,7 @@ def formel(prompt_type):
    
     if request.method == 'POST' and form.validate_on_submit():
         form_data = form.data
-        form_data['prompt_type'] = prompt_type.capitalize()
+        form_data['prompt_type'] = prompt_type
         keys = ["prompt_type","excel_google", "vba_app", "formula_explain", "prompt"]
         prompt = []
         for key in keys:
@@ -93,7 +93,18 @@ def formel(prompt_type):
         prompt = " ".join(prompt)
         result = openai_chat(prompt)
         answer = result.choices[0].message.content
-        
+        print(form_data['formula_explain'])
+        # p
+        if form_data['formula_explain'] == 'Erstellen':
+            
+            # Extracting the part of the string from "sql" to "19"
+            start_keyword = f"{form_data['prompt_type']}"
+            end_keyword = "```"
+
+            start_index = answer.find(start_keyword)
+            end_index = answer.find(end_keyword)
+            # Extract the specific part of the string
+            print(start_keyword, answer[start_index+len(start_keyword):end_index + len(end_keyword)])
         # Increasing the amount of prompts and total tokens when prompt is generated
         current_user.num_prompts += 1
         current_user.num_tokens += result.usage.total_tokens
