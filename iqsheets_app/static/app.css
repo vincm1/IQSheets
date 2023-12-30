@@ -509,6 +509,20 @@ body {
   font-size: 16px;
 }
 
+/* CSS rule that applies to medium screens (md) or smaller */
+@media (max-width: 767.98px) {
+  .number-card {
+      margin-bottom: 5px;
+      margin-top: 5px; /* Example margin value, adjust as needed */
+  }
+}
+
+@media (max-width: 767.98px) {
+  #dashboard-card-text {
+      display: none;
+  }
+}
+
 .dashboard-info .card-body p {
   color: var(--bs-background-light);
   font-size: 28px;

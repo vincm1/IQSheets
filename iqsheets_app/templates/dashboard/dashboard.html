@@ -1,132 +1,143 @@
 {% extends "layout.html" %}{% block content %}
-	<div class="heading mx-4 mt-3">
-		<h3>Dashboard</h3>
-	</div>
-	<div class="dashboard-info mt-4 mx-4">
-		<h4><i class="fa-solid fa-door-open pe-2"></i> 
-			{% if current_user.firstname %}
-			<span class="welcome-msg">Willkommen auf deinem Dashboard 
-				{{current_user.firstname}}
-			</span></h4>
-			{% else %}
-			<span class="welcome-msg">Willkommen auf deinem Dashboard</span></h4>
-			{% endif %}
-		<div class="row pt-4 text-center">
-			<div class="col-lg-3">
-				<div class="card number-card">
-					<div class="card-header">
-						<p>Generierte KI-Formeln</p>
-					</div>
-					<div class="card-body">
-						<p>{{num_prompts}}</p>
-					</div>
+<div class="heading mx-4 mt-3">
+	<h3>Dashboard</h3>
+</div>
+
+<div class="dashboard-info mt-4 mx-4">
+	<h4><i class="fa-solid fa-door-open pe-2"></i>
+		{% if current_user.firstname %}
+		<span class="welcome-msg">Willkommen auf deinem Dashboard
+			{{current_user.firstname}}
+		</span>
+	</h4>
+	{% else %}
+	<span class="welcome-msg">Willkommen auf deinem Dashboard</span></h4>
+	{% endif %}
+	<div class="d-flex row row-cols-md-4 row-cols-sm-2 g-1 text-center mt-2">
+		<div class="col">
+			<div class="card number-card">
+				<div class="card-header" style="height: 50px;">
+					<p>Generierte KI-Formeln</p>
+				</div>
+				<div class="card-body flex-fill">
+					<p>{{num_prompts}}</p>
 				</div>
 			</div>
-			<div class="col-lg-3">
-				<div class="card number-card">
-					<div class="card-header">
-						<p>Favoriten</p>
-					</div>
-					<div class="card-body">
-						<p>{{favorites}}</p>
-					</div>
+		</div>
+		<div class="col">
+			<div class="card number-card">
+				<div class="card-header" style="height: 50px;">
+					<p>Favoriten</p>
+				</div>
+				<div class="card-body flex-fill">
+					<p>{{favorites}}</p>
 				</div>
 			</div>
-			<div class="col-lg-3">
-				<div class="card number-card">
-					<div class="card-header">
-						<p>Zeit gespart</p>
-					</div>
-					<div class="card-body">
-						<p>{{time_saved}}</p>
-					</div>
+		</div>
+		<div class="col">
+			<div class="card number-card">
+				<div class="card-header" style="height: 50px;">
+					<p>Zeitersparnis</p>
+				</div>
+				<div class="card-body flex-fill">
+					<p>{{time_saved}}</p>
 				</div>
 			</div>
-			<div class="col-lg-3">
-				<div class="card number-card">
-					<div class="card-header">
-						<p>Am häufigsten benötigt</p>
-					</div>
-					<div class="card-body">
-						<p>{{most_used}}</p>
-					</div>
+		</div>
+		<div class="col">
+			<div class="card number-card">
+				<div class="card-header" style="height: 50px;">
+					<p>Favoriten-Funktion</p>
+				</div>
+				<div class="card-body flex-fill">
+					<p>{{most_used}}</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="dashboard-cards mt-5 mx-4">
-			<div class="row mt-5">
-				<div class="col-4">
-					<a href="{{url_for('dashboard.prompter', prompt_type='formula')}}" class="custom-link">
-						<div class="card dashboard-card" >
-							<div class="card-body m-2">
-								<div class="text-center">
-									<i class="fa-solid fa-square-root-variable fa-2xl"></i>
-									<h4 class="pt-4">Formeln</h4>
-								</div>
-								<p class="pt-2">Ein KI-Assistent für Excel und Google Sheets zum Generieren und Verstehen von Formeln.</p>
-							</div>
+</div>
+
+<div class="dashboard-cards mt-5 mx-4">
+	<div class="row row-cols-1 row-cols-md-3 g-2">
+		<div class="col">
+			<a href="{{url_for('dashboard.prompter', prompt_type='formula')}}" class="custom-link">
+				<div class="card dashboard-card h-100">
+					<div class="card-body m-2">
+						<div class="text-center">
+							<i class="fa-solid fa-square-root-variable fa-2xl"></i>
+							<h4 class="pt-4">Formeln</h4>
 						</div>
-					</a>
+						<p class="pt-2" id="dashboard-card-text">Ein KI-Assistent für 
+							Excel und Google Sheets zum Generieren und Verstehen von
+							Formeln.
+						</p>
+					</div>
 				</div>
-				<div class="col-4">
-					<a href="{{url_for('dashboard.prompter', prompt_type='skripte')}}" class="custom-link">
-						<div class="card dashboard-card">
-							<div class="card-body m-2">
-								<div class="text-center">
-									<i class="fa-solid fa-code fa-2xl"></i>
-									<h4 class="pt-4">Scripts</h4>
-								</div>
-								<p class="pt-2">Ein KI-Assistent für die Generierung von VBA und Google Apps Skripten für die Aufgabenautomatisierung.</p>
-							</div>
+			</a>
+		</div>
+		<div class="col">
+			<a href="{{url_for('dashboard.prompter', prompt_type='skripte')}}" class="custom-link">
+				<div class="card dashboard-card h-100">
+					<div class="card-body m-2">
+						<div class="text-center">
+							<i class="fa-solid fa-code fa-2xl"></i>
+							<h4 class="pt-4">Skripte</h4>
 						</div>
-					</a>
+						<p class="pt-2" id="dashboard-card-text">Ein KI-Assistent für die Generierung von 
+							VBA und Google Apps Skripten für die Aufgabenautomatisierung.
+						</p>
+					</div>
 				</div>
-				<div class="col-4">
-					<a href="{{url_for('dashboard.prompter', prompt_type='sql')}}" class="custom-link">
-						<div class="card dashboard-card">
-							<div class="card-body m-2">
-								<div class="text-center">
-									<i class="fa-solid fa-database fa-2xl"></i>
-									<h4 class="pt-4">SQL</h4>
-								</div>
-								<p class="pt-2">Ein KI-Assistent für die Erstellung und Erklärung von SQL-Abfragen für verschiedene Datenbanken.</p>
-							</div>
+			</a>
+		</div>
+		<div class="col">
+			<a href="{{url_for('dashboard.prompter', prompt_type='sql')}}" class="custom-link">
+				<div class="card dashboard-card h-100">
+					<div class="card-body m-2">
+						<div class="text-center">
+							<i class="fa-solid fa-database fa-2xl"></i>
+							<h4 class="pt-4">SQL</h4>
 						</div>
-					</a>
+						<p class="pt-2" id="dashboard-card-text">Ein KI-Assistent für die Erstellung
+							und Erklärung von SQL-Abfragen für verschiedene Datenbanken.
+						</p>
+					</div>
 				</div>
-			</div>
-			<div class="row mt-4">
-				<div class="col-4">
-					<a href="{{url_for('dashboard.prompter', prompt_type='regex')}}" class="custom-link">
-						<div class="card dashboard-card">
-							<div class="card-body m-2">
-								<div class="text-center">
-									<i class="fa-solid fa-gears fa-2xl"></i>
-									<h4 class="pt-4">RegEx</h4>
-								</div>
-								<p class="pt-2">Ein KI-Assistent zur Generierung regulärer Ausdrucksmuster für die Datenvalidierung und -filterung.</p>
-							</div>
+			</a>
+		</div>
+		<div class="col">
+			<a href="{{url_for('dashboard.prompter', prompt_type='regex')}}" class="custom-link">
+				<div class="card dashboard-card w-100 h-100">
+					<div class="card-body m-2">
+						<div class="text-center">
+							<i class="fa-solid fa-gears fa-2xl"></i>
+							<h4 class="pt-4">RegEx</h4>
 						</div>
-					</a>
+						<p class="pt-2" id="dashboard-card-text">Ein KI-Assistent zur Generierung
+							regulärer Ausdrucksmuster für die Datenvalidierung und -filterung.
+						</p>
+					</div>
 				</div>
-				<div class="col-4">
-					<a href="{{url_for('dashboard.favorites')}}" class="custom-link">
-						<div class="card dashboard-card">
-							<div class="card-body m-2">
-								<div class="text-center">
-									<i class="fa-solid fa-heart fa-2xl"></i>
-									<h4 class="pt-4">Favoriten</h4>
-								</div>
-								<p class="pt-2">Deine wichtigsten Formeln und Erklärungen auf einen Blick.</p>
-							</div>
+			</a>
+		</div>
+		<div class="col">
+			<a href="{{url_for('dashboard.favorites')}}" class="custom-link">
+				<div class="card dashboard-card w-100 h-100">
+					<div class="card-body m-2">
+						<div class="text-center">
+							<i class="fa-solid fa-heart fa-2xl"></i>
+							<h4 class="pt-4">Favoriten</h4>
 						</div>
-					</a>
+						<p class="pt-2" id="dashboard-card-text">Deine wichtigsten favorisierten 
+							Formeln und Erklärungen auf einen Blick.
+						</p>
+					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	</div>
+</div>
 
-
+</div>
 
 {% endblock %}
