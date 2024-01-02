@@ -65,23 +65,28 @@
             <a href="{{url_for('dashboard.templates')}}"><i class="fa-solid fa-paste"></i>Templates</a>
           </li>
         </ul>
-        <div class="dropdown user-menu text-center">
-            <i class="fa-solid fa-circle-user fa-2xl my-2 py-2" id="usericon"></i>
+
+        <div class="dropdown user-menu text-center" id="usermenu">
+            <i class="fa-solid fa-circle-user fa-2xl my-2 py-2 ms-2" id="usericon"></i>
             <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle" id="user-dropdown-toggle" 
               data-bs-toggle="dropdown" aria-expanded="false">
               {% if current_user.firstname and current_user.lastname %}
-              <strong class="username text-center" id="usernameid" >{{current_user.firstname}} {{current_user.lastname}}</strong>
+              <strong class="username text-center ms-1" id="usernameid" >{{current_user.firstname}} {{current_user.lastname}}</strong>
               {% else %}
-              <strong class="username text-center" id="usernameid">{{current_user.email}}</strong>
+              <strong class="username text-center ms-1" id="usernameid">{{current_user.email}}</strong>
               {% endif %}
             </a>
             <ul class="dropdown-menu text-small shadow mb-2">
               <li><a class="dropdown-item" href="https://billing.stripe.com/p/login/test_28o3fw9S44IEfOE8ww" target="_blank">
-                <i class="fa-solid fa-wallet fa-xs pe-2"></i>Zahlungen</a>
+                <i class="fa-solid fa-wallet fa-xs pe-2"></i><strong class="dropdown-text">Zahlungen</strong></a>
               </li>
-              <li><a class="dropdown-item" href="{{url_for('user.edit_user')}}"><i class="fa-solid fa-gear fa-xs pe-2"></i>Einstellungen</a></li>
+              <li>
+                <a class="dropdown-item" href="{{url_for('user.edit_user')}}"><i class="fa-solid fa-gear fa-xs pe-2">
+                  </i><strong class="dropdown-text">Einstellungen</strong>
+                </a>
+              </li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{{url_for('user.logout')}}"><i class="fa-solid fa-right-from-bracket fa-xs pe-2"></i>Logout</a></li>
+              <li><a class="dropdown-item" href="{{url_for('user.logout')}}"><i class="fa-solid fa-right-from-bracket fa-xs pe-2"></i><strong class="dropdown-text">Logout</strong></a></li>
             </ul>
         </div>        
       </aside>
@@ -90,7 +95,7 @@
         <nav class="navbar navbar-inverse">
           <div class="container-fluid" style="padding-left:3px">
             <div class="navbar-header d-inline-block">
-              <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa-solid fa-arrow-left" id="toggle-icon"></i></a>
+              <a href="#" class="navbar-brand" id="sidebar-toggle" ><i class="fa-solid fa-arrow-left" id="toggle-icon"></i></a>
             </div>
           </div>
           <hr>

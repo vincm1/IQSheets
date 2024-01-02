@@ -1,36 +1,27 @@
 const $sidebarToggler = document.querySelector('#sidebar-toggle');
 const $toggleIcon = document.querySelector('#toggle-icon');
 const $wrapper = document.querySelector('#wrapper');
-const $usermenuSidebar = document.querySelector('#user-dropdown-toggle');
-
-// Function to toggle sidebar
-function toggleSidebar() {
-    const isToggled = $wrapper.classList.toggle('toggled');
-    $toggleIcon.className = isToggled ? "fa-solid fa-arrow-right" : "fa-solid fa-arrow-left";
-    localStorage.setItem('sidebarToggled', isToggled);
-    if (isToggled) {
-        $usermenuSidebar.classList.remove('toggled');
-        console.log(isToggled);
-    } else {
-        $usermenuSidebar.classList.add('toggled');
-        // Restore the inner text for dropdown items if necessary
-    }
-}
-
-$sidebarToggler.addEventListener('click', (e) => {
-    e.preventDefault();
-    toggleSidebar();
-    console.log(e);
-});
+const $usermenuDropDown = document.querySelector('#usermenu');
+const $usermenuSidebarName = document.querySelector('#usernameid');
 
 // When the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
+    const isSidebarToggled = localStorage.getItem('sidebarToggled') === 'true';
+
     // Apply the initial toggle state from localStorage
-    if (localStorage.getItem('sidebarToggled') === 'true') {
+    if (isSidebarToggled) {
         $wrapper.classList.add('toggled');
         $toggleIcon.className = "fa-solid fa-arrow-right";
+        $usermenuDropDown.classList.add('toggled');
+        $usermenuSidebarName.classList.add('toggled');
+        document.querySelectorAll('.username').forEach(el => el.classList.add('hide-username')); // Hide usernames
+        document.querySelectorAll('.dropdown-toggle').forEach(el => el.classList.add('hide-dropdown-toggle')); // Hide usernames
     } else {
         $toggleIcon.className = "fa-solid fa-arrow-left";
+        $usermenuDropDown.classList.remove('toggled');
+        $usermenuSidebarName.classList.remove('toggled');
+        document.querySelectorAll('.username').forEach(el => el.classList.remove('hide-username')); // Show usernames
+        document.querySelectorAll('.dropdown-toggle').forEach(el => el.classList.remove('hide-dropdown-toggle')); // Hide usernames
     }
 
     // Get all nav items
@@ -49,3 +40,28 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+// Function to toggle sidebar
+function toggleSidebar() {
+    const isToggled = $wrapper.classList.toggle('toggled');
+    $toggleIcon.className = isToggled ? "fa-solid fa-arrow-right" : "fa-solid fa-arrow-left";
+    localStorage.setItem('sidebarToggled', isToggled);
+    if (isToggled) {
+        $usermenuDropDown.classList.add('toggled');
+        $usermenuSidebarName.classList.add('toggled');
+        document.querySelectorAll('.username').forEach(el => el.classList.add('hide-username'));
+        document.querySelectorAll('.dropdown-toggle').forEach(el => el.classList.add('hide-dropdown-toggle'));
+    } else {
+        $usermenuDropDown.classList.remove('toggled');
+        $usermenuSidebarName.classList.remove('toggled');
+        document.querySelectorAll('.username').forEach(el => el.classList.remove('hide-username'));
+        document.querySelectorAll('.dropdown-toggle').forEach(el => el.classList.remove('hide-dropdown-toggle')); // Show usernames
+        // Restore the inner text for dropdown items if necessary
+    }
+}
+
+$sidebarToggler.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleSidebar();
+});
+

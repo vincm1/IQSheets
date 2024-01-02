@@ -76,8 +76,7 @@ def login():
                             login_user(user, remember=True)
                             return redirect(url_for('dashboard.dashboard'))
                         else:
-                            flash(Markup('Kontaktiere unseren Support - <a href="{{url_for("core.index")}}">Supportseite</a>'), 'danger')
-                            return redirect(url_for('user.login'))    
+                            return redirect(f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}")    
                 else:
                     flash('Prüfe deine Anmeldedaten!', 'danger')
                     return redirect(url_for('user.login'))

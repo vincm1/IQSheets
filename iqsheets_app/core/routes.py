@@ -77,6 +77,12 @@ def kontakt():
                 + form_contact.email.data)
     return render_template('kontakt.html', form_contact=form_contact)
 
+@core_blueprint.route("/agbs", methods=["GET"])
+def agbs():
+    ''' AGB Page '''
+    form_nl = NewsletterForm()
+    return render_template('agbs.html', form_nl=form_nl)
+
 @core_blueprint.route("/newsletter", methods=["POST"])
 def newsletter():
     ''' Newsletter subscription route '''
