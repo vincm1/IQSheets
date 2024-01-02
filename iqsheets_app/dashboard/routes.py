@@ -1,5 +1,5 @@
 """Routes for dashboard"""
-import boto3
+import boto3, re
 from datetime import datetime
 from sqlalchemy import func
 from flask import Blueprint, current_app, render_template, flash, send_file, redirect, url_for, request
@@ -23,6 +23,15 @@ s3_client = boto3.client(
     aws_secret_access_key=current_app.config['AWS_SECRET_ACCESS_KEY'],
     region_name=current_app.config['AWS_REGION']
     )
+
+def find_function(text, prompt_type):
+    # Pattern to find text enclosed between ```sql  and ```
+    pattern = r"```" + prompt_type + "(.*?)```"
+    print(pattern)
+    # Using re.findall to find all occurrences of the pattern
+    matches = re.findall(pattern, text, re.DOTALL)
+    print(matches)
+    return matches
         
 ################
 #### routes ####
@@ -93,18 +102,7 @@ def formel(prompt_type):
         prompt = " ".join(prompt)
         result = openai_chat(prompt)
         answer = result.choices[0].message.content
-        print(form_data['formula_explain'])
-        # p
-        if form_data['formula_explain'] == 'Erstellen':
-            
-            # Extracting the part of the string from "sql" to "19"
-            start_keyword = f"{form_data['prompt_type']}"
-            end_keyword = "```"
-
-            start_index = answer.find(start_keyword)
-            end_index = answer.find(end_keyword)
-            # Extract the specific part of the string
-            print(start_keyword, answer[start_index+len(start_keyword):end_index + len(end_keyword)])
+        
         # Increasing the amount of prompts and total tokens when prompt is generated
         current_user.num_prompts += 1
         current_user.num_tokens += result.usage.total_tokens
@@ -116,7 +114,12 @@ def formel(prompt_type):
         db.session.add(prompt)
         db.session.commit()
         
-        return render_template(f'dashboard/{prompt_type}_page.html', answer=answer, form=form, prompt_id=prompt.id)
+        if prompt.category == 'Erstellen':
+            
+            # Extracting the part of the string from "sql" to "19"
+            formulas = find_function(answer, prompt.prompt_type.lower())
+        
+        return render_template(f'dashboard/{prompt_type}_page.html', answer=answer, form=form, prompt_id=prompt.id, formulas=formulas)
 
     return render_template(f'dashboard/{prompt_type}_page.html', form=form)
 
@@ -174,9 +177,8 @@ def delete_favorite(favorite_id):
     favorite = Prompt.query.filter_by(id=favorite_id).first()
     db.session.delete(favorite)
     db.session.commit()
-    flash('Favorit erfolgreich gelöscht!', 'success')
-    return redirect(url_for('dashboard.favorites', username=current_user.username))
-
+    return redirect(url_for('dashboard.favorites'))
+    
 @dashboard_blueprint.route('/templates', methods=['GET', 'POST'])
 @login_required
 @check_confirmed_mail

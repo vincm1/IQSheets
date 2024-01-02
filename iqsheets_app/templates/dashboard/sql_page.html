@@ -27,9 +27,21 @@
                         <div class="row mt-3">
                             {{form.submit(class="btn btn-primary w-100 mx-2 py-2")}}
                         </div>
+                        <div class="best-practices mt-3 mb-2">
+                            <a class="btn btn-secondary" id="best-practice-btn" data-bs-toggle="collapse" href="#collapseBestPractices" role="button" aria-expanded="false" aria-controls="collapseBestPractices">
+                                Best Practices
+                            </a>
+                              <div class="collapse mt-3" id="collapseBestPractices">
+                                <div class="card card-body">
+                                  sdsd
+                                </div>
+                              </div>  
+                        </div>
                     </form>
                 </div>
-            </div>      
+            </div> 
+            
+            
         </div>
 
         <div class="card result-card shadow-lg col-lg-5 col-sm-12">
@@ -40,13 +52,36 @@
                         <p>Hier steht deine Lösung:</p>
                         <div class="card">
                             <div class="card-body">
-                                {% if answer %}
-                                <div class="row">
-                                    <p class="" id="copy-target">{{answer}}</p>
-                                </div>
+                                {%if formulas and answer %}
+                                    {% for formula in formulas %}
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="formel fw-bold p-2" id="copy-target">{{formula}} <button class="btn btn-secondary" id="copy-btn" onclick="copyToClipboard()">
+                                                <i class="fa-solid fa-copy pe-2"></i>
+                                            </button>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    <div class="row">
+                                        <p class="d-inline-flex gap-1">
+                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFullAnswer" role="button" aria-expanded="false" aria-controls="collapseFullAnswer">
+                                              Antwort
+                                            </a>
+                                        </p>
+                                          <div class="collapse" id="collapseFullAnswer">
+                                            <div class="card card-body p-2">
+                                              {{answer}}
+                                            </div>
+                                          </div>  
+                                    </div>
+                                {% else %}
+                                    <p id="lorem">Noch keine Lösung vorhanden.</p>
                                 {% endif %}
                             </div>
                         </div>
+                        <hr>
                         <div class="d-flex flex-row mt-3">
                             {% if prompt_id %}
                             <a href="{{url_for('dashboard.prompt_favorite', prompt_id=prompt_id)}}">
@@ -60,9 +95,6 @@
                                 </button>	
                             </a>
                             {% endif %}
-                            <button class="p-2 me-2 btn btn-secondary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
-                                <i class="fa-solid fa-copy pe-2"></i> Kopieren
-                            </button>
                         </div>
                     </div>
             </div>

@@ -83,3 +83,23 @@ $(document).ready(function() {
   });
 });
 
+function toggleText(formulaId) {
+  var displayText = document.getElementById('displayText-' + formulaId);
+  var fullText = document.getElementById('fullText-' + formulaId);
+
+  if (displayText.classList.contains('show')) {
+      displayText.classList.remove('show');
+      fullText.classList.add('show');
+  } else {
+      displayText.classList.add('show');
+      fullText.classList.remove('show');
+  }
+}
+// When the page loads
+document.addEventListener("DOMContentLoaded", function() {
+  var fullText = document.getElementById('fullText').innerText;
+  var displayText = document.getElementById('displayText');
+
+  // Set the display text to the first 100 characters of the full text
+  displayText.innerText = fullText.substring(0, 100) + '...';
+});

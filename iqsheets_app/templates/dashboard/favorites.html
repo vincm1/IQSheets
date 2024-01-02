@@ -16,7 +16,7 @@
 		<div class="favorite-cards">
 			<div class="row">
 				{% for formula in favorite_formulas %}
-				<div class="col-xl-4 col-lg-3 col-md-6 col-sm-12 py-2 response">
+				<div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-2 response">
 					<div class="card">
 						<div class="card-header py-4">
 							{% if formula.prompt_type == "Formula" %}
@@ -42,28 +42,51 @@
 								</span>
 							{% endif %}
 						</div>
-						<div class="card-body mx-2">
+						<div class="card-body mx-1">
 							<div class="row user-input">
-								<p>Input</p>
-								<p id="prompt-input">{{formula.prompt}}</p>
+								<div class="col-1 me-3">
+									<i class="fa-solid fa-circle-user fa-2xl" id="usericon"></i>
+								</div>
+								<div class="col-10">
+									<p id="prompt-input">{{formula.prompt}}</p>
+								</div>
 							</div>
-							<div class="row ki-output">
-								<p>Output</p>
-								<p class="p-3" id="copy-target">{{formula.result}}</p>
+							<div class="row ki-output mt-3">
+								<div class="col-1 me-3">
+									<i class="fa-regular fa-lightbulb fa-2xl" id="result-icon"></i>
+								</div>
+								<div class="col-10">
+									<div id="displayText-{{ formula.id }}" class="collapse show">
+										{{ formula.result[:100] }}
+										<a href="#fullText-{{ formula.id }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="fullText-{{ formula.id }}" onclick="toggleText('{{ formula.id }}')">
+											<i class="fa-solid fa-caret-down ps-2"></i>
+										</a>
+									</div>
+									<div id="fullText-{{ formula.id }}" class="collapse">
+										<p class="" id="copy-target">
+											{{ formula.result }}
+											<a href="#fullText-{{ formula.id }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="fullText-{{ formula.id }}" onclick="toggleText('{{ formula.id }}')">
+												<i class="fa-solid fa-caret-up ps-2"></i>
+											</a>
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
+
 						<div class="card-footer">
-							<div class="d-flex gap-1">
+							<div class="d-flex justify-content-end gap-1">
+								<button class="btn btn-secondary px-3" id="copy-btn" onclick="copyToClipboard()">
+									<i class="fa-solid fa-copy pe-2"></i>Kopieren
+								</button>	
 								<a href="{{url_for('dashboard.delete_favorite', favorite_id=formula.id)}}" class="">
 									<button class="btn btn-danger px-3" id="incorrect-btn">
 										<i class="fa-solid fa-trash"></i>
 									</button>
 								</a>
-								<button class="btn btn-secondary px-3" id="copy-btn" onclick="copyToClipboard()">
-									<i class="fa-solid fa-copy pe-2"></i>Kopieren
-								</button>		
 							</div>
 						</div>
+
 					</div>
 				</div>
 				{% endfor %}
