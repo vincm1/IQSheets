@@ -25,14 +25,38 @@ s3_client = boto3.client(
     )
 
 def find_function(text, prompt_type):
-    # Pattern to find text enclosed between ```sql  and ```
+    """
+    Function collect the formula of openai response only.
+
+    Parameters:
+    text (str): The text from which the pattern will be removed.
+    prompt_type (str): The type of prompt to be removed from the text.
+
+    Returns:
+    str: The text with the specified pattern removed.
+    """
     pattern = r"```" + prompt_type + "(.*?)```"
-    print(pattern)
     # Using re.findall to find all occurrences of the pattern
     matches = re.findall(pattern, text, re.DOTALL)
-    print(matches)
     return matches
-        
+
+def remove_pattern_from_text(text, prompt_type):
+    """
+    Function to remove a specific pattern from a given text string.
+
+    Parameters:
+    text (str): The text from which the pattern will be removed.
+    prompt_type (str): The type of prompt to be removed from the text.
+
+    Returns:
+    str: The text with the specified pattern removed.
+    """
+    start_pattern = re.escape(r"```") + prompt_type
+    end_pattern = re.escape(r"```")
+    text = re.sub(start_pattern, '', text, flags=re.DOTALL)
+    text = re.sub(end_pattern, '', text, flags=re.DOTALL)
+    return text.strip()
+
 ################
 #### routes ####
 ################
@@ -118,8 +142,9 @@ def formel(prompt_type):
             
             # Extracting the part of the string from "sql" to "19"
             formulas = find_function(answer, prompt.prompt_type.lower())
+            reduced_answer = remove_pattern_from_text(answer, prompt.prompt_type.lower())
         
-        return render_template(f'dashboard/{prompt_type}_page.html', answer=answer, form=form, prompt_id=prompt.id, formulas=formulas)
+        return render_template(f'dashboard/{prompt_type}_page.html', answer=reduced_answer, form=form, prompt_id=prompt.id, formulas=formulas)
 
     return render_template(f'dashboard/{prompt_type}_page.html', form=form)
 
