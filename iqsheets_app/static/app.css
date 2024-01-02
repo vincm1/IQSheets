@@ -556,8 +556,18 @@ body {
   }
 
 /* Formel-Components */
-.db-card label {
+.generator-card label {
     color: var(--bs-body-color);
+}
+
+.generator-card {
+  margin-right: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .result-card {
+      margin-top: 5px; /* Example margin value, adjust as needed */
+  }
 }
 
 .form-input {

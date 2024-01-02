@@ -2,101 +2,68 @@
 	<div class="heading mx-4 mt-3">
 		<h3>AI RegEx Assistent</h3>
 	</div>
-	<div class="formula-cards mt-3 mx-3">
-        <div class="row">
-            <div class="col-6">
-                <div class="card db-card shadow-lg">
-                    <div class="card-body p-4">
-                        <h4>Input</h4>
-                        <hr>
-                        <div class="py-2">
-                            <form method="POST" action="{{url_for('dashboard.formel', prompt_type='regex')}}" id="formula-form">
-                                {{form.hidden_tag()}}
-                                <div class="row mt-2">
-                                    {{form.formula_explain.label(class_="pb-1")}}
-									{% for subfield in form.formula_explain %}
-										<div class="col-5 form-input mt-3 mx-3 py-3"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
-											{{ subfield.label}}
-											{{ subfield(id="checkbtn")}}
-										</div>
-									{% endfor %}
+	<div class="d-flex row generator-cards mt-3 mx-3">
+        <div class="card generator-card shadow-lg col-lg-6 col-sm-12">
+            <div class="card-body p-4">
+                <h4>Input</h4>
+                <hr>
+                <div class="py-2">
+                    <form method="POST" action="{{url_for('dashboard.formel', prompt_type='regex')}}" id="formula-form">
+                        {{form.hidden_tag()}}
+                        <div class="row mt-2">
+                            {{form.formula_explain.label(class_="pb-1")}}
+                            {% for subfield in form.formula_explain %}
+                                <div class="col-5 form-input mt-3 mx-3 py-3"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
+                                    {{ subfield.label}}
+                                    {{ subfield(id="checkbtn")}}
                                 </div>
-                                <div class="row mt-4">
-                                    {{form.prompt.label(class="mb-2")}}	
-									{{form.prompt(class="form-input-text p-2 mx-2")}}	
+                            {% endfor %}
+                        </div>
+                        <div class="row mt-4">
+                            {{form.prompt.label(class="mb-2")}}	
+                            {{form.prompt(class="form-input-text p-2 mx-2")}}	
+                        </div>
+                        <div class="row mt-3">
+                            {{form.submit(class="btn btn-primary w-100 mx-2 py-2")}}
+                        </div>
+                    </form>
+                </div>
+            </div>  
+        </div>
+        
+        <div class="card result-card shadow-lg col-lg-5 col-sm-12">
+            <div class="card-body p-4">
+                <h4>Output</h4>
+                <hr>
+                    <div class="result">
+                        <p>Hier steht deine Lösung:</p>
+                        <div class="card">
+                            <div class="card-body">
+                                {% if answer %}
+                                <div class="row">
+                                    <p class="" id="copy-target">{{answer}}</p>
                                 </div>
-								<div class="row mt-3">
-                                    {{form.submit(class="btn btn-primary w-100 mx-2 py-2")}}
-                                </div>
-                            </form>
-                        </div>    
-                        <div>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal2">
-                                Best Practices
-                            </button>
-                            
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>sdsd</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
-                    </div>        
-                </div>
-            </div>
-            
-            <div class="col-6">
-                <div class="card shadow-lg">
-                    <div class="card-body p-4">
-                        <h4>Output</h4>
-                        <hr>
-							<div class="result">
-                                <p>Hier steht deine Lösung:</p>
-								<div class="card">
-									<div class="card-body">
-                                        {% if answer %}
-										<div class="row">
-											<p class="" id="copy-target">{{answer}}</p>
-										</div>
-                                        {% endif %}
-									</div>
-								</div>
-								<div class="d-flex flex-row mt-3">
-                                    {% if prompt_id %}
-                                    <a href="{{url_for('dashboard.prompt_favorite', prompt_id=prompt_id)}}">
-                                        <button class="p-2 me-2 btn btn-primary px-3 me-2" id="favoritebtn">
-                                            <i class="fa-solid fa-heart pe-2"></i> Favorit
-                                        </button>	
-                                    </a>
-                                    <a href="{{url_for('dashboard.negative_feedback', prompt_id=prompt_id, prompt_type='formula')}}">
-                                        <button class="p-2 me-2 btn btn-secondary px-3 me-2" id="wrongbtn">
-                                            <i class="fa-regular fa-circle-xmark pe-2"></i> Falsch
-                                        </button>	
-                                    </a>
-                                    {% endif %}
-									<button class="p-2 me-2 btn btn-secondary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
-										<i class="fa-solid fa-copy pe-2"></i> Kopieren
-									</button>
-								</div>
-							</div>
-					</div>
-                </div>
+                        <div class="d-flex flex-row mt-3">
+                            {% if prompt_id %}
+                            <a href="{{url_for('dashboard.prompt_favorite', prompt_id=prompt_id)}}">
+                                <button class="p-2 me-2 btn btn-primary px-3 me-2" id="favoritebtn">
+                                    <i class="fa-solid fa-heart pe-2"></i> Favorit
+                                </button>	
+                            </a>
+                            <a href="{{url_for('dashboard.negative_feedback', prompt_id=prompt_id, prompt_type='formula')}}">
+                                <button class="p-2 me-2 btn btn-secondary px-3 me-2" id="wrongbtn">
+                                    <i class="fa-regular fa-circle-xmark pe-2"></i> Falsch
+                                </button>	
+                            </a>
+                            {% endif %}
+                            <button class="p-2 me-2 btn btn-secondary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
+                                <i class="fa-solid fa-copy pe-2"></i> Kopieren
+                            </button>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
