@@ -623,7 +623,17 @@ body {
 }
 
 .result .card-body {
-  color: var(--bs-link-hover-color)
+  color: var(--bs-link-hover-color);
+}
+
+.result .formel {
+  background-color: var(--bs-link-color-hover);
+  border: 1px solid var(--bs-link-hover-color);
+  border: 10px;
+}
+
+.result #copy-target {
+  color: var(--bs-link-hover-color);
 }
 
 #lorem {
@@ -652,6 +662,41 @@ body {
   border: 1px solid var(--bs-link-color-hover);
 }
 
+#collapseBestPractices {
+  transition: 0;
+  border: 1px solid var(--bs-link-color-hover);
+  border-radius: 5px;
+}
+
+#collapseBestPractices {
+  transition: 0;
+  border: 1px solid var(--bs-link-color-hover);
+}
+
+#collapseBestPractices .card {
+  border: none;
+}
+
+.bestpractices .fa-circle-check {
+  color: var(--bs-link-hover-color);
+}
+
+.bestpractices .fa-circle-xmark {
+  color: var(--bs-danger);
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 5px 0; /* Horizontal and vertical spacing */
+}
+
+tr {
+  color: var(--bs-body-color)
+}
+
+th {
+  border-bottom: 1px solid var(--bs-link-hover-color); /* Black border for the table */
+}
 /* Favorites */
 
 .favorite-cards {

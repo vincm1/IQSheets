@@ -1,8 +1,9 @@
 """Routes for dashboard"""
-import boto3, re
 from datetime import datetime
+import re
+import boto3
 from sqlalchemy import func
-from flask import Blueprint, current_app, render_template, flash, send_file, redirect, url_for, request
+from flask import Blueprint, current_app, render_template, send_file, redirect, url_for, request
 from flask_login import login_required, current_user
 from iqsheets_app import db
 from iqsheets_app.models import Prompt, Template
@@ -23,6 +24,23 @@ s3_client = boto3.client(
     aws_secret_access_key=current_app.config['AWS_SECRET_ACCESS_KEY'],
     region_name=current_app.config['AWS_REGION']
     )
+
+# Mapping of prompt types to their respective forms
+FORM_MAP = {
+    "formula": FormelForm,
+    "skripte": SkriptForm,
+    "sql": SqlForm,
+    "regex": RegExForm,
+}
+
+CLEAN_MAP = {
+    "Excel - VBA": "vba",
+    "GSheets - Apps": "javascript",
+}
+
+################
+#### helpers ####
+################
 
 def find_function(text, prompt_type):
     """
@@ -57,6 +75,55 @@ def remove_pattern_from_text(text, prompt_type):
     text = re.sub(end_pattern, '', text, flags=re.DOTALL)
     return text.strip()
 
+def process_form_data(form_data, prompt_type):
+    '''Function to handle prompt input form data from inserted form.
+    Parameters:
+        form data: The text from which the pattern will be removed.
+    Returns: 
+        Input for Prompt DB Model
+    '''
+    form_data['prompt_type'] = prompt_type
+    keys = ["prompt_type", "excel_google", "vba_app", "formula_explain", "prompt"]
+    input_prompt = []
+    for key in keys:
+        if key in form_data:
+            input_prompt.append(form_data[key])
+    # Form user info to prompt for OpenAI
+    input_prompt = " ".join(input_prompt)
+    result = openai_chat(input_prompt)
+    answer = result.choices[0].message.content
+    
+    category, prompt = form_data["formula_explain"], form_data["prompt"]
+    
+    # Increasing the amount of prompts and total tokens when prompt is generated
+    current_user.num_prompts += 1
+    current_user.num_tokens += result.usage.total_tokens
+    
+    return prompt_type, category, prompt, answer
+
+def prompt_output_handler(prompt_result, prompt_type, form_data):
+    """
+    Function to handle the OpenAi response for user.
+
+    Parameters:
+    text (str): The text from which the pattern will be removed.
+    prompt_type (str): The type of prompt to be removed from the text.
+
+    Returns:
+    str: The text with the specified pattern removed.
+    """
+    # Extracting the part of the string from "sql" to "19"
+    if form_data["vba_app"]:
+        print(CLEAN_MAP[form_data["vba_app"]].lower())
+        formulas = find_function(prompt_result, CLEAN_MAP[form_data["vba_app"]].lower())
+        reduced_answer = remove_pattern_from_text(prompt_result, CLEAN_MAP[form_data["vba_app"]].lower())
+        print(prompt_result, prompt_type.lower(),formulas, reduced_answer)
+    else:
+        formulas = find_function(prompt_result, prompt_type.lower())
+        reduced_answer = remove_pattern_from_text(prompt_result, prompt_type.lower())
+        print(prompt_result, prompt_type.lower(),formulas, reduced_answer)
+    
+    return formulas, reduced_answer
 ################
 #### routes ####
 ################
@@ -85,19 +152,11 @@ def dashboard():
 @check_confirmed_mail
 def prompter(prompt_type):
     """User Dashboard page"""
-    valid_prompt_types = ["formula", "skripte", "sql", "regex"]
-    if prompt_type not in valid_prompt_types:
-    # Handle invalid prompt_type, maybe redirect to a default page or show an error
+    if prompt_type not in FORM_MAP:
+        # Redirect to the default dashboard page for invalid prompt types
         return redirect(url_for('dashboard.dashboard'))
-    if prompt_type == "formula":
-        form = FormelForm()
-    elif prompt_type == "skripte":
-        form = SkriptForm()
-    elif prompt_type == "sql":
-        form = SqlForm()
-    else:
-        form = RegExForm()
 
+    form = FORM_MAP[prompt_type]()
     return render_template(f"dashboard/{prompt_type}_page.html", form=form)
 
 @dashboard_blueprint.route('/<prompt_type>/result', methods=['GET', 'POST'])
@@ -105,47 +164,29 @@ def prompter(prompt_type):
 @check_confirmed_mail
 def formel(prompt_type):
     """User Dashboard page"""
-    if prompt_type == "formula":
-        form = FormelForm()
-    elif prompt_type == "skripte":
-        form = SkriptForm()
-    elif prompt_type == "sql":
-        form = SqlForm()
-    else:
-        form = RegExForm()
+    if prompt_type not in FORM_MAP:
+        # Redirect to the default dashboard page for invalid prompt types
+        return redirect(url_for('dashboard.dashboard'))
+
+    form = FORM_MAP[prompt_type]() 
    
     if request.method == 'POST' and form.validate_on_submit():
         form_data = form.data
-        form_data['prompt_type'] = prompt_type
-        keys = ["prompt_type","excel_google", "vba_app", "formula_explain", "prompt"]
-        prompt = []
-        for key in keys:
-            if key in form_data:
-                prompt.append(form_data[key])
-        # Form user info to prompt for OpenAI
-        prompt = " ".join(prompt)
-        result = openai_chat(prompt)
-        answer = result.choices[0].message.content
+        prompt_type, category, prompt, answer = process_form_data(form_data, prompt_type)
         
-        # Increasing the amount of prompts and total tokens when prompt is generated
-        current_user.num_prompts += 1
-        current_user.num_tokens += result.usage.total_tokens
-    
         # Creating prompt instance
-        prompt = Prompt(user_id = current_user.id, prompt_type=prompt_type.capitalize(), category=form.formula_explain.data,
-                        prompt=form.prompt.data, result=answer)
+        prompt = Prompt(user_id = current_user.id, prompt_type=prompt_type, 
+                        category=category, prompt=prompt, result=answer)
         # Commiting prompt and numbers to db
         db.session.add(prompt)
         db.session.commit()
         
-        if prompt.category == 'Erstellen':
-            
-            # Extracting the part of the string from "sql" to "19"
-            formulas = find_function(answer, prompt.prompt_type.lower())
-            reduced_answer = remove_pattern_from_text(answer, prompt.prompt_type.lower())
+    if prompt.category == 'Erstellen':
+        formulas, reduced_answer = prompt_output_handler(prompt.result, prompt.prompt_type, form.data)
+        return render_template(f'dashboard/{prompt_type}_page.html', answer=reduced_answer, form=form, prompt_id=prompt.id, formulas=formulas)    
+    else:
+        return render_template(f'dashboard/{prompt_type}_page.html', answer=prompt.result, form=form, prompt_id=prompt.id)
         
-        return render_template(f'dashboard/{prompt_type}_page.html', answer=reduced_answer, form=form, prompt_id=prompt.id, formulas=formulas)
-
     return render_template(f'dashboard/{prompt_type}_page.html', form=form)
 
 @dashboard_blueprint.route('/dashboard/favorite/<int:prompt_id>', methods=['GET'])
@@ -165,6 +206,7 @@ def negative_feedback(prompt_id):
     ''' handles user feedback per prompt '''
     prompt = Prompt.query.filter_by(id=prompt_id).first()
     prompt.feedback = False
+    db.session.add(prompt)
     db.session.commit()
     return redirect(request.referrer or '/default-page')
 

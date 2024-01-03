@@ -33,15 +33,49 @@
                             </a>
                               <div class="collapse mt-3" id="collapseBestPractices">
                                 <div class="card card-body">
-                                  sdsd
+                                    <table class="table bestpractices">
+                                        <thead class="text-center">
+                                          <tr>
+                                            <th scope="col text-center"><i class="fa-regular fa-circle-check fa-xl pe-3"></i>DO's</th>
+                                            <th scope="col text-center"><i class="fa-regular fa-circle-xmark fa-xl pe-3"></i>DONT's</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td><strong>Sei Spezifisch:</strong> Gib genaue Details zu deiner Excel-Aufgabe an. Zum Beispiel, 
+                                                ob du mit Formeln, Pivot-Tabellen, Datenvisualisierung oder speziellen Funktionen wie VLOOKUP 
+                                                arbeitest.
+                                            </td>
+                                            <td><strong>Zu Vage Sein:</strong> 
+                                                Vermeiden Sie allgemeine Anfragen ohne spezifische Details, wie „Hilf mir mit Excel“.
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td><strong>Definiere das Ziel Klar:</strong> 
+                                                Erklären Sie, was das Endergebnis Ihrer Anfrage sein soll. Zum Beispiel: 
+                                                „Ich möchte eine Liste von Mitarbeitern nach ihrem Gehalt sortieren“.
+                                            </td>
+                                            <td><strong>Überkomplizierte Anfragen:</strong>
+                                                Vermeiden Sie extrem komplexe Anfragen, die besser in kleinere, handhabbare Teile aufgeteilt werden sollten.
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td><strong>Benutze Klare Beispiele:</strong>
+                                                Wenn möglich, fügen Sie Beispiele oder Musterdaten hinzu, um Ihre Anfrage zu verdeutlichen.
+                                            </td>
+                                            <td><strong>Ignorieren von Datenschutzbestimmungen:</strong>
+                                                Achten Sie darauf, keine sensiblen oder persönlichen Daten zu teilen, 
+                                                wenn Sie Beispiele aus der realen Welt verwenden.
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
                                 </div>
                               </div>  
                         </div>
                     </form>
                 </div>
             </div> 
-            
-            
         </div>
 
         <div class="card result-card shadow-lg col-lg-5 col-sm-12">
@@ -52,30 +86,38 @@
                         <p>Hier steht deine Lösung:</p>
                         <div class="card">
                             <div class="card-body">
-                                {%if formulas and answer %}
+                                {% if formulas and answer %}
                                     {% for formula in formulas %}
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p class="formel fw-bold py-5" id="copy-target">{{formula}} <button class="btn btn-secondary align-self-end" id="copy-btn" onclick="copyToClipboard()">
+                                    <div class="row mt-1 mb-2">
+                                        <div class="col-10 formel shadow-lg py-1" >
+                                            <p id="copy-target">{{formula}}</p>
+                                        </div>
+                                        <div class="col-1 ms-1">
+                                            <button class="btn btn-secondary align-self-end" title="Kopieren" id="copy-btn" onclick="copyToClipboard()">
                                                 <i class="fa-solid fa-copy"></i>
                                             </button>
-                                        </p>
                                         </div>
                                     </div>
                                     {% endfor %}
 
-                                    <div class="row mt-2">
-                                        <p class="d-inline-flex gap-1">
-                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFullAnswer" role="button" aria-expanded="false" aria-controls="collapseFullAnswer">
-                                              gesamte Antwort
-                                            </a>
-                                        </p>
-                                          <div class="collapse" id="collapseFullAnswer">
-                                            <div class="card card-body p-2">
+                                    <div class="row mt-3">
+                                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFullAnswer" role="button" aria-expanded="false" aria-controls="collapseFullAnswer">
+                                            gesamte Antwort
+                                        </a>
+                                        <div class="collapse mt-2" id="collapseFullAnswer">
+                                            <div class="card card-body p-1">
                                               {{answer}}
                                             </div>
-                                          </div>  
+                                        </div>  
                                     </div>
+                                {% elif answer %}
+                                    <div class="row">
+                                        <div class="collapse mt-2" id="collapseFullAnswer">
+                                            <div class="card card-body p-1">
+                                            {{answer}}
+                                        </div>
+                                    </div>
+                                
                                 {% else %}
                                     <p id="lorem">Noch keine Lösung vorhanden.</p>
                                 {% endif %}
@@ -99,5 +141,6 @@
                     </div>
             </div>
         </div>
+
     </div>
 {% endblock %}
