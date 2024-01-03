@@ -685,6 +685,10 @@ body {
   color: var(--bs-danger);
 }
 
+.result .card .formel {
+  background-color: var(--bs-link-color-hover);
+}
+
 table {
   border-collapse: separate;
   border-spacing: 5px 0; /* Horizontal and vertical spacing */

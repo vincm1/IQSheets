@@ -112,8 +112,9 @@ def prompt_output_handler(prompt_result, prompt_type, form_data):
     Returns:
     str: The text with the specified pattern removed.
     """
-    # Extracting the part of the string from "sql" to "19"
-    if form_data["vba_app"]:
+    # Extracting the part of the string from "sql" to "19"7
+    print(form_data)
+    if "vba_app" in form_data:
         print(CLEAN_MAP[form_data["vba_app"]].lower())
         formulas = find_function(prompt_result, CLEAN_MAP[form_data["vba_app"]].lower())
         reduced_answer = remove_pattern_from_text(prompt_result, CLEAN_MAP[form_data["vba_app"]].lower())
@@ -181,7 +182,7 @@ def formel(prompt_type):
         db.session.add(prompt)
         db.session.commit()
         
-    if prompt.category == 'Erstellen':
+    if prompt.category == 'Erstellen' and prompt.prompt_type != "formula":
         formulas, reduced_answer = prompt_output_handler(prompt.result, prompt.prompt_type, form.data)
         return render_template(f'dashboard/{prompt_type}_page.html', answer=reduced_answer, form=form, prompt_id=prompt.id, formulas=formulas)    
     else:

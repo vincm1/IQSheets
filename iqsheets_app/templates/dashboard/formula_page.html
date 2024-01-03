@@ -41,6 +41,52 @@
                         <div class="row mt-3">
                             {{form.submit(class="btn btn-primary w-100 mx-2 py-2")}}
                         </div>
+                        <div class="best-practices mt-3 mb-2">
+                            <a class="btn btn-secondary" id="best-practice-btn" data-bs-toggle="collapse" href="#collapseBestPractices" role="button" aria-expanded="false" aria-controls="collapseBestPractices">
+                                Best Practices
+                            </a>
+                              <div class="collapse mt-3" id="collapseBestPractices">
+                                <div class="card card-body">
+                                    <table class="table bestpractices">
+                                        <thead class="text-center">
+                                          <tr>
+                                            <th scope="col text-center"><i class="fa-regular fa-circle-check fa-xl pe-3"></i>DO's</th>
+                                            <th scope="col text-center"><i class="fa-regular fa-circle-xmark fa-xl pe-3"></i>DONT's</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td><strong>Sei Spezifisch:</strong> Gib genaue Details zu deiner Excel-Aufgabe an. Zum Beispiel, 
+                                                ob du mit Formeln, Pivot-Tabellen, Datenvisualisierung oder speziellen Funktionen wie VLOOKUP 
+                                                arbeitest.
+                                            </td>
+                                            <td><strong>Zu Vage Sein:</strong> 
+                                                Vermeiden Sie allgemeine Anfragen ohne spezifische Details, wie „Hilf mir mit Excel“.
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td><strong>Definiere das Ziel Klar:</strong> 
+                                                Erklären Sie, was das Endergebnis Ihrer Anfrage sein soll. Zum Beispiel: 
+                                                „Ich möchte eine Liste von Mitarbeitern nach ihrem Gehalt sortieren“.
+                                            </td>
+                                            <td><strong>Überkomplizierte Anfragen:</strong>
+                                                Vermeiden Sie extrem komplexe Anfragen, die besser in kleinere, handhabbare Teile aufgeteilt werden sollten.
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td><strong>Benutze Klare Beispiele:</strong>
+                                                Wenn möglich, fügen Sie Beispiele oder Musterdaten hinzu, um Ihre Anfrage zu verdeutlichen.
+                                            </td>
+                                            <td><strong>Ignorieren von Datenschutzbestimmungen:</strong>
+                                                Achten Sie darauf, keine sensiblen oder persönlichen Daten zu teilen, 
+                                                wenn Sie Beispiele aus der realen Welt verwenden.
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                </div>
+                              </div>  
+                        </div>
                     </form>
                 </div>    
             </div>       
@@ -55,12 +101,18 @@
                         <div class="card">
                             <div class="card-body">
                                 {% if answer %}
-                                <div class="row">
-                                    <p class="" id="copy-target">{{answer}}</p>
-                                </div>
+                                    <div class="row">
+                                        <div class="card formel card-body px-1 py-2">
+                                            {{answer}}
+                                        </div>
+                                    </div>
+                        
+                                {% else %}
+                                    <p id="lorem">Noch keine Lösung vorhanden.</p>
                                 {% endif %}
                             </div>
                         </div>
+                        <hr>
                         <div class="d-flex flex-row mt-3">
                             {% if prompt_id %}
                             <a href="{{url_for('dashboard.prompt_favorite', prompt_id=prompt_id)}}">
@@ -74,9 +126,6 @@
                                 </button>	
                             </a>
                             {% endif %}
-                            <button class="p-2 me-2 btn btn-secondary px-3 me-2" onclick="copyToClipboard()" id="copy-btn">
-                                <i class="fa-solid fa-copy pe-2"></i> Kopieren
-                            </button>
                         </div>
                     </div>
             </div>
