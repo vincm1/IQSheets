@@ -56,7 +56,8 @@ def mailchimp_newsletter(email):
 def index():
     ''' Landing Page '''
     form_nl = NewsletterForm()
-    return render_template('index.html', form_nl=form_nl)
+    is_debug = current_app.debug
+    return render_template('index.html', form_nl=form_nl, is_debug=is_debug)
 
 @core_blueprint.route("/impressum", methods=["GET"])
 def impressum():

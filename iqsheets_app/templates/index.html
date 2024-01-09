@@ -1,6 +1,12 @@
 {% extends "base.html" %} {% block content %}
 <main>
-  
+   {% if is_debug %}
+    <div class="alert alert-warning" role="alert">
+        <strong>Warning!</strong> You are in debug mode.
+    {% else %}
+    <div class="alert alert-success" role="alert">
+        <strong>Success!</strong> You are not in debug mode.
+    {% endif %}
     <section class="hero pt-5 pb-4">
             <div class="container pt-5 pb-5">
               <div class="row align-items-top">
