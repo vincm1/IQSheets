@@ -1,9 +1,8 @@
 """Module docstring """
-
 # import the create app application factory
+import os
 from iqsheets_app import create_app
 
-app = create_app()
-
 if __name__ == '__main__':
-    app.run(port="5000")
+    app = create_app(os.getenv('ENV') or 'development')
+    app.run()

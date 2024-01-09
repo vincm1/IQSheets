@@ -1,10 +1,14 @@
 ''' Init file for app '''
 import os
+import logging
+from logging.handlers import RotatingFileHandler
+
 from flask import Flask, render_template
+from werkzeug.security import generate_password_hash
 from config import config
 from .extensions import db, migrate, login_manager, mail
 from .admin.admin import create_admin, create_admin_user
-from werkzeug.security import generate_password_hash
+from flask.logging import default_handler
 
 def create_app(config_name=None):
     '''Factory to create Flask application'''
@@ -53,8 +57,16 @@ def create_app(config_name=None):
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
         
-        db.create_all()
-        
+        # Check if the database needs to be initialized
+        engine = db.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+        inspector = db.inspect(engine)
+        if not inspector.has_table("users"):
+            db.drop_all()
+            db.create_all()
+            app.logger.info('Initialized the database!')
+        else:
+            app.logger.info('Database already contains the users table.')
+ 
         ### Create admin user ###
         admin_user = User.query.filter_by(email=os.environ.get('ADMIN_EMAIL')).first()
         if not admin_user:
@@ -62,3 +74,23 @@ def create_app(config_name=None):
                               password=generate_password_hash((os.environ.get('ADMIN_EMAIL'))))
 
         return app
+
+def configure_logging(app):
+    # Logging Configuration
+    if app.config['LOG_WITH_GUNICORN']:
+        gunicorn_error_logger = logging.getLogger('gunicorn.error')
+        app.logger.handlers.extend(gunicorn_error_logger.handlers)
+        app.logger.setLevel(logging.DEBUG)
+    else:
+        file_handler = RotatingFileHandler('instance/flask-user-management.log',
+                                           maxBytes=16384,
+                                           backupCount=20)
+        file_formatter = logging.Formatter('%(asctime)s %(levelname)s %(threadName)s-%(thread)d: %(message)s [in %(filename)s:%(lineno)d]')
+        file_handler.setFormatter(file_formatter)
+        file_handler.setLevel(logging.INFO)
+        app.logger.addHandler(file_handler)
+
+    # Remove the default logger configured by Flask
+    app.logger.removeHandler(default_handler)
+
+    app.logger.info('Starting the Flask User Management App...')

@@ -8,12 +8,13 @@ basedir = basedir = os.path.abspath(os.path.join('../', os.path.dirname(__file__
 
 # create superclass
 class BaseConfig(object):
+    ''' Config base '''
     FLASK_APP = 'iqsheets_app'
     SECRET_KEY = os.getenv('SECRET_KEY')
     AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_REGION = os.getenv('AWS_REGION')
-    S3_BUCKET = os.getenv('S3_BUCKET')
+    S3_BUCKET = os.getenv('S3_BUCKET_DEV')
     MAILCHIMP_AUDIENCE_ID =  os.getenv('MAILCHIMP_AUDIENCE_ID')
     MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
     MAILCHIMP_SERVERPREFIX = os.getenv('MAILCHIMP_SERVERPREFIX')
@@ -22,11 +23,13 @@ class BaseConfig(object):
     FACEBOOK_OAUTH_CLIENT_ID = os.getenv('FACEBOOK_OAUTH_CLIENT_ID')
     FACEBOOK_OAUTH_CLIENT_SECRET = os.getenv('FACEBOOK_OAUTH_CLIENT_SECRET')
     KONTAKT_IQSHEETS = os.getenv('KONTAKT_IQSHEETS')
+    LOG_WITH_GUNICORN = os.getenv('LOG_WITH_GUNICORN', default=False)
     
 # Create the development config
 class DevelopmentConfig(BaseConfig):
+    ''' Config for development '''
     DEBUG = True
-    ENV = 'development'
+    FLASK_ENV = 'development'
     SECURITY_PASSWORD_SALT = os.getenv('SECURITY_PASSWORD_SALT ')
     db_user = os.getenv('DB_USER')
     db_pw = os.getenv('DB_PW')
@@ -55,6 +58,7 @@ class DevelopmentConfig(BaseConfig):
 
 # Create the testing config
 class TestingConfig(BaseConfig):
+    ''' Test config '''
     db_user = os.getenv('DB_USER')
     db_pw = os.getenv('DB_PW')
     db_uri = os.getenv('TEST_DB_URI')
@@ -62,12 +66,14 @@ class TestingConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = True
-    ENV = 'testing'
+    FLASK_ENV = 'testing'
 
 # create the production config
 class ProductionConfig(BaseConfig):
+    ''' Production config '''
     #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    FLASK_ENV = 'production'
 
 config = {
     "development": DevelopmentConfig,

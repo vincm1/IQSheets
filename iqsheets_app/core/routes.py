@@ -1,5 +1,5 @@
 ''' Core routes for landing page etc. '''
-from flask import Blueprint, current_app, render_template, jsonify, request, flash, redirect, url_for
+from flask import Blueprint, current_app, render_template, jsonify, request, flash, redirect, url_for, make_response
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
 from flask_mail import Message
