@@ -71,7 +71,7 @@ class TestingConfig(BaseConfig):
 # create the production config
 class ProductionConfig(BaseConfig):
     ''' Production config '''
-    #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data.db')
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_ENV = 'production'
 
