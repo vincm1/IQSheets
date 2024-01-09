@@ -1,8 +1,9 @@
 """Module docstring """
-# import the create app application factory
 import os
+# import the create app application factory
 from iqsheets_app import create_app
 
+app = create_app(os.getenv('FLASK_ENV') or 'development')
+
 if __name__ == '__main__':
-    app = create_app(os.getenv('ENV') or 'development')
     app.run()
