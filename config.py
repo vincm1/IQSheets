@@ -11,17 +11,26 @@ class BaseConfig(object):
     ''' Config base '''
     FLASK_APP = 'iqsheets_app'
     SECRET_KEY = os.getenv('SECRET_KEY')
+    #AWS
     AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_REGION = os.getenv('AWS_REGION')
-    S3_BUCKET = os.getenv('S3_BUCKET_DEV')
+    #MAILCHIMP
     MAILCHIMP_AUDIENCE_ID =  os.getenv('MAILCHIMP_AUDIENCE_ID')
     MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
     MAILCHIMP_SERVERPREFIX = os.getenv('MAILCHIMP_SERVERPREFIX')
+    #OAUTH
+    GOOGLE_OAUTH_CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
+    GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
+    LINKEDIN_OAUTH_CLIENT_SECRET = os.getenv('LINKEDIN_OAUTH_CLIENT_SECRET')
     LINKEDIN_OAUTH_CLIENT_ID = os.getenv('LINKEDIN_OAUTH_CLIENT_ID')
     LINKEDIN_OAUTH_CLIENT_SECRET = os.getenv('LINKEDIN_OAUTH_CLIENT_SECRET')
     FACEBOOK_OAUTH_CLIENT_ID = os.getenv('FACEBOOK_OAUTH_CLIENT_ID')
     FACEBOOK_OAUTH_CLIENT_SECRET = os.getenv('FACEBOOK_OAUTH_CLIENT_SECRET')
+    #Stripe
+    STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_TEST')
+    STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_TEST')
+    #Other
     KONTAKT_IQSHEETS = os.getenv('KONTAKT_IQSHEETS')
     LOG_WITH_GUNICORN = os.getenv('LOG_WITH_GUNICORN', default=False)
     
@@ -55,6 +64,8 @@ class DevelopmentConfig(BaseConfig):
     #Stripe test keys
     STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_TEST')
     STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_TEST')
+    # Amazon S3
+    S3_BUCKET = os.getenv('S3_BUCKET_DEV')
 
 # Create the testing config
 class TestingConfig(BaseConfig):
@@ -74,6 +85,7 @@ class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_ENV = 'production'
+    S3_BUCKET = os.getenv('S3_BUCKET')
 
 config = {
     "development": DevelopmentConfig,
