@@ -1,12 +1,5 @@
 {% extends "base.html" %} {% block content %}
 <main>
-   {% if is_debug %}
-    <div class="alert alert-warning" role="alert">
-        <strong>Warning!</strong> You are in debug mode.
-    {% else %}
-    <div class="alert alert-success" role="alert">
-        <strong>Success!</strong> You are not in debug mode.
-    {% endif %}
     <section class="hero pt-5 pb-4">
             <div class="container pt-5 pb-5">
               <div class="row align-items-top">
@@ -21,7 +14,7 @@
                     <h4 class="pt-3 pb-5">Erstelle komplexe Formeln in sekundenschnelle durch einfache Textanweisungen.</h4>
                     <div class="d-grid d-sm-flex gap-2 mt-2 mb-5">
                         <a href="{{url_for('user.register')}}"><button class="btn btn-primary p-3" href="">Jetzt registrieren</button></a>
-                        <a class="btn btn-secondary me-3 p-3" href="https://www.youtube.com/watch?v=0qisGSwZym4" role="button" data-fslightbox="youtube-video">
+                        <a class="btn btn-secondary me-3 p-3" href="#landing-video" role="button">
                           Demovideo <i class="fa-solid fa-play fa-xl ms-2"></i>
                         </a>
                     </div>
@@ -160,7 +153,7 @@
                 </div>   
             </div>
             <div class="container video-container justify-content-center text-center mt-5 mb-3">
-                <video src="{{url_for('static', filename='img/IQSheetsVid.mp4')}}" id="landing-video" height="700" type="video/mp4" controls>
+                <video src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/videos/IQSheetsVid.mp4" id="landing-video" height="700" type="video/mp4" controls>
                   Browser unterstützt Videowiedergabe nicht.
                 </video>
             </div>
@@ -358,7 +351,7 @@
                         <div class="row justify-content-center gap-2">
                           <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
                             <div class="card-body">
-                              <img src="static/img/testi1.png" alt="testimonial-pic">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi1.png" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
                               <hr class="testimonial-divider">
                               <div class="testimonial-card-text mt-4 text-center">
@@ -371,7 +364,7 @@
                           </div>
                           <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
                             <div class="card-body">
-                              <img src="static/img/testi2.png" alt="testimonial-pic">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi2.png" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Tim, Einkaufsleiter</h6>
                               <hr class="testimonial-divider">
                               <div class="testimonial-card-text mt-4 text-center">
@@ -384,7 +377,7 @@
                           </div>
                           <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
                             <div class="card-body">
-                              <img src="static/img/testi3.png" alt="testimonial-pic">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi3.png" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Marcel, Controller</h6>
                               <hr class="testimonial-divider">
                               <div class="testimonial-card-text mt-4 text-center">
@@ -400,7 +393,7 @@
                         <div class="row justify-content-center gap-2">
                           <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
                             <div class="card-body">
-                              <img src="static/img/testi4.jpg" height="60" width="60" style="border-radius:50%" alt="Testimonial">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi4.jpg" height="60" width="60" style="border-radius:50%" alt="Testimonial">
                               <h6 class="ps-2 pt-3">Marco, Buchhalter</h6>
                               <hr class="testimonial-divider">
                               <div class="testimonial-card-text mt-4 text-center">
@@ -413,7 +406,7 @@
                           </div>
                           <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
                             <div class="card-body">
-                              <img src="static/img/testi5.jpg" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi5.jpg" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Luca, Sales Manager</h6>
                               <hr class="testimonial-divider">
                               <div class="testimonial-card-text mt-4 text-center">
@@ -425,7 +418,7 @@
                           </div>
                           <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
                             <div class="card-body">
-                              <img src="static/img/testi6.png" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi6.png" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
                               <hr class="testimonial-divider">
                               <div class="testimonial-card-text mt-4 text-center">
