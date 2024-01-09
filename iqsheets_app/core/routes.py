@@ -101,3 +101,4 @@ def newsletter():
             flash('Erfolgreich angemeldet!', 'success')
             return redirect(url_for('core.index', _anchor='newsletter-form-anchor'))
     return redirect(url_for('core.index'))
+
