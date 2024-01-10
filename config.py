@@ -15,6 +15,20 @@ class BaseConfig(object):
     AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_REGION = os.getenv('AWS_REGION')
+    #Admin settings
+    ADMIN_USER = os.getenv('ADMIN_USER')
+    ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+    ADMIN_PW = os.getenv('ADMIN_PW')
+    # MAIL SETTINGS
+    MAIL_SERVER = 'mail.privateemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    # PRIVATEEMAIL SETTINGS (NAMECHEAP)
+    MAIL_USERNAME = os.getenv('KONTAKT_IQSHEETS')
+    MAIL_PASSWORD = os.getenv('APP_MAIL_PASSWORD')
+    # mail accounts
+    MAIL_DEFAULT_SENDER = os.getenv('KONTAKT_IQSHEETS')
     #MAILCHIMP
     MAILCHIMP_AUDIENCE_ID =  os.getenv('MAILCHIMP_AUDIENCE_ID')
     MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
@@ -45,19 +59,7 @@ class DevelopmentConfig(BaseConfig):
     db_uri = os.getenv('DB_URI')
     db_url = f"postgresql+psycopg2://{db_user}:{db_pw}{db_uri}"
     SQLALCHEMY_DATABASE_URI = db_url
-    #Admin settings
-    ADMIN_USER = os.getenv('ADMIN_USER')
-    ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
-    ADMIN_PW = os.getenv('ADMIN_PW')
-    # mail settings
-    MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    # gmail authentication
-    MAIL_USERNAME = os.getenv('APP_MAIL_USERNAME')
-    MAIL_PASSWORD = os.getenv('APP_MAIL_PASSWORD')
-    # mail accounts
-    MAIL_DEFAULT_SENDER = os.getenv('APP_MAIL_USERNAME')
+    
     #Oauth
     GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
     GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")

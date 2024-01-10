@@ -1,19 +1,17 @@
 """Routes for user"""
 from datetime import datetime
 import stripe
-from flask import Blueprint, Markup, render_template, redirect, request, flash, url_for
+from flask import Blueprint, render_template, redirect, request, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_mail import Message
+from werkzeug.utils import secure_filename
 from iqsheets_app import db
 from iqsheets_app.models import User
+from iqsheets_app.core.forms import NewsletterForm
 from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
-from werkzeug.utils import secure_filename
 from iqsheets_app.utils.decorators import check_confirmed_mail, non_oauth_required
-from iqsheets_app.openai import openai_chat
-from iqsheets_app.core.forms import NewsletterForm
 
 ################
 #### config ####
@@ -43,9 +41,9 @@ def register():
         
         token = generate_confirmation_token(user.email)
         confirm_url = url_for('user.confirm_email', token=token, _external=True)
-        html = render_template('user/email/activate.html', confirm_url=confirm_url)
+        message = 'Das ist dein Bestätigungslink: ' + confirm_url
         subject = "Bitte bestätige Deine Email für IQSheets!"
-        send_email(user.email, subject, html)
+        send_email(user.email, subject, message)
         
         flash(f'Eine Bestätigungs-Email wurde an {user.email} geschickt.', 'success')
         return redirect(url_for('user.login'))
@@ -100,7 +98,7 @@ def confirm_email(token):
     email = confirm_token(token)
     user = User.query.filter_by(email=email).first_or_404()
     print(user.email)
-    form_nl = NewsletterForm()
+    
     if user.email == email:
         user.is_confirmed = True
         user.confirmed_on = datetime.now()
@@ -169,6 +167,7 @@ def edit_password():
                 db.session.add(current_user)
                 db.session.commit()
                 flash("Passwort erfolgreich geändert!", "success")
+                logout_user()
         else:
             flash('Altes Passwort stimmt nicht!', 'danger')
     return render_template('user/change_password.html', form=form, active_page='edit_password')
@@ -200,8 +199,8 @@ def reset_password_request():
             token = generate_confirmation_token(user.email)
             confirm_url = url_for('user.reset_password', token=token, _external=True)
             subject = f"Passwort Reset für {user.email} IQSheets!"
-            html = render_template('user/email/reset_password.html', confirm_url=confirm_url, form_nl=form_nl)
-            send_email(user.email, subject, html)
+            message = "Klicke auf folgenden Link, um dein Passwort zurückzusetzen: " + confirm_url
+            send_email(user.email, subject, message)
             flash('Prüfe deine Emails', 'success')
             redirect(url_for('user.login'))
         else:

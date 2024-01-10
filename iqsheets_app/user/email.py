@@ -3,7 +3,7 @@ from flask import current_app as app
 from flask_mail import Message
 from iqsheets_app import mail
 
-def send_email(to, subject, template):
+def send_email(to, subject, message):
     """Function to send email
 
     Args:
@@ -13,9 +13,9 @@ def send_email(to, subject, template):
     """
     msg = Message(
         subject,
+        body=message,
         recipients=[to],
         sender=app.config['MAIL_DEFAULT_SENDER']
-    )
-    msg.html = template
+        )
     mail.send(msg)
     
