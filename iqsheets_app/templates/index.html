@@ -1,127 +1,128 @@
 {% extends "base.html" %} {% block content %}
 <main>
-    <section class="hero pt-5 pb-4">
-            <div class="container pt-5 pb-5">
-              <div class="row align-items-top">
-                <div class="col-lg-7">
-                  <!-- Heading -->
-                  <div class="pe-lg-3 mb-7 justify-content-sm-center">
-                    <h1 class="display-3 text-inline">AI-generierte Formeln für
-                        <div id="text-container" style="display: inline;">
-                          <p id="changing-text" style="display: inline;">Controller.</p>
-                        </div>
-                      </h1>
-                    <h4 class="pt-3 pb-5">Erstelle komplexe Formeln in sekundenschnelle durch einfache Textanweisungen.</h4>
-                    <div class="d-grid d-sm-flex gap-2 mt-2 mb-5">
-                        <a href="{{url_for('user.register')}}"><button class="btn btn-primary p-3" href="">Jetzt registrieren</button></a>
-                        <a class="btn btn-secondary me-3 p-3" href="#landing-video" role="button">
-                          Demovideo <i class="fa-solid fa-play fa-xl ms-2"></i>
-                        </a>
-                    </div>
-                    <div class="row hero-benefits gap-3">
-                      <div class="col-lg-3 col-sm-12">
-                        <h2 class="hero-info">50%</h2>
-                        <p>Zeitersparnis dank KI-Formeln</p>
-                      </div>  
-                      <div class="col-lg-3 col-sm-12">
-                        <h2 class="hero-info">10x</h2>
-                        <p>Mehr Produktivität in Spreadsheets</p>
-                      </div> 
-                      <div class="col-lg-3 col-sm-12">
-                        <h2 class="hero-info">20%</h2>
-                        <p>Zeitersparnis dank KI-Formeln</p>
-                      </div> 
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 d-none d-lg-block">
-                    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-                    <dotlottie-player src="https://lottie.host/0351042f-3b37-420c-98c7-2c681d3e4dcc/PohXkhh0Hq.json" background="transparent" speed="1" style="width: 600px; height: 600px;" loop autoplay></dotlottie-player>
-                </div>
-              </div>
-            </div>
-    </section>
+	<!-- Hero Start -->
+	<section class="hero pt-5 pb-4 ">
+		<div class="container hero pt-5 pb-5">
+			<div class="row align-items-top">
+				<div class="col-lg-7 col-sm-12">
+					<!-- Heading -->
+					<div class="mb-5 justify-content-sm-center">
+							<h1 class="display-3 text-inline">AI-generierte Formeln für
+								<div id="text-container" style="display: inline;">
+									<p id="changing-text" style="display: inline;">Controller.</p>
+								</div>
+							</h1>
+						<h4 class="pt-3 pb-5">Erstelle komplexe Formeln in sekundenschnelle durch einfache Textanweisungen.</h4>
+						<div class="mb-5">
+								<a href="{{url_for('user.register')}}"><button class="btn btn-primary p-3" href="">Jetzt registrieren</button></a>
+								<a class="btn btn-secondary me-3 p-3" href="#landing-video" role="button">
+									Demovideo <i class="fa-solid fa-play fa-xl ms-2"></i>
+								</a>
+						</div>
+						<div class="row mt-2 hero-benefits">
+							<div class="col-3 my-2">
+								<h2 class="hero-info">50%</h2>
+								<p>Zeitersparnis dank KI-Formeln</p>
+							</div>  
+							<div class="col-3 my-2">
+								<h2 class="hero-info">10x</h2>
+								<p>Mehr Produktivität in Spreadsheets</p>
+							</div> 
+							<div class="col-3 my-2">
+								<h2 class="hero-info">20%</h2>
+								<p>Zeitersparnis dank KI-Formeln</p>
+							</div> 
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5">
+						<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+						<dotlottie-player src="https://lottie.host/0351042f-3b37-420c-98c7-2c681d3e4dcc/PohXkhh0Hq.json" background="transparent" speed="1" style="width: 100%; height: auto;" loop autoplay></dotlottie-player>
+				</div>
+			</div>
+		</div>
+  </section>
+	<!-- Hero End -->
 
-    <!-- Features -->
-    <section class="features-1 pt-2 pb-5">
-            <div class="container py-5">
-                <div class="row justify-content-center" id="features-1">
-                    <!-- slider Heading -->
-                    <div class="col-xl-12 text-center">
-                        <h3>Die wichtigsten Features auf einem Blick</h3>
-                        <p class="pt-2">Egal ob Google oder Excel, spare jetzt jede Menge Zeit und Frust in deinem Arbeitsalltag!</p>
-                    </div>
-                </div>
-                <div class="row mt-4 justify-content-center gap-3">
-                    <div class="col-lg-5 col-md-1 vorteil-container">
-                        <div class="services-caption">
-                            <div class="service-icon text-center py-4 p-3 text-center">
-                                <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
-                                <h4 class="text-center pt-4">Formeln</h4>
-                            </div> 
-                            <div class="service-cap py-2 px-3 text-center">
-                                <p>Generiere in Sekunden die benötigten Formeln mit unserer KI und spare Zeit sowie Nerven.
-                                   Schluss mit langwieriger Internetrecherche zur Formelerstellung.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-1 vorteil-container">
-                      <div class="services-caption">
-                          <div class="service-icon text-center py-4 p-3 text-center">
-                              <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
-                              <h4 class="text-center pt-4">Erklärungen</h4>
-                          </div> 
-                          <div class="service-cap py-2 px-3 text-center">
-                              <p>Lass dir komplexe Formeln, die von deinen Kollegen in Excel geschrieben wurden, ganz einfach vom System erklären. 
-                                Verstehe und optimiere deine Arbeitsblätter mühelos.</p>
-                          </div>
-                      </div>
-                    </div>
-                </div>
-                <div class="row mt-3 justify-content-center gap-3">
-                  <div class="col-lg-5 col-md-1 vorteil-container">
-                      <div class="services-caption">
-                          <div class="service-icon text-center py-4 p-3 text-center">
-                              <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
-                              <h4 class="text-center pt-4">VBA</h4>
-                          </div> 
-                          <div class="service-cap py-2 px-3 text-center">
-                              <p>Entdecke die Leichtigkeit der VBA-Code-Erstellung, auch ohne Programmiererfahrung. 
-                                Vereinfache deine Arbeitsabläufe und spare wertvolle Zeit bei der Erstellung komplexer 
-                                Automatisierungslösungen.</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-5 col-md-1 vorteil-container">
-                    <div class="services-caption">
-                        <div class="service-icon text-center py-4 p-3 text-center">
-                            <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
-                            <h4 class="text-center pt-4">SQL</h4>
-                        </div> 
-                        <div class="service-cap py-2 px-3 text-center">
-                            <p>Entdecke müheloses SQL-Code-Generieren, selbst ohne Entwicklererfahrung,
-                              um Datenabfragen zu vereinfachen und Zeit zu sparen.</p>
-                        </div>
-                    </div>
-                  </div>
-              </div>
-              </div>
-            </div>
-    </section>
-    <!-- Features End -->
+  <!-- Features Start -->
+  <section class="features-1 pt-2 pb-5">
+		<div class="container py-5">
+			<div class="row justify-content-center" id="features-1">
+					<!-- slider Heading -->
+					<div class="text-center">
+							<h3>Die wichtigsten Features auf einem Blick</h3>
+							<p class="pt-2">Egal ob Google oder Excel, spare jetzt jede Menge Zeit und Frust in deinem Arbeitsalltag!</p>
+					</div>
+			</div>
+			<div class="row mt-4 justify-content-center gap-2 mx-1">
+					<div class="col-md-5 col-sm-12 vorteil-container">
+							<div class="services-caption">
+									<div class="service-icon text-center py-4 p-3 text-center">
+											<i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+											<h4 class="text-center pt-4">Formeln</h4>
+									</div> 
+									<div class="service-cap py-2 px-3 text-center">
+											<p>Generiere in Sekunden die benötigten Formeln mit unserer KI und spare Zeit sowie Nerven.
+												 Schluss mit langwieriger Internetrecherche zur Formelerstellung.</p>
+									</div>
+							</div>
+					</div>
+					<div class="col-md-5 col-sm-12 vorteil-container">
+						<div class="services-caption">
+								<div class="service-icon text-center py-4 p-3 text-center">
+										<i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+										<h4 class="text-center pt-4">Erklärungen</h4>
+								</div> 
+								<div class="service-cap py-2 px-3 text-center">
+										<p>Lass dir komplexe Formeln, die von deinen Kollegen in Excel geschrieben wurden, ganz einfach vom System erklären. 
+											Verstehe und optimiere deine Arbeitsblätter mühelos.</p>
+								</div>
+						</div>
+					</div>
+			</div>
+			<div class="row justify-content-center gap-2 mx-1">
+				<div class="col-md-5 col-sm-12 vorteil-container">
+						<div class="services-caption">
+								<div class="service-icon text-center py-4 p-3 text-center">
+										<i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+										<h4 class="text-center pt-4">VBA</h4>
+								</div> 
+								<div class="service-cap py-2 px-3 text-center">
+										<p>Entdecke die Leichtigkeit der VBA-Code-Erstellung, auch ohne Programmiererfahrung. 
+											Vereinfache deine Arbeitsabläufe und spare wertvolle Zeit bei der Erstellung komplexer 
+											Automatisierungslösungen.</p>
+								</div>
+						</div>
+				</div>
+				<div class="col-md-5 col-sm-12 vorteil-container">
+					<div class="services-caption">
+							<div class="service-icon text-center py-4 p-3 text-center">
+									<i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+									<h4 class="text-center pt-4">SQL</h4>
+							</div> 
+							<div class="service-cap py-2 px-3 text-center">
+									<p>Entdecke müheloses SQL-Code-Generieren, selbst ohne Entwicklererfahrung,
+										um Datenabfragen zu vereinfachen und Zeit zu sparen.</p>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+  </section>
+  <!-- Features End -->
     
-    <!-- How to -->
-    <section class="how-to py-5">
-        <div class="container pb-5">
-            <div class="row justify-content-center">
+    <!-- How to Start -->
+  <section class="how-to py-5">
+      <div class="container pb-5">
+        <div class="row justify-content-center">
                 <!-- slider Heading -->
-                <div class="col-xl-12 text-center" id="video-description">
+                <div class="text-center" id="video-description">
                     <h3 class="how-to-heading">Wie funktioniert die App?</h3>
                     <p>In nur drei Schritten zur perfekten Excel/Google Spreadsheet Formel.</p>
                 </div>
-            </div>
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-3 col-md-1 how-to-container">
+				</div>
+				<div class="row justify-content-center gap-3 mt-5">
+					<div class="col-3 how-to-container">
                     <div class="services-caption text-center">
                         <div class="how-to-icon">
                           <i class="fa-regular fa-clock fa-3x"></i>
@@ -130,8 +131,8 @@
                             <h6>Textanweisung eingeben</h6>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-1 how-to-container">
+          </div>
+                <div class="col-3 how-to-container">
                     <div class="services-caption text-center">
                         <div class="how-to-icon">
                             <i class="fa-solid fa-brain fa-3x"></i>
@@ -141,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-1 how-to-container">
+                <div class="col-3 how-to-container">
                     <div class="services-caption text-center">
                         <div class="how-to-icon">
                             <i class="fa-solid fa-check-to-slot fa-3x"></i>
@@ -150,21 +151,19 @@
                             <h6>Formel oder VBA kopieren und eintragen</h6>
                         </div>
                     </div>
-                </div>   
-            </div>
-            <div class="container video-container justify-content-center text-center mt-5 mb-3">
-                <video src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/videos/IQSheetsVid.mp4" id="landing-video" height="700" type="video/mp4" controls>
-                  Browser unterstützt Videowiedergabe nicht.
-                </video>
-            </div>
-        </div>
-    </section>
+                </div> 
+					</div>
+                  
+      </div>
+  </section>
+	<!-- How to End -->
 
-    <section class="pricing">
+	<!-- Pricing Start -->
+  <section class="pricing">
             <!-- Pricing -->
-        <div class="container pricing mt-3">
+        <div class="container pricing mt-2">
             <!-- Heading -->
-            <div class="mb-5 text-center pt-5 py-2"  id="pricing">
+            <div class="mb-5 text-center py-2"  id="pricing">
                 <h3>Ein Plan für Jeden</h3>
                 <p>Pay as you go, jederzeit kündbar.</p>
                 <p style="font-size:13px">2 Tage kostenlos testen.</p>
@@ -172,7 +171,7 @@
             <!-- End Heading -->
         
             <div class="row justify-content-center">
-                <div class="col-lg-4" style="border-right: 1px solid #8C98A4;">
+                <div class="col-lg-4 col-sm-11">
                     <div class="justify-content-center text-center">
                         <img class="avatar avatar-xxl avatar-4x3" src="static/components/oc-money-profits.svg" alt="Image Description" height="200px" width="200px">
                         <h2 class="preis"> € 4,99</h2>
@@ -180,18 +179,15 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 ms-5 mt-3">
-                    <div class="mb-4">
-                        <h5>Beinhaltet alles, was du benötigst:</h5>
-                    </div>
-            
+                <div class="col-lg-4 col-sm-11 ms-5 mt-3">
+                    <h5 class="mb-2 text-sm-center">Beinhaltet alles, was du benötigst:</h5>
                     <!-- List Checked -->
-                    <ul class="list-checked list-checked-primary justify-content-left mb-0">
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Unlimitierte KI-Abfragen</li>
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Excel und Google Templates <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Unsere Templates werden regelmäßig geupdatet und ergänzt"></i></li>
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>SQL Formeln</li>
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Erklärungen</li>
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Support <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Wir unterstützen dich jederzeit bei Fragen"></i></li>
+                    <ul class="list-checked list-checked-primary mb-0">
+                        <li class="list-checked-item text-sm-center py-1"><i class="fa-solid fa-check pe-2"></i>Unlimitierte KI-Abfragen</li>
+                        <li class="list-checked-item text-sm-center py-1"><i class="fa-solid fa-check pe-2"></i>Excel und Google Templates <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Unsere Templates werden regelmäßig geupdatet und ergänzt"></i></li>
+                        <li class="list-checked-item text-sm-center py-1"><i class="fa-solid fa-check pe-2"></i>SQL Formeln</li>
+                        <li class="list-checked-item text-sm-center py-1"><i class="fa-solid fa-check pe-2"></i>Erklärungen</li>
+                        <li class="list-checked-item text-sm-center py-1"><i class="fa-solid fa-check pe-2"></i>Support <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Wir unterstützen dich jederzeit bei Fragen"></i></li>
                     </ul>
                 <!-- End List Checked -->
                 </div>
@@ -199,31 +195,31 @@
             <!-- End Col -->
            
             <!-- End Row -->
-            <div class="row justify-content-center my-5">
-                <div class="pricing-info mx-auto" style="max-width: 40.25rem;">
-                    <!-- Alert -->
-                    <div class="alert alert-soft-primary" role="alert">
-                        <div class="d-sm-flex align-items-sm-center">
-                        <div class="flex-shrink-0 mb-3 mb-sm-0">
-                        </div>
-                        <div><i class="fa-solid fa-bell fa-2xl me-2"></i></div>
-                        <div class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
-                          Optimiere deine Arbeitsabläufe jetzt mit IQSheets
-                        </div>
-                        <div class="flex-shrink-0 ms-sm-3">
-                            <a class="btn btn-primary mt-2 p-3" href="{{url_for('user.register')}}">Kostenlos probieren</a>
-                        </div>
-                        </div>
-                    </div>
-                    <!-- End Alert -->
-                </div>
-            </div>
+						<div class="row">
+							<div class="pricing-info mx-auto mt-3" style="max-width: 45rem;">
+								<!-- Alert -->
+								<div class="alert alert-soft-primary mx-auto" role="alert">
+										<div class="d-flex align-items-center">
+										
+											<i class="fa-solid fa-bell fa-2xl me-2"></i> 	
+											<p class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
+												Optimiere deine Arbeitsabläufe jetzt mit IQSheets
+											</p>
+												<!-- Button trigger modal -->
+												<a type="button" class="btn btn-primary mt-2 p-2" href="{{url_for('user.register')}}">
+													Kostenlos probieren
+												</a>
+										</div>
+								</div>
+								<!-- End Alert -->
+							</div>
+						</div>
         </div>
+	</section>
   <!-- End Pricing -->
-    </section>
 
     <!-- Best Features Start -->
-    <section class="features mt-5" id="features">
+  <section class="features mt-5" id="features">
         <div class="container pt-5">
             <!-- Section Title -->
             <div class="row d-flex justify-content-center ">
@@ -235,12 +231,12 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center pb-5">
-                <div class="col-6 text-center mb-4">
-                  <img src="{{url_for('static', filename='components/oc-error.svg')}}" alt="" height="300px" width="300px">
+            <div class="row pb-5">
+                <div class="col-lg-6 col-md-12 col-sm-12 text-center mb-4">
+                  <img src="{{url_for('static', filename='components/oc-error.svg')}}" alt="" class="img-fluid" style="max-width: 80%; height: auto;">
                 </div>
-                <div class="col-6 mb-5">
-                    <table class="feature-table">
+                <div class="col-lg-6 col-md-12 mb-5">
+                    <table class="feature-table table-lg mx-auto mt-sm-3" style="width:100%">
                         <thead>
                             <tr>
                               <th scope="col"></th>
@@ -307,7 +303,6 @@
                     </table>
                 </div>
             </div>
-            <!-- Features -->
             <div class="row justify-content-center text-center pb-5">
               <div class="col-3 key-facts">
                 <h2 class="text-center">5h</h2>
@@ -325,10 +320,12 @@
                 <p>sparen als Consultant</p>
               </div>
             </div>
-    </section>
+		</div>
+  </section>
+	<!-- Best Features End -->
 
     <!-- Testimonials -->
-  <section class="testimonials mt-5 pb-5">
+	<section class="testimonials mt-5 pb-5">
         <div class="customers">
             <div class="container">
                 <div class="row d-flex justify-content-center">
@@ -447,8 +444,9 @@
             </div>
         </div>
   </section>   
-    <!-- Our Customer End -->
+    <!-- Testimonials End -->
 
+	<!-- Pricing Start -->
   <section class="calculator py-3">
     <div class="container">
       <div class="section-title text-center">
@@ -456,89 +454,91 @@
         <p>Du arbeitest täglich mit Spreadsheets und möchtest deinen Arbeitsaufwand reduzieren.</p>
         <p> Errechne jetzt wie viel du einsparen könntest.</p>
       </div>
-      <div class="row justify-content-center text-center pt-5">
-        <div class="col-4 fact-col">
+      <div class="row justify-content-center text-center gap-5 mt-2 pt-5">
+        <div class="col-3 fact-col">
           <h4>10K Formeln</h4>
           <p>automatisch generiert</p>
         </div>
-        <div class="col-4 fact-col">
+        <div class="col-3 fact-col">
           <h5>200+ Arbeitsstunden</h5>
           <p>eingespart</p>
         </div>
-        <div class="col-4 fact-col">
+        <div class="col-3 fact-col">
           <h5>500 Templates</h5>
           <p>von Nutzern gedownloadet</p>
         </div>
       </div>  
-      <div class="row justify-content-center my-5">
-        <div class="pricing-info mx-auto" style="max-width: 40.25rem;">
+      <div class="row my-5">
+        <div class="pricing-info mx-auto mt-2" style="max-width: 45rem;">
             <!-- Alert -->
-            <div class="alert alert-soft-primary" role="alert">
-                <div class="d-sm-flex align-items-sm-center">
+            <div class="alert alert-soft-primary mx-auto" role="alert">
+                <div class="d-flex align-items-center">
                 
-                <div><i class="fa-solid fa-bolt-lightning fa-2xl me-2"></i></div>
-                <div class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
-                  Jetzt Ersparniss berechnen
-                </div>
-                <div class="mt-2">
+                	<i class="fa-solid fa-bolt-lightning fa-2xl me-2"></i> 	
+                	<p class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
+                  		Jetzt Ersparniss berechnen
+									</p>
                     <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-secondary px-3" id="calcualate-btn" data-bs-toggle="modal" data-bs-target="#calculatorModal">
-                    Berechnen
-                  </button>
-                </div>
+                  	<button type="button" class="btn btn-secondary px-3" id="calcualate-btn" data-bs-toggle="modal" data-bs-target="#calculatorModal">
+                    	Berechnen
+                  	</button>
                 </div>
             </div>
             <!-- End Alert -->
         </div>
       </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="calculatorModal" tabindex="-1" aria-labelledby="calculatorModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="calculatorModalLabel">Errechne deine Ersparnis</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row justify-content-center">
-              <div class="col-lg-6 justify-content-center calculator-line">
-                <form id="calculator-form">
-                  <div class="mt-3">
-                    <label for="hours" class="form-label text-center">Stündlicher Arbeitsaufwand pro Woche mit Excel oder GSheets?</label>
-                    <input class="form-control" type="number" id="hours" required>
-                  </div>
-                  <div class="mt-3">
-                    <label class="form-label" for="hourly-wage">Dein Stundenlohn in €</label>
-                    <p class="calculator-form-explanation">(Tipp: Jahresgehalt / 2052)</p>
-                    <input class="form-control" type="number" id="hourly-wage" required>
-                  </div>
-                  <div class="mt-3 text-center">
-                    <button type="button" class="btn btn-secondary px-5 py-1" id="calculate">Berechnen</button>
-                  </div>
-                </form>
-              </div>
-              <div class="col-lg-6 justify-content-center text-center">
-                <p class="pt-2">Deine mögliche Ersparniss in EUR</p>
-                <div class="card mb-5">
-                  <div class="card-body" id="result"></div>
-                </div>
-                <p class="mt-5">Deine mögliche Ersparniss in Stunden pro Woche </p>
-                <div class="card">
-                  <div class="card-body" id="result2"></div>
-                </div>
-                <div class="mt-3 text center">
-                  <a class="btn btn-primary px-5 p-3 mt-3 shadow-lg" target="_blank" href="{{url_for('user.register')}}">Jetzt registrieren</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>  
+			<!-- Modal -->
+			<div class="row">
+				<div class="modal fade" id="calculatorModal" tabindex="-1" aria-labelledby="calculatorModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-xl">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="calculatorModalLabel">Errechne deine Ersparnis</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="row justify-content-center">
+									<div class="col-lg-6 justify-content-center calculator-line">
+										<form id="calculator-form">
+											<div class="mt-3">
+												<label for="hours" class="form-label text-center">Stündlicher Arbeitsaufwand pro Woche mit Excel oder GSheets?</label>
+												<input class="form-control" type="number" id="hours" required>
+											</div>
+											<div class="mt-3">
+												<label class="form-label" for="hourly-wage">Dein Stundenlohn in €</label>
+												<p class="calculator-form-explanation">(Tipp: Jahresgehalt / 2052)</p>
+												<input class="form-control" type="number" id="hourly-wage" required>
+											</div>
+											<div class="mt-3 text-center">
+												<button type="button" class="btn btn-secondary px-5 py-1" id="calculate">Berechnen</button>
+											</div>
+										</form>
+									</div>
+									<div class="col-lg-6 justify-content-center text-center">
+										<p class="pt-2">Deine mögliche Ersparniss in EUR</p>
+										<div class="card mb-5">
+											<div class="card-body" id="result"></div>
+										</div>
+										<p class="mt-5">Deine mögliche Ersparniss in Stunden pro Woche </p>
+										<div class="card">
+											<div class="card-body" id="result2"></div>
+										</div>
+										<div class="mt-3 text center">
+											<a class="btn btn-primary px-5 p-3 mt-3 shadow-lg" target="_blank" href="{{url_for('user.register')}}">Jetzt registrieren</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+			</div>
+			 
     </div>    
   </section>
+	<!-- Pricing Start -->
 
+	<!-- FAQs Start -->
   <section class="faqs my-5">
     <div class="container">
       <div class="row justify-content-center" id="faqs">
@@ -607,7 +607,9 @@
       </div>
     </div>
   </section>
+	<!-- FAQs End -->
 
+	<!-- CTA Start -->
   <section class="cta my-5">
     <div class="container py-5">
       <div class="row justify-content-center">
@@ -627,6 +629,7 @@
       </div>
     </div>
   </section>
+	<!-- CTA End -->
 
 </main>
 {% endblock %}
