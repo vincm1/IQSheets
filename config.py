@@ -46,14 +46,14 @@ class BaseConfig(object):
     STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_TEST')
     #Other
     KONTAKT_IQSHEETS = os.getenv('KONTAKT_IQSHEETS')
-    LOG_WITH_GUNICORN = os.getenv('LOG_WITH_GUNICORN', default=False)
+    LOG_WITH_GUNICORN = os.getenv('LOG_WITH_GUNICORN', default=False)    
+    SECURITY_PASSWORD_SALT = os.getenv('SECURITY_PASSWORD_SALT')
     
 # Create the development config
 class DevelopmentConfig(BaseConfig):
     ''' Config for development '''
     DEBUG = True
     FLASK_ENV = 'development'
-    SECURITY_PASSWORD_SALT = os.getenv('SECURITY_PASSWORD_SALT ')
     db_user = os.getenv('DB_USER')
     db_pw = os.getenv('DB_PW')
     db_uri = os.getenv('DB_URI')

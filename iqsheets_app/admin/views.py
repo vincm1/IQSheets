@@ -19,7 +19,8 @@ class MyAdminIndexView(AdminIndexView):
         return True
     
     def inacessible_callback(self, name, **kwargs):
-        if not current_user.is_authenticated:
+        ''' Check if current user is admin '''
+        if not current_user.is_admin:
             return redirect(url_for('user.login'))
 
 class UserView(ModelView):
