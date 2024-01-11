@@ -73,6 +73,9 @@ def create_app(config_name=None):
             create_admin_user(email=os.environ.get('ADMIN_EMAIL'),
                               password=generate_password_hash((os.environ.get('ADMIN_EMAIL'))))
 
+        # Log mode of app
+        app.logger.info(f"{app.debug}")
+        
         return app
 
 def configure_logging(app):

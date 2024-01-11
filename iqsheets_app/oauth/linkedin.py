@@ -20,7 +20,7 @@ else:
         client_id=current_app.config['LINKEDIN_OAUTH_CLIENT_ID'],
         client_secret=current_app.config['LINKEDIN_OAUTH_CLIENT_SECRET'],
         scope=["r_liteprofile", "r_emailaddress"],
-        redirect_url="https://iqsheets.de/login/linkedin/authorized",
+        redirect_url="https://www.iqsheets.de/login/linkedin/authorized",
         storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
     )
 

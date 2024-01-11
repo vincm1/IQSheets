@@ -22,7 +22,7 @@ else:
         client_secret=current_app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
         scope=["profile", "email"],
         storage=SQLAlchemyStorage(OAuth, db.session, user=current_user),
-        redirect_url="https://iqsheets.de/login/google/authorized"
+        redirect_url="https://www.iqsheets.de/login/google/authorized"
     )
 
 # create/login local user on successful OAuth login
