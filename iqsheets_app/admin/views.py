@@ -38,8 +38,7 @@ class SubscriptionsView(BaseView):
         if current_app.debug:
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
         else:
-            stripe.api_key = current_app.config['STRIPE_PUBLIC_KEY_PROD']
-        print(stripe.api_key)
+            stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
         customers = stripe.Customer.list()
         subscriptions = stripe.Subscription.list()
         return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions)
