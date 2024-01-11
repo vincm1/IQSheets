@@ -87,8 +87,8 @@ class ProductionConfig(BaseConfig):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_ENV = 'production'
     S3_BUCKET = os.getenv('S3_BUCKET')
-    STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_PROD')
-    STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_PROD')
+    STRIPE_PUBLIC_KEY_PROD = os.environ.get('STRIPE_PUBLIC_KEY_PROD')
+    STRIPE_SECRETKEY_PROD = os.environ.get('STRIPE_SECRETKEY_PROD')
     
 
 config = {

@@ -13,8 +13,8 @@ function updateText() {
     currentIndex = (currentIndex + 1) % textMessages.length;
 }
 
-// Change the text every 3 seconds (3000 milliseconds)
-var interval = setInterval(updateText, 3000);
+// Change the text every 1.5 seconds (3000 milliseconds)
+var interval = setInterval(updateText, 1500);
 
 
 // Calculator Landing Page // 
