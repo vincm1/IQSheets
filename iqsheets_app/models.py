@@ -39,17 +39,14 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         """ check hashed password """ 
         return check_password_hash(self.password_hash, password)
-    
+     
     def check_payment(self):
         """ Check whether payment of a user was successful """
         # Stripe API Key
         if current_app.debug: 
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
-            YOUR_DOMAIN = 'http://localhost:5000'
         else:
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
-            YOUR_DOMAIN = 'https://www.iqsheets.de' 
-        
         if self.is_admin is False: 
             try:
                 resp = stripe.Customer.list(email=self.email)

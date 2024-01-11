@@ -12,16 +12,15 @@ from flask_admin.contrib.sqla import ModelView
 from iqsheets_app import db
 from iqsheets_app.models import Template
 
-stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
 class MyAdminIndexView(AdminIndexView):
     ''' Index view for admin panel '''
     def is_accessible(self):
-        return True
+        return current_user.is_admin
     
     def inacessible_callback(self, name, **kwargs):
         ''' Check if current user is admin '''
-        if not current_user.is_admin:
-            return redirect(url_for('user.login'))
+        print("here")
+        return redirect(url_for('dashboard.dashboard'))
 
 class UserView(ModelView):
     form_columns = ['id', 'username', 'email', 'job_description', 'profile_picture'
@@ -36,6 +35,11 @@ class AnalyticsView(BaseView):
 class SubscriptionsView(BaseView):
     @expose('/')
     def index(self):
+        if current_app.debug:
+            stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
+        else:
+            stripe.api_key = current_app.config['STRIPE_PUBLIC_KEY_PROD']
+        print(stripe.api_key)
         customers = stripe.Customer.list()
         subscriptions = stripe.Subscription.list()
         return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions)

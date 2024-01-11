@@ -72,6 +72,7 @@ def login():
                         return redirect(url_for('dashboard.dashboard'))
                     else:
                         user.check_payment()
+                        print(user.stripe_customer_id, user.stripe_sub_idc)
                         if user.stripe_customer_id and user.stripe_sub_id is not None:
                             login_user(user, remember=True)
                             return redirect(url_for('dashboard.dashboard'))
