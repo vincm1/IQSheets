@@ -10,7 +10,7 @@ from iqsheets_app import db, login_manager
 # Stripe API Key
 if current_app.debug: 
     stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
-    YOUR_DOMAIN = 'http://localhost:5000''
+    YOUR_DOMAIN = 'http://localhost:5000'
 else:
     stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
     YOUR_DOMAIN = 'https://www.iqsheets.de'
