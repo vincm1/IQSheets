@@ -8,12 +8,22 @@ from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from sqlalchemy.orm.exc import NoResultFound
 from iqsheets_app.models import db, User, OAuth
 
-google_blueprint = make_google_blueprint(
-    client_id=current_app.config['GOOGLE_OAUTH_CLIENT_ID'],
-    client_secret=current_app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
-    scope=["profile", "email"],
-    storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
-)
+if current_app.debug:
+    google_blueprint = make_google_blueprint(
+        client_id=current_app.config['GOOGLE_OAUTH_CLIENT_ID'],
+        client_secret=current_app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
+        scope=["profile", "email"],
+        storage=SQLAlchemyStorage(OAuth, db.session, user=current_user),
+        redirect_url="http://127.0.0.1:5000/login/google/authorized"
+    )
+else:
+    google_blueprint = make_google_blueprint(
+        client_id=current_app.config['GOOGLE_OAUTH_CLIENT_ID'],
+        client_secret=current_app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
+        scope=["profile", "email"],
+        storage=SQLAlchemyStorage(OAuth, db.session, user=current_user),
+        redirect_url="https://iqsheets.de/login/google/authorized"
+    )
 
 # create/login local user on successful OAuth login
 @oauth_authorized.connect_via(google_blueprint)

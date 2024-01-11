@@ -7,13 +7,22 @@ from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from sqlalchemy.orm.exc import NoResultFound
 from iqsheets_app.models import db, User, OAuth
 
-linkedin_blueprint = make_linkedin_blueprint(
-    client_id=current_app.config['LINKEDIN_OAUTH_CLIENT_ID'],
-    client_secret=current_app.config['LINKEDIN_OAUTH_CLIENT_SECRET'],
-    scope=["r_liteprofile", "r_emailaddress"],
-    redirect_url="http://127.0.0.1:5000/login/linkedin/authorized",
-    storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
-)
+if current_app.debug:
+    linkedin_blueprint = make_linkedin_blueprint(
+        client_id=current_app.config['LINKEDIN_OAUTH_CLIENT_ID'],
+        client_secret=current_app.config['LINKEDIN_OAUTH_CLIENT_SECRET'],
+        scope=["r_liteprofile", "r_emailaddress"],
+        redirect_url="http://127.0.0.1:5000/login/linkedin/authorized",
+        storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
+    )
+else:
+    linkedin_blueprint = make_linkedin_blueprint(
+        client_id=current_app.config['LINKEDIN_OAUTH_CLIENT_ID'],
+        client_secret=current_app.config['LINKEDIN_OAUTH_CLIENT_SECRET'],
+        scope=["r_liteprofile", "r_emailaddress"],
+        redirect_url="https://iqsheets.de/login/linkedin/authorized",
+        storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
+    )
 
 # create/login local user on successful OAuth login
 @oauth_authorized.connect_via(linkedin_blueprint)
