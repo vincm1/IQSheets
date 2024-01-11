@@ -14,7 +14,6 @@ if current_app.debug:
         redirect_url="http://127.0.0.1:5000/login/linkedin/authorized",
         storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
     )
-    stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={current_user.email}"
 else:
     linkedin_blueprint = make_linkedin_blueprint(
         client_id=current_app.config['LINKEDIN_OAUTH_CLIENT_ID'],
@@ -23,7 +22,6 @@ else:
         redirect_url="https://www.iqsheets.de/login/linkedin/authorized",
         storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
     )
-    stripe_link = f"https://buy.stripe.com/fZe4iy3C34ItctG000?https://buy.stripe.com/fZe4iy3C34ItctG000?prefilled_email={current_user.email}"
     
 # create/login local user on successful OAuth login
 @oauth_authorized.connect_via(linkedin_blueprint)
@@ -84,6 +82,10 @@ def linkedin_logged_in(blueprint, token):
         db.session.add_all([user, oauth])
         db.session.commit()
         # Redirect to Stripe signup if payment details are missing
+        if current_app.debug:    
+            stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={current_user.email}"
+        else: 
+            stripe_link = f"https://buy.stripe.com/fZe4iy3C34ItctG000?https://buy.stripe.com/fZe4iy3C34ItctG000?prefilled_email={current_user.email}"
         return redirect(stripe_link)
     
     # Disable Flask-Dance's default behavior for saving the OAuth token

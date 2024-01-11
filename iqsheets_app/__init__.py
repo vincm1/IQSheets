@@ -2,13 +2,12 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
-
 from flask import Flask, render_template
+from flask.logging import default_handler
 from werkzeug.security import generate_password_hash
 from config import config
 from .extensions import db, migrate, login_manager, mail
 from .admin.admin import create_admin, create_admin_user
-from flask.logging import default_handler
 
 def create_app(config_name=None):
     '''Factory to create Flask application'''
