@@ -12,7 +12,7 @@ from flask_admin.contrib.sqla import ModelView
 from iqsheets_app import db
 from iqsheets_app.models import Template
 
-stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2AbKIYPWl2LXKPW3U3h6Lu71E94Gf1NvrHKE00xPsZzRZZ"
+stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
 class MyAdminIndexView(AdminIndexView):
     ''' Index view for admin panel '''
     def is_accessible(self):
