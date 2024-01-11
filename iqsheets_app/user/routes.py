@@ -1,17 +1,16 @@
 """Routes for user"""
 from datetime import datetime
 import stripe
-from flask import Blueprint, render_template, redirect, request, flash, url_for
+from flask import Blueprint, render_template, redirect, request, flash, url_for, current_app
 from flask_login import login_user, login_required, logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash
 from iqsheets_app import db
 from iqsheets_app.models import User
 from iqsheets_app.core.forms import NewsletterForm
+from iqsheets_app.utils.decorators import check_confirmed_mail, non_oauth_required
 from .forms import RegistrationForm, LoginForm, EditUserForm, ChangePasswordForm, ResetPasswordRequestForm, ResetPasswordForm
 from .token import generate_confirmation_token, confirm_token
 from .email import send_email
-from iqsheets_app.utils.decorators import check_confirmed_mail, non_oauth_required
 
 ################
 #### config ####
@@ -19,10 +18,13 @@ from iqsheets_app.utils.decorators import check_confirmed_mail, non_oauth_requir
 
 user_blueprint = Blueprint('user', __name__)
 
-stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2AbKIYPWl2LXKPW3U3h6Lu71E94Gf1NvrHKE00xPsZzRZZ"
-
-YOUR_DOMAIN = 'http://localhost:5000'
-
+if current_app.debug: 
+    stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
+    YOUR_DOMAIN = 'http://localhost:5000'
+else:
+    stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
+    YOUR_DOMAIN = 'https://www.iqsheets.de'
+    
 ################
 #### routes ####
 ################
@@ -74,7 +76,10 @@ def login():
                             login_user(user, remember=True)
                             return redirect(url_for('dashboard.dashboard'))
                         else:
-                            return redirect(f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}")    
+                            if current_app.debug:
+                                return redirect(f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}")  
+                            else:
+                                return redirect(f"https://buy.stripe.com/fZe4iy3C34ItctG000?https://buy.stripe.com/fZe4iy3C34ItctG000?prefilled_email={user.email}")                              
                 else:
                     flash('Prüfe deine Anmeldedaten!', 'danger')
                     return redirect(url_for('user.login'))

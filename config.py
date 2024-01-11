@@ -41,9 +41,6 @@ class BaseConfig(object):
     LINKEDIN_OAUTH_CLIENT_SECRET = os.getenv('LINKEDIN_OAUTH_CLIENT_SECRET')
     FACEBOOK_OAUTH_CLIENT_ID = os.getenv('FACEBOOK_OAUTH_CLIENT_ID')
     FACEBOOK_OAUTH_CLIENT_SECRET = os.getenv('FACEBOOK_OAUTH_CLIENT_SECRET')
-    #Stripe
-    STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_TEST')
-    STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_TEST')
     #Other
     KONTAKT_IQSHEETS = os.getenv('KONTAKT_IQSHEETS')
     LOG_WITH_GUNICORN = os.getenv('LOG_WITH_GUNICORN', default=False)    
@@ -59,7 +56,9 @@ class DevelopmentConfig(BaseConfig):
     db_uri = os.getenv('DB_URI')
     db_url = f"postgresql+psycopg2://{db_user}:{db_pw}{db_uri}"
     SQLALCHEMY_DATABASE_URI = db_url
-    
+    #Stripe
+    STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_TEST')
+    STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_TEST')
     #Oauth
     GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
     GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
@@ -88,6 +87,9 @@ class ProductionConfig(BaseConfig):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_ENV = 'production'
     S3_BUCKET = os.getenv('S3_BUCKET')
+    STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_PROD')
+    STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_PROD')
+    
 
 config = {
     "development": DevelopmentConfig,

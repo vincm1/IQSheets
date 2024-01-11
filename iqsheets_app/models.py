@@ -1,14 +1,19 @@
 ''' IQ_Sheets DB Models '''
 from datetime import datetime
 import stripe
+from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 from iqsheets_app import db, login_manager
 
-stripe.api_key = "sk_test_51MpD8VHjForJHjCtVZ317uTWseSh0XxZkuguQKo9Ei3WjaQdMDpo2AbKIYPWl2LXKPW3U3h6Lu71E94Gf1NvrHKE00xPsZzRZZ"
-
-YOUR_DOMAIN = 'http://localhost:5000'
+# Stripe API Key
+if current_app.debug: 
+    stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
+    YOUR_DOMAIN = 'http://localhost:5000''
+else:
+    stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
+    YOUR_DOMAIN = 'https://www.iqsheets.de'
 
 # Login Manager User loader
 @login_manager.user_loader
