@@ -1,4 +1,5 @@
 ''' Core routes for landing page etc. '''
+import stripe
 from flask import Blueprint, current_app, render_template, jsonify, request, flash, redirect, url_for, make_response
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
@@ -57,7 +58,11 @@ def index():
     ''' Landing Page '''
     form_nl = NewsletterForm()
     is_debug = current_app.debug
-    return render_template('index.html', form_nl=form_nl, is_debug=is_debug)
+    if current_app.debug:
+        stripe_api_key = current_app.config['STRIPE_SECRETKEY_TEST']
+    else:
+        stripe_api_key = current_app.config['STRIPE_SECRETKEY_PROD']
+    return render_template('index.html', form_nl=form_nl, is_debug=is_debug, stripe_api_key=stripe_api_key)
 
 @core_blueprint.route("/impressum", methods=["GET"])
 def impressum():

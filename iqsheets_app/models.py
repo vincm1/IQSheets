@@ -47,7 +47,7 @@ class User(db.Model, UserMixin):
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
         else:
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
-        if self.is_admin is False: 
+        if self.is_admin is False:
             try:
                 resp = stripe.Customer.list(email=self.email)
                 if resp.get('data'):
