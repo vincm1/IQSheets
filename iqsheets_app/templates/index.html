@@ -1,8 +1,5 @@
 {% extends "base.html" %} {% block content %}
 <main>
-	<div class="container">
-
-  </div>
   <!-- Hero Start -->
 	<section class="hero pt-5 pb-4 ">
 		<div class="container hero pt-5 pb-5">
@@ -155,8 +152,12 @@
                         </div>
                     </div>
                 </div> 
-					</div>
-                  
+				</div>
+        
+        <div class="row video mt-5">
+          <video src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/videos/IQSheetsVid.mp4" controls></video>
+        </div>
+        
       </div>
   </section>
 	<!-- How to End -->
@@ -164,7 +165,7 @@
 	<!-- Pricing Start -->
   <section class="pricing">
             <!-- Pricing -->
-        <div class="container pricing mt-2">
+        <div class="container pricing mt-4">
             <!-- Heading -->
             <div class="mb-5 text-center py-2"  id="pricing">
                 <h3>Ein Plan für Jeden</h3>
@@ -545,7 +546,7 @@
   <section class="faqs my-5">
     <div class="container">
       <div class="row justify-content-center" id="faqs">
-        <img src="https://iqsheetsbucketprod.s3.eu-central-1.amazonaws.com/bilder/faqs.png" height="230" alt="FAQ-picture">
+        <img src="{{url_for('static', filename='components/oc-thinking.svg')}}" height="230" alt="FAQ-picture">
       </div>
       <div class="section-title text-center pt-5">
         <h2>FAQs</h2>

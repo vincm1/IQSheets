@@ -144,9 +144,14 @@ def dashboard():
         most_used = most_used[0].capitalize()
     else:
         most_used = "/"
+        
+    if current_app.debug:
+        stripe_user_payment_link = "https://billing.stripe.com/p/login/test_28o3fw9S44IEfOE8ww"
+    else:
+        stripe_user_payment_link = "https://billing.stripe.com/p/login/aEU4gD2fT472awE3cc"
     return render_template('dashboard/dashboard.html', num_prompts=num_prompts, 
                            favorites=favorite_prompt, most_used=most_used, 
-                           time_saved=time_saved)
+                           time_saved=time_saved, stripe_user_payment_link=stripe_user_payment_link)
 
 @dashboard_blueprint.route('/<prompt_type>', methods=['GET', 'POST'])
 @login_required
