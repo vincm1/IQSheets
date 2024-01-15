@@ -69,20 +69,18 @@ def login():
                 if user.check_password(form.password.data):
                     if user.is_admin:
                         login_user(user, remember=True)
-                        return redirect(url_for('dashboard.dashboard'))
                     else:
                         user.check_payment()
-                        print(user.stripe_customer_id, user.stripe_sub_idc)
                         if user.stripe_customer_id and user.stripe_sub_id is not None:
                             login_user(user, remember=True)
-                            return redirect(url_for('dashboard.dashboard'))
                         else:
                             if current_app.debug:
-                                return redirect(f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}")  
+                                stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}"
+                                return redirect(stripe_link)
                             else:
-                                return redirect(f"https://buy.stripe.com/fZe4iy3C34ItctG000?https://buy.stripe.com/fZe4iy3C34ItctG000?prefilled_email={user.email}")                              
+                                stripe_link = f"https://buy.stripe.com/fZe4iy3C34ItctG000?https://buy.stripe.com/fZe4iy3C34ItctG000?prefilled_email={user.email}"
+                                return redirect(stripe_link)                          
                 else:
-                    flash('Prüfe deine Anmeldedaten!', 'danger')
                     return redirect(url_for('user.login'))
             else:
                 flash('Bitte bestätige deine Anmeldung per Link', 'danger')
