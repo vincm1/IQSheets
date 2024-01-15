@@ -16,7 +16,7 @@
 		<div class="favorite-cards">
 			<div class="row">
 				{% for formula in favorite_formulas %}
-				<div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-2 response">
+				<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 py-2 response">
 					<div class="card">
 						<div class="card-header py-4">
 							{% if formula.prompt_type == "Formula" %}
@@ -125,7 +125,7 @@
 					{% endfor %}
 					{% if favorite_formulas.page != favorite_formulas.pages %}
 						<a href="{{ url_for('dashboard.favorites', username=current_user.username, page=favorite_formulas.next_num) }}"
-						class="btn btn-outline-primary
+						class="btn btn-secondary
 						{% if favorite_formulas.page == favorite_formulas.pages %}disabled{% endif %}">
 							&raquo;
 						</a>

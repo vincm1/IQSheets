@@ -183,15 +183,11 @@ def edit_password():
 @check_confirmed_mail
 def user_payments():
     """ User payments routes """
-    stripe_sub_id = current_user.stripe_sub_id
-    sub = stripe.Subscription.retrieve(id=stripe_sub_id)
-    stripe_cust_id = current_user.stripe_customer_id
-    created_date, days_to_due = datetime.utcfromtimestamp(sub['created']).strftime('%d.%m.%Y'), sub['days_until_due']
-    current_payment_start, current_payment_end = datetime.utcfromtimestamp(sub["current_period_start"]).strftime('%d.%m.%Y'), datetime.utcfromtimestamp(sub["current_period_end"]).strftime('%d.%m.%Y')
-    
-    return render_template('user/payments.html', sub=sub, stripe_cust_id=stripe_cust_id,
-                           stripe_sub_id=stripe_sub_id, created_date=created_date, days_to_due=days_to_due,
-                           current_payment_start=current_payment_start, current_payment_end=current_payment_end)
+    if current_app.debug:
+        stripe_user_payment_link = current_app.config["STRIPE_TEST_PAYMENTPAGE"]
+    else:
+        stripe_user_payment_link = current_app.config["STRIPE_TEST_PAYMENTPAGE"]
+    return redirect(stripe_user_payment_link)
 
 @user_blueprint.route('/passwort_zuruecksetzen', methods=['GET', 'POST'])
 def reset_password_request():

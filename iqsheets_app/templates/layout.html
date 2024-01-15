@@ -67,18 +67,18 @@
           </li>
         </ul>
 
-        <div class="dropdown user-menu text-center" id="usermenu">
+        <div class="dropdown user-menu text-center justify-content-start" id="usermenu">
             <i class="fa-solid fa-circle-user fa-2xl my-2 py-2 ms-2" id="usericon"></i>
             <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle" id="user-dropdown-toggle" 
               data-bs-toggle="dropdown" aria-expanded="false">
               {% if current_user.firstname and current_user.lastname %}
-              <strong class="username text-center ms-1" id="usernameid" >{{current_user.firstname}} {{current_user.lastname}}</strong>
+                <strong class="username text-center ms-1" id="usernameid" >{{current_user.firstname}} {{current_user.lastname}}</strong>
               {% else %}
-              <strong class="username text-center ms-1" id="usernameid">{{current_user.email}}</strong>
+                <strong class="username text-center ms-1" id="usernameid">{{current_user.email}}</strong>
               {% endif %}
             </a>
             <ul class="dropdown-menu text-small shadow mb-2">
-              <li><a class="dropdown-item" href="{{stripe_user_payment_link}}" target="_blank">
+              <li><a class="dropdown-item" href="{{url_for('user.user_payments')}}" target="_blank">
                 <i class="fa-solid fa-wallet fa-xs pe-2"></i><strong class="dropdown-text">Zahlungen</strong></a>
               </li>
               <li>

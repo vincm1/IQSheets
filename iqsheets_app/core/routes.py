@@ -75,7 +75,7 @@ def impressum():
 def kontakt():
     ''' Contact Page '''
     form_contact = ContactForm()
-    if form_contact.validate_on_submit():
+    if form_contact.validate_on_submit() and request.method == "POST":
         send_email(
             to=current_app.config['KONTAKT_IQSHEETS'],
             subject=form_contact.betreff.data,

@@ -259,11 +259,13 @@ body {
   }
 
   .user-menu {
-    position: absolute;
+    position: relative;
     left: 40%;
+    top: 93vh;
     bottom: 2%; /* Adjust as necessary to position above the username */
     transform: translateX(-50%); /* Center the menu horizontally */
-    width: 100%; /* Adjust the width as needed */
+    width: 100%;
+     /* Adjust the width as needed */
     /* Additional styling for user-menu */
   }
 
@@ -566,10 +568,6 @@ body {
     color: var(--bs-body-color);
 }
 
-.generator-card {
-  margin-right: 1rem;
-}
-
 @media (max-width: 1000px) {
   .result-card {
       margin-top: 5px; /* Example margin value, adjust as needed */
@@ -770,6 +768,7 @@ th {
 #result-icon {
     color: var(--bs-link-hover-color);
 }
+
 
 .user-input #usericon {
   color: var(--bs-link-color-hover)

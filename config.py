@@ -65,6 +65,7 @@ class DevelopmentConfig(BaseConfig):
     #Stripe test keys
     STRIPE_PUBLIC_KEY_TEST = os.environ.get('STRIPE_PUBLIC_KEY_TEST')
     STRIPE_SECRETKEY_TEST = os.environ.get('STRIPE_SECRETKEY_TEST')
+    STRIPE_TEST_PAYMENTPAGE = os.environ.get('STRIPE_TEST_PAYMENTPAGE')
     # Amazon S3
     S3_BUCKET = os.getenv('S3_BUCKET_DEV')
 
@@ -89,6 +90,7 @@ class ProductionConfig(BaseConfig):
     S3_BUCKET = os.getenv('S3_BUCKET')
     STRIPE_PUBLIC_KEY_PROD = os.environ.get('STRIPE_PUBLIC_KEY_PROD')
     STRIPE_SECRETKEY_PROD = os.environ.get('STRIPE_SECRETKEY_PROD')
+    STRIPE_PROD_PAYMENTPAGE = os.environ.get('STRIPE_PROD_PAYMENTPAGE')
     
 
 config = {
