@@ -1,6 +1,7 @@
 ''' Init file for app '''
 import os
 import logging
+from datetime import timedelta
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template
 from flask.logging import default_handler
@@ -36,6 +37,9 @@ def create_app(config_name=None):
 
     # Flask Admin instantiation
     create_admin(db).init_app(app)
+    
+    # Set the duration for the remember cookie
+    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=3)
     
     from iqsheets_app.models import User
     

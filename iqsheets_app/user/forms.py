@@ -1,7 +1,7 @@
 """ User forms """
 from flask import Markup
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, SubmitField, FileField, ValidationError
+from wtforms import StringField, PasswordField, EmailField, SubmitField, BooleanField, ValidationError
 from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp, Optional
 from iqsheets_app.models import User
 
@@ -20,6 +20,7 @@ class RegistrationForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[Email(), DataRequired()])
     password = PasswordField('Passwort', validators=[DataRequired()])
+    remember = BooleanField(default="checked", description="Lorem")
     submit = SubmitField('Login')
     
 class EditUserForm(FlaskForm):

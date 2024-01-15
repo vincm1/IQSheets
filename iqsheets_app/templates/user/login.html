@@ -1,26 +1,26 @@
 {% extends "main.html" %} {% block content %}
 <main>
   <section class="signup">
-    <div class="container mx-auto pt-5">
-      <div class="row justify-content-center pt-5">
-        <div class="col-sm-4 pt-5">
-          <!-- Flash messages -->
-          <div class="flashmessages">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                {% for category, message in messages %}
+    <div class="container mx-auto">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="row justify-content-center pt-1">
+            <div class="col-sm-4 pt-5">
+              <!-- Flash messages -->
+              <div class="flashmessages">
                   <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
                     {{ message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
-      <div class="row justify-content-center">
+      <div class="row justify-content-center pt-3">
         <div class="col-sm-4">
           <!-- Login Card -->
           <div class="card shadow-lg p-3 text-center login-card">
@@ -36,6 +36,12 @@
                 </div>
                 <div class="form-group my-4">
                   {{form.password(placeholder="Passwort", class="form-control")}}
+                </div>
+                <div class="form-check my-5">
+                  {{form.remember(class="form-check-input", type="checkbox", id="CheckDefault")}}
+                  <label class="form-check-label" for="CheckDefault">
+                    Erinnere Mich
+                  </label>
                 </div>
                 <div class="form-group mt-3">
                   {{form.submit(class="btn btn-primary w-100 py-2")}}

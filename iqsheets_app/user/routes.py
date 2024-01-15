@@ -68,11 +68,14 @@ def login():
                 # Check password of user
                 if user.check_password(form.password.data):
                     if user.is_admin:
-                        login_user(user, remember=True)
+                        login_user(user, remember=form.remember.data)
+                        return redirect(url_for('dashboard.dashboard'))
                     else:
                         user.check_payment()
                         if user.stripe_customer_id and user.stripe_sub_id is not None:
-                            login_user(user, remember=True)
+                            login_user(user, remember=form.remember.data)
+                            print(form.remember.data)
+                            return redirect(url_for('dashboard.dashboard'))
                         else:
                             if current_app.debug:
                                 stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}"
