@@ -98,6 +98,12 @@
 																			<li class="footer-link pt-2"><a href="{{url_for('core.index', _anchor='faqs')}}">FAQs</a></li>
 																			<li class="footer-link pt-2"><a href="{{url_for('core.agbs')}}">AGBs</a></li>
 																			<li class="footer-link pt-2"><a href="{{url_for('core.impressum')}}">Impressum</a></li>
+																			<li class="footer-link pt-2"><a href="https://www.iubenda.com/privacy-policy/91134987" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " 
+																				title="Datenschutzerklärung ">Datenschutzerklärung</a>
+																			</li>
+																			<li class="footer-link pt-2"><a href="https://www.iubenda.com/privacy-policy/91134987/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " 
+																				title="Cookie-Richtlinie ">Cookie-Richtlinie</a>
+																			</li>
 																	</ul>
 													</div>
 												</div>
@@ -186,5 +192,22 @@
     <!-- JS file -->
     <script src="{{url_for('static', filename='main.js')}}" charset="utf-8"></script>
     <script src="{{url_for('static', filename='newsletter.js')}}" charset="utf-8"></script>
+	<!-- iubenda (Cookies & Datenschutz) -->
+	<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; 
+		s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent)
+		{w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);
+	</script>
+	<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; 
+		s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent)
+		{w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);
+	</script>
+	<script type="text/javascript">
+		var _iub = _iub || [];
+		_iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"enableFadp":true,"enableLgpd":true,"enableUspr":true,"fadpApplies":true,"floatingPreferencesButtonDisplay":"bottom-right","lang":"de","perPurposeConsent":true,"siteId":3456894,"usprApplies":true,"whitelabel":false,"cookiePolicyId":91134987,"cookiePolicyUrl":"www.iqsheets.de","privacyPolicyUrl":"www.iqsheets.de","privacyPolicyNoticeAtCollectionUrl":"www.iqsheets.de/agbs", "banner":{ "acceptButtonCaptionColor":"#FFFFFF","acceptButtonColor":"#0073CE","acceptButtonDisplay":true,"backgroundColor":"#FFFFFF","closeButtonDisplay":false,"customizeButtonCaptionColor":"#4D4D4D","customizeButtonColor":"#DADADA","customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"position":"float-top-center","rejectButtonCaptionColor":"#FFFFFF","rejectButtonColor":"#0073CE","rejectButtonDisplay":true,"showTitle":false,"textColor":"#000000" }};
+		</script>
+		<script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3456894.js"></script>
+		<script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js"></script>
+		<script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async>
+	</script>
   </body>
 </html>
