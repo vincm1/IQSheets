@@ -4,6 +4,7 @@ import os
 import boto3
 import stripe
 from datetime import datetime
+from botocore.exceptions import ClientError
 from flask import current_app, redirect, url_for
 from flask_login import current_user
 from flask_admin import AdminIndexView, BaseView, expose
@@ -55,6 +56,8 @@ class TemplatesUploadView(BaseView):
             region_name=current_app.config['AWS_REGION']
         )
         
+        print(s3_client.list_buckets())
+        
         form = TemplatesForm()
         folder = 'templates/'
         
@@ -68,9 +71,23 @@ class TemplatesUploadView(BaseView):
             ### Boto3 Aws ###
             file = form.data['template_name']
             filename = form.data['template_name'].filename
-            
-            s3_client.upload_fileobj(file, current_app.config['S3_BUCKET'], folder + filename)
-            
+
+            # Upload the file
+            # initialize S3 client using boto3
+            s3_client = boto3.client(
+                's3',
+                aws_access_key_id=current_app.config['AWS_ACCESS_KEY'],
+                aws_secret_access_key=current_app.config['AWS_SECRET_ACCESS_KEY'],
+                region_name=current_app.config['AWS_REGION']
+            )
+        
+            try:
+                response = s3_client.upload_file(file, current_app.config['S3_BUCKET'], folder + filename)
+            except ClientError as e:
+                logging.error(e)
+                return False
+            return True
+        
             ### Committing Template to database ###
             db.session.add(file_db)
             db.session.commit()

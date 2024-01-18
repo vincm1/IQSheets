@@ -219,20 +219,20 @@ def favorites():
     page = request.args.get('page', 1, type=int)
     favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, 
                                                favorite=True).order_by(Prompt.created_at).paginate(page=page, 
-                                                                                                   per_page=30)
+                                                                                                   per_page=15)
     # prompt_types = db.session.query(Prompt.prompt_type).distinct().all()
     prompt_types = ["formula", "skripte", "sql", "regex"]
     today = datetime.now()
     if request.method == 'POST' and request.form['filter_value'] == "Alle":
     
         page = request.args.get('page', 1, type=int)
-        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True).order_by(Prompt.created_at).paginate(page=page, per_page=9)
+        favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True).order_by(Prompt.created_at).paginate(page=page, per_page=15)
     
     elif request.method == 'POST':
         filter_value = request.form['filter_value']
         page = request.args.get('page', 1, type=int)
         favorite_formulas = Prompt.query.filter_by(user_id=current_user.id, favorite=True, 
-                                                   prompt_type=filter_value).order_by(Prompt.created_at).paginate(page=page, per_page=30)
+                                                   prompt_type=filter_value).order_by(Prompt.created_at).paginate(page=page, per_page=15)
         
         
     return render_template('dashboard/favorites.html', favorite_formulas=favorite_formulas, prompt_types=prompt_types, today=today)

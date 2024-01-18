@@ -7,7 +7,7 @@
 				<form method="POST">
 					<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="Alle">Alle</button>
 					{% for type in prompt_types %}
-					<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="{{type.capitalize()}}">{{type.capitalize()}}</button>
+					<button class="btn btn-secondary me-1" id="filter-btn" type="submit" name="filter_value" value="{{type}}">{{type.capitalize()}}</button>
 					{% endfor %}	
 				</form>
 			</div>
@@ -16,7 +16,7 @@
 		<div class="favorite-cards">
 			<div class="row">
 				{% for formula in favorite_formulas %}
-				<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 py-2 response">
+				<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 py-2 response">
 					<div class="card">
 						<div class="card-header py-4">
 							{% if formula.prompt_type == "Formula" %}
@@ -28,7 +28,7 @@
 							{% else %}
 								<i class="fa-solid fa-wave-square fa-xl" id="badge-icon"></i>
 							{% endif %}
-							<span class="badge rounded-pill shadow-lg ms-3" id={{formula.prompt_type}}>{{formula.prompt_type}}</span>
+							<span class="badge rounded-pill shadow-lg ms-3" id={{formula.prompt_type}}>{{formula.prompt_type.capitalize()}}</span>
 							<span class="badge rounded-pill" id={{formula.category}}>{{formula.category}}</span>
 							{% set days_diff = (today-formula.created_at).days %}
 							{% if days_diff >= 1 %}
