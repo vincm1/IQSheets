@@ -51,7 +51,6 @@ class User(db.Model, UserMixin):
             try:
                 resp = stripe.Customer.list(email=self.email)
                 if resp.get('data'):
-                    print(resp["data"])
                     stripe_cust_id = resp["data"][0]["id"]
                     stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
                     stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
