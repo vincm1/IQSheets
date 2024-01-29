@@ -187,7 +187,7 @@ def user_payments():
     if current_app.debug:
         stripe_user_payment_link = current_app.config["STRIPE_TEST_PAYMENTPAGE"]
     else:
-        stripe_user_payment_link = current_app.config["STRIPE_TEST_PAYMENTPAGE"]
+        stripe_user_payment_link = current_app.config["STRIPE_PROD_PAYMENTPAGE"]
     return redirect(stripe_user_payment_link)
 
 @user_blueprint.route('/passwort_zuruecksetzen', methods=['GET', 'POST'])
