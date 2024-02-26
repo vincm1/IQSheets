@@ -15,6 +15,18 @@ def check_confirmed_mail(func):
 
     return decorated_function
 
+def check_sub_stat(func):
+    """ Route decorator to check is user subscription is active """
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_admin and current_user.sub_status != "active":
+            if current_user.sub_status != "trialing":
+                flash('Dein Abonnement ist abgelaufen, wende dich an den Support!', 'warning')
+            return redirect(url_for('user.register'))
+        return func(*args, **kwargs)
+
+    return decorated_function
+
 def check_payment_oauth(func):
     """ Route decorator to check payments by oauth user """
     @wraps(func)
