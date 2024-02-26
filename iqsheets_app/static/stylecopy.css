@@ -105,6 +105,10 @@ a {
     color: var(--bs-body-color);
 }
 
+hr {    
+    border: 1px solid red;
+}
+
 .btn-primary,
 .btn-primary:hover {
     background-color: var(--bs-link-color);

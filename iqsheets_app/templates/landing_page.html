@@ -15,22 +15,22 @@
 						<h4 class="pt-3 pb-3 mt-4">Erstelle komplexe Formeln in sekundenschnelle durch einfache Textanweisungen.</h4>
 						<div class="mb-5">
 								<a href="{{url_for('user.register')}}"><button class="btn btn-primary p-3" href="">Jetzt registrieren</button></a>
-								<a class="btn btn-secondary me-3 px-2 p-3" href="#video-landing" role="button" alt="wehwe">
+								<a class="btn btn-secondary me-3 ms-1 px-2 p-3" href="#video-landing" role="button" alt="wehwe">
 									Demovideos <i class="fa-solid fa-play fa-xl ms-2"></i>
 								</a>
 						</div>
 						<div class="row mt-5 hero-benefits text-center">
-							<div class="col-3 my-2">
+							<div class="col-3 my-2 me-3">
 								<h2 class="hero-info text-center">50%</h2>
 								<p>Zeitersparnis dank KI-Formeln</p>
 							</div>  
-							<div class="col-3 my-2">
+							<div class="col-3 my-2 mx-3">
 								<h2 class="hero-info text-center">10x</h2>
 								<p>Mehr Produktivität in Spreadsheets</p>
 							</div> 
-							<div class="col-3 my-2">
+							<div class="col-3 my-2 mx-3">
 								<h2 class="hero-info text-center">30%</h2>
-								<p>Weniger zeitaufwendige Internetsuche</p>
+								<p>weniger Internetsuche</p>
 							</div> 
 						</div>
 					</div>
@@ -45,8 +45,8 @@
 	<!-- Hero End -->
 
   <!-- Features Start -->
-  <section class="features-1 pt-2 pb-5 mt-2">
-		<div class="container justify-content-center py-5">
+  <section class="features-1 pt-2 mt-2">
+		<div class="container justify-content-center pt-5">
 			<div class="row justify-content-center" id="features-1">
 					<!-- slider Heading -->
 					<div class="text-center">
@@ -57,7 +57,7 @@
 
       <div class="row justify-content-center mt-5">
         <!-- Erste Spalte -->
-        <div class="col-md-3 d-flex align-items-start mx-2 feature-col">
+        <div class="col-md-4 d-flex align-items-start feature-col">
           <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/abs/abs028.svg')}}" class="me-3" alt="">
           <div>
             <h4>All-in-one workspace</h4>
@@ -65,7 +65,7 @@
           </div>
         </div>
         <!-- Zweite Spalte -->
-        <div class="col-md-3 d-flex align-items-start mx-4 feature-col">
+        <div class="col-md-4 d-flex align-items-start feature-col">
           <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/abs/abs026.svg')}}" class="me-3" alt="">
           <div>
             <h4>All-in-one workspace</h4>
@@ -73,7 +73,7 @@
           </div>
         </div>
         <!-- Dritte Spalte -->
-        <div class="col-md-3 d-flex align-items-start mx-4 feature-col">
+        <div class="col-md-4 d-flex align-items-start feature-col">
           <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/abs/abs027.svg')}}" class="me-3" alt="">
           <div>
             <h4>All-in-one workspace</h4>
@@ -85,36 +85,92 @@
       <div class="row video mt-5">
         <video src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/videos/IQSheetsVid.mp4" controls id="video-landing" class="w-100"></video>
       </div>
+      <hr class="m-5">
     </div>
   </section>
   <!-- Features End -->
 
-  <section class="functions">
-    <div class="container justify-content-center">
-      <div class="row">
-          <h1 class="text-center"> Lorem</h1>
+  <!-- Functions --> 
+  <section class="functions mt-1">
+    <div class="container py-2">
+      <div class="row text-center justify-content-center mt-2">
+        <h3>Die wichtigsten Funktionen</h3>
+        <p>Lass Dir in sekundenschnelle Excelformeln, RegEx oder SQL-Queries erstellen.</p>
       </div>
-      <div class="row">
-        <div class="col-4">1
+      <div class="row text-center justify-content-center mt-5">
+        <div class="col-md-3 my-sm-1 functions-col">
+          <div class="text-start flex-grow-1">
+            <img width="36" height="36" src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="microsoft-excel-2019--v1"/>
+            <img width="30" height="30" src="{{url_for('static', filename='img/vba-script.svg')}}" class="ms-1 mt-3"/>
+          </div>
+          <div class="text-start mt-3 flex-grow-1">
+            <h5>Excel- und VBA Formeln</h5>
+            <p>Generiere Excelformeln und sogar VBA Code mit einfachen Textanweisungen in sekundenschnelle.</p>
+          </div>
+        </div>
+        <div class="col-md-3 my-sm-1 functions-col">
+          <div class="text-start flex-shrink-1">
+            <img width="36" height="36" src="https://img.icons8.com/color/48/google-sheets.png" alt="google-sheets"/>
+            <img width="30" height="30" src="{{url_for('static', filename='img/apps-script.svg')}}" alt="google-sheets"/>
+          </div>
+          <div class="text-start mt-3 flex-grow-1">
+            <h5>GSheets- Skritpformeln</h5>
+            <p>Generiere GSheet Formel und sogar Skript Code mit einfachen Textanweisungen in sekundenschnelle.</p>
+          </div>
+        </div>
+        <div class="col-md-3 my-sm-1 functions-col">
+          <div class="text-start flex-shrink-1">
+            <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/lay/lay009.svg')}}" alt="">
+          </div>
+          <div class="text-start mt-3 flex-grow-1">
+            <h5>Smart Dashboard</h5>
+            <p>Verwalte Deine Queries über unser smartes Dashboards und greife auf deine Lieblingsformeln zu.</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="row text-center justify-content-center mt-4 mt-sm-0">
+        <div class="col-md-3 my-sm-1 functions-col">
+          <div class="text-start flex-grow-1">
+            <img width="36" height="36" src="https://img.icons8.com/color/48/sql.png" alt="sql"/>
+          </div>
+          <div class="text-start mt-3 flex-grow-1">
+            <h5>SQL</h5>
+            <p>Generiere für unterschiedlichste Query</p>
+          </div>
         </div>
-        <div class="col-4">1
-          
+        <div class="col-md-3 my-sm-1 functions-col">
+          <div class="text-start flex-shrink-1">
+            <i class="fa-regular fa-circle"></i>
+            <i class="fa-solid fa-asterisk fa-2xl"></i>
+          </div>
+          <div class="text-start mt-3 flex-grow-1">
+            <h5>RegEx</h5>
+            <p>Lass Dir blitzschnell komplexe RegEx Statements von erstellen mit Hilfe von einfachen Sprachanweisungen.</p>
+          </div>
         </div>
-        <div class="col-4">1
-          
+        <div class="col-md-3 my-sm-1 functions-col">
+          <div class="text-start flex-shrink-1">
+            <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/abs/abs024.svg')}}" alt="">
+          </div>
+          <div class="text-start mt-3 flex-grow-1">
+            <h5>Templates</h5>
+            <p>Diverse Templates aus unterschiedlichen Kategorien wie z.B. Projekt- oder Zeitmanagement, oder der Buchhaltung zum downloaden.</p>
+          </div>
         </div>
       </div>
+      <hr class="mx-4 mt-5">
+    </div>
     </div>
   </section>
-    
+  <!-- Functions End -->
 
-	<!-- Pricing Start -->
-  <section class="pricing">
+  <!-- Pricing Start -->
+  <section class="pricing mb-5">
             <!-- Pricing -->
         <div class="container pricing mt-4">
             <!-- Heading -->
-            <div class="mb-5 text-center py-2"  id="pricing">
+            <div class="mb-5 text-center py-2" id="pricing">
                 <h3>Ein Plan für Jeden</h3>
                 <p>Pay as you go, jederzeit kündbar.</p>
                 <p style="font-size:13px">2 Tage kostenlos testen.</p>
@@ -122,7 +178,7 @@
             <!-- End Heading -->
         
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-sm-11">
+                <div class="col-lg-4 col-sm-11" id="pricing-avatar">
                     <div class="justify-content-center text-center">
                         <img class="avatar avatar-xxl avatar-4x3" src="static/components/oc-money-profits.svg" alt="Image Description" height="200px" width="200px">
                         <h2 class="preis"> € 4,99</h2>
@@ -133,11 +189,10 @@
                 <div class="col-lg-4 col-sm-11 ms-5 mt-3">
                     <h5 class="mb-2">Beinhaltet alles, was du benötigst:</h5>
                     <!-- List Checked -->
-                    <ul class="list-checked list-checked-primary mb-0">
+                    <ul class="list-checked list-checked-primary mb-0 sm-text-center">
                         <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Unlimitierte KI-Abfragen</li>
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Excel und Google Templates <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Unsere Templates werden regelmäßig geupdatet und ergänzt"></i></li>
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>SQL Formeln</li>
-                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Erklärungen</li>
+                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>User Dashboard</li>
+                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Excel & Google Templates <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Unsere Templates werden regelmäßig geupdatet und ergänzt"></i></li>
                         <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Support <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Wir unterstützen dich jederzeit bei Fragen"></i></li>
                     </ul>
                 <!-- End List Checked -->
@@ -276,7 +331,7 @@
 	<!-- Best Features End -->
 
     <!-- Testimonials -->
-	<section class="testimonials mt-5 pb-5">
+	<section class="testimonials mt-5 mb-2">
         <div class="customers">
             <div class="container">
                 <div class="row d-flex justify-content-center">
@@ -288,16 +343,16 @@
                 </div>
             </div>
             <div class="container text-center py-5">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="carousel-indicators">
+                <div id="carouselExampleIndicators" class="carousel slide mb-5">
+                    <div class="carousel-indicators mb-3">
                       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" id="carousel-btn"></button>
                       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" id="carousel-btn"></button>
                       <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <div class="row justify-content-center gap-2">
-                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
+                        <div class="row justify-content-center">
+                          <div class="card shadow p-3 sm-mb-1 bg-white rounded testimonial-card col-lg-3 col-sm-10">
                             <div class="card-body">
                               <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi1.png" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
@@ -310,7 +365,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
+                          <div class="card shadow p-3 sm-mb-1 bg-white rounded testimonial-card col-lg-3 col-sm-10">
                             <div class="card-body">
                               <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi2.png" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Tim, Einkaufsleiter</h6>
@@ -323,7 +378,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
+                          <div class="card shadow p-3 sm-mb-1 bg-white rounded testimonial-card col-lg-3 col-sm-10">
                             <div class="card-body">
                               <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi3.png" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Marcel, Controller</h6>
@@ -339,7 +394,7 @@
                       </div>
                       <div class="carousel-item">
                         <div class="row justify-content-center gap-2">
-                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                          <div class="card shadow p-3 sm-mb-1 bg-white rounded testimonial-card col-lg-3 col-sm-10">
                             <div class="card-body">
                               <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi4.jpg" height="60" width="60" style="border-radius:50%" alt="Testimonial">
                               <h6 class="ps-2 pt-3">Marco, Buchhalter</h6>
@@ -352,7 +407,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                          <div class="card shadow p-3 sm-mb-1 bg-white rounded testimonial-card col-lg-3 col-sm-10">
                             <div class="card-body">
                               <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi5.jpg" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Luca, Sales Manager</h6>
@@ -364,7 +419,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                          <div class="card shadow p-3 sm-mb-1 bg-white rounded testimonial-card col-lg-3 col-sm-10">
                             <div class="card-body">
                               <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi6.png" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
                               <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
@@ -391,6 +446,7 @@
                         </button>
                     </div> -->
                 </div>
+                <hr class="mx-4 mt-5">
             </div>
             </div>
         </div>
@@ -398,7 +454,7 @@
     <!-- Testimonials End -->
 
 	<!-- Pricing Start -->
-  <section class="calculator py-3">
+  <section class="calculator ">
     <div class="container">
       <div class="section-title text-center">
         <h2>Wie viel kannst du die Stunde sparen?</h2>
