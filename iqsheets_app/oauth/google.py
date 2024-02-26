@@ -59,6 +59,7 @@ def google_logged_in(blueprint, token):
         # Check if Stripe payment exists for account
         existing_user.check_payment()
         if existing_user.stripe_customer_id and existing_user.stripe_sub_id is not None:
+            existing_user.check_abo_status()
             login_user(existing_user, remember=True)
             return redirect(url_for('dashboard.dashboard'))
         else:

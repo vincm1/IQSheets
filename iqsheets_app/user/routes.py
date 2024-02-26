@@ -73,6 +73,7 @@ def login():
                     else:
                         user.check_payment()
                         if user.stripe_customer_id and user.stripe_sub_id is not None:
+                            user.check_abo_status()
                             login_user(user, remember=form.remember.data)
                             print(form.remember.data)
                             return redirect(url_for('dashboard.dashboard'))

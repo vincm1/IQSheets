@@ -24,8 +24,10 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String, nullable=False)
     registration_date = db.Column(db.DateTime, default=datetime.now)
     cancellation_date = db.Column(db.DateTime, default=None, nullable=True)
+    sub_status = db.Column(db.String, nullable=True)
     is_cancelled = db.Column(db.Boolean, default=False, nullable=True)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    trial_end = db.Column(db.DateTime, nullable=True, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     stripe_customer_id = db.Column(db.String, nullable=True, default=None)
     stripe_sub_id = db.Column(db.String, nullable=True, default=None)
@@ -49,13 +51,14 @@ class User(db.Model, UserMixin):
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
         if self.is_admin is False:
             try:
-                resp = stripe.Customer.list(email=self.email)
+                resp = stripe.Subscription.list(sub_id=self.stripe_sub_id)
                 if resp.get('data'):
-                    stripe_cust_id = resp["data"][0]["id"]
-                    stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
-                    stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
-                    self.stripe_customer_id = stripe_cust_id
-                    self.stripe_sub_id = stripe_subscription_id
+                    sub = resp["data"][0]
+                    print(sub)
+                    self.sub_status = sub["status"]
+                    self.is_cancelled = sub["canceled_at"]
+                    self.trial_end = sub["trial_end"]
+                    print(sub["status"], sub["canceled_at"], sub["trial_end"])
                     db.session.add(self)
                     db.session.commit()
                 else:
@@ -66,7 +69,28 @@ class User(db.Model, UserMixin):
             except stripe.error.InvalidRequestError as e:
                 # Handle the error, e.g., log it or raise a specific exception
                 print(f"Error checking payment: {e}")
-           
+    
+    def check_abo_status(self):
+        """ Check status of a user's subscription"""
+        # Stripe API Key
+        if current_app.debug: 
+            stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
+        else:
+            stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
+        if self.is_admin is False:
+            try:
+                subscription = stripe.Subscription.retrieve(self.stripe_sub_id)
+                print(subscription["items"]["data"])
+                if subscription:
+                    self.trial_end = subscription["trial_end"]
+                    self.sub_status = subscription["status"]
+                    db.session.add(self)
+                    db.session.commit()
+                    
+            except stripe.error.InvalidRequestError as e:
+                # Handle the error, e.g., log it or raise a specific exception
+                print(f"Error checking subscription status: {e}")
+                
     def __init__(self, email, password):
         self.email = email
         self.password_hash = generate_password_hash(password)
