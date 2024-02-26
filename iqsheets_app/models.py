@@ -27,7 +27,6 @@ class User(db.Model, UserMixin):
     sub_status = db.Column(db.String, nullable=True)
     is_cancelled = db.Column(db.Boolean, default=False, nullable=True)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
-    trial_end = db.Column(db.DateTime, nullable=True, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     stripe_customer_id = db.Column(db.String, nullable=True, default=None)
     stripe_sub_id = db.Column(db.String, nullable=True, default=None)
@@ -44,21 +43,21 @@ class User(db.Model, UserMixin):
      
     def check_payment(self):
         """ Check whether payment of a user was successful """
-        # Stripe API Key
-        if current_app.debug: 
-            stripe.api_key = current_app.config['STRIPE_SECRETKEY_TEST']
-        else:
-            stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
-        if self.is_admin is False:
+        if self.is_admin is False: 
             try:
-                resp = stripe.Subscription.list(sub_id=self.stripe_sub_id)
+                resp = stripe.Customer.list(email=self.email)
                 if resp.get('data'):
-                    sub = resp["data"][0]
-                    print(sub)
-                    self.sub_status = sub["status"]
-                    self.is_cancelled = sub["canceled_at"]
-                    self.trial_end = sub["trial_end"]
-                    print(sub["status"], sub["canceled_at"], sub["trial_end"])
+                    print(resp["data"])
+                    stripe_cust_id = resp["data"][0]["id"]
+                    stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
+                    stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
+                    self.stripe_customer_id = stripe_cust_id
+                    self.stripe_sub_id = stripe_subscription_id
+                    db.session.add(self)
+                    db.session.commit()
+                else:
+                    self.stripe_customer_id = None
+                    self.stripe_sub_id = None
                     db.session.add(self)
                     db.session.commit()
             except stripe.error.InvalidRequestError as e:
@@ -77,7 +76,6 @@ class User(db.Model, UserMixin):
                 subscription = stripe.Subscription.retrieve(self.stripe_sub_id)
                 print(subscription["items"]["data"])
                 if subscription:
-                    self.trial_end = subscription["trial_end"]
                     self.sub_status = subscription["status"]
                     db.session.add(self)
                     db.session.commit()
