@@ -62,7 +62,7 @@ def index():
         stripe_api_key = current_app.config['STRIPE_SECRETKEY_TEST']
     else:
         stripe_api_key = current_app.config['STRIPE_SECRETKEY_PROD']
-    return render_template('index.html', form_nl=form_nl, is_debug=is_debug, stripe_api_key=stripe_api_key)
+    return render_template('landing_page.html', form_nl=form_nl, is_debug=is_debug, stripe_api_key=stripe_api_key)
 
 @core_blueprint.route("/impressum", methods=["GET"])
 def impressum():

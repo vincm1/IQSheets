@@ -1,0 +1,586 @@
+{% extends "index.html" %} {% block content %}
+<main>
+  <!-- Hero Start -->
+	<section class="hero pt-2">
+		<div class="container hero pt-5 pb-5">
+			<div class="row align-items-top">
+				<div class="col-lg-7 col-sm-12">
+					<!-- Heading -->
+					<div class="mb-5 mt-2 justify-content-sm-center">
+						<h1 class="display-4 text-inline">AI-generierte Formeln für
+							<div id="text-container" style="display: inline;">
+								<p id="changing-text" style="display: inline;">Controller.</p>
+							</div>
+						</h1>
+						<h4 class="pt-3 pb-3 mt-4">Erstelle komplexe Formeln in sekundenschnelle durch einfache Textanweisungen.</h4>
+						<div class="mb-5">
+								<a href="{{url_for('user.register')}}"><button class="btn btn-primary p-3" href="">Jetzt registrieren</button></a>
+								<a class="btn btn-secondary me-3 px-2 p-3" href="#video-landing" role="button" alt="wehwe">
+									Demovideos <i class="fa-solid fa-play fa-xl ms-2"></i>
+								</a>
+						</div>
+						<div class="row mt-5 hero-benefits text-center">
+							<div class="col-3 my-2">
+								<h2 class="hero-info text-center">50%</h2>
+								<p>Zeitersparnis dank KI-Formeln</p>
+							</div>  
+							<div class="col-3 my-2">
+								<h2 class="hero-info text-center">10x</h2>
+								<p>Mehr Produktivität in Spreadsheets</p>
+							</div> 
+							<div class="col-3 my-2">
+								<h2 class="hero-info text-center">30%</h2>
+								<p>Weniger zeitaufwendige Internetsuche</p>
+							</div> 
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5 is-center">
+						<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+						<dotlottie-player src="https://lottie.host/0351042f-3b37-420c-98c7-2c681d3e4dcc/PohXkhh0Hq.json" background="transparent" speed="1" style="width: 100%; height: auto;" loop autoplay></dotlottie-player>
+				</div>
+			</div>
+		</div>
+  </section>
+	<!-- Hero End -->
+
+  <!-- Features Start -->
+  <section class="features-1 pt-2 pb-5 mt-2">
+		<div class="container justify-content-center py-5">
+			<div class="row justify-content-center" id="features-1">
+					<!-- slider Heading -->
+					<div class="text-center">
+							<h3>Steigere Deine Spreadsheet-Produktivität</h3>
+							<p class="pt-2">Verwandle Text mühelos in kraftvolle Formeln und erziele blitzschnelle Effizienzsteigerungen.</p>
+					</div>
+			</div>
+
+      <div class="row justify-content-center mt-5">
+        <!-- Erste Spalte -->
+        <div class="col-md-3 d-flex align-items-start mx-2 feature-col">
+          <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/abs/abs028.svg')}}" class="me-3" alt="">
+          <div>
+            <h4>All-in-one workspace</h4>
+            <p>Create a business, whether you've got a fresh idea or are looking for a new way to make money.</p>
+          </div>
+        </div>
+        <!-- Zweite Spalte -->
+        <div class="col-md-3 d-flex align-items-start mx-4 feature-col">
+          <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/abs/abs026.svg')}}" class="me-3" alt="">
+          <div>
+            <h4>All-in-one workspace</h4>
+            <p>Create a business, whether you've got a fresh idea or are looking for a new way to make money.</p>
+          </div>
+        </div>
+        <!-- Dritte Spalte -->
+        <div class="col-md-3 d-flex align-items-start mx-4 feature-col">
+          <img width="32" height="32" src="{{url_for('static', filename='duotone-icons/abs/abs027.svg')}}" class="me-3" alt="">
+          <div>
+            <h4>All-in-one workspace</h4>
+            <p>Create a business, whether you've got a fresh idea.</p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row video mt-5">
+        <video src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/videos/IQSheetsVid.mp4" controls id="video-landing" class="w-100"></video>
+      </div>
+    </div>
+  </section>
+  <!-- Features End -->
+
+  <section class="functions">
+    <div class="container justify-content-center">
+      <div class="row">
+          <h1 class="text-center"> Lorem</h1>
+      </div>
+      <div class="row">
+        <div class="col-4">1
+
+        </div>
+        <div class="col-4">1
+          
+        </div>
+        <div class="col-4">1
+          
+        </div>
+      </div>
+    </div>
+  </section>
+    
+
+	<!-- Pricing Start -->
+  <section class="pricing">
+            <!-- Pricing -->
+        <div class="container pricing mt-4">
+            <!-- Heading -->
+            <div class="mb-5 text-center py-2"  id="pricing">
+                <h3>Ein Plan für Jeden</h3>
+                <p>Pay as you go, jederzeit kündbar.</p>
+                <p style="font-size:13px">2 Tage kostenlos testen.</p>
+            </div>
+            <!-- End Heading -->
+        
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-sm-11">
+                    <div class="justify-content-center text-center">
+                        <img class="avatar avatar-xxl avatar-4x3" src="static/components/oc-money-profits.svg" alt="Image Description" height="200px" width="200px">
+                        <h2 class="preis"> € 4,99</h2>
+                        <p>Pro Monat</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-11 ms-5 mt-3">
+                    <h5 class="mb-2">Beinhaltet alles, was du benötigst:</h5>
+                    <!-- List Checked -->
+                    <ul class="list-checked list-checked-primary mb-0">
+                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Unlimitierte KI-Abfragen</li>
+                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Excel und Google Templates <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Unsere Templates werden regelmäßig geupdatet und ergänzt"></i></li>
+                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>SQL Formeln</li>
+                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Erklärungen</li>
+                        <li class="list-checked-item py-1"><i class="fa-solid fa-check pe-2"></i>Support <i class="fa-solid fa-circle-info fa-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Wir unterstützen dich jederzeit bei Fragen"></i></li>
+                    </ul>
+                <!-- End List Checked -->
+                </div>
+            </div>
+            <!-- End Col -->
+           
+            <!-- End Row -->
+						<div class="row">
+							<div class="pricing-info mx-auto mt-3" style="max-width: 45rem;">
+								<!-- Alert -->
+								<div class="alert alert-soft-primary mx-auto" role="alert">
+										<div class="d-flex align-items-center">
+										
+											<i class="fa-solid fa-bell fa-2xl me-2"></i> 	
+											<p class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
+												Optimiere deine Arbeitsabläufe jetzt mit IQSheets
+											</p>
+												<!-- Button trigger modal -->
+												<a type="button" class="btn btn-primary mt-2 p-2" href="{{url_for('user.register')}}">
+													Kostenlos probieren
+												</a>
+										</div>
+								</div>
+								<!-- End Alert -->
+							</div>
+						</div>
+        </div>
+	</section>
+  <!-- End Pricing -->
+
+    <!-- Best Features Start -->
+  <section class="features mt-5" id="features">
+        <div class="container pt-5">
+            <!-- Section Title -->
+            <div class="row d-flex justify-content-center ">
+                <div class="col-lg-6 col-md-8">
+                    <div class="section-title text-center pb-5">
+                        <h2>Entfalte dein gesamtes Potential</h2>
+                        <h6>Modernisiere deine Arbeitsweise mit IQSheets.</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pb-5">
+                <div class="col-lg-6 col-md-12 col-sm-12 text-center mb-4">
+                  <img src="{{url_for('static', filename='components/oc-error.svg')}}" alt="" class="img-fluid" style="max-width: 80%; height: auto;">
+                </div>
+                <div class="col-lg-6 col-md-12 mb-5">
+                    <table class="feature-table table-lg mx-auto mt-sm-3" style="width:100%">
+                        <thead>
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col" class="text-center">Others</th>
+                              <th scope="col" class="text-center">IQSheets</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="p-4 m-4">
+                              <th scope="row">Excel</th>
+                              <td class="text-center py-2 pe-2">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">VBA</th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">GSheets</th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Erklärungen</th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">SQL <i class="bi-info-circle text-muted small ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Shows activities completed by each user and the specific activity types."></i></th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Support <i class="bi-info-circle text-muted small ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Shows activities completed by each user and the specific activity types."></i></th>
+                              <td class="text-center">
+                                <i class="fa-solid fa-x fa-xl" id="cross-mark"></i>
+                              </td>
+                              <td class="text-center">
+                                <i class="fa-solid fa-check fa-xl" id="check-mark"></i>
+                              </td>
+                            </tr>
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center text-center pb-5">
+              <div class="col-3 key-facts">
+                <h2 class="text-center">5h</h2>
+                <p style="font-size:10px">pro Woche</p>
+                <p>sparen als Buchhalter</p>
+              </div>
+              <div class="col-3 key-facts">
+                <h2 class="text-center">3h</h2>
+                <p style="font-size:10px">pro Woche</p>
+                <p>sparen als Vertriebsleiter</p>
+              </div>
+              <div class="col-3 key-facts">
+                <h2 class="text-center">4h</h2>
+                <p style="font-size:10px">pro Woche</p>
+                <p>sparen als Consultant</p>
+              </div>
+            </div>
+		</div>
+  </section>
+	<!-- Best Features End -->
+
+    <!-- Testimonials -->
+	<section class="testimonials mt-5 pb-5">
+        <div class="customers">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-xl-8">
+                        <div class="section-tittle text-center">
+                          <h2>Das sagen unsere Nutzer über IQSheets:</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container text-center py-5">
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" id="carousel-btn"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" id="carousel-btn"></button>
+                      <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="row justify-content-center gap-2">
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
+                            <div class="card-body">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi1.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Als Account Managerin ist meine Aufgabe, sicherzustellen, dass unsere Kunden exzellent 
+                                  betreut werden und ihre Bedürfnisse erfüllt werden. IQSheets hat meine Arbeit erheblich vereinfacht. 
+                                  Mit dieser App kann ich jetzt mühelos komplexe Berichte und Analysen für unsere Kunden erstellen."
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
+                            <div class="card-body">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi2.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Tim, Einkaufsleiter</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Ich kann mit vollem Vertrauen sagen, dass diese App einen enormen Einfluss auf unsere Einkaufsabteilung hatte.
+                                  Sie hat uns geholfen, Ressourcen zu maximieren, Prozesse zu beschleunigen und die Effizienz zu steigern. 
+                                  Eine unverzichtbare Ressource für jeden Einkaufsleiter."
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-4">
+                            <div class="card-body">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi3.png" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Marcel, Controller</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Als Controller stehen Präzision und Effizienz im Mittelpunkt meiner Aufgaben. 
+                                  IQSheets hat meine Arbeitsweise und die Überwachung finanzieller Prozesse in unserer Organisation maßgeblich verändert."
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="row justify-content-center gap-2">
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi4.jpg" height="60" width="60" style="border-radius:50%" alt="Testimonial">
+                              <h6 class="ps-2 pt-3">Marco, Buchhalter</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Ich benutze Excel täglich in meinem Job, und diese App hat mir geholfen, Zeit und Frustration zu sparen.
+                                  Sie ist ein leistungsstarkes Werkzeug, das sowohl für Anfänger als auch für Experten geeignet ist. 
+                                  Endlich bereitet mir die Arbeit mit Excel Spaß!"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi5.jpg" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Luca, Sales Manager</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Mit IQSheets können sparen wir jede Menge Zeit für die Erstellung von Verkaufsberichten und Analysen unserer Kunden.
+                                  Diese gewonnene Zeit kann ich als Vertriebler perfekt nutzen für den noch engeren Austausch mit meinen Kunden."
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow p-3 mb-5 bg-white rounded testimonial-card col-lg-3">
+                            <div class="card-body">
+                              <img src="https://iqsheetsbucket.s3.eu-central-1.amazonaws.com/testimonials/testi6.png" height="60" width="60" style="border-radius:50%" alt="testimonial-pic">
+                              <h6 class="ps-2 pt-3">Maria, Account Managerin</h6>
+                              <hr class="testimonial-divider">
+                              <div class="testimonial-card-text mt-4 text-center">
+                                <p>"Ich war zuerst skeptisch, aber nachdem ich IQSheets ausprobiert habe, bin ich begeistert. 
+                                  Ich konnte zeitraubende Aufgaben automatisieren und meine Arbeitsweise verbessern. 
+                                  Ich kann sie jedem empfehlen, der mit Excel arbeitet."
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="carousel-controls pt-5">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div> -->
+                </div>
+            </div>
+            </div>
+        </div>
+  </section>   
+    <!-- Testimonials End -->
+
+	<!-- Pricing Start -->
+  <section class="calculator py-3">
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>Wie viel kannst du die Stunde sparen?</h2>
+        <p>Du arbeitest täglich mit Spreadsheets und möchtest deinen Arbeitsaufwand reduzieren.</p>
+        <p> Errechne jetzt wie viel du einsparen könntest.</p>
+      </div>
+      <div class="row justify-content-center text-center gap-5 mt-2 pt-5">
+        <div class="col-3 fact-col">
+          <h4>10K Formeln</h4>
+          <p>automatisch generiert</p>
+        </div>
+        <div class="col-3 fact-col">
+          <h5>200+ Arbeitsstunden</h5>
+          <p>eingespart</p>
+        </div>
+        <div class="col-3 fact-col">
+          <h5>500 Templates</h5>
+          <p>von Nutzern gedownloadet</p>
+        </div>
+      </div>  
+      <div class="row my-5">
+        <div class="pricing-info mx-auto mt-2" style="max-width: 45rem;">
+            <!-- Alert -->
+            <div class="alert alert-soft-primary mx-auto" role="alert">
+                <div class="d-flex align-items-center">
+                
+                	<i class="fa-solid fa-bolt-lightning fa-2xl me-2"></i> 	
+                	<p class="flex-grow-1 text-center ms-sm-3 mb-3 mb-sm-0">
+                  		Jetzt Ersparniss berechnen
+									</p>
+                    <!-- Button trigger modal -->
+                  	<button type="button" class="btn btn-secondary px-3" id="calcualate-btn" data-bs-toggle="modal" data-bs-target="#calculatorModal">
+                    	Berechnen
+                  	</button>
+                </div>
+            </div>
+            <!-- End Alert -->
+        </div>
+      </div>
+			<!-- Modal -->
+			<div class="row">
+				<div class="modal fade" id="calculatorModal" tabindex="-1" aria-labelledby="calculatorModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-xl">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="calculatorModalLabel">Errechne deine Ersparnis</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="row justify-content-center">
+									<div class="col-lg-6 justify-content-center calculator-line">
+										<form id="calculator-form">
+											<div class="mt-3">
+												<label for="hours" class="form-label text-center">Stündlicher Arbeitsaufwand pro Woche mit Excel oder GSheets?</label>
+												<input class="form-control" type="number" id="hours" required>
+											</div>
+											<div class="mt-3">
+												<label class="form-label" for="hourly-wage">Dein Stundenlohn in €</label>
+												<p class="calculator-form-explanation">(Tipp: Jahresgehalt / 2052)</p>
+												<input class="form-control" type="number" id="hourly-wage" required>
+											</div>
+											<div class="mt-3 text-center">
+												<button type="button" class="btn btn-secondary px-5 py-1" id="calculate">Berechnen</button>
+											</div>
+										</form>
+									</div>
+									<div class="col-lg-6 justify-content-center text-center">
+										<p class="pt-2">Deine mögliche Ersparniss in EUR</p>
+										<div class="card mb-5">
+											<div class="card-body" id="result"></div>
+										</div>
+										<p class="mt-5">Deine mögliche Ersparniss in Stunden pro Woche </p>
+										<div class="card">
+											<div class="card-body" id="result2"></div>
+										</div>
+										<div class="mt-3 text center">
+											<a class="btn btn-primary px-5 p-3 mt-3 shadow-lg" target="_blank" href="{{url_for('user.register')}}">Jetzt registrieren</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+			</div>
+			 
+    </div>    
+  </section>
+	<!-- Pricing Start -->
+
+	<!-- FAQs Start -->
+  <section class="faqs my-5">
+    <div class="container">
+      <div class="row justify-content-center" id="faqs">
+        <img src="{{url_for('static', filename='components/oc-thinking.svg')}}" height="230" alt="FAQ-picture">
+      </div>
+      <div class="section-title text-center pt-5">
+        <h2>FAQs</h2>
+        <p>Häufig gestellte Fragen.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="card col-8 faq-card card-lg shadow-lg">
+          <div class="card-body">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Wie funktioniert IQSheets?
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Nach Anmeldung erhältst du Zugriff auf dein persönliches Dashboard.
+                    In diesem kannst du durch Sprachanweisungen ganz einfach mit unserer 
+                    KI deine benötigte Formel kreeieren oder erklären lassen.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Gibt es eine kostenlose Testversion?
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Ja, du kannst IQSheets eine Woche mit allen unseren Features testen. Nach Ablauf geht deine Test-Version 
+                    in unser Abo für 4,99€ den Monat über, solltest du nicht rechtzeitig gekündigt haben.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Wie kann ich das Premium-Abo kündigen?
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Das Abo kannst du in deinem persönlichen Dashboard jederzeit unter Account > Abo verwalten kündigen.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    Wie kann ich das Premium-Abo kündigen?
+                  </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Das Abo kannst du in deinem persönlichen Dashboard jederzeit unter Account > Abo verwalten kündigen.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center py-5">
+            <p>Trotzem noch offene Fragen?</p>
+            <a class="btn btn-secondary mt-2" id="supportbtn" href="{{url_for('core.kontakt')}}" target=_blank id="support-faq">Unser Support Team kontaktieren</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+	<!-- FAQs End -->
+
+	<!-- CTA Start -->
+  <section class="cta my-5">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <div class="card text-center shadow-lg cta-card">
+            <div class="card-body my-5">
+              <h3 class="pt-3">Du hast ein Projekt im Kopf?</h3>
+              <h5 class="pt-3">Verbessere deinen Arbeitsalltag!</h5>
+              <h6 class="pt-3">Unser schneller AI Excel-Assistent revolutioniert 
+                die Art und Weise, wie du mit Spreadsheets <br> arbeitest und steigert
+                 die Produktivität wie nie zuvor!</h6>
+              <a class="btn btn-primary px-5 p-3 mt-3 shadow-lg" href="{{url_for('user.register')}}">Jetzt testen <i class="fa-solid fa-arrow-right fa-xl ps-3"></i></a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+	<!-- CTA End -->
+
+</main>
+{% endblock %}

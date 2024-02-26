@@ -103,3 +103,12 @@ document.addEventListener("DOMContentLoaded", function() {
   // Set the display text to the first 100 characters of the full text
   displayText.innerText = fullText.substring(0, 100) + '...';
 });
+
+// Loop through each .feature-col element and add an event listener
+
+const feature_cols = document.querySelectorAll('.feature-col'); 
+feature_cols.forEach(function(feature_col) {
+  feature_col.addEventListener('click', function(event) {
+    console.log(event); // Logs the event object to the console
+  });
+});
