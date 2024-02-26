@@ -61,11 +61,6 @@ class User(db.Model, UserMixin):
                     print(sub["status"], sub["canceled_at"], sub["trial_end"])
                     db.session.add(self)
                     db.session.commit()
-                else:
-                    self.stripe_customer_id = None
-                    self.stripe_sub_id = None
-                    db.session.add(self)
-                    db.session.commit()
             except stripe.error.InvalidRequestError as e:
                 # Handle the error, e.g., log it or raise a specific exception
                 print(f"Error checking payment: {e}")
