@@ -184,11 +184,13 @@ def formel(prompt_type):
         # Commiting prompt and numbers to db
         db.session.add(prompt)
         db.session.commit()
-        
+        print(prompt.result, prompt.prompt_type, form.data)
     if prompt.category == 'Erstellen' and prompt.prompt_type != "formula":
         formulas, reduced_answer = prompt_output_handler(prompt.result, prompt.prompt_type, form.data)
+        print(formulas, reduced_answer, prompt.result, prompt.prompt_type, form.data)
         return render_template(f'dashboard/{prompt_type}_page.html', answer=reduced_answer, form=form, prompt_id=prompt.id, formulas=formulas)    
     else:
+        print(prompt.result, prompt.prompt_type, form.data)
         return render_template(f'dashboard/{prompt_type}_page.html', answer=prompt.result, form=form, prompt_id=prompt.id)
         
     return render_template(f'dashboard/{prompt_type}_page.html', form=form)

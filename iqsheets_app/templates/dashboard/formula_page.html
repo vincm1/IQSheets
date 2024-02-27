@@ -3,32 +3,36 @@
 		<h3>AI Formel Assistent</h3>
 	</div>
 
-	<div class="d-flex row generator-cards mt-3 mx-3">
-        <div class="card generator-card shadow-lg ms-2 col-lg-6 col-md-8 col-sm-12">
+	<div class="d-flex row generator-cards mt-3 mx-4">
+        <div class="ccard generator-card shadow-lg col-lg-6 me-lg-4 col-xs-11">
             <div class="card-body p-4">
                 <h4>Input</h4>
                 <hr>
                 <div class="py-3">
                     <form method="POST" action="{{url_for('dashboard.formel', prompt_type='formula')}}" id="formula-form">
                         {{form.hidden_tag()}}
-                        <div class="row row-col-sm-12">
+                        <div class="row justify-content-start">
                             {{form.excel_google.label(class_="pb-1")}}
-                            {% for subfield in form.excel_google %}
-                                <div class="col-5 form-input mt-3 mx-3 py-2">
+                        {% for subfield in form.excel_google %}
+                            <div class="col-md-5 col-sm-12 me-3 form-input mt-3 py-2" id="container-{{ loop.index }}" style="cursor: pointer;">
+                                <div class="d-flex align-items-center">
                                     {% if subfield.data == "Excel" %}
-                                        <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="microsoft-excel-2019--v1"/>
+                                        <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="Microsoft Excel">
                                     {% else %}
-                                        <img width="48" height="48" src="https://img.icons8.com/color/48/google-sheets.png" alt="google-sheets"/>
+                                        <img width="48" height="48" src="https://img.icons8.com/color/48/google-sheets.png" alt="Google Sheets">
                                     {% endif %}
-                                    {{subfield.label}}
-                                    {{subfield(id="checkbtn")}}
+                                    <div class="ms-2 d-flex align-items-center">
+                                        <label for="{{ subfield.id }}" class="form-check-label">{{ subfield.label.text }}</label>
+                                        {{ subfield(class="ms-2") }}
+                                    </div>
                                 </div>
-                            {% endfor %}
+                            </div>
+                        {% endfor %}
                         </div>
                         <div class="row mt-4">
                             {{form.formula_explain.label(class_="pb-1")}}
                             {% for subfield in form.formula_explain %}
-                                <div class="col-5 form-input mt-3 mx-3 py-3"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
+                                <div class="col-5 form-input mt-3 me-3 py-3"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
                                     {{ subfield.label}}
                                     {{ subfield(id="checkbtn")}}
                                 </div>
@@ -36,7 +40,7 @@
                         </div>
                         <div class="row mt-4">
                             {{form.prompt.label(class="mb-2")}}	
-                            {{form.prompt(class="form-input-text p-2 mx-2", placeholder="Summe Spalte A wenn Spalte B das Wort 'Sales' enthält z.B.")}}	
+                            {{form.prompt(class="form-input-text p-2 me-2", placeholder="Summe Spalte A wenn Spalte B das Wort 'Sales' enthält z.B.")}}	
                         </div>
                         <div class="row mt-3">
                             {{form.submit(class="btn btn-primary w-100 mx-2 py-2")}}
@@ -92,7 +96,7 @@
             </div>       
         </div>
         
-        <div class="card result-card shadow-lg col-lg-5 ms-5 col-md-4 col-sm-12">
+        <div class="card result-card shadow-lg lg-ms-5 col-lg-5 col-xs-11">
             <div class="card-body p-4">
                 <h4>Output</h4>
                 <hr>

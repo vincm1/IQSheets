@@ -13,26 +13,26 @@
                         <div class="row justify-content-start">
                             {{form.vba_app.label(class_="pb-1")}}
                             {% for subfield in form.vba_app %}
-                                <div class="col-lg-5 form-input mt-3 py-2 w-100" id="container-1" style="cursor: pointer;">
+                            <div class="col-md-5 col-sm-12 me-3 form-input mt-3 py-2" id="container-{{ loop.index }}" style="cursor: pointer;">
+                                <div class="d-flex align-items-center">
                                     {% if subfield.data == "Excel - VBA" %}
-                                        <div class="d-none d-md-inline-block">
-                                            <img width="48" height="48" src="{{url_for('static', filename='img/vba-script.svg')}}" />
-                                        </div>
+                                        <img width="48" height="48" src="{{url_for('static', filename='img/vba-script.svg')}}" />
                                     {% else %}
-                                        <div class="d-none d-md-inline-block">
-                                            <img width="48" height="48" src="{{url_for('static', filename='img/apps-script.svg')}}" alt="google-sheets" />
-                                        </div>
+                                        <img width="48" height="48" src="{{url_for('static', filename='img/apps-script.svg')}}" alt="google-sheets" />
                                     {% endif %}
-                                    <span>{{ subfield.label(for="checkbtn") }}</span>
-                                    <span>{{ subfield(id="checkbtn") }}</span>
+                                    <div class="ms-2 d-flex align-items-center">
+                                        <label for="{{ subfield.id }}" class="form-check-label">{{ subfield.label.text }}</label>
+                                        {{ subfield(class="ms-2") }}
+                                    </div>
                                 </div>
+                            </div>
                             {% endfor %}
                         </div>
-                        <div class="row justify-content-start gap-2 mt-4">
+                        <div class="row mt-4">
                             {{form.formula_explain.label(class_="pb-1")}}
                             {% for subfield in form.formula_explain %}
-                                <div class="col-md-5 col-sm-11 col-xs-11 form-input py-2 sm-w-100"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
-                                    {{ subfield.label(for)}}
+                                <div class="col-5 form-input mt-3 me-3 py-3"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
+                                    {{ subfield.label}}
                                     {{ subfield(id="checkbtn")}}
                                 </div>
                             {% endfor %}
@@ -107,10 +107,10 @@
                                 {% if formulas and answer %}
                                     {% for formula in formulas %}
                                     <div class="row mt-1 mb-2">
-                                        <div class="col-10 formel shadow-lg py-1" >
+                                        <div class="col-11 formel shadow-lg py-1" >
                                             <p id="copy-target">{{formula}}</p>
                                         </div>
-                                        <div class="col-1 ms-1">
+                                        <div class="col-1">
                                             <button class="btn btn-secondary align-self-end" title="Kopieren" id="copy-btn" onclick="copyToClipboard()">
                                                 <i class="fa-solid fa-copy"></i>
                                             </button>

@@ -2,8 +2,8 @@
 	<div class="heading mx-4 mt-3">
 		<h3>AI SQL Assistent</h3>
 	</div>
-	<div class="d-flex row generator-cards mt-3 mx-3">
-        <div class="card generator-card shadow-lg ms-2 col-lg-6 col-md-8 col-sm-12">
+	<div class="d-flex row generator-cards mt-3 mx-4">
+        <div class="card generator-card shadow-lg col-lg-6 me-lg-4 col-xs-11">
             <div class="card-body p-4">
                 <h4>Input</h4>
                 <hr>
@@ -13,7 +13,7 @@
                         <div class="row mt-2">
                             {{form.formula_explain.label(class_="pb-1")}}
                             {% for subfield in form.formula_explain %}
-                                <div class="col-5 form-input mt-3 mx-3 py-3"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
+                                <div class="col-xs-12 col-md-5 form-input mt-3 mx-1 py-3"> <!-- Hier verwenden wir col-6 für zwei gleichbreite Spalten -->
                                     {{ subfield.label}}
                                     {{ subfield(id="checkbtn")}}
                                 </div>
@@ -78,7 +78,7 @@
             </div> 
         </div>
 
-        <div class="card result-card shadow-lg col-lg-5 ms-5 col-md-4 col-sm-12">
+        <div class="card result-card shadow-lg lg-ms-5 col-lg-5 col-xs-11">
             <div class="card-body p-4">
                 <h4>Output</h4>
                 <hr>
@@ -142,5 +142,6 @@
             </div>
         </div>
 
+        </div>
     </div>
 {% endblock %}
