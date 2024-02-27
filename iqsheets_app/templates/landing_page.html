@@ -1,25 +1,25 @@
 {% extends "index.html" %} {% block content %}
 <main>
   <!-- Hero Start -->
-	<section class="hero pt-2">
-		<div class="container hero pt-5 pb-5">
-			<div class="row align-items-top">
+	<section class="hero py-5">
+		<div class="container hero pt-5">
+			<div class="row align-items-top mt-1">
 				<div class="col-lg-7 col-sm-12">
 					<!-- Heading -->
-					<div class="mb-5 mt-2 justify-content-sm-center">
+					<div class="mb-5 mt-1 justify-content-sm-center">
 						<h1 class="display-4 text-inline">AI-generierte Formeln für
 							<div id="text-container" style="display: inline;">
 								<p id="changing-text" style="display: inline;">Controller.</p>
 							</div>
 						</h1>
 						<h4 class="pt-3 pb-3 mt-4">Erstelle komplexe Formeln in sekundenschnelle durch einfache Textanweisungen.</h4>
-						<div class="mb-5">
+						<div class="mt-3 mb-5">
 								<a href="{{url_for('user.register')}}"><button class="btn btn-primary p-3" href="">Jetzt registrieren</button></a>
 								<a class="btn btn-secondary me-3 ms-1 px-2 p-3" href="#video-landing" role="button" alt="wehwe">
 									Demovideos <i class="fa-solid fa-play fa-xl ms-2"></i>
 								</a>
 						</div>
-						<div class="row mt-5 hero-benefits text-center">
+						<div class="row mt-2 hero-benefits text-center">
 							<div class="col-3 my-2 me-3">
 								<h2 class="hero-info text-center">50%</h2>
 								<p>Zeitersparnis dank KI-Formeln</p>
@@ -35,7 +35,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-5 is-center">
+				<div class="col-lg-5 justify-content-center">
 						<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
 						<dotlottie-player src="https://lottie.host/0351042f-3b37-420c-98c7-2c681d3e4dcc/PohXkhh0Hq.json" background="transparent" speed="1" style="width: 100%; height: auto;" loop autoplay></dotlottie-player>
 				</div>
@@ -93,7 +93,7 @@
   <!-- Functions --> 
   <section class="functions mt-1">
     <div class="container py-2">
-      <div class="row text-center justify-content-center mt-2">
+      <div class="row text-center justify-content-center mt-3">
         <h3>Die wichtigsten Funktionen</h3>
         <p>Lass Dir in sekundenschnelle Excelformeln, RegEx oder SQL-Queries erstellen.</p>
       </div>
@@ -620,8 +620,7 @@
   <section class="cta my-5">
     <div class="container py-5">
       <div class="row justify-content-center">
-        <div class="col-sm-10 ">
-          <div class="card text-center shadow-lg cta-card">
+        <div class="card text-center col-md-8 col-xs-9 mx-sm-1 card-lg shadow-lg cta-card">
             <div class="card-body my-5">
               <h3 class="pt-3">Du hast ein Projekt im Kopf?</h3>
               <h5 class="pt-3">Verbessere deinen Arbeitsalltag!</h5>

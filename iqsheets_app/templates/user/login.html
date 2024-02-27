@@ -2,11 +2,11 @@
 <main>
   <section class="signup">
     <div class="container mx-auto">
-      <div class="row justify-content-center pt-1">
+      <div class="row justify-content-center pt-5">
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             {% for category, message in messages %}
-              <div class="col-md-5 col-sm-12 pt-2">
+              <div class="col-md-6 col-sm-12">
               <!-- Flash messages -->
                 <div class="flashmessages">
                   <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
@@ -20,7 +20,7 @@
         {% endwith %}      
       </div>      
 
-      <div class="row justify-content-center pt-3">
+      <div class="row justify-content-center pt-1">
         <div class="col-md-6 col-sm-12">
           <!-- Login Card -->
           <div class="card shadow-lg p-3 text-center login-card">

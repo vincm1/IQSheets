@@ -699,6 +699,8 @@ tr {
 th {
   border-bottom: 1px solid var(--bs-link-hover-color); /* Black border for the table */
 }
+
+
 /* Favorites */
 
 .favorite-cards {
