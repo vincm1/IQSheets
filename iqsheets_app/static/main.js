@@ -22,11 +22,11 @@ var interval = setInterval(updateText, 1500);
 document.getElementById("calculate").addEventListener("click", function() {
   var hours = parseFloat(document.getElementById("hours").value);
   var hourlyWage = parseFloat(document.getElementById("hourly-wage").value);
-  
+  console.log("hi");
   if (!isNaN(hours) && !isNaN(hourlyWage)) {
       var totalEarnings = hours * hourlyWage;
       document.getElementById("result").innerHTML = totalEarnings.toFixed(2) + "€";
-      document.getElementById("result2").innerHTML = hours * 0.25;
+      document.getElementById("result2").innerHTML = hours * 0.25.toFixed(21) + "€";
   } else {
       document.getElementById("result").innerHTML = "Trage deine Daten ein.";
   }
@@ -57,10 +57,10 @@ function copyToClipboard() {
     document.body.removeChild(tempInput);
   }
 
-const filterBtn = document.getElementById("filter-btn");
-filterBtn.addEventListener("click", () => {
-    filterBtn.classList.add("active");
-  });
+// const filterBtn = document.getElementById("filter-btn");
+// filterBtn.addEventListener("click", () => {
+//     filterBtn.classList.add("active");
+// });
 
 $(document).ready(function() {
     $('#formula-form').submit(function(event) {
@@ -105,10 +105,26 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Loop through each .feature-col element and add an event listener
+const featureCols = document.querySelectorAll('.feature-col'); // Verwende . für Klassen
+// Event Listener für jede Feature-Spalte hinzufügen
+document.querySelectorAll('.feature-col').forEach((featureCol, index) => {
+  featureCol.addEventListener('click', function() {
+    // Alle Text-Divs ausblenden
+    document.getElementById('text1').style.display = 'none';
+    document.getElementById('text2').style.display = 'none';
+    document.getElementById('text3').style.display = 'none';
 
-const feature_cols = document.querySelectorAll('.feature-col'); 
-feature_cols.forEach(function(feature_col) {
-  feature_col.addEventListener('click', function(event) {
-    console.log(event); // Logs the event object to the console
+    // Aktive Klasse von allen Spalten entfernen und zur aktuellen hinzufügen
+    document.querySelectorAll('.feature-col').forEach(col => col.classList.remove('active'));
+    this.classList.add('active');
+
+    // Entsprechenden Text-Div basierend auf dem Index der geklickten Spalte anzeigen
+    if (index === 0) {
+      document.getElementById('text1').style.display = 'block';
+    } else if (index === 1) {
+      document.getElementById('text2').style.display = 'block';
+    } else if (index === 2) {
+      document.getElementById('text3').style.display = 'block';
+    }
   });
 });

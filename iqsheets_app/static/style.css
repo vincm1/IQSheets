@@ -242,8 +242,9 @@ body {
 }
 
 .feature-col.active {
-    background-color: #007bff; /* Highlight color for active state */
-    color: white; /* Optional: change text color for active state */
+    background-color: var(--bs-background-light); /* Highlight color for active state */
+    border: 1px solid var(--bs-link-color);
+    border-radius: var(--bs-border-radius);
 }
 
 /* FUNCTIONS */

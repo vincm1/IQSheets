@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -80,113 +80,113 @@
     <footer>
 			<div class="container pt-3 pb-5">
 				<hr>
-					<!-- Footer Start-->
-					<div class="footer-area footer-padding">
-							<div class="container py-2">
-									<div class="row justify-content-between">
-											<div class="col-lg-3 mb-7 mb-lg-0">
-												<div class="logo-area">
-													<a class="navbar-brand" href="{{url_for('core.index')}}" id="logo">
-														<span class="iq me-1">IQ</span><span class="sheets">Sheets</span>
-													</a>
-													<h6 class="footer-desc pt-3">Zeitersparnis in Excel & Google Spreadsheets, dank smarter KI.</h6>
-													<p class="info1">
-															Generiere dir mit dem KI-Tool von IQSheets in sekundenschnelle smarte Excel-Formeln und lasse dir unbekannte Formeln 
-															erklären und werde zum Spreadsheet-Profi. 
-													</p>
-												</div>
-											</div>
-
-											<div class="col-lg-3 mb-7 mb-lg-0">
-													<div class="single-footer-caption">
-															<div class="footer-title">
-																	<h6 class="footer-heading">Quick Links</h6>
-															</div>
-																	<ul class="footer-list">
-																			<li class="footer-link"><a href="{{url_for('core.index', _anchor='pricing')}}">Preise</a></li>
-																			<li class="footer-link pt-2"><a href="{{url_for('core.index', _anchor='faqs')}}">FAQs</a></li>
-																			<li class="footer-link pt-2"><a href="{{url_for('core.impressum')}}">Impressum</a></li>
-																			<!-- iubenda (Cookies & Datenschutz) -->
-																			<!-- iubenda Datenschutzerklärung -->
-																			<a href="https://www.iubenda.com/privacy-policy/91134987" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Datenschutzerklärung ">Datenschutzerklärung</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-																			<!-- iubenda Cookie-Richtlinie -->
-																			<a href="https://www.iubenda.com/privacy-policy/91134987/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Cookie-Richtlinie ">Cookie-Richtlinie</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-																			<!-- ibuenda AGBs -->
-																			<a href="https://www.iubenda.com/nutzungsbedingungen/91134987" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="AGBs ">AGBs</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-																	</ul>
-													</div>
-												</div>
-
-											<div class="col-lg-2 col-md-4 col-sm-7">
-													<div class="single-footer-caption mb-50">
-															<div class="footer-title">
-																	<h6 class="footer-heading">Support</h6>
-																	<ul class="footer-list">
-																			<li class="footer-link"><a href="{{url_for('core.kontakt')}}">Feedback</a></li>
-																			<li class="footer-link pt-2"><a href="{{url_for('core.kontakt')}}">Kontakt</a></li>
-																	</ul>
-															</div>
-													</div>
-											</div>
-
-											<div class="col-lg-3 col-md-6 col-sm-8">
-													<div class="single-footer-caption mb-50">
-															<div class="footer-title">
-																	<h6 class="footer-heading">Newsletter</h6>
-																	<div class="footer-pera footer-pera2">
-																		<p>Verpasse keine Updates, jetzt zum Newsletter anmelden.</p>
-																	</div>
-																<!-- Form -->
-																<div class="footer-form" id="newsletter-form-anchor">
-																		<form method="POST" action="{{url_for('core.newsletter')}}" id="newsletterForm">
-																				{{form_nl.hidden_tag()}}
-																				<div class="d-flex flex-row">
-																						{{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
-																						<div class="form-icon">
-																								<button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 px-3">
-																										<i class="fa-solid fa-arrow-right"></i>
-																								</button>
-																						</div>
-																						<div class="mt-10 info"></div>
-																				</div>    
-																			</form>
-																		<!-- Flash messages -->
-																		<div class="flashmessages mt-2">
-																			{% with messages = get_flashed_messages(with_categories=true) %}
-																				{% if messages %}
-																					{% for category, message in messages %}
-																						<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-																							{{ message }}
-																							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-																						</div>
-																					{% endfor %}
-																				{% endif %}
-																			{% endwith %}
-																		</div>
-																</div>
-															</div>
-													</div>
-											</div>
-
+				<!-- Footer Start-->
+				<div class="footer-area footer-padding">
+					<div class="container py-2">
+						<div class="row justify-content-between">
+								<div class="col-lg-3 mb-7 mb-lg-0">
+									<div class="logo-area">
+										<a class="navbar-brand" href="{{url_for('core.index')}}" id="logo">
+											<span class="iq me-1">IQ</span><span class="sheets">Sheets</span>
+										</a>
+										<h6 class="footer-desc pt-3">Zeitersparnis in Excel & Google Spreadsheets, dank smarter KI.</h6>
+										<p class="info1">
+												Generiere dir mit dem KI-Tool von IQSheets in sekundenschnelle smarte Excel-Formeln und lasse dir unbekannte Formeln 
+												erklären und werde zum Spreadsheet-Profi. 
+										</p>
 									</div>
-							 </div>
+								</div>
 
-						<div class="container mt-2">
-								<!-- Copy-Right -->
-								<div class="row align-items-center">
-										<hr>
-										<div class="col-12 d-flex justify-content-between align-items-center flex-wrap">
-												<p class="mb-0">© IQSheets ein Produkt der <br> PyMinds UG (haftungsbeschränkt)</p>
-												<div class="social-btns">
-														<button class="btn btn-primary p-2 mx-1"><i class="fa-brands fa-facebook fa-2xl"></i></button>
-														<button class="btn btn-primary p-2 mx-1"><i class="fa-brands fa-linkedin fa-2xl"></i></button>
-														<button class="btn btn-primary p-2 mx-1"><i class="fa-brands fa-twitter fa-2xl"></i></button>
-												</div>      
+								<div class="col-lg-3 mb-7 mb-lg-0">
+										<div class="single-footer-caption">
+												<div class="footer-title">
+														<h6 class="footer-heading">Quick Links</h6>
+												</div>
+												<ul class="footer-list">
+													<li class="footer-link"><a href="{{url_for('core.index', _anchor='pricing')}}">Preise</a></li>
+													<li class="footer-link pt-2"><a href="{{url_for('core.index', _anchor='faqs')}}">FAQs</a></li>
+													<li class="footer-link pt-2"><a href="{{url_for('core.impressum')}}">Impressum</a></li>
+													<!-- iubenda (Cookies & Datenschutz) -->
+													<!-- iubenda Datenschutzerklärung -->
+													<a href="https://www.iubenda.com/privacy-policy/91134987" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Datenschutzerklärung ">Datenschutzerklärung</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+													<!-- iubenda Cookie-Richtlinie -->
+													<a href="https://www.iubenda.com/privacy-policy/91134987/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Cookie-Richtlinie ">Cookie-Richtlinie</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+													<!-- ibuenda AGBs -->
+													<a href="https://www.iubenda.com/nutzungsbedingungen/91134987" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="AGBs ">AGBs</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+											</ul>
 										</div>
 								</div>
+
+								<div class="col-lg-2 col-md-4 col-sm-7">
+										<div class="single-footer-caption mb-50">
+												<div class="footer-title">
+													<h6 class="footer-heading">Support</h6>
+													<ul class="footer-list">
+														<li class="footer-link"><a href="{{url_for('core.kontakt')}}">Feedback</a></li>
+														<li class="footer-link pt-2"><a href="{{url_for('core.kontakt')}}">Kontakt</a></li>
+													</ul>
+												</div>
+										</div>
+								</div>
+
+								<div class="col-lg-3 col-md-6 col-sm-8">
+										<div class="single-footer-caption mb-50">
+												<div class="footer-title">
+														<h6 class="footer-heading">Newsletter</h6>
+														<div class="footer-pera footer-pera2">
+															<p>Verpasse keine Updates, jetzt zum Newsletter anmelden.</p>
+														</div>
+													<!-- Form -->
+													<div class="footer-form" id="newsletter-form-anchor">
+															<form method="POST" action="{{url_for('core.newsletter')}}" id="newsletterForm">
+																	{{form_nl.hidden_tag()}}
+																	<div class="d-flex flex-row">
+																			{{form_nl.email(class_="form-control", placeholder="Email-Adresse")}}
+																			<div class="form-icon">
+																					<button type="submit" name="submit" id="newsletter-submit" class="p-2 btn btn-primary ms-2 px-3">
+																							<i class="fa-solid fa-arrow-right"></i>
+																					</button>
+																			</div>
+																			<div class="mt-10 info"></div>
+																	</div>    
+																</form>
+															<!-- Flash messages -->
+															<div class="flashmessages mt-2">
+																{% with messages = get_flashed_messages(with_categories=true) %}
+																	{% if messages %}
+																		{% for category, message in messages %}
+																			<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+																				{{ message }}
+																				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+																			</div>
+																		{% endfor %}
+																	{% endif %}
+																{% endwith %}
+															</div>
+													</div>
+												</div>
+										</div>
+								</div>
+
+						</div>
+				</div>
+
+					<div class="container mt-2">
+							<!-- Copy-Right -->
+							<div class="row align-items-center">
+									<hr>
+									<div class="col-12 d-flex justify-content-between align-items-center flex-wrap">
+											<p class="mb-0">© IQSheets ein Produkt der <br> PyMinds UG (haftungsbeschränkt)</p>
+											<div class="social-btns">
+													<button class="btn btn-primary p-2 mx-1"><i class="fa-brands fa-facebook fa-2xl"></i></button>
+													<button class="btn btn-primary p-2 mx-1"><i class="fa-brands fa-linkedin fa-2xl"></i></button>
+													<button class="btn btn-primary p-2 mx-1"><i class="fa-brands fa-twitter fa-2xl"></i></button>
+											</div>      
+									</div>
 							</div>
-												
-					</div>
+						</div>
+											
+				</div>
 			</div>
 	</footer>
 	<!-- Footer End-->
@@ -200,7 +200,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- JS file -->
     <script src="{{url_for('static', filename='main.js')}}" charset="utf-8"></script>
-    <script src="{{url_for('static', filename='newsletter.js')}}" charset="utf-8"></script>
+	<script src="{{url_for('static', filename='test.js')}}" charset="utf-8"></script>
 	
 	</body>
 </html>
