@@ -104,13 +104,34 @@
                         <p>Hier steht deine Lösung:</p>
                         <div class="card">
                             <div class="card-body">
-                                {% if answer %}
-                                    <div class="row">
-                                        <div class="card formel card-body px-1 py-2">
-                                            {{answer}}
+                                {% if formula and answer %}
+                                    <div class="row mt-1 mb-2">
+                                        <div class="col-11 formel shadow-lg py-1" >
+                                            <p id="copy-target">{{formula}}</p>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-secondary align-self-end" title="Kopieren" id="copy-btn" onclick="copyToClipboard()">
+                                                <i class="fa-solid fa-copy"></i>
+                                            </button>
                                         </div>
                                     </div>
-                        
+
+                                    <div class="row mt-3">
+                                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFullAnswer" role="button" aria-expanded="false" aria-controls="collapseFullAnswer">
+                                            gesamte Antwort
+                                        </a>
+                                        <div class="collapse mt-2" id="collapseFullAnswer">
+                                            <div class="col-12 w-100 answer shadow-lg p-2" >
+                                                <p class="mx-2">{{answer}}</p>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                {% elif answer %}
+                                    <div class="row mt-1">
+                                        <div class="col-12 answer shadow-lg p-3" >
+                                            <p>{{answer}}</p>
+                                        </div>
+                                    </div>
                                 {% else %}
                                     <p id="lorem">Noch keine Lösung vorhanden.</p>
                                 {% endif %}

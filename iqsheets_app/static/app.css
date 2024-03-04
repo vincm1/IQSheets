@@ -620,22 +620,16 @@ body {
   padding: 0;
 }
 
-.result .card-body {
-  color: var(--bs-link-hover-color);
+.card .formel {
+  background-color: var(--bs-body-background);
+  border: 1px solid var(--bs-link-color);
+  border-radius: var(--bs-border-radius);
 }
 
-.result .formel {
-  background-color: var(--bs-link-color-hover);
-  border: 1px solid var(--bs-link-hover-color);
-  border: 10px;
-}
-
-.result #copy-target {
-  color: var(--bs-link-hover-color);
-}
-
-#lorem {
-  color: #fff;
+.card .answer {
+  background-color: var(--bs-body-background);
+  border: 1px solid var(--bs-link-color);
+  border-radius: var(--bs-border-radius);
 }
 
 #copy-btn {
@@ -681,10 +675,6 @@ body {
 
 .bestpractices .fa-circle-xmark {
   color: var(--bs-danger);
-}
-
-.result .card .formel {
-  background-color: var(--bs-link-color-hover);
 }
 
 table {
@@ -771,7 +761,6 @@ th {
     color: var(--bs-link-hover-color);
 }
 
-
 .user-input #usericon {
   color: var(--bs-link-color-hover)
 }
@@ -795,27 +784,6 @@ th {
   color: var(--bs-warning);
   font-size: 20px;
 } 
-
-.formel {
-  border: 1px solid var(--bs-link-hover-color);
-  border-radius: 5px;
-  background-color: var(--bs-link-color);
-}
-
-.formel i {
-  color: #fff;
-  border: none;
-}
-
-.formel i :hover {
-  color: var(--bs-warning);
-}
-
-
-#collapseFullAnswer {
-  border: 1px solid var(--bs-link-hover-color);
-  border-radius: 5px;
-}
  
 /* TEMPLATES  */
 

@@ -94,7 +94,6 @@ def process_form_data(form_data, prompt_type):
     answer = result.choices[0].message.content
     
     category, prompt = form_data["formula_explain"], form_data["prompt"]
-    
     # Increasing the amount of prompts and total tokens when prompt is generated
     current_user.num_prompts += 1
     current_user.num_tokens += result.usage.total_tokens
@@ -113,18 +112,41 @@ def prompt_output_handler(prompt_result, prompt_type, form_data):
     str: The text with the specified pattern removed.
     """
     # Extracting the part of the string from "sql" to "19"7
-    print(form_data)
     if "vba_app" in form_data:
-        print(CLEAN_MAP[form_data["vba_app"]].lower())
         formulas = find_function(prompt_result, CLEAN_MAP[form_data["vba_app"]].lower())
         reduced_answer = remove_pattern_from_text(prompt_result, CLEAN_MAP[form_data["vba_app"]].lower())
-        print(prompt_result, prompt_type.lower(),formulas, reduced_answer)
     else:
         formulas = find_function(prompt_result, prompt_type.lower())
         reduced_answer = remove_pattern_from_text(prompt_result, prompt_type.lower())
-        print(prompt_result, prompt_type.lower(),formulas, reduced_answer)
     
     return formulas, reduced_answer
+
+def formula_output_handler(prompt_result):
+    """
+    Function to handle the OpenAi response for user.
+
+    Parameters:
+    text (str): The text from which the pattern will be removed.
+    prompt_type (str): The type of prompt to be removed from the text.
+
+    Returns:
+    str: The text with the specified pattern removed.
+    """
+    # Extracting the part of the string from "sql" to "19"7
+    # Suche nach der gesamten Formel
+    formula_part = re.search(r"=(.*\))", prompt_result)
+    formula = formula_part.group(0) if formula_part else "No formula found"
+
+    # Entfernen der gesamten Formel aus dem Text
+    if formula_part:
+        reduced_answer = prompt_result.replace(formula_part.group(0), "")
+    else:
+        reduced_answer = prompt_result
+
+    print("Gefundene Formel:", formula)
+    print("Reduzierter Text:", reduced_answer)
+    return formula, reduced_answer
+
 ################
 #### routes ####
 ################
@@ -184,14 +206,14 @@ def formel(prompt_type):
         # Commiting prompt and numbers to db
         db.session.add(prompt)
         db.session.commit()
-        print(prompt.result, prompt.prompt_type, form.data)
     if prompt.category == 'Erstellen' and prompt.prompt_type != "formula":
         formulas, reduced_answer = prompt_output_handler(prompt.result, prompt.prompt_type, form.data)
-        print(formulas, reduced_answer, prompt.result, prompt.prompt_type, form.data)
         return render_template(f'dashboard/{prompt_type}_page.html', answer=reduced_answer, form=form, prompt_id=prompt.id, formulas=formulas)    
+    elif prompt.category == 'Erstellen' and prompt.prompt_type == "formula":
+        formula, reduced_answer = formula_output_handler(prompt.result)
+        return render_template(f'dashboard/{prompt_type}_page.html', answer=reduced_answer, form=form, prompt_id=prompt.id, formula=formula)
     else:
-        print(prompt.result, prompt.prompt_type, form.data)
-        return render_template(f'dashboard/{prompt_type}_page.html', answer=prompt.result, form=form, prompt_id=prompt.id)
+        return render_template(f'dashboard/{prompt_type}_page.html', answer=answer, form=form, prompt_id=prompt.id)
         
     return render_template(f'dashboard/{prompt_type}_page.html', form=form)
 
