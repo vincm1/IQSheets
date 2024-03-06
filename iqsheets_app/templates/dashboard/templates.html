@@ -33,8 +33,7 @@
 								class="card-img-top" alt="spreadsheet computer">
 							{% endif %}
 								<div class="download-btn position-absolute top-50 start-50 translate-middle text-center opacity-0">
-									{% set s3_template_link = "https://" + template.bucket + ".s3." + template.region + ".amazonaws.com/templates/" + template.template_name %}
-									<a href="{{s3_template_link}}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
+									<a href="{{ url_for('dashboard.download', template_id=template.id) }}" class="btn btn-primary px-4 py-3 mb-5">Download</a>
 								</div>
 						</div>
 						<div class="card-body mt-3">

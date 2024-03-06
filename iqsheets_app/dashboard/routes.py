@@ -1,9 +1,12 @@
 """Routes for dashboard"""
 from datetime import datetime
 import re
+import os
+import time
+import threading
 import boto3
 from sqlalchemy import func
-from flask import Blueprint, current_app, render_template, send_file, redirect, url_for, request
+from flask import Blueprint, current_app, render_template, send_file, redirect, url_for, request, after_this_request
 from flask_login import login_required, current_user
 from iqsheets_app import db
 from iqsheets_app.models import Prompt, Template
@@ -299,14 +302,45 @@ def templates():
             
     return render_template('dashboard/templates.html', templates=templates, categorys=categorys)
 
-@dashboard_blueprint.route('/download', methods=['GET'])
+@dashboard_blueprint.route('/templates/<int:template_id>/download', methods=['GET'])
 @login_required
 @check_confirmed_mail
 @check_sub_stat
-def download():
-    """ Route for templates download """
-    filename = 'static/xlxs_templates/Calendar-Template.xlsx'
+def download(template_id):
     try:
-        return send_file(filename)
+        template = Template.query.get(template_id)
+        if not template:
+            return "Template not found", 404
+
+        folder = 'templates/'
+        filename = template.template_name
+        file_path = folder + filename
+        
+        # Erstelle den temporären Ordner, wenn er noch nicht existiert
+        temp_folder = os.path.join(current_app.root_path, 'static', 'template_downloads')
+        if not os.path.exists(temp_folder):
+            os.makedirs(temp_folder)
+        
+        # Pfad zur temporären Datei
+        temp_file_path = os.path.join(temp_folder, filename)
+        
+        # Herunterladen der Datei aus dem S3-Bucket
+        output = s3_client.download_file(template.bucket, file_path, temp_file_path)
+        
+        # Schedule file deletion after a delay
+        def delete_file_delayed(file_path):
+            time.sleep(10)  # Delay for 10 seconds
+            try:
+                os.unlink(file_path)
+            except Exception as e:
+                print("Error deleting file:", e)
+        
+        # Start a new thread to delete the file after a delay
+        threading.Thread(target=delete_file_delayed, args=(temp_file_path,)).start()
+
+        return send_file(temp_file_path, as_attachment=True)
     except Exception as e:
+        # Protokolliere den Fehler für weitere Diagnose
+        print("Error:", e)
         return str(e)
+    return redirect(url_for('dashboard.templates'))
