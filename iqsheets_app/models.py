@@ -49,7 +49,7 @@ class User(db.Model, UserMixin):
                 if resp.get('data'):
                     print(resp["data"])
                     stripe_cust_id = resp["data"][0]["id"]
-                    stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id)
+                    stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id, status="all")
                     stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
                     self.stripe_customer_id = stripe_cust_id
                     self.stripe_sub_id = stripe_subscription_id
@@ -73,7 +73,7 @@ class User(db.Model, UserMixin):
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
         if self.is_admin is False:
             try:
-                subscription = stripe.Subscription.retrieve(self.stripe_sub_id)
+                subscription = stripe.Subscription.retrieve(self.stripe_sub_id, status="all")
                 print(subscription["items"]["data"])
                 if subscription:
                     self.sub_status = subscription["status"]
