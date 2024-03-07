@@ -49,7 +49,8 @@ class SubscriptionsView(BaseView):
         else:
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
         customers = stripe.Customer.list()
-        subscriptions = stripe.Subscription.list()
+        subscriptions = stripe.Subscription.list(status='canceled')
+        
         return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions)
 
 class TemplatesUploadView(BaseView):
