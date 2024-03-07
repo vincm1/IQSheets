@@ -104,27 +104,35 @@ document.addEventListener("DOMContentLoaded", function() {
   displayText.innerText = fullText.substring(0, 100) + '...';
 });
 
-// Loop through each .feature-col element and add an event listener
-const featureCols = document.querySelectorAll('.feature-col'); // Verwende . für Klassen
-// Event Listener für jede Feature-Spalte hinzufügen
-document.querySelectorAll('.feature-col').forEach((featureCol, index) => {
-  featureCol.addEventListener('click', function() {
-    // Alle Text-Divs ausblenden
-    document.getElementById('text1').style.display = 'none';
-    document.getElementById('text2').style.display = 'none';
-    document.getElementById('text3').style.display = 'none';
+// Add an event listener for each feature column
+const featureCols = document.querySelectorAll('.feature-col');
 
-    // Aktive Klasse von allen Spalten entfernen und zur aktuellen hinzufügen
-    document.querySelectorAll('.feature-col').forEach(col => col.classList.remove('active'));
+// Initially hide all videos and show only the first one
+document.getElementById('video1').style.display = 'block';
+document.getElementById('video2').style.display = 'none';
+document.getElementById('video3').style.display = 'none';
+
+// Initially set the first feature column as active
+featureCols[0].classList.add('active');
+
+featureCols.forEach((featureCol, index) => {
+  featureCol.addEventListener('click', function() {
+    // Hide all video divs when any feature column is clicked
+    document.getElementById('video1').style.display = 'none';
+    document.getElementById('video2').style.display = 'none';
+    document.getElementById('video3').style.display = 'none';
+
+    // Remove 'active' class from all columns and add it to the clicked one
+    featureCols.forEach(col => col.classList.remove('active'));
     this.classList.add('active');
 
-    // Entsprechenden Text-Div basierend auf dem Index der geklickten Spalte anzeigen
+    // Display the corresponding video div based on the index of the clicked column
     if (index === 0) {
-      document.getElementById('text1').style.display = 'block';
+      document.getElementById('video1').style.display = 'block';
     } else if (index === 1) {
-      document.getElementById('text2').style.display = 'block';
+      document.getElementById('video2').style.display = 'block';
     } else if (index === 2) {
-      document.getElementById('text3').style.display = 'block';
+      document.getElementById('video3').style.display = 'block';
     }
   });
 });
