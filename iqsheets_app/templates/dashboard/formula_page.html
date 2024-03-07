@@ -106,7 +106,7 @@
                             <div class="card-body">
                                 {% if formula and answer %}
                                     <div class="row mt-1 mb-2">
-                                        <div class="col-11 formel shadow-lg py-1" >
+                                        <div class="col-11 formel p-3 shadow-lg py-1" >
                                             <p id="copy-target">{{formula}}</p>
                                         </div>
                                         <div class="col-1">
@@ -121,19 +121,19 @@
                                             gesamte Antwort
                                         </a>
                                         <div class="collapse mt-2" id="collapseFullAnswer">
-                                            <div class="col-12 w-100 answer shadow-lg p-2" >
+                                            <div class="col-12 w-100 answer formel p-3 shadow-lg p-2" >
                                                 <p class="mx-2">{{answer}}</p>
                                             </div>
                                         </div>  
                                     </div>
                                 {% elif answer %}
                                     <div class="row mt-1">
-                                        <div class="col-12 answer shadow-lg p-3" >
+                                        <div class="col-12 answer formel p-3 shadow-lg p-3" >
                                             <p>{{answer}}</p>
                                         </div>
                                     </div>
                                 {% else %}
-                                    <p id="lorem">Noch keine Lösung vorhanden.</p>
+                                    <p class="formel p-3" id="lorem">Noch keine Lösung vorhanden.</p>
                                 {% endif %}
                             </div>
                         </div>
@@ -148,6 +148,11 @@
                             <a href="{{url_for('dashboard.negative_feedback', prompt_id=prompt_id, prompt_type='formula')}}">
                                 <button class="p-2 me-2 btn btn-secondary px-3 me-2" id="wrongbtn">
                                     <i class="fa-regular fa-circle-xmark pe-2"></i> Falsch
+                                </button>	
+                            </a>
+                            <a href="{{url_for('dashboard.prompter', prompt_type='skripte')}}">
+                                <button class="p-2 me-2 btn btn-secondary px-3 me-2">
+                                    <i class="fa-regular fa-lightbulb pe-2"></i> Neue Formel
                                 </button>	
                             </a>
                             {% endif %}

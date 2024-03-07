@@ -75,7 +75,6 @@ def login():
                         if user.stripe_customer_id and user.stripe_sub_id is not None:
                             user.check_abo_status()
                             login_user(user, remember=form.remember.data)
-                            print(form.remember.data)
                             return redirect(url_for('dashboard.dashboard'))
                         else:
                             if current_app.debug:
@@ -85,12 +84,12 @@ def login():
                                 stripe_link = f"https://buy.stripe.com/fZe4iy3C34ItctG000?https://buy.stripe.com/fZe4iy3C34ItctG000?prefilled_email={user.email}"
                                 return redirect(stripe_link)                          
                 else:
+                    flash('Prüfe deine Anmeldedaten!', 'danger')
                     return redirect(url_for('user.login'))
             else:
                 flash('Bitte bestätige deine Anmeldung per Link', 'danger')
         else:
             flash('Prüfe deine Anmeldedaten!', 'danger')
-            return redirect(url_for('user.login'))
     return render_template('user/login.html', form=form, form_2=form_2, form_nl=form_nl)    
 
 @user_blueprint.route('/logout')
