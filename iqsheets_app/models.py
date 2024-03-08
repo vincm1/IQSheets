@@ -10,10 +10,11 @@ from iqsheets_app import db, login_manager
 # Login Manager User loader
 @login_manager.user_loader
 def load_user(user_id):
+    """ Login manager to query by user id """
     return User.query.get(user_id)
-
 class User(db.Model, UserMixin):
-
+    """ DB Model for Users """
+    
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -23,19 +24,23 @@ class User(db.Model, UserMixin):
     job_description = db.Column(db.String(100), nullable=True)
     password_hash = db.Column(db.String, nullable=False)
     registration_date = db.Column(db.DateTime, default=datetime.now)
-    cancellation_date = db.Column(db.DateTime, default=None, nullable=True)
-    sub_status = db.Column(db.String, nullable=True)
-    is_cancelled = db.Column(db.Boolean, default=False, nullable=True)
     is_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
-    stripe_customer_id = db.Column(db.String, nullable=True, default=None)
-    stripe_sub_id = db.Column(db.String, nullable=True, default=None)
-    newsletter = db.relationship('Newsletter', backref='user')
-    num_prompts = db.Column(db.Integer, nullable=False, default=0)
-    num_tokens = db.Column(db.Integer, nullable=False, default=0)
     is_oauth = db.Column(db.Boolean, nullable=False, default=False)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
     last_login = db.Column(db.DateTime, nullable=True)
+    stripe_customer_id = db.Column(db.String, nullable=True, default=None)
+    stripe_sub_id = db.Column(db.String, nullable=True, default=None)
+    sub_created = db.Column(db.DateTime, default=None, nullable=True)
+    sub_status = db.Column(db.String, nullable=True)
+    cancellation_date = db.Column(db.DateTime, default=None, nullable=True)
+    current_period_start = db.Column(db.DateTime, default=None, nullable=True)
+    current_period_end = db.Column(db.DateTime, default=None, nullable=True)
+    trial_start = db.Column(db.DateTime, default=None, nullable=True)
+    trial_end = db.Column(db.DateTime, default=None, nullable=True)
+    newsletter = db.relationship('Newsletter', backref='user')
+    num_prompts = db.Column(db.Integer, nullable=False, default=0)
+    num_tokens = db.Column(db.Integer, nullable=False, default=0)
     prompt = db.relationship('Prompt', backref="user")
 
     def check_password(self, password):
@@ -48,7 +53,6 @@ class User(db.Model, UserMixin):
             try:
                 resp = stripe.Customer.list(email=self.email)
                 if resp.get('data'):
-                    print(resp["data"])
                     stripe_cust_id = resp["data"][0]["id"]
                     stripe_subscription_id = stripe.Subscription.list(customer=stripe_cust_id, status="all")
                     stripe_subscription_id = stripe_subscription_id["data"][0]["id"] 
@@ -74,12 +78,27 @@ class User(db.Model, UserMixin):
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
         if self.is_admin is False:
             try:
-                subscription = stripe.Subscription.retrieve(self.stripe_sub_id, status="all")
-                print(subscription["items"]["data"])
+                response = stripe.Subscription.list(customer=self.stripe_customer_id, status="all")
+                subscription = response["data"][0]
+                print(subscription)
                 if subscription:
+                    subscription["created"] = datetime.fromtimestamp(subscription["created"]).strftime('%d.%m.%Y')
+                    if subscription["canceled_at"] is not None:
+                        subscription["canceled_at"] = datetime.fromtimestamp(subscription["canceled_at"]).strftime('%d.%m.%Y')
+                    subscription["current_period_end"] = datetime.fromtimestamp(subscription["current_period_end"]).strftime('%d.%m.%Y')
+                    subscription["current_period_start"] = datetime.fromtimestamp(subscription["current_period_start"]).strftime('%d.%m.%Y')
+                    if subscription["trial_start"] is not None:
+                        subscription["trial_start"] = datetime.fromtimestamp(subscription["trial_start"]).strftime('%d.%m.%Y')
+                    if subscription["trial_end"] is not None:
+                        subscription["trial_end"] = datetime.fromtimestamp(subscription["trial_end"]).strftime('%d.%m.%Y')
+                    
                     self.sub_status = subscription["status"]
-                    db.session.add(self)
-                    db.session.commit()
+                    self.sub_created = subscription["created"]
+                    self.cancellation_date = subscription["canceled_at"]
+                    self.trial_start = subscription["trial_start"]
+                    self.trial_end = subscription["trial_end"]
+                    self.current_period_start = subscription["current_period_start"]
+                    self.current_period_end = subscription["current_period_end"]
                     
             except stripe.error.InvalidRequestError as e:
                 # Handle the error, e.g., log it or raise a specific exception
@@ -113,14 +132,14 @@ class Prompt(db.Model):
     result = db.Column(db.String)
     favorite = db.Column(db.Boolean, nullable=True, default=False)
     feedback = db.Column(db.Boolean, nullable=True)
-    
+ 
     def __init__(self, prompt_type, category, prompt, result, user_id):
         self.prompt_type = prompt_type
         self.category = category
         self.prompt = prompt
         self.result = result
         self.user_id = user_id
-        
+
     def __repr__(self):
         f"Formel mit {self.prompt_type}, {self.prompt} wurde am {self.created_at} hinzugefügt."
 
