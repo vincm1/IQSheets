@@ -118,8 +118,6 @@ def confirm_email(token):
         db.session.add(user)
         db.session.commit()
         flash('Account bestätigt', 'success')
-        stripe_link = f"https://buy.stripe.com/test_aEU7t68NY7Dm6ukbIL?prefilled_email={user.email}"
-        # return render_template('stripe/checkout.html', user_email=email, form_nl=form_nl)
     else:
         flash('Der Bestätigungslink ist abgelaufen oder invalide.', 'danger')
     return redirect(url_for('core.index'))

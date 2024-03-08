@@ -108,8 +108,6 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password_hash = generate_password_hash(password)
         
-    def __repr__(self):
-        f"User with {self.id} and {self.username}, {self.email} was created."
 
 class OAuth(OAuthConsumerMixin, db.Model):
     

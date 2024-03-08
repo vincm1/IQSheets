@@ -1,5 +1,4 @@
 """ User forms """
-from flask import Markup
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField, BooleanField, ValidationError
 from wtforms.validators import DataRequired, EqualTo, Length, Email, Regexp, Optional

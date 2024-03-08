@@ -1,6 +1,6 @@
 """ Google Oauth routes """
 from datetime import datetime
-from flask import current_app, flash, url_for, redirect, Markup
+from flask import current_app, flash, url_for, redirect
 from flask_login import current_user, login_user
 from flask_dance.contrib.google import make_google_blueprint
 from flask_dance.consumer import oauth_authorized, oauth_error
@@ -66,7 +66,7 @@ def google_logged_in(blueprint, token):
             db.session.commit()
             return redirect(url_for('dashboard.dashboard'))
         else:
-            flash(Markup('Kontaktiere unseren Support - <a href="{{url_for("core.index")}}">Supportseite</a>'), 'danger')
+            flash('Kontaktiere unseren Support', category='danger')
             # return redirect(url_for('user.login'))   
     
     else:

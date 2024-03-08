@@ -2,13 +2,16 @@
 import os
 import logging
 from datetime import timedelta
+import datetime as time
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template
 from flask.logging import default_handler
 from werkzeug.security import generate_password_hash
+from apscheduler.schedulers.background import BackgroundScheduler
 from config import config
-from .extensions import db, migrate, login_manager, mail
+from .extensions import db, migrate, login_manager, mail, scheduler
 from .admin.admin import create_admin, create_admin_user
+from .user.email import send_reminder_unconfirmed_email
 
 def create_app(config_name=None):
     '''Factory to create Flask application'''
@@ -38,6 +41,8 @@ def create_app(config_name=None):
     # Flask Admin instantiation
     create_admin(db).init_app(app)
     
+    scheduler.init_app(app)
+    
     # Set the duration for the remember cookie
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=3)
     
@@ -60,6 +65,12 @@ def create_app(config_name=None):
         app.register_blueprint(user_blueprint)
         app.register_blueprint(dashboard_blueprint)
         
+        # FlaskScheduler
+        scheduler.start()
+        def print_scheduler():
+            print('Scheduler is running')
+        scheduler.add_job(id="1", func=send_reminder_unconfirmed_email, trigger='interval', days=3)
+        
         # Check if the database needs to be initialized
         engine = db.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
         inspector = db.inspect(engine)
@@ -78,6 +89,7 @@ def create_app(config_name=None):
 
         # Log mode of app
         app.logger.info(f"{app.debug}")
+        logging.getLogger("apscheduler").setLevel(logging.INFO)
         
         return app
 
