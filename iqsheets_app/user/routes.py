@@ -69,12 +69,18 @@ def login():
                 if user.check_password(form.password.data):
                     if user.is_admin:
                         login_user(user, remember=form.remember.data)
+                        user.last_login = datetime.now()
+                        db.session.add(user)
+                        db.session.commit()
                         return redirect(url_for('dashboard.dashboard'))
                     else:
                         user.check_payment()
                         if user.stripe_customer_id and user.stripe_sub_id is not None:
                             user.check_abo_status()
                             login_user(user, remember=form.remember.data)
+                            user.last_login = datetime.now()
+                            db.session.add(user)
+                            db.session.commit()
                             return redirect(url_for('dashboard.dashboard'))
                         else:
                             if current_app.debug:

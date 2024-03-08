@@ -64,6 +64,9 @@ def linkedin_logged_in(blueprint, token):
         if existing_user.stripe_customer_id and existing_user.stripe_sub_id is not None:
             existing_user.check_abo_status()
             login_user(existing_user, remember=True)
+            existing_user.last_login = datetime.utcnow()
+            db.session.add(existing_user)
+            db.session.commit()
             return redirect(url_for('dashboard.dashboard'))
         else:
             flash(Markup('Kontaktiere unseren Support - <a href="{{url_for("core.index")}}">Supportseite</a>'), 'danger')

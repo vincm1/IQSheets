@@ -49,9 +49,19 @@ class SubscriptionsView(BaseView):
         else:
             stripe.api_key = current_app.config['STRIPE_SECRETKEY_PROD']
         customers = stripe.Customer.list()
-        subscriptions = stripe.Subscription.list(status='all')
-        
-        return self.render('admin/subscriptions.html', customers=customers, subscriptions=subscriptions)
+        response = stripe.Subscription.list(status='all')
+        subscriptions = response
+        for subscription in subscriptions:
+            subscription["created"] = datetime.fromtimestamp(subscription["created"]).strftime('%d.%m.%Y')
+            if subscription["canceled_at"] is not None:
+                subscription["canceled_at"] = datetime.fromtimestamp(subscription["canceled_at"]).strftime('%d.%m.%Y')
+            subscription["current_period_end"] = datetime.fromtimestamp(subscription["current_period_end"]).strftime('%d.%m.%Y')
+            subscription["current_period_start"] = datetime.fromtimestamp(subscription["current_period_start"]).strftime('%d.%m.%Y')
+            if subscription["trial_start"] is not None:
+                subscription["trial_start"] = datetime.fromtimestamp(subscription["trial_start"]).strftime('%d.%m.%Y')
+            if subscription["trial_end"] is not None:
+                subscription["trial_end"] = datetime.fromtimestamp(subscription["trial_end"]).strftime('%d.%m.%Y')
+        return self.render('admin/subscriptions.html', customers=customers, response=response, subscriptions=subscriptions)
 
 class TemplatesUploadView(BaseView):
     """ Admin View for uploading Excel & Gsheet templates """

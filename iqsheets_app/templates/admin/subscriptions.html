@@ -24,33 +24,33 @@
 <h2>Subscriptions</h2>
 <table class="table">
   <thead>
+    <th class="me-2">Stripe Customer ID</th>
     <th class="me-2">Stripe Subscription ID</th>
-    <th class="me-2">Stripe Subscription Customer ID</th>
-    <th class="me-2">Subscription created date</th>
-    <th class="me-2">Subscription fee</th>
-    <th class="me-2">Payment Cycle date start</th>
-    <th class="me-2">Payment Cycle date end</th>
-    <th class="me-2">Trial Start date</th>
-    <th class="me-2">Trial End date</th>
-    <th class="me-2">Cancelation daet</th>
-    <th class="me-2">Trial End date</th>
+    <th class="me-2">Creation date</th>
     <th class="me-2">Status</th>
+    <th class="me-2">Canceled</th>
+    <th class="me-2">Current payment period START</th>
+    <th class="me-2">Current payment period END</th>
+    <th class="me-2">Trial START</th>
+    <th class="me-2">Trial END</th>
   </thead>
   <tbody>
-    {% for subscription in subscriptions %}
+    {% if subscriptions %}
+      {% for subscription in subscriptions %}
       <tr>
-        <td>{{subscription.id}}</td>
-        <td>{{subscription.customer}}</td>
-        <td>{{subscription.created}}</td>
-        <td>{{subscription["items"]["data"][0]["price"]["unit_amount"]}}</td>
-        <td>{{subscription.currrent_period_start}}</td>
-        <td>{{subscription.currrent_period_end}}</td>
-        <td>{{subscription.trial_start}}</td>
-        <td>{{subscription.trial_end}}</td>
-        <td>{{subscription.status}}</td>
+        <td>{{ subscription["customer"] }}</td>
+        <td>{{ subscription["id"] }}</td>
+        <td>{{ subscription["created"] }}</td>
+        <td>{{ subscription["status"] }}</td>
+        <td>{{ subscription["canceled_at"] }}</td>
+        <td>{{ subscription["current_period_start"] }}</td>
+        <td>{{ subscription["current_period_end"] }}</td>
+        <td>{{ subscription["trial_start"] }}</td>
+        <td>{{ subscription["trial_end"] }}</td>
       </tr>
-    {% endfor %}
+      {% endfor %}
+    {% endif %}
   </tbody>
 </table>
-{{}}
+
 {% endblock %}

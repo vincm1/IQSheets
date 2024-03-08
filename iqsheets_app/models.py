@@ -35,6 +35,7 @@ class User(db.Model, UserMixin):
     num_tokens = db.Column(db.Integer, nullable=False, default=0)
     is_oauth = db.Column(db.Boolean, nullable=False, default=False)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    last_login = db.Column(db.DateTime, nullable=True)
     prompt = db.relationship('Prompt', backref="user")
 
     def check_password(self, password):
