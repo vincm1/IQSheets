@@ -1,7 +1,6 @@
 """Email functions with Flask-Mail"""
 from datetime import datetime, timedelta
 from flask import current_app as app
-from flask import url_for
 from flask_mail import Message
 from iqsheets_app import db
 from iqsheets_app.models import User
@@ -39,5 +38,23 @@ def send_reminder_unconfirmed_email():
                 confirm_url = confirm_url = f"https://www.iqsheets.de/confirm_email?token={token}"
                 message = 'Bitte bestätige noch Deinen Account. Das ist dein Bestätigungslink: ' + confirm_url
                 subject = "Email bestätigen für IQSheets!"
+                send_email(user.email, subject, message)
+
+def send_reminder_abo_email():
+    """ Automated email job sending to users not subscribing """
+    with scheduler.app.app_context():
+        # Get the current date and time
+        current_date = datetime.now()
+        # Query all users that are not confirmed
+        users = User.query.filter_by(sub_created=None).all()     
+        for user in users:
+            print(user)
+            if user.registration_date < current_date - timedelta(days=1):
+                if app.debug:
+                    stripe_user_payment_link = app.config["STRIPE_TEST_PAYMENTPAGE"]
+                else:
+                    stripe_user_payment_link = app.config["STRIPE_PROD_PAYMENTPAGE"]
+                message = f"Schließe jetzt dein IQSheets Premium Abo ab. Hier kannst Du ein Abo abschließen: {stripe_user_payment_link}"
+                subject = "Starte jetzt dein IQSheets Abo!"
                 send_email(user.email, subject, message)
             

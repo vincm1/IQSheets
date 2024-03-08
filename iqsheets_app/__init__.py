@@ -11,7 +11,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from config import config
 from .extensions import db, migrate, login_manager, mail, scheduler
 from .admin.admin import create_admin, create_admin_user
-from .user.email import send_reminder_unconfirmed_email
+from .user.email import send_reminder_unconfirmed_email, send_reminder_abo_email
 
 def create_app(config_name=None):
     '''Factory to create Flask application'''
@@ -67,9 +67,8 @@ def create_app(config_name=None):
         
         # FlaskScheduler
         scheduler.start()
-        def print_scheduler():
-            print('Scheduler is running')
-        scheduler.add_job(id="1", func=send_reminder_unconfirmed_email, trigger='interval', days=3)
+        scheduler.add_job(id="1", func=send_reminder_unconfirmed_email, trigger='interval', days=2)
+        scheduler.add_job(id="2", func=send_reminder_abo_email, trigger='interval', days=1)
         
         # Check if the database needs to be initialized
         engine = db.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
