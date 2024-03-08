@@ -82,15 +82,15 @@ class User(db.Model, UserMixin):
                 subscription = response["data"][0]
                 print(subscription)
                 if subscription:
-                    subscription["created"] = datetime.fromtimestamp(subscription["created"]).strftime('%d.%m.%Y')
+                    subscription["created"] = datetime.fromtimestamp(subscription["created"]).strftime('%Y-%m-%d')
                     if subscription["canceled_at"] is not None:
-                        subscription["canceled_at"] = datetime.fromtimestamp(subscription["canceled_at"]).strftime('%d.%m.%Y')
-                    subscription["current_period_end"] = datetime.fromtimestamp(subscription["current_period_end"]).strftime('%d.%m.%Y')
-                    subscription["current_period_start"] = datetime.fromtimestamp(subscription["current_period_start"]).strftime('%d.%m.%Y')
+                        subscription["canceled_at"] = datetime.fromtimestamp(subscription["canceled_at"]).strftime('%Y-%m-%d')
+                    subscription["current_period_end"] = datetime.fromtimestamp(subscription["current_period_end"]).strftime('%Y-%m-%d')
+                    subscription["current_period_start"] = datetime.fromtimestamp(subscription["current_period_start"]).strftime('%Y-%m-%d')
                     if subscription["trial_start"] is not None:
-                        subscription["trial_start"] = datetime.fromtimestamp(subscription["trial_start"]).strftime('%d.%m.%Y')
+                        subscription["trial_start"] = datetime.fromtimestamp(subscription["trial_start"]).strftime('%Y-%m-%d')
                     if subscription["trial_end"] is not None:
-                        subscription["trial_end"] = datetime.fromtimestamp(subscription["trial_end"]).strftime('%d.%m.%Y')
+                        subscription["trial_end"] = datetime.fromtimestamp(subscription["trial_end"]).strftime('%Y-%m-%d')
                     
                     self.sub_status = subscription["status"]
                     self.sub_created = subscription["created"]
