@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import FileField, SelectField, TextAreaField, SubmitField
+from wtforms import FileField, SelectField, TextAreaField, SubmitField, DateField
 from wtforms.validators import DataRequired
 ### File Upload Form for admin page ###
 
@@ -9,4 +9,10 @@ class TemplatesForm(FlaskForm):
     template_category = SelectField('Kategorie', choices=category_choices, validators=[DataRequired()])
     template_description = TextAreaField('Beschreibung', validators=[DataRequired()])
     submit = SubmitField('Hochladen')    
+
+
+class PromptForm(FlaskForm):
+    start_date = DateField('start', validators=[DataRequired()])
+    end_date = DateField('end', validators=[DataRequired()])
+    submit = SubmitField('Finetune')    
     

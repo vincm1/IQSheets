@@ -9,10 +9,10 @@ from botocore.exceptions import ClientError
 from flask import current_app, redirect, url_for, abort
 from flask_login import current_user
 from flask_admin import AdminIndexView, BaseView, expose
-from iqsheets_app.admin.forms import TemplatesForm 
+from iqsheets_app.admin.forms import TemplatesForm, PromptForm
 from flask_admin.contrib.sqla import ModelView 
 from iqsheets_app import db
-from iqsheets_app.models import Template
+from iqsheets_app.models import Template, Prompt
 
 class MyAdminIndexView(AdminIndexView):
     ''' Index view for admin panel '''
@@ -34,8 +34,13 @@ class UserView(ModelView):
                     'registration_date', 'is_confirmed', 'confirmed_on', 'premium', 
                     'num_prompts', 'is_oauth']
 
+class PromptView(ModelView):
+    """ Admin View for loading prompts """
+    form_columns = ['id', 'user_id', 'created_at', 'prompt_type', 'category'
+                    'prompt', 'result', 'favorite', 'feedback']
+
 class AnalyticsView(BaseView):
-    """ Admin View for uploading Excel & Gsheet templates """
+    """ User and prompt metrics """
     @expose('/')
     def index(self):
         return self.render('admin/analytics_index.html')
@@ -105,3 +110,12 @@ class TemplatesUploadView(BaseView):
             return redirect(url_for('admin.index'))
 
         return self.render('admin/template_upload.html', form=form)
+
+class FineTuneModelView(BaseView):
+    """ Admin View for Finetuning the GPT-3 model """
+    @expose('/', methods=["GET", "POST"])
+    def index(self):
+        form = PromptForm()
+        print(form.start_date.data, form.end_date.data)
+        prompts = Prompt.query.all()
+        return self.render('admin/finetune_model.html', form=form, prompts=prompts)

@@ -1,0 +1,15 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+  <h2>
+    Test
+  </h2>
+  <h2>
+    <form method="POST">
+      {{form.hidden_tag()}}
+      {{form.start_date.label(class_="form-label")}}: {{form.start_date(class_="form-group")}}<br>
+      {{form.end_date.label(class_="form-label")}}: {{form.end_date(class_="form-group")}}<br>
+      {{form.submit(class_="btn btn-primary")}}
+    </form>
+  </h2>
+{% endblock %}

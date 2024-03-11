@@ -93,6 +93,7 @@ def process_form_data(form_data, prompt_type):
             input_prompt.append(form_data[key])
     # Form user info to prompt for OpenAI
     input_prompt = " ".join(input_prompt)
+    print(input_prompt)
     result = openai_chat(input_prompt)
     answer = result.choices[0].message.content
     
@@ -204,7 +205,7 @@ def formel(prompt_type):
         prompt_type, category, prompt, answer = process_form_data(form_data, prompt_type)
         
         # Creating prompt instance
-        prompt = Prompt(user_id = current_user.id, prompt_type=prompt_type, 
+        prompt = Prompt(user_id = current_user.id, prompt_type=prompt_type,
                         category=category, prompt=prompt, result=answer)
         # Commiting prompt and numbers to db
         db.session.add(prompt)
