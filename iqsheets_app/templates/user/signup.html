@@ -6,7 +6,7 @@
         <div class="row justify-content-center pt-2">
           <!-- Flash messages -->
           <div class="flashmessages pt-5">
-            <div class="col-lg-8 col-md-8 col-sm-8 align-self-end flashmessages">
+            <div class="col-md-6 col-sm-12 justify-content-center flashmessages">
               {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                   {% for category, message in messages %}
@@ -20,7 +20,7 @@
             </div>
           </div>
           <!-- Login Card -->
-          <div class="col-md-5 col-sm-12">
+          <div class="col-md-6 col-sm-12">
             <div class="card shadow-lg p-3">
               <div class="card-top text-center">
                 <h2 class="pt-2">Registrierung</h2>

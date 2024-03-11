@@ -1,5 +1,6 @@
 """Routes for user"""
 from datetime import datetime
+import time
 import stripe
 from flask import Blueprint, render_template, redirect, request, flash, url_for, current_app
 from flask_login import login_user, login_required, logout_user, current_user
@@ -43,9 +44,9 @@ def register():
         
         token = generate_confirmation_token(user.email)
         confirm_url = url_for('user.confirm_email', token=token, _external=True)
-        message = 'Das ist dein Bestätigungslink: ' + confirm_url
-        subject = "Bitte bestätige Deine Email für IQSheets!"
-        send_email(user.email, subject, message)
+        html = render_template('user/email/activate.html', confirm_url=confirm_url, user=user)
+        subject = "Email Bestätigung für IQSheets!"
+        send_email(user.email, subject, html)
         
         flash(f'Eine Bestätigungs-Email wurde an {user.email} geschickt.', 'success')
         return redirect(url_for('user.login'))
@@ -91,9 +92,10 @@ def login():
                                 return redirect(stripe_link)                          
                 else:
                     flash('Prüfe deine Anmeldedaten!', 'danger')
-                    return redirect(url_for('user.login'))
             else:
-                flash('Bitte bestätige deine Anmeldung per Link', 'danger')
+                flash('Bitte bestätige deine Emailadresse!', 'warning')
+                time.sleep(4)
+                return redirect(url_for('user.resend_confirmation'))
         else:
             flash('Prüfe deine Anmeldedaten!', 'danger')
     return render_template('user/login.html', form=form, form_2=form_2, form_nl=form_nl)    
@@ -110,7 +112,6 @@ def confirm_email(token):
     """ Sending confirmation Email to user after signup """
     email = confirm_token(token)
     user = User.query.filter_by(email=email).first_or_404()
-    print(user.email)
     
     if user.email == email:
         user.is_confirmed = True
@@ -118,6 +119,7 @@ def confirm_email(token):
         db.session.add(user)
         db.session.commit()
         flash('Account bestätigt', 'success')
+        return redirect(url_for('user.login'))
     else:
         flash('Der Bestätigungslink ist abgelaufen oder invalide.', 'danger')
     return redirect(url_for('core.index'))
@@ -137,7 +139,7 @@ def resend_confirmation():
     """ Resending a confirmation link after signup """
     token = generate_confirmation_token(current_user.email)
     confirm_url = url_for('user.confirm_email', token=token, _external=True)
-    html = render_template('user/email/activate.html', confirm_url=confirm_url)
+    html = render_template('user/email/activate.html', confirm_url=confirm_url, user=current_user)
     subject = "Bitte bestätige Deine Email für IQSheets!"
     send_email(current_user.email, subject, html)
     flash(f'Eine Bestätigungs-Email wurde an {current_user.email} geschickt.', 'success')
@@ -205,9 +207,9 @@ def reset_password_request():
             
             token = generate_confirmation_token(user.email)
             confirm_url = url_for('user.reset_password', token=token, _external=True)
-            subject = f"Passwort Reset für {user.email} IQSheets!"
-            message = "Klicke auf folgenden Link, um dein Passwort zurückzusetzen: " + confirm_url
-            send_email(user.email, subject, message)
+            subject = f"Passwort zurücksetzen {user.email} IQSheets!"
+            html = render_template('user/email/reset_password.html', confirm_url=confirm_url, user=current_user)
+            send_email(user.email, subject, html)
             flash('Prüfe deine Emails', 'success')
             redirect(url_for('user.login'))
         else:

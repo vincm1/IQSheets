@@ -14,10 +14,10 @@
         <p>Hallo {{ user.email }},</p>
         <br>
         <p>Wir freuen uns, dich als neues Mitglied bei IQSheets begrüßen zu dürfen. <br><br> 
-            Um deine Anmeldung zu bestätigen klicke bitte auf folgenden Link:
+            Um vollen Zugriff auf alle Funktionen zu erhalten, klicke bitte auf folgenden Link:
         </p>
         <br>
-        <a href="{{ confirm_url }}">{{ confirm_url }}</a>
+        <a href="{{ stripe_user_payment_link }}">{{ stripe_user_payment_link }}</a>
         <br>
         <br>
         <p>Viel Spaß!</p>
