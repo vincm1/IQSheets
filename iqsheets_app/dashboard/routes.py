@@ -6,7 +6,7 @@ import time
 import threading
 import boto3
 from sqlalchemy import func
-from flask import Blueprint, current_app, render_template, send_file, redirect, url_for, request, after_this_request
+from flask import Blueprint, current_app, render_template, send_file, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from iqsheets_app import db
 from iqsheets_app.models import Prompt, Template
@@ -232,17 +232,36 @@ def prompt_favorite(prompt_id):
     db.session.commit()
     return redirect(url_for('dashboard.favorites'))
 
+@dashboard_blueprint.route('/dashboard/positive/<int:prompt_id>', methods=['GET'])
+@login_required
+@check_confirmed_mail
+@check_sub_stat
+def positive_prompt(prompt_id):
+    ''' handles user feedback per prompt '''
+    
+    prompt = Prompt.query.filter_by(id=prompt_id).first()
+    prompt.feedback = True
+    db.session.add(prompt)
+    db.session.commit()
+    flash('Vielen Dank für Ihr Feedback!', 'success')
+    
+    form = FORM_MAP[prompt.prompt_type]() 
+    
+    return render_template(f'dashboard/{prompt.prompt_type}_page.html', form=form)
+
 @dashboard_blueprint.route('/dashboard/negative/<int:prompt_id>', methods=['GET'])
 @login_required
 @check_confirmed_mail
 @check_sub_stat
-def negative_feedback(prompt_id):
+def negative_prompt(prompt_id):
     ''' handles user feedback per prompt '''
     prompt = Prompt.query.filter_by(id=prompt_id).first()
     prompt.feedback = False
     db.session.add(prompt)
     db.session.commit()
-    return redirect(request.referrer or '/default-page')
+    flash('Vielen Dank für Ihr Feedback!', 'warning')
+    form = FORM_MAP[prompt.prompt_type]() 
+    return redirect(f'dashboard/{prompt.prompt_type}_page.html', form=form)
 
 @dashboard_blueprint.route('/favoriten', methods=['GET', 'POST'])
 @login_required

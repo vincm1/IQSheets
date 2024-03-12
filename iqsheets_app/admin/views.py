@@ -1,19 +1,20 @@
 
 ''' Views for flask admin '''
 import os
+import json
 import boto3
 import stripe
 from datetime import datetime
 import logging
 from botocore.exceptions import ClientError
-from flask import current_app, redirect, url_for, abort
+from flask import current_app, redirect, url_for, abort, request, jsonify
 from flask_login import current_user
 from flask_admin import AdminIndexView, BaseView, expose
 from iqsheets_app.admin.forms import TemplatesForm, PromptForm
 from flask_admin.contrib.sqla import ModelView 
 from iqsheets_app import db
 from iqsheets_app.models import Template, Prompt
-
+from iqsheets_app.openai import openai_finetune
 class MyAdminIndexView(AdminIndexView):
     ''' Index view for admin panel '''
 
@@ -27,24 +28,20 @@ class MyAdminIndexView(AdminIndexView):
         if not self.is_accessible():
             abort(403)  # Or redirect to a custom unauthorized access page
         return redirect(url_for('dashboard.dashboard'))
-
 class UserView(ModelView):
     """ Admin View for loading user info """
     form_columns = ['id', 'username', 'email', 'job_description', 'profile_picture'
                     'registration_date', 'is_confirmed', 'confirmed_on', 'premium', 
                     'num_prompts', 'is_oauth']
-
 class PromptView(ModelView):
     """ Admin View for loading prompts """
     form_columns = ['id', 'user_id', 'created_at', 'prompt_type', 'category'
                     'prompt', 'result', 'favorite', 'feedback']
-
 class AnalyticsView(BaseView):
     """ User and prompt metrics """
     @expose('/')
     def index(self):
         return self.render('admin/analytics_index.html')
-    
 class SubscriptionsView(BaseView):
     """ Admin View for uploading Excel & Gsheet templates """
     @expose('/')
@@ -116,6 +113,26 @@ class FineTuneModelView(BaseView):
     @expose('/', methods=["GET", "POST"])
     def index(self):
         form = PromptForm()
-        print(form.start_date.data, form.end_date.data)
         prompts = Prompt.query.all()
+        if form.validate_on_submit():
+            prompts = Prompt.query.filter(Prompt.created_at >= form.start_date.data).filter(Prompt.created_at <= form.end_date.data).all()
+        
+        if request.method == 'POST':
+            selected_prompts = request.form.getlist('prompt_selection')
+            results = Prompt.query.filter(Prompt.id.in_(selected_prompts)).all()
+            data_to_dump = []
+            for result in results:
+                print(result.prompt, result.result)
+                data_to_dump.append({"messages":[{"role": "system", "content": "IQSheets ist ein deutschsprachiger Excel, VBA und SQL Experte der höflich zur Seite steht."}, 
+                                                 {'role':'user', 'content': result.prompt.replace('\r\n', ' ')}]})
+            with open(f'iqsheets_app/static/promptrainer_{datetime.now().strftime("%d-%m-%Y")}.json', 'w', encoding='utf-8') as f:
+                json.dump(data_to_dump, f, ensure_ascii=False, indent=4)
+                openai_finetune()
+            return self.render('admin/finetune_model.html', form=form, prompts=prompts, selected_prompts=selected_prompts)
+        
         return self.render('admin/finetune_model.html', form=form, prompts=prompts)
+    
+    
+# {"messages": [{"role": "system", "content": "Marv is a factual chatbot that is also sarcastic."}, {"role": "user", "content": "What's the capital of France?"}, {"role": "assistant", "content": "Paris, as if everyone doesn't know that already."}]}
+# {"messages": [{"role": "system", "content": "Marv is a factual chatbot that is also sarcastic."}, {"role": "user", "content": "Who wrote 'Romeo and Juliet'?"}, {"role": "assistant", "content": "Oh, just some guy named William Shakespeare. Ever heard of him?"}]}
+# {"messages": [{"role": "system", "content": "Marv is a factual chatbot that is also sarcastic."}, {"role": "user", "content": "How far is the Moon from Earth?"}, {"role": "assistant", "content": "Around 384,400 kilometers. Give or take a few, like that really matters."}]}

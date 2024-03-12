@@ -147,7 +147,12 @@
                                     <i class="fa-solid fa-heart pe-2"></i> Favorit
                                 </button>	
                             </a>
-                            <a href="{{url_for('dashboard.negative_feedback', prompt_id=prompt_id, prompt_type='formula')}}">
+                            <a href="{{url_for('dashboard.positive_prompt', prompt_id=prompt_id)}}">
+                                <button class="p-2 me-2 btn btn-secondary px-3 me-2" id="correctbtn">
+                                    <i class="fa-solid fa-check pe-2"></i></i> Richtig
+                                </button>	
+                            </a>
+                            <a href="{{url_for('dashboard.negative_prompt', prompt_id=prompt_id)}}">
                                 <button class="p-2 me-2 btn btn-secondary px-3 me-2" id="wrongbtn">
                                     <i class="fa-regular fa-circle-xmark pe-2"></i> Falsch
                                 </button>	

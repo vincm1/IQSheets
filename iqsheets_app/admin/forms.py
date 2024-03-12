@@ -14,5 +14,5 @@ class TemplatesForm(FlaskForm):
 class PromptForm(FlaskForm):
     start_date = DateField('start', validators=[DataRequired()])
     end_date = DateField('end', validators=[DataRequired()])
-    submit = SubmitField('Finetune')    
+    submit = SubmitField('Pick dates')    
     
