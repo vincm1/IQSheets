@@ -11,14 +11,21 @@ openai_key = os.getenv('OPENAI_KEY')
 
 client = OpenAI(api_key=openai_key)
 
-
-def openai_finetune(prompts_to_tune):
+def openai_finetune_data(prompts_to_tune):
     """ Function called in Admin to finetune """
-    print(prompts_to_tune)
     with open(f'iqsheets_app/static/promptrainer_{datetime.now().strftime("%d-%m-%Y")}.json', 'w', encoding='utf-8') as f:
-        json.dump(prompts_to_tune, f, ensure_ascii=False, indent=4)
-    print('here')
+        json.dump(prompts_to_tune, f, ensure_ascii=False)
+    openai_trainer()
     
+def openai_trainer():
+    # Load the dataset
+    with open(f'iqsheets_app/static/promptrainer_{datetime.now().strftime("%d-%m-%Y")}.json', 'r', encoding='utf-8') as f:
+        dataset = [json.loads(line) for line in f]
+    # Initial dataset stats
+    print(dataset)
+    print(dataset[0])
+    # for message in dataset[0]["messages"]:
+    #     print(message)
     
 def openai_chat(prompt):
     """ Function called by Dashboad route """

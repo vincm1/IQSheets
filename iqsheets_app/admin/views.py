@@ -14,7 +14,7 @@ from iqsheets_app.admin.forms import TemplatesForm, PromptForm
 from flask_admin.contrib.sqla import ModelView 
 from iqsheets_app import db
 from iqsheets_app.models import Template, Prompt
-from iqsheets_app.openai import openai_finetune
+from iqsheets_app.openai import openai_finetune_data
 class MyAdminIndexView(AdminIndexView):
     ''' Index view for admin panel '''
 
@@ -122,10 +122,10 @@ class FineTuneModelView(BaseView):
             results = Prompt.query.filter(Prompt.id.in_(selected_prompts)).all()
             data_to_dump = []
             for result in results:
-                    data_to_dump.append([{"messages":[{"role": "system", "content": "IQSheets ist ein deutschsprachiger Excel, VBA und SQL Experte der höflich zur Seite steht."}, 
-                                                    {'role':'user', 'content': result.prompt.replace('\r\n', ' ')}]}])
+                    data_to_dump.append({"messages":[{"role": "system", "content": "IQSheets ist ein deutschsprachiger Excel, VBA und SQL Experte der höflich zur Seite steht."}, 
+                                                    {'role':'user', 'content': result.prompt.replace('\r\n', ' ')}]})
             
-            openai_finetune(data_to_dump)           
+            openai_finetune_data(data_to_dump)           
             return self.render('admin/finetune_model.html', form=form, prompts=prompts, selected_prompts=selected_prompts)
         
         return self.render('admin/finetune_model.html', form=form, prompts=prompts)
