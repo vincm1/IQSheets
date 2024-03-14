@@ -1,71 +1,64 @@
 {% extends 'admin/master.html' %}
 
 {% block body %}
-  <div class="view-header my-4">
-    <h1 class="">
-      Fine Tune Modeler
-    </h1>
-  </div>
+<div class="view-header my-4">
+  <h1>
+    Fine Tune Modeler
+  </h1>
+</div>
 
-  <div class="view-form my-4">
-    <form method="POST">
-      {{form.hidden_tag()}}
-      {{form.start_date.label(class_="form-label")}}: {{form.start_date(class_="form-group")}}<br>
-      {{form.end_date.label(class_="form-label")}}: {{form.end_date(class_="form-group")}}<br>
-      {{form.submit(class_="btn btn-primary")}}
-    </form>
-  </div>
+<div class="view-form my-4">
+  <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.start_date.label(class_="form-label")}}: {{form.start_date(class_="form-group")}}<br>
+    {{form.end_date.label(class_="form-label")}}: {{form.end_date(class_="form-group")}}<br>
+    {{form.submit(class_="btn btn-primary")}}
+  </form>
+</div>
 
-  <div class="prompt-table">
-    <div
-      class="table-responsive"
-    >
+<div class="prompt-table">
+  <div class="table-responsive">
     <form action="" method="post">
-      <table
-        class="table table-primary"
-      >
+      {{form.hidden_tag()}}
+      <table class="table table-primary">
         <thead>
           <tr>
             <th scope="col">Prompt Category</th>
             <th scope="col">Prompt Type</th>
             <th scope="col">Prompt</th>
             <th scope="col">Result</th>
-            <th scope="col">Result</th>
-            <th scope="col">Finetune<button type="button" id="select-all" class="btn btn-info">All</button></th></th>
-            <th>
+            <th scope="col">Feedback</th>
+            <th scope="col">Finetune<button type="button" id="select-all" class="btn btn-info">All</button></th>
           </tr>
         </thead>
         <tbody>
           {% for prompt in prompts %}
-            <tr class="">
-              <td scope="row">{{ prompt.category }}</td>
-              <td>{{ prompt.prompt_type.capitalize() }}</td>
-              <td>{{ prompt.prompt }}</td>
-              <td>{{ prompt.result[0:300] }}</td>
-              <td>{{ prompt.feedback }}</td>
-              <td><input type="checkbox" name="prompt_selection" value="{{ prompt.id }}"></td>
-            </tr>
+          <tr>
+            <td scope="row">{{ prompt.category }}</td>
+            <td>{{ prompt.prompt_type.capitalize() }}</td>
+            <td>{{ prompt.prompt }}</td>
+            <td>{{ prompt.result[0:300] }}</td>
+            <td>{{ prompt.feedback }}</td>
+            <td><input type="checkbox" name="prompt_selection" value="{{ prompt.id }}"></td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
-      <input class="btn btn-secondary"type="submit" value="Prepare for finetune" name="Prep">
-      <input class="btn btn-primary" type="button" value="Finetune model" name="Finetune">
+      <input type="submit" value="Finetune" class="btn btn-primary" name="Finetune">
     </form>
-    </div>
   </div>
+</div>
 
-  {{json_1}}
-
-  <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      document.getElementById('select-all').addEventListener('click', function() {
-        const checkboxes = document.querySelectorAll('input[name="prompt_selection"]');
-        const currentlyChecked = [...checkboxes].every(checkbox => checkbox.checked);
-        
-        checkboxes.forEach(checkbox => {
-          checkbox.checked = !currentlyChecked;
-        });
-      });
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  document.getElementById('select-all').addEventListener('click', function() {
+    const checkboxes = document.querySelectorAll('input[name="prompt_selection"]');
+    const currentlyChecked = [...checkboxes].every(checkbox => checkbox.checked);
+    
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = !currentlyChecked;
     });
-  </script>
+  });
+});
+</script>
 {% endblock %}

@@ -117,17 +117,15 @@ class FineTuneModelView(BaseView):
         if form.validate_on_submit():
             prompts = Prompt.query.filter(Prompt.created_at >= form.start_date.data).filter(Prompt.created_at <= form.end_date.data).all()
         
-        if request.method == 'POST':
+        if request.method == 'POST' and 'Finetune' in request.form: 
             selected_prompts = request.form.getlist('prompt_selection')
             results = Prompt.query.filter(Prompt.id.in_(selected_prompts)).all()
             data_to_dump = []
             for result in results:
-                print(result.prompt, result.result)
-                data_to_dump.append({"messages":[{"role": "system", "content": "IQSheets ist ein deutschsprachiger Excel, VBA und SQL Experte der höflich zur Seite steht."}, 
-                                                 {'role':'user', 'content': result.prompt.replace('\r\n', ' ')}]})
-            with open(f'iqsheets_app/static/promptrainer_{datetime.now().strftime("%d-%m-%Y")}.json', 'w', encoding='utf-8') as f:
-                json.dump(data_to_dump, f, ensure_ascii=False, indent=4)
-                openai_finetune()
+                    data_to_dump.append([{"messages":[{"role": "system", "content": "IQSheets ist ein deutschsprachiger Excel, VBA und SQL Experte der höflich zur Seite steht."}, 
+                                                    {'role':'user', 'content': result.prompt.replace('\r\n', ' ')}]}])
+            
+            openai_finetune(data_to_dump)           
             return self.render('admin/finetune_model.html', form=form, prompts=prompts, selected_prompts=selected_prompts)
         
         return self.render('admin/finetune_model.html', form=form, prompts=prompts)

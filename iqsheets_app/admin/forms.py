@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import FileField, SelectField, TextAreaField, SubmitField, DateField
+from wtforms import FileField, SelectField, TextAreaField, SubmitField, DateField, SelectMultipleField
 from wtforms.validators import DataRequired
 ### File Upload Form for admin page ###
 
@@ -15,4 +15,7 @@ class PromptForm(FlaskForm):
     start_date = DateField('start', validators=[DataRequired()])
     end_date = DateField('end', validators=[DataRequired()])
     submit = SubmitField('Pick dates')    
-    
+
+class FineTuneForm(FlaskForm):
+    prompt = SelectMultipleField(validators=[DataRequired()])
+    submit = SubmitField('Finetune')
